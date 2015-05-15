@@ -1,4 +1,4 @@
-package mainPackage;
+package tuilePackage;
 
 import constantesPackages.Constantes;
 
@@ -27,8 +27,8 @@ public class Connection {
 	}
 	
 	public void rotationGauche (){
-		pointA = (pointA%4 == Constantes.pointGauche) ? Constantes.pointBas : (pointA%4) - 1;
-		pointB = (pointB%4 == Constantes.pointGauche) ? Constantes.pointBas : (pointB%4) - 1;
+		pointA = (pointA%4 == Constantes.Tuile.pointGauche) ? Constantes.Tuile.pointBas : (pointA%4) - 1;
+		pointB = (pointB%4 == Constantes.Tuile.pointGauche) ? Constantes.Tuile.pointBas : (pointB%4) - 1;
 	}
 	
 	public void rotationDroite (){
@@ -39,8 +39,10 @@ public class Connection {
 	// retourne vrai si connection_appelante.pointA == otherConnection.pointB
 	//				ou  connection_appelante.pointB == otherConnection.pointA
 	public boolean isConnected (Connection otherConnection){
-		boolean resultat = ( pointA == otherConnection.getPointB() 
-						  || pointB == otherConnection.getPointA() );
+		boolean resultat = ( pointA == otherConnection.getPointA() 
+						  || pointA == otherConnection.getPointB()
+						  || pointB == otherConnection.getPointA() 
+						  || pointB == otherConnection.getPointB() );
 		
 		return resultat;
 	}

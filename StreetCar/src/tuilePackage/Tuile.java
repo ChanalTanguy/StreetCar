@@ -3,7 +3,6 @@ package tuilePackage;
 import java.util.ArrayList;
 
 import mainPackage.ActionsToken;
-import mainPackage.Connection;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
@@ -73,10 +72,10 @@ public class Tuile implements ActionsToken{
 	
 	public void rotation(String sensRotation) {
 		switch (sensRotation){
-		case Constantes.rotationDroite:
+		case Constantes.Rotation.rotationDroite:
 			
 			break;
-		case Constantes.rotationGauche:
+		case Constantes.Rotation.rotationGauche:
 			
 			break;
 		default:

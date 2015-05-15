@@ -7,7 +7,7 @@ public class MainJoueur {
 	Tuile[] cartesJoueur;
 	
 	public MainJoueur (){
-		cartesJoueur = new Tuile[Constantes.nbCartesJoueur];
+		cartesJoueur = new Tuile[Constantes.Plateau.nbCartesJoueur];
 		instanciation(cartesJoueur);
 	}
 	
