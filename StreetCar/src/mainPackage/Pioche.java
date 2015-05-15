@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 
+import tuilePackage.Tuile;
+
 public class Pioche extends ArrayList<Tuile>{
 	
 	public Pioche (){

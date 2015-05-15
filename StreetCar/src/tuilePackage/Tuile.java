@@ -1,7 +1,9 @@
-package mainPackage;
+package tuilePackage;
 
 import java.util.ArrayList;
 
+import mainPackage.ActionsToken;
+import mainPackage.Connection;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{

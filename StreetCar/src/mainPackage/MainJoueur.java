@@ -1,5 +1,6 @@
 package mainPackage;
 
+import tuilePackage.Tuile;
 import constantesPackages.Constantes;
 
 public class MainJoueur {

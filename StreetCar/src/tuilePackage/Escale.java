@@ -1,4 +1,5 @@
-package mainPackage;
+package tuilePackage;
+
 
 public class Escale extends Tuile{
 	int numeroEscale;

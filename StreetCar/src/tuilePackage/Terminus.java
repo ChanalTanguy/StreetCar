@@ -1,4 +1,5 @@
-package mainPackage;
+package tuilePackage;
+
 
 public class Terminus extends Tuile{
 	int numeroTerminus;
