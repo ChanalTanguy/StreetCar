@@ -2,8 +2,13 @@ package constantesPackages;
 
 public class Constantes {
 	
-	public static final int dimensionTuile = 50;
-	public static final int dimensionTuileZoom = 80;
+	public static class Dimensions {
+		public static final int dimensionTuile = 50;
+		public static final int dimensionTuileZoom = 80;
+		public static final int dimensionPlateau = 14;
+	}
+	
+	
 	
 	public static final int nbCartesJoueur = 5;
 	public static final int nbMaxTuiles = 126;

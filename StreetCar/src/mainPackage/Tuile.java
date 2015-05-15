@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
-	private boolean avecArbres;
+	private boolean immuable;
 	private ArrayList<Connection> listeConnections;
 	
 	/*
 	 * 2 Constructeurs
 	 */
 	public Tuile (){
-		avecArbres = false;
+		immuable = false;
 		listeConnections = new ArrayList<Connection>();
 	}
 	
 	public Tuile (boolean presenceArbres){
-		avecArbres = presenceArbres;
+		immuable = presenceArbres;
 		listeConnections = new ArrayList<Connection>();
 	}
 	
@@ -25,7 +25,7 @@ public class Tuile implements ActionsToken{
 	 * les 4 Accesseurs
 	 */
 	public boolean getPresenceArbres (){
-		return avecArbres;
+		return immuable;
 	}
 	
 	public ArrayList<Connection> getListeConnections (){
@@ -33,7 +33,7 @@ public class Tuile implements ActionsToken{
 	}
 	
 	public void setPresenceArbres (boolean newPresence){
-		avecArbres = newPresence;
+		immuable = newPresence;
 	}
 	
 	public void setListeConnections (ArrayList<Connection> newListe){
@@ -103,13 +103,13 @@ public class Tuile implements ActionsToken{
 	public boolean equals (Tuile autreTuile){
 		boolean resultat = false;
 		
-		resultat = ( avecArbres == autreTuile.getPresenceArbres() && listesIdentiques(autreTuile.getListeConnections()) );
+		resultat = ( immuable == autreTuile.getPresenceArbres() && listesIdentiques(autreTuile.getListeConnections()) );
 		
 		return resultat;
 	}
 	
 	public Tuile clone (){
-		Tuile copyTuile = new Tuile(avecArbres);
+		Tuile copyTuile = new Tuile(immuable);
 		
 		copyTuile.setListeConnections(listeConnections);
 		
