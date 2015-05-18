@@ -3,6 +3,8 @@ package joueurPackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import mainPackage.Moteur;
+
 public class EcouteurBoucle implements ActionListener {
 
 	boolean enabled;

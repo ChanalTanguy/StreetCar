@@ -4,11 +4,13 @@ import iaPackage.InterfaceIA;
 
 import javax.swing.Timer;
 
+import mainPackage.Moteur;
+
 public class JoueurIA implements Joueur {
 
 	public EcouteurBoucle ecouteurBoucle;
 	
-	public JoueurIA(Moteur m, InterfaceIA ia) {
+	public JoueurIA(Moteur m) {
 		ecouteurBoucle = new EcouteurBoucle(m);
 		new Timer(50, ecouteurBoucle);
 	}

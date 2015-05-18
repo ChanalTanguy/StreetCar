@@ -1,5 +1,7 @@
 package joueurPackage;
 
+import mainPackage.Moteur;
+
 public class JoueurHumain implements Joueur {
 
 	public EcouteurPlateau ecouteurPlateau;

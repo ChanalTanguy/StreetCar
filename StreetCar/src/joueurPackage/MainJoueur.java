@@ -1,4 +1,4 @@
-package mainPackage;
+package joueurPackage;
 
 import tuilePackage.Tuile;
 import constantesPackages.Constantes;
