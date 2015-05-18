@@ -8,6 +8,7 @@ import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
 	private boolean immuable;
+	private String orientation;
 	private ArrayList<Connection> listeConnections;
 	
 	/*
@@ -15,6 +16,7 @@ public class Tuile implements ActionsToken{
 	 */
 	public Tuile (){
 		immuable = false;
+		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 	}
 	

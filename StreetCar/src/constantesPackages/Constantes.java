@@ -25,4 +25,11 @@ public class Constantes {
 		public static final String rotationDroite = "droite";
 	}
 	
+	public static class Orientation {
+		public static final String nord = "Nord";
+		public static final String sud = "Sud";
+		public static final String est = "Est";
+		public static final String ouest = "Ouest";
+	}
+	
 }
