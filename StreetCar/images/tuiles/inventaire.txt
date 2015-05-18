@@ -1,0 +1,15 @@
+Inventaire des pieces du jeu STREET CAR
+
+----------------------------------------------------
+001:x36 //2 positions //ligne droite
+002:x30 //4 positions //simple virage
+003:x10 //4 positions //double virage partant d'un meme cote vers les deux cote adjacent
+004:x10 //4 positions //ligne droite plus virage en bas a gauche
+005:x10 //4 positions //ligne droite plus virage en bas a droite
+006:x06 //2 positions //double virage opposé, haut vers droite et bas vers gauche
+007:x06 //4 positions //un cote vers les trois autres
+008:x04 //1 position  //croisement de deux lignes doites
+009:x04 //2 positions //Z ligne droite plus virage vers la gauche par le bas et vers la droite par le haut
+010:x04 //1 position //quadruple virage, chaque cote peux alle vers les deux adjacents
+011:x06 //4 positions //delta, ligne droite plus accés vers chaque cote de cette ligne droite par haut OU bas
+----------------------------------------------------
