@@ -6,5 +6,6 @@ public class Bouton extends JButton{
 
 	public Bouton (String name){
 		super(name);
+		addMouseListener(new GestionSouris(this));
 	}
 }

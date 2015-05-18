@@ -1,6 +1,7 @@
 package tuilePackage;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import mainPackage.ActionsToken;
 import constantesPackages.Constantes;
@@ -62,12 +63,21 @@ public class Tuile implements ActionsToken{
 		else { System.out.println("ajout annule"); }
 	}
 	
-	// retourne vrai si la tuile appelante peut etre posee a cote de "fixedTuile"
-	// => on verifie alors si l'une des connections de la tuile appelante 
+	/**
+	 * A FAIRE/FINIR
+	 * @param fixedTuile
+	 * @return
+	 */
+	
+	// retourne vrai si la tuile_appelante peut etre posee a cote de "fixedTuile"
+	// => on verifie alors si l'une des connections de la tuile appelante est connectee a
+	//	  l'une des connections de "fixedTuile" est connectee a la tuile_appelante
 	public boolean isAdjacent (Tuile fixedTuile){
-		boolean resultat = false;
+		boolean connectionTrouvee = false;
 		
-		return resultat;
+		
+		
+		return connectionTrouvee;
 	}
 	
 	public void rotation(String sensRotation) {
@@ -110,11 +120,11 @@ public class Tuile implements ActionsToken{
 	}
 	
 	public Tuile clone (){
-		Tuile copyTuile = new Tuile(immuable);
+		Tuile newTuile = new Tuile(immuable);
 		
-		copyTuile.setListeConnections(listeConnections);
+		newTuile.setListeConnections(listeConnections);
 		
-		return copyTuile;
+		return newTuile;
 	}
 	
 	
