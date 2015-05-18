@@ -1,7 +1,6 @@
 package tuilePackage;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 import mainPackage.ActionsToken;
 import constantesPackages.Constantes;
@@ -22,11 +21,12 @@ public class Tuile implements ActionsToken{
 	
 	public Tuile (boolean presenceArbres){
 		immuable = presenceArbres;
+		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 	}
 	
 	/*
-	 * les 4 Accesseurs
+	 * les 6 Accesseurs
 	 */
 	public boolean getPresenceArbres (){
 		return immuable;
@@ -36,22 +36,28 @@ public class Tuile implements ActionsToken{
 		return listeConnections;
 	}
 	
+	public String getOrientation (){
+		return orientation;
+	}
+	
 	public void setPresenceArbres (boolean newPresence){
 		immuable = newPresence;
 	}
 	
 	public void setListeConnections (ArrayList<Connection> newListe){
-	/*		effectuer un test si la liste de l'objet appelant est vide ?
-	 * =>	if ( listeConnections.isEmpty() ){
-	 * 			listeConnections.clear();
-	 * 		}
-	 */
+		if ( listeConnections.isEmpty() ){
+			listeConnections.clear();
+		}
 		if ( listeConnections.addAll(newListe) ){
 			System.out.println("update de la liste ok");
 		}
 		else {
 			System.out.println("update refuse/annule");
 		}
+	}
+	
+	public void setOrientation (String newOrientation){
+		orientation = new String(newOrientation);
 	}
 	
 	/*
@@ -85,10 +91,10 @@ public class Tuile implements ActionsToken{
 	public void rotation(String sensRotation) {
 		switch (sensRotation){
 		case Constantes.Rotation.rotationDroite:
-			
+			effectuerRotationDroite();
 			break;
 		case Constantes.Rotation.rotationGauche:
-			
+			effectuerRotationGauche();
 			break;
 		default:
 			break;
@@ -141,6 +147,43 @@ public class Tuile implements ActionsToken{
 		
 		return resultat;
 	}
-
+	
+	private void effectuerRotationDroite (){
+		switch (orientation){
+		case Constantes.Orientation.nord:
+			orientation = Constantes.Orientation.est;
+			break;
+		case Constantes.Orientation.sud:
+			orientation = Constantes.Orientation.ouest;
+			break;
+		case Constantes.Orientation.est:
+			orientation = Constantes.Orientation.sud;
+			break;
+		case Constantes.Orientation.ouest:
+			orientation = Constantes.Orientation.nord;
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void effectuerRotationGauche (){
+		switch (orientation){
+		case Constantes.Orientation.nord:
+			orientation = Constantes.Orientation.ouest;
+			break;
+		case Constantes.Orientation.sud:
+			orientation = Constantes.Orientation.est;
+			break;
+		case Constantes.Orientation.est:
+			orientation = Constantes.Orientation.nord;
+			break;
+		case Constantes.Orientation.ouest:
+			orientation = Constantes.Orientation.sud;
+			break;
+		default:
+			break;
+		}
+	} 
 	
 }
