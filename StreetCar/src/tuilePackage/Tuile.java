@@ -1,6 +1,7 @@
 package tuilePackage;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import mainPackage.ActionsToken;
 import constantesPackages.Constantes;
@@ -140,6 +141,9 @@ public class Tuile implements ActionsToken{
 	 * Methodes privees de la classe
 	 */
 	
+	/**
+	 * retourne vrai si la liste appelante et celle en parametre sont identiques
+	 */
 	private boolean listesIdentiques (ArrayList<Connection> autreListe){
 		boolean resultat;
 		
@@ -148,6 +152,9 @@ public class Tuile implements ActionsToken{
 		return resultat;
 	}
 	
+	/**
+	 * modifie l'orientation de la tuile appelante d'un cran dans le sens horaire
+	 */
 	private void effectuerRotationDroite (){
 		switch (orientation){
 		case Constantes.Orientation.nord:
@@ -165,8 +172,12 @@ public class Tuile implements ActionsToken{
 		default:
 			break;
 		}
+		rotationDroiteConnections();
 	}
 	
+	/**
+	 * modifie l'orientation de la tuile appelante d'un cran dans le sens anti-horaire
+	 */
 	private void effectuerRotationGauche (){
 		switch (orientation){
 		case Constantes.Orientation.nord:
@@ -184,6 +195,27 @@ public class Tuile implements ActionsToken{
 		default:
 			break;
 		}
-	} 
+		rotationGaucheConnections();
+	}
+	
+	/**
+	 * tourne toutes les connections de la tuile appelante d'un cran dans le sens horaire 
+	 */
+	private void rotationDroiteConnections (){
+		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+		while ( iterateurConnections.hasNext() ){
+			iterateurConnections.next().rotationDroite();
+		}
+	}
+	
+	/**
+	 * tourne toutes les connections de la tuile appelante d'un cran dans le sens anti-horaire
+	 */
+	private void rotationGaucheConnections (){
+		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+		while ( iterateurConnections.hasNext() ){
+			iterateurConnections.next().rotationGauche();
+		}
+	}
 	
 }
