@@ -108,7 +108,7 @@ public class Tuile implements ActionsToken{
 		return t;
 	}
 	
-	public static Tuile newBiffurcationsEmbrasses() {
+	public static Tuile newBiffurcationsEmbrassees() {
 		Tuile t = new Tuile(true);
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
