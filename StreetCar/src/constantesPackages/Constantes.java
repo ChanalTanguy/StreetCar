@@ -1,5 +1,11 @@
 package constantesPackages;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class Constantes {
 	
 	public static class Dimensions {
@@ -39,4 +45,41 @@ public class Constantes {
 		public static final String rotation = "Rotation";
 	}
 	
+	public static class Images {
+		
+		/**
+		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
+		 * @param nomImage
+		 * @return une BufferedImage image si un fichier de nom "nomImage" existe dans l'arborescence de fichier. Leve une exception sinon.
+		 */
+		public static BufferedImage initImage (String nomImage){
+			BufferedImage imageResultat = null;
+			String chemin = "images/tuiles/";
+			try {
+				chemin = chemin + nomImage;
+				imageResultat = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucune image de ce nom trouvee");
+			}
+			return imageResultat;
+		}
+		
+		/**
+		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
+		 * @param nomImage
+		 * @return une BufferedImage background si un fichier de nom "nomImage" existe dans l'arborescence de fichier. Leve une exception sinon.
+		 */
+		public static BufferedImage initBackground (String nomBackground){
+			BufferedImage background = null;
+			String chemin = "images/";
+			try {
+				chemin = chemin + nomBackground;
+				background = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucun background de ce nom trouve");
+			}
+			return background;
+		}
+	}
+
 }
