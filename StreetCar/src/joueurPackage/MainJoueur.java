@@ -19,9 +19,11 @@ public class MainJoueur {
 	
 	
 	private void instanciation (Tuile[] tab){
-		for (int i = 0; i < tab.length; i++){
-			tab[i] = new Tuile();
-		}
+		tab[0] = Tuile.newLigneDroite(); // La main est créée de cette manière.
+		tab[1] = Tuile.newLigneDroite(); // Pour pouvoir la modifier facilement.
+		tab[2] = Tuile.newLigneDroite();
+		tab[3] = Tuile.newVirage();
+		tab[4] = Tuile.newVirage();
 	}
 
 	/**
