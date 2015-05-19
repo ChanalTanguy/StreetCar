@@ -1,7 +1,6 @@
 package mainPackage;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Random;
 
 import tuilePackage.Tuile;
@@ -10,6 +9,8 @@ public class Pioche extends ArrayList<Tuile>{
 	
 	public Pioche (){
 		super();
+		initialisation();
+		shuffle();
 	}
 	
 	// A TERMINER <= En attente de l'initialisation des differentes tuiles existantes.
