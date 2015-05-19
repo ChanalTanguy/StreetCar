@@ -8,4 +8,7 @@ Vendredi 15/05
 Lundi 18/05
 * Codage de la structure de l'interface
 * Évaluation d'une première version de l'IHM
+* Création d'une banque d'images pour l'interface graphique
 * Première ébauche d'interface graphique
+* Création du package Joueur, réprésentant un des joueurs du jeu
+* Ajout des fonctions de rotation d'un tuile
