@@ -63,8 +63,8 @@ public class Tuile implements ActionsToken{
 	
 	public static Tuile newDoubleVirage() {
 		Tuile t = new Tuile(false);
-		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
-		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		return t;
 	}
 	
@@ -99,7 +99,7 @@ public class Tuile implements ActionsToken{
 		return t;
 	}
 	
-	public static Tuile newQuadrupleCroisement() {
+	public static Tuile newQuadrupleVirages() {
 		Tuile t = new Tuile(true);
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
@@ -108,7 +108,7 @@ public class Tuile implements ActionsToken{
 		return t;
 	}
 	
-	public static Tuile newBiffurcationsEmbraces() {
+	public static Tuile newBiffurcationsEmbrasses() {
 		Tuile t = new Tuile(true);
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
