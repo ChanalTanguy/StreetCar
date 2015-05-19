@@ -73,27 +73,27 @@ public class Tuile implements ActionsToken{
 	
 	/**
 	 * A FAIRE/FINIR <== EST FINI
-	 * @param fixedTuile
+	 * @param nouvTuile
 	 * @return
 	 */
 	
 	// retourne vrai si la tuile_appelante peut etre posee a cote de "fixedTuile"
 	// => on verifie alors si l'une des connections de la tuile appelante est connectee a
 	//	  l'une des connections de "fixedTuile" est connectee a la tuile_appelante
-	public boolean isAdjacent (Tuile fixedTuile, String cote){
+	public boolean canConnectTo (Tuile nouvTuile, String cote){
 		boolean connectionTrouvee = false;
 		switch (cote){
 		case Constantes.Orientation.nord:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && fixedTuile.connectionsExistantes(Constantes.Orientation.nord) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && nouvTuile.connectionsExistantes(Constantes.Orientation.sud) );
 			break;
 		case Constantes.Orientation.sud:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && fixedTuile.connectionsExistantes(Constantes.Orientation.sud) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && nouvTuile.connectionsExistantes(Constantes.Orientation.nord) );
 			break;
 		case Constantes.Orientation.est:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) );	
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && nouvTuile.connectionsExistantes(Constantes.Orientation.ouest) );	
 			break;
 		case Constantes.Orientation.ouest:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && fixedTuile.connectionsExistantes(Constantes.Orientation.ouest) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && nouvTuile.connectionsExistantes(Constantes.Orientation.est) );
 			break;
 		default:
 			throw new RuntimeException("cote non indique pour adjacence des Tuiles");
