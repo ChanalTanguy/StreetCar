@@ -73,7 +73,7 @@ public class Tuile implements ActionsToken{
 	}
 	
 	/**
-	 * A FAIRE/FINIR
+	 * A FAIRE/FINIR <== EST FINI
 	 * @param fixedTuile
 	 * @return
 	 */
@@ -81,9 +81,44 @@ public class Tuile implements ActionsToken{
 	// retourne vrai si la tuile_appelante peut etre posee a cote de "fixedTuile"
 	// => on verifie alors si l'une des connections de la tuile appelante est connectee a
 	//	  l'une des connections de "fixedTuile" est connectee a la tuile_appelante
-	public boolean isAdjacent (Tuile fixedTuile){
+	public boolean isAdjacent (Tuile fixedTuile, String cote){
 		boolean connectionTrouvee = false;
-		
+		switch (cote){
+		case Constantes.Orientation.nord:
+/*			if ( this.connectionsExistantes(Constantes.Orientation.sud) && fixedTuile.connectionsExistantes(Constantes.Orientation.nord) ){
+				connectionTrouvee = true;
+			}
+*/			
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && fixedTuile.connectionsExistantes(Constantes.Orientation.nord) );
+			
+			break;
+		case Constantes.Orientation.sud:
+/*			if ( this.connectionsExistantes(Constantes.Orientation.nord) && fixedTuile.connectionsExistantes(Constantes.Orientation.sud) ){
+				connectionTrouvee = true;
+			}
+*/			
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && fixedTuile.connectionsExistantes(Constantes.Orientation.sud) );
+			
+			break;
+		case Constantes.Orientation.est:
+/*			if ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) ){
+				connectionTrouvee = true;
+			}
+*/			
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) );
+			
+			break;
+		case Constantes.Orientation.ouest:
+/*			if ( this.connectionsExistantes(Constantes.Orientation.est) && fixedTuile.connectionsExistantes(Constantes.Orientation.ouest) ){
+				connectionTrouvee = true;
+			}
+*/			
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && fixedTuile.connectionsExistantes(Constantes.Orientation.ouest) );
+			
+			break;
+		default:
+			throw new RuntimeException("cote non indique pour adjacence des Tuiles");
+		}
 		
 		
 		return connectionTrouvee;
@@ -117,6 +152,9 @@ public class Tuile implements ActionsToken{
 	public String toString (){
 		String resultat = "";
 		
+		resultat = resultat + orientation + "\n";
+		resultat = resultat + listeConnections.toString();
+		
 		return resultat;
 	}
 	
@@ -143,13 +181,35 @@ public class Tuile implements ActionsToken{
 	
 	/**
 	 * retourne vrai si la liste appelante et celle en parametre sont identiques
+	 * @param autreListe : liste de connections qui sera comparee avec la liste de la tuile appelante
+	 * @return true : les 2 listes sont identiques
+	 */
+	/* /!\ ATTENTION /!\ CORRIGEE MAIS A REVERIFIER
+	 * sous quelles conditions 2 tuiles sont elles identiques ???
+	 * 		=> sous quelles conditions 2 listes de connections sont identiques ???
+	 * 
+	 * 
 	 */
 	private boolean listesIdentiques (ArrayList<Connection> autreListe){
-		boolean resultat;
+		boolean estContenu = false;
 		
-		resultat = (listeConnections.size() == autreListe.size()) ? listeConnections.containsAll(autreListe) : false;
+		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+		while ( iterateurConnections.hasNext() && !estContenu ){
+			ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
+			Connection connection1 = iterateurConnections.next();
+			while ( iterateurAutresConnections.hasNext() && !estContenu){
+				estContenu = estContenu || connection1.equals(iterateurAutresConnections.next());
+			}
+			if (estContenu){
+				System.out.println("connection " + connection1.toString() + " ou une identique se trouve dans la liste donnee en parametre");
+				estContenu = false;
+			}
+			else {
+				System.out.println("aucune connection identique a " + connection1.toString() + " dans la liste donnee en parametre");
+			}
+		}
 		
-		return resultat;
+		return estContenu;
 	}
 	
 	/**
@@ -218,4 +278,42 @@ public class Tuile implements ActionsToken{
 		}
 	}
 	
+	/**
+	 * retourne vrai si la tuile appelante possede au moins une connexion avec l'une de ses extremites
+	 * sur le cote indique
+	 * retourne faux sinon
+	 * @param cote : chaine de caracteres indiquant sur quel cote doit etre chercher l'extremite des connections
+	 * @return true : une connection possede une extremite est sur le cote indique, false sinon.
+	 */
+	private boolean connectionsExistantes (String cote){
+		boolean connectionTrouvee = false;
+		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+		
+		switch (cote){
+		case Constantes.Orientation.nord:
+			while ( iterateurConnections.hasNext() && !connectionTrouvee){
+				connectionTrouvee = iterateurConnections.next().isConnectedTo(Constantes.Orientation.nord);
+			}
+			break;
+		case Constantes.Orientation.sud:
+			while ( iterateurConnections.hasNext() && !connectionTrouvee){
+				connectionTrouvee = iterateurConnections.next().isConnectedTo(Constantes.Orientation.sud);
+			}
+			break;
+		case Constantes.Orientation.est:
+			while ( iterateurConnections.hasNext() && !connectionTrouvee){
+				connectionTrouvee = iterateurConnections.next().isConnectedTo(Constantes.Orientation.est);
+			}
+			break;
+		case Constantes.Orientation.ouest:
+			while ( iterateurConnections.hasNext() && !connectionTrouvee){
+				connectionTrouvee = iterateurConnections.next().isConnectedTo(Constantes.Orientation.ouest);
+			}
+			break;
+		default:
+			throw new RuntimeException("cote non indique pour adjacence des connections");
+		}
+		
+		return connectionTrouvee;
+	}
 }
