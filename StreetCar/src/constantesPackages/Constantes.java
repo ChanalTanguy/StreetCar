@@ -32,4 +32,11 @@ public class Constantes {
 		public static final String ouest = "Ouest";
 	}
 	
+	public static class Coup {
+		public static final String pioche = "Pioche";
+		public static final String echange = "Echange";
+		public static final String placement = "Placement";
+		public static final String rotation = "Rotation";
+	}
+	
 }
