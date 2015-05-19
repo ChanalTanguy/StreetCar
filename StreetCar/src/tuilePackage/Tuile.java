@@ -1,4 +1,4 @@
-package tuilePackage;
+ package tuilePackage;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -23,6 +23,97 @@ public class Tuile implements ActionsToken{
 		immuable = presenceArbres;
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
+	}
+	
+	/*
+	 * 12 Constructeur de tuile fixes
+	 */
+	public static Tuile newLigneDroite() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		return t;
+	}
+
+	public static Tuile newVirage() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		return t;
+	}
+
+	public static Tuile newBifurcationDroite() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		return t;
+	}
+	
+	public static Tuile newBifurcationGauche() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		return t;
+	}
+	
+	public static Tuile newSeparation() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		return t;
+	}
+	
+	public static Tuile newDoubleVirage() {
+		Tuile t = new Tuile(false);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
+		return t;
+	}
+	
+	public static Tuile newDoubleBiffurcation() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		return t;
+	}
+	
+	public static Tuile newCroisement() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		return t;
+	}
+	
+	public static Tuile newBiffurcationsSeparesGauche() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		return t;
+	}
+	
+	public static Tuile newBiffurcationsSeparesDroite() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		return t;
+	}
+	
+	public static Tuile newQuadrupleCroisement() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		return t;
+	}
+	
+	public static Tuile newBiffurcationsEmbraces() {
+		Tuile t = new Tuile(true);
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
+		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		return t;
 	}
 	
 	/*
