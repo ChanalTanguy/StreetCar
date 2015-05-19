@@ -6,7 +6,7 @@ import javax.swing.Timer;
 
 import mainPackage.Moteur;
 
-public class JoueurIA implements Joueur {
+public class JoueurIA extends Joueur {
 
 	public EcouteurBoucle ecouteurBoucle;
 	

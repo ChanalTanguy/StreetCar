@@ -1,5 +1,7 @@
 package iaPackage;
 
-public interface InterfaceIA {
+import joueurPackage.Coup;
 
+public interface InterfaceIA {
+	public Coup getCoup();
 }

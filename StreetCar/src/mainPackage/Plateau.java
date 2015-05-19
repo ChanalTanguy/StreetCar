@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.awt.Dimension;
+import java.awt.Point;
 
 import joueurPackage.Coup;
 import tuilePackage.Tuile;
@@ -23,9 +24,9 @@ public class Plateau {
 			// Et que les 4 cases adjacente ne font pas conflit
 			boolean valide = false;
 
-			Dimension coord = coup.getCoordonnee();
-			int x = coord.width;
-			int y = coord.height;
+			Point coord = coup.getCoordonnee();
+			int x = coord.x;
+			int y = coord.y;
 			Tuile nouvTuile = getTuileAt(x,y);
 
 			valide = getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.est)

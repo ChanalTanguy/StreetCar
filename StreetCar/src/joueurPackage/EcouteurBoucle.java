@@ -1,5 +1,7 @@
 package joueurPackage;
 
+import iaPackage.InterfaceIA;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +11,7 @@ public class EcouteurBoucle implements ActionListener {
 
 	boolean enabled;
 	Moteur moteur;
+	InterfaceIA ia;
 	
 	public EcouteurBoucle(Moteur m) {
 		enabled = false;
@@ -26,8 +29,8 @@ public class EcouteurBoucle implements ActionListener {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			// Coup c = IA.getCoup();
-			moteur.jouerCoup(/* c */);
+			Coup c = ia.getCoup();
+			moteur.jouerCoup(c);
 			enabled = false;
 		}
 	}
