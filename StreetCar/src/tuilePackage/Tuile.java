@@ -3,7 +3,6 @@ package tuilePackage;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import mainPackage.ActionsToken;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
@@ -85,36 +84,16 @@ public class Tuile implements ActionsToken{
 		boolean connectionTrouvee = false;
 		switch (cote){
 		case Constantes.Orientation.nord:
-/*			if ( this.connectionsExistantes(Constantes.Orientation.sud) && fixedTuile.connectionsExistantes(Constantes.Orientation.nord) ){
-				connectionTrouvee = true;
-			}
-*/			
 			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && fixedTuile.connectionsExistantes(Constantes.Orientation.nord) );
-			
 			break;
 		case Constantes.Orientation.sud:
-/*			if ( this.connectionsExistantes(Constantes.Orientation.nord) && fixedTuile.connectionsExistantes(Constantes.Orientation.sud) ){
-				connectionTrouvee = true;
-			}
-*/			
 			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && fixedTuile.connectionsExistantes(Constantes.Orientation.sud) );
-			
 			break;
 		case Constantes.Orientation.est:
-/*			if ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) ){
-				connectionTrouvee = true;
-			}
-*/			
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) );
-			
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && fixedTuile.connectionsExistantes(Constantes.Orientation.est) );	
 			break;
 		case Constantes.Orientation.ouest:
-/*			if ( this.connectionsExistantes(Constantes.Orientation.est) && fixedTuile.connectionsExistantes(Constantes.Orientation.ouest) ){
-				connectionTrouvee = true;
-			}
-*/			
 			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && fixedTuile.connectionsExistantes(Constantes.Orientation.ouest) );
-			
 			break;
 		default:
 			throw new RuntimeException("cote non indique pour adjacence des Tuiles");
@@ -135,18 +114,6 @@ public class Tuile implements ActionsToken{
 		default:
 			break;
 		}
-	}
-	
-	/* methode utile ??? <=> on lui fournit un objet (ici une tuile)
-	 * 						et on remplace l'appelant par cet objet
-	 * 
-	 * /!\ l'operation inverse est possible /!\
-	 * 
-	 */
-	public void swap (Object token){
-		Tuile tampon = (Tuile) token;
-		this.setPresenceArbres(tampon.getPresenceArbres());
-		this.setListeConnections(tampon.getListeConnections());
 	}
 	
 	public String toString (){
