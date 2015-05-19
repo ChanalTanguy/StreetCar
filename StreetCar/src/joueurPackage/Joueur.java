@@ -57,10 +57,11 @@ public abstract class Joueur {
 	
 	/**
 	 * Enlève la carte au dessus de la pioche et la met dans la main du joueur
+	 * @param pioche 
 	 */
-	public void piocher() {
+	public void piocher(Pioche pioche) {
 		while (!main.isFull())
-			main.ajouterCarte(null/*Pioche.nextTuile()*/);
+			main.ajouterCarte(pioche.remove(0));
 	}
 	
 }

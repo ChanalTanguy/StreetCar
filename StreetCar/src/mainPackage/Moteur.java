@@ -9,6 +9,7 @@ public class Moteur {
 	private int currentPlayer;
 	private Plateau plateauDeJeu;
 	private int nbActions;
+	private Pioche pioche;
 	
 	/*
 	 * Constructeur
@@ -21,6 +22,7 @@ public class Moteur {
 		plateauDeJeu = referencePlateau;
 		nbActions = 2;
 		players[currentPlayer].attendCoup();
+		pioche = new Pioche();
 	}
 	
 	/* 
@@ -40,6 +42,10 @@ public class Moteur {
 	
 	public int getNbActions (){
 		return nbActions;
+	}
+
+	public Pioche getPioche (){
+		return pioche;
 	}
 	
 	
@@ -64,7 +70,7 @@ public class Moteur {
 				players[currentPlayer].volerTuile(c.getTuile(), players[(currentPlayer+1)%2]);
 				nbActions--;
 			} else if (c.getType().equals(Constantes.Coup.pioche)) {
-				players[currentPlayer].piocher();
+				players[currentPlayer].piocher(pioche);
 				nbActions = 0;
 			} else {
 				System.out.println("Erreur : Cas non géré"); // Cas sensé inateignable
@@ -76,7 +82,7 @@ public class Moteur {
 			}
 		}
 		else {
-			/*	/!\ ATTENTION /!\
+			/*	/!\ ATTENTION TODO /!\
 			 *  Sinon mettre un message d'erreur <=> notifications
 			 */
 			
