@@ -9,6 +9,26 @@ import javax.swing.JFrame;
 
 public class Fenetre extends JFrame{
 	
+	public Fenetre()
+	{
+		super();
+		Panneau p = new Panneau();
+		p.addMouseListener(new EcouteTerrain(p));
+		
+		//Avoir la taille standard de l'écran
+		Toolkit tk = Toolkit.getDefaultToolkit(); 
+		int largeur = tk.getScreenSize().width;
+		int hauteur = tk.getScreenSize().height; 
+		
+		this.setSize(largeur, hauteur);	
+		this.setTitle("Street Car");
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(p);
+		this.setVisible(true);
+	}
+		
 	public Fenetre (String title){
 		super(title);
 		Toolkit tk = Toolkit.getDefaultToolkit();
