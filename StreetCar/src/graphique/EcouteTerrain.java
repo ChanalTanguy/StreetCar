@@ -28,17 +28,12 @@ public class EcouteTerrain implements MouseListener {
 		{ 	
 			int numCarte = carteNo(piocheX);
 			int numMain = mainNo(piocheY);
-			//p.message = "Je suis dans la main du joueur " + numMain + " à la carte " + numCarte;
 			illuminerMain(numCarte, numMain);
 		}
 		
 		//Plateau
 		if(!estSurPlateau(caseX, caseY)){ caseX = -1; caseY = -1; }
-		else
-		{
-			//p.message = "X = " + caseX + ", Y = " + caseY;
-			illuminerCase(caseX, caseY);
-		}
+		else { illuminerCase(caseX, caseY);}
 		
 		p.repaint();
 	}

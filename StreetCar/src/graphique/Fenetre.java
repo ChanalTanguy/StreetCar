@@ -12,7 +12,7 @@ public class Fenetre extends JFrame{
 	public Fenetre()
 	{
 		super();
-		Panneau p = new Panneau();
+		Panneau p = new Panneau(Color.white, "fond", true);
 		p.addMouseListener(new EcouteTerrain(p));
 		
 		//Avoir la taille standard de l'écran

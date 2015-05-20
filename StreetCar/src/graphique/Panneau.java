@@ -15,7 +15,6 @@ public class Panneau extends JPanel{
 	Color couleur;
 	
 	//Ajout Mathieu
-	int x, y;
 	int depart = 100;
 	int tailleCase = 50;
 	int ecart = 220;
@@ -42,48 +41,25 @@ public class Panneau extends JPanel{
 		
 	boolean zoneDeJeu;
 	boolean contoursDessines;
-	
-	//Constructeur de Mathieu
-	public Panneau()
-	{
-		super();
-		this.x = 0;
-		this.y = 0;
-		try {		
-			//Chargement des images
-			fond = ImageIO.read(new File("tram.png"));
-			plateau = ImageIO.read(new File("plateau.png"));
-			tuile001 = ImageIO.read(new File("tuiles/001.jpg"));
-			tuile002 = ImageIO.read(new File("tuiles/002.jpg"));
-			tuile003 = ImageIO.read(new File("tuiles/003.jpg"));
-			tuile004 = ImageIO.read(new File("tuiles/004.jpg"));
-			tuile005 = ImageIO.read(new File("tuiles/005.jpg"));
-			tuile006 = ImageIO.read(new File("tuiles/006.jpg"));
-			tuile007 = ImageIO.read(new File("tuiles/007.jpg"));
-			tuile008 = ImageIO.read(new File("tuiles/008.jpg"));
-			tuile009 = ImageIO.read(new File("tuiles/009.jpg"));
-			tuile010 = ImageIO.read(new File("tuiles/010.jpg"));
-			tuile011 = ImageIO.read(new File("tuiles/011.jpg"));
-		}
-		catch (IOException e) { e.printStackTrace();}	
-	}
-	
+		
 	public Panneau (Color newCouleur, String newName){
-		super();
+		super();	
 		name = newName;
 		couleur = newCouleur;
 		zoneDeJeu = false;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
+		initImage();
 	}
 	
 	public Panneau (Color newCouleur, String newName, boolean panneauDeJeu){
-		super();
+		super();		
 		name = newName;
 		couleur = newCouleur;
 		zoneDeJeu = panneauDeJeu;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
+		initImage();
 	}
 	
 	public String getName (){
@@ -177,6 +153,27 @@ public class Panneau extends JPanel{
 			if(i == 0 || i == 1 || i == 2) drawable.drawImage(tuile001, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
 			else drawable.drawImage(tuile002, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
 		}
+	}
+	
+	private void initImage() {
+		try {		
+			//Chargement des images
+			fond = ImageIO.read(new File("images/background/tram.png"));
+			plateau = ImageIO.read(new File("images/background/plateau.png"));
+			tuile001 = ImageIO.read(new File("images/tuiles/001.jpg"));
+			tuile002 = ImageIO.read(new File("images/tuiles/002.jpg"));
+			tuile003 = ImageIO.read(new File("images/tuiles/003.jpg"));
+			tuile004 = ImageIO.read(new File("images/tuiles/004.jpg"));
+			tuile005 = ImageIO.read(new File("images/tuiles/005.jpg"));
+			tuile006 = ImageIO.read(new File("images/tuiles/006.jpg"));
+			tuile007 = ImageIO.read(new File("images/tuiles/007.jpg"));
+			tuile008 = ImageIO.read(new File("images/tuiles/008.jpg"));
+			tuile009 = ImageIO.read(new File("images/tuiles/009.jpg"));
+			tuile010 = ImageIO.read(new File("images/tuiles/010.jpg"));
+			tuile011 = ImageIO.read(new File("images/tuiles/011.jpg"));
+		}
+		catch (IOException e) { e.printStackTrace();}	
+		
 	}
 	
 }
