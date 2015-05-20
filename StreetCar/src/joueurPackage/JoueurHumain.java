@@ -1,5 +1,6 @@
 package joueurPackage;
 
+import graphique.EcouteTerrain;
 import constantesPackages.Constantes.Plateau;
 import mainPackage.Moteur;
 
