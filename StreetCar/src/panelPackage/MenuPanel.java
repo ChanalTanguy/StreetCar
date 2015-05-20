@@ -8,37 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MenuPanel {
+public class MenuPanel extends JPanel {
 	
-	public static void addMenuToFrame(JFrame frame){
-		MenuPanel menuBuilder = new MenuPanel();
-		JPanel menu = menuBuilder.buildMenuPanel();
-		frame.add(menu);
+	public MenuPanel(){
+		this.buildMenuPanel();
 	}
 	
-	public static void addMenuToFrame(JFrame frame, String position){
-		MenuPanel menuBuilder = new MenuPanel();
-		JPanel menu = menuBuilder.buildMenuPanel();
-		frame.setLayout(new BorderLayout());
-		frame.add(menu, position);
-	}
-	
-	public static void addMenuToPanel(JPanel panel){
-		MenuPanel menuBuilder = new MenuPanel();
-		JPanel menu = menuBuilder.buildMenuPanel();
-		panel.add(menu);
-	}
-	
-	public static void addMenuToPanel(JPanel panel, String position){
-		MenuPanel menuBuilder = new MenuPanel();
-		JPanel menu = menuBuilder.buildMenuPanel();
-		panel.setLayout(new BorderLayout());
-		panel.add(menu, position);
-	}
-	
-	private JPanel buildMenuPanel(){
-		
-		JPanel content = new JPanel();
+	private void buildMenuPanel(){
 		
 		JPanel zone1 = newZone();
 		JPanel zone2 = newZone();
@@ -46,22 +22,20 @@ public class MenuPanel {
 		JPanel zone4 = newZone();
 		
 		addNewButton(zone1, "Nouvelle partie", BorderLayout.NORTH, null);
-		addNewButton(zone1, "Retour", BorderLayout.SOUTH, null);
+		addNewButton(zone4, "Retour", BorderLayout.SOUTH, null);
 		
-		addNewButton(zone2, "Sauvegarder la partie",  BorderLayout.NORTH, null);
-		addNewButton(zone2, "Charger une partie",  BorderLayout.SOUTH, null);
+		addNewButton(zone1, "Sauvegarder la partie",  BorderLayout.CENTER, null);
+		addNewButton(zone1, "Charger une partie",  BorderLayout.SOUTH, null);
 		
 		addNewButton(zone3, "Succès",  BorderLayout.NORTH, null);
 		addNewButton(zone3, "Options",  BorderLayout.SOUTH, null);
 		
 		addNewButton(zone4, "Quitter",  BorderLayout.CENTER, null);
 		
-		content.add(zone1);
-		content.add(zone2);
-		content.add(zone3);
-		content.add(zone4);
-		
-		return content;
+		this.add(zone1);
+		this.add(zone2);
+		this.add(zone3);
+		this.add(zone4);
 	}
 	
 	private JPanel newZone(){
