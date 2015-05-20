@@ -43,13 +43,20 @@ public class EcouteTerrain implements MouseListener {
 		{ 	
 			int numCarte = carteNo(piocheX);
 			int numMain = mainNo(piocheY);
+			
 			j.coupSelectionTuile(numCarte);
+			
 			illuminerMain(numCarte, numMain);
 		}
 		
 		//Plateau
 		if(!estSurPlateau(caseX, caseY)){ caseX = -1; caseY = -1; }
-		else { illuminerCase(caseX, caseY);}
+		else { 
+			
+			//Pour voir si l'on a selectionné au préalable la main du joueur
+			
+			illuminerCase(caseX, caseY);
+		}
 		
 		p.repaint();
 	}

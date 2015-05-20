@@ -15,5 +15,4 @@ public class MainClass implements Runnable{
 		Fenetre f = new Fenetre("Street Car");
 		f.disposition(m);
 	}
-
 }
