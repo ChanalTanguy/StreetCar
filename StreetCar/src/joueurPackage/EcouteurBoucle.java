@@ -29,7 +29,7 @@ public class EcouteurBoucle implements ActionListener {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			Coup c = ia.getCoup();
+			Coup c = ia.getCoup(moteur);
 			moteur.jouerCoup(c);
 			enabled = false;
 		}
