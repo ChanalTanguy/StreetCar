@@ -157,7 +157,7 @@ public class Tuile implements ActionsToken{
 	
 	public void addConnection (Connection nouvelleConnection){
 		if ( listeConnections.add(nouvelleConnection) ){
-			System.out.println("ajout ok");
+			System.out.println("ajout connection ok");
 		}
 		else { System.out.println("ajout annule"); }
 	}
@@ -167,10 +167,6 @@ public class Tuile implements ActionsToken{
 	 * @param nouvTuile
 	 * @return
 	 */
-	
-	// retourne vrai si la tuile_appelante peut etre posee a cote de "fixedTuile"
-	// => on verifie alors si l'une des connections de la tuile appelante est connectee a
-	//	  l'une des connections de "fixedTuile" est connectee a la tuile_appelante
 	public boolean canConnectTo (Tuile nouvTuile, String cote){
 		boolean connectionTrouvee = false;
 		switch (cote){

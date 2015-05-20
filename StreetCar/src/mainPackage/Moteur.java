@@ -15,6 +15,7 @@ public class Moteur {
 	 * Constructeur
 	 */
 	public Moteur(Plateau referencePlateau) {
+		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
 		players[0] = new JoueurHumain(this);
 		players[0] = new JoueurIA(this);
@@ -23,6 +24,8 @@ public class Moteur {
 		nbActions = 2;
 		players[currentPlayer].attendCoup();
 		pioche = new Pioche();
+		pioche.initialisation();
+		pioche.shuffle();
 	}
 	
 	/* 
