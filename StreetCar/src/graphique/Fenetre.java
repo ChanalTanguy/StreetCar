@@ -11,35 +11,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import mainPackage.Moteur;
+
 public class Fenetre extends JFrame{
-	
-	public Fenetre()
-	{
-		super();
-		Panneau p = new Panneau(Color.white, "fond", true);
-		p.addMouseListener(new EcouteTerrain(p));
-		
-		//Avoir la taille standard de l'écran
-		Toolkit tk = Toolkit.getDefaultToolkit(); 
-		int largeur = tk.getScreenSize().width;
-		int hauteur = tk.getScreenSize().height;
-		
-		try {		
-			//Chargement des images
-			BufferedImage icone = ImageIO.read(new File("images/background/logo.png"));
-			this.setIconImage(icone);
-		}
-		catch (IOException e) { e.printStackTrace();}	
-		
-		this.setSize(largeur, hauteur);	
-		this.setTitle("Street Car");
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(p);
-		this.setVisible(true);
-	}
-		
+			
 	public Fenetre (String title){
 		super(title);
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -61,8 +36,8 @@ public class Fenetre extends JFrame{
 
 	}
 	
-	public void disposition (){
-		Panneau panel1 = new Panneau(Color.orange, "zone de jeu", true);
+	public void disposition (Moteur m){
+		Panneau panel1 = new Panneau(Color.orange, "zone de jeu", true, m);
 		Panneau panel2 = new Panneau(Color.white, "zone d'interface");
 		Panneau panel3 = new Panneau(Color.cyan, "notifications");
 		Panneau panel4 = new Panneau(Color.white, "historiques");

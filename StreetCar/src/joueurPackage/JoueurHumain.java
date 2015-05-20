@@ -12,7 +12,7 @@ public class JoueurHumain extends Joueur {
 	int tuileSelectionnee;
 	
 	public JoueurHumain(Moteur m) {
-		ecouteurPlateau = new EcouteTerrain(this);
+		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;
 		// TODO : Ajouter la main en paramètre

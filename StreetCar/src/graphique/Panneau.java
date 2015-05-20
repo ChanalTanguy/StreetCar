@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import mainPackage.Moteur;
+
 public class Panneau extends JPanel{
 	String name;
 	Color couleur;
@@ -53,14 +55,15 @@ public class Panneau extends JPanel{
 		initImage();
 	}
 	
-	public Panneau (Color newCouleur, String newName, boolean panneauDeJeu){
+	public Panneau (Color newCouleur, String newName, boolean panneauDeJeu, Moteur m){
 		super();		
 		name = newName;
 		couleur = newCouleur;
 		zoneDeJeu = panneauDeJeu;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
-		addMouseListener(new EcouteTerrain(this));
+		//On est sensé créer un mouse listener par joueur, à modifier
+		addMouseListener(new EcouteTerrain(this, m));
 		initImage();
 	}
 	

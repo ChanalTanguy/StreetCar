@@ -3,20 +3,35 @@ package graphique;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import mainPackage.Moteur;
+import joueurPackage.*;
+
 public class EcouteTerrain implements MouseListener {
 
 	Panneau p;
+	Moteur mot;
 	
 	EcouteTerrain(Panneau panneau)
 	{
 		p = panneau;
 	}
 	
+	EcouteTerrain(Panneau panneau, Moteur m)
+	{
+		p = panneau;
+		mot = m;
+	}
+	
 	public void mousePressed(MouseEvent e) {
 		
+		//Joueur actif
+		JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
+		
+		//Coordonéess
 		int x = e.getX();
 		int y = e.getY();
 		
+		//
 		int piocheX = x-p.ecart;
 		int piocheY = y;
 		
@@ -28,6 +43,7 @@ public class EcouteTerrain implements MouseListener {
 		{ 	
 			int numCarte = carteNo(piocheX);
 			int numMain = mainNo(piocheY);
+			j.coupSelectionTuile(numCarte);
 			illuminerMain(numCarte, numMain);
 		}
 		

@@ -11,8 +11,9 @@ public class MainClass implements Runnable{
 	}
 	
 	public void run(){
+		Moteur m = new Moteur(new Plateau());
 		Fenetre f = new Fenetre("Street Car");
-		f.disposition();
+		f.disposition(m);
 	}
 
 }
