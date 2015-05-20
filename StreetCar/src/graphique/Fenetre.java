@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Fenetre extends JFrame{
@@ -18,7 +22,14 @@ public class Fenetre extends JFrame{
 		//Avoir la taille standard de l'écran
 		Toolkit tk = Toolkit.getDefaultToolkit(); 
 		int largeur = tk.getScreenSize().width;
-		int hauteur = tk.getScreenSize().height; 
+		int hauteur = tk.getScreenSize().height;
+		
+		try {		
+			//Chargement des images
+			BufferedImage icone = ImageIO.read(new File("images/background/logo.png"));
+			this.setIconImage(icone);
+		}
+		catch (IOException e) { e.printStackTrace();}	
 		
 		this.setSize(largeur, hauteur);	
 		this.setTitle("Street Car");
@@ -34,16 +45,24 @@ public class Fenetre extends JFrame{
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int largeur = tk.getScreenSize().width;
 		int hauteur = tk.getScreenSize().height;
-		setSize(500, 500);
+		
+		try {		
+			//Chargement des images
+			BufferedImage icone = ImageIO.read(new File("images/background/logo.png"));
+			this.setIconImage(icone);
+		}
+		catch (IOException e) { e.printStackTrace();}	
+		
+		setSize(largeur, hauteur);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addMouseListener(new GestionSouris(this));
-		
+
 	}
 	
 	public void disposition (){
-		Panneau panel1 = new Panneau(Color.orange, "zone de jeu");
+		Panneau panel1 = new Panneau(Color.orange, "zone de jeu", true);
 		Panneau panel2 = new Panneau(Color.white, "zone d'interface");
 		Panneau panel3 = new Panneau(Color.cyan, "notifications");
 		Panneau panel4 = new Panneau(Color.white, "historiques");
