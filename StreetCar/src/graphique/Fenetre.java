@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Fenetre extends JFrame{
@@ -18,7 +22,14 @@ public class Fenetre extends JFrame{
 		//Avoir la taille standard de l'écran
 		Toolkit tk = Toolkit.getDefaultToolkit(); 
 		int largeur = tk.getScreenSize().width;
-		int hauteur = tk.getScreenSize().height; 
+		int hauteur = tk.getScreenSize().height;
+		
+		try {		
+			//Chargement des images
+			BufferedImage icone = ImageIO.read(new File("images/background/logo.png"));
+			this.setIconImage(icone);
+		}
+		catch (IOException e) { e.printStackTrace();}	
 		
 		this.setSize(largeur, hauteur);	
 		this.setTitle("Street Car");
@@ -34,6 +45,13 @@ public class Fenetre extends JFrame{
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int largeur = tk.getScreenSize().width;
 		int hauteur = tk.getScreenSize().height;
+		
+		try {		
+			//Chargement des images
+			BufferedImage icone = ImageIO.read(new File("images/background/logo.png"));
+			this.setIconImage(icone);
+		}
+		catch (IOException e) { e.printStackTrace();}	
 		
 		setSize(largeur, hauteur);
 		setLocationRelativeTo(null);
