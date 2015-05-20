@@ -12,3 +12,9 @@ Lundi 18/05
 * Première ébauche d'interface graphique
 * Création du package Joueur, réprésentant un des joueurs du jeu
 * Ajout des fonctions de rotation d'un tuile
+
+Mardi 19/05
+* Écriture des fonctions permettant de vérifier si un coup est valide
+* Création et implémentation de la classe Coup, gérant la pose d'une tuile
+* Ajout des méthodes créant les différents types de tuiles
+* Création d'une classe permettant d'instancier les images
