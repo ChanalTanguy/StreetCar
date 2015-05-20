@@ -8,6 +8,7 @@ public class JoueurHumain extends Joueur {
 	private EcouteTerrain ecouteurPlateau;
 	private boolean enabled;
 	Moteur moteur;
+	int tuileSelectionnee;
 	
 	public JoueurHumain(Moteur m) {
 		ecouteurPlateau = new EcouteTerrain(this);
@@ -37,11 +38,22 @@ public class JoueurHumain extends Joueur {
 	}
 	
 	/**
-	 *  Jouer un coup "Placer" si c'est au tour de ce joueur de jouer
+	 *  Selectionee une tuile
 	 */
-	public void coupPlacer(int tuile, int x, int y) {
+	public void coupSelectionTuile(int tuile) {
 		if (enabled)
-			moteur.jouerCoup(Coup.newPlacement(tuile, x, y));
+			tuileSelectionnee = tuile;
+	}
+	
+	/**
+	 *  Jouer un coup "Placer" si c'est au tour de ce joueur de jouer
+	 *  et une tuile a été préalablement selectionnée
+	 */
+	public void coupPlacerTuile(int x, int y) {
+		if (enabled && tuileSelectionnee != 0) {
+			moteur.jouerCoup(Coup.newPlacement(tuileSelectionnee, x, y));
+			tuileSelectionnee = 0;
+		}
 	}
 	
 	/**
