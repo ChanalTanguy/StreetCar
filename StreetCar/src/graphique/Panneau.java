@@ -86,6 +86,10 @@ public class Panneau extends JPanel{
 			dessinerMain1(crayon);
 			dessinerMain2(crayon);
 			
+			//Visuel des cases
+			//crayon.drawImage(tuile001, depart+5*tailleCase+1, depart+tailleCase*3+1, tailleCase-1, tailleCase-1, this);
+			//crayon.drawImage(tuile001, depart+5*tailleCase+1, depart+tailleCase*4+1, tailleCase-1, tailleCase-1, this);
+			
 			if(main != -1){ colorMain(crayon); }
 			if(caseX != -1){ colorCase(crayon); }
 		}
@@ -160,7 +164,7 @@ public class Panneau extends JPanel{
 	private void initImage() {
 		try {		
 			//Chargement des images
-			fond = ImageIO.read(new File("images/background/tram.png"));
+			fond = ImageIO.read(new File("images/background/tramOui.png"));
 			plateau = ImageIO.read(new File("images/background/plateau.png"));
 			tuile001 = ImageIO.read(new File("images/tuiles/001.jpg"));
 			tuile002 = ImageIO.read(new File("images/tuiles/002.jpg"));

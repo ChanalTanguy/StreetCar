@@ -11,7 +11,7 @@ public class MainClass implements Runnable{
 	}
 	
 	public void run(){
-		Fenetre f = new Fenetre("Test");
+		Fenetre f = new Fenetre("Street Car");
 		f.disposition();
 	}
 
