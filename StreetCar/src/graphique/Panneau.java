@@ -10,7 +10,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import tuilePackage.Tuile;
 import mainPackage.Moteur;
+import mainPackage.Plateau;
 
 public class Panneau extends JPanel{
 	String name;
@@ -39,6 +41,7 @@ public class Panneau extends JPanel{
 	public int carte = -1;
 	public int caseX = -1;
 	public int caseY = -1;
+	Moteur mot;
 	//Ajout Mathieu
 		
 	boolean zoneDeJeu;
@@ -60,6 +63,7 @@ public class Panneau extends JPanel{
 		name = newName;
 		couleur = newCouleur;
 		zoneDeJeu = panneauDeJeu;
+		mot = m;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
 		//On est sensé créer un mouse listener par joueur, à modifier
@@ -86,8 +90,10 @@ public class Panneau extends JPanel{
 		{
 			dessinerFond(crayon);
 			dessinerPlateau(crayon);
+			dessinerContenuPlateau(crayon, mot.getPlateau());
 			dessinerMain1(crayon);
 			dessinerMain2(crayon);
+			
 			
 			//Visuel des cases
 			//crayon.drawImage(tuile001, depart+5*tailleCase+1, depart+tailleCase*3+1, tailleCase-1, tailleCase-1, this);
@@ -104,6 +110,22 @@ public class Panneau extends JPanel{
 		
 	}
 	
+	private void dessinerContenuPlateau(Graphics2D crayon, Plateau plateau) {
+		for(int i = 0; i<12; i++)
+		{
+			for(int j = 0; j<12; j++)
+			{
+				dessinerTuile(plateau.getTuileAt(i, j));
+			}
+		}
+		
+	}
+
+	private void dessinerTuile(Tuile tuileAt) {
+		// TODO avoir le visuel de toutes les tuiles
+		
+	}
+
 	public void activerContours() {
 		contoursDessines = true;
 		repaint();

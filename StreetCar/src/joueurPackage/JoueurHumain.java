@@ -50,7 +50,7 @@ public class JoueurHumain extends Joueur {
 	 *  Jouer un coup "Placer" si c'est au tour de ce joueur de jouer
 	 *  et une tuile a été préalablement selectionnée
 	 */
-	public void coupPlacerTuile(int x, int y) {
+	public void coupPlacerTuile(int carte, int x, int y) {
 		if (enabled && tuileSelectionnee != 0) {
 			moteur.jouerCoup(Coup.newPlacement(tuileSelectionnee, x, y));
 			tuileSelectionnee = 0;
