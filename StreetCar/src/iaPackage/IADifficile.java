@@ -4,8 +4,12 @@ import joueurPackage.Coup;
 import mainPackage.Moteur;
 
 public class IADifficile implements InterfaceIA {
+	
+	public IADifficile(Moteur moteur) {
+		
+	}
 
-	public Coup getCoup(Moteur moteur) {
+	public Coup getCoup() {
 		// * Générer le graphe (ou pas selon commenjt on s'y prend
 		// ** Trouver le chemin le plus rapide pour rejoindre ses terminus
 		// *** Placer une tuile au hasard sur le chemin (avec Rotation potentiel)
