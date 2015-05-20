@@ -67,7 +67,7 @@ public class Constantes {
 		/**
 		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
 		 * @param nomImage
-		 * @return une BufferedImage background si un fichier de nom "nomImage" existe dans l'arborescence de fichier. Leve une exception sinon.
+		 * @return une BufferedImage background si un fichier de nom "nomBackground" existe dans l'arborescence de fichier. Leve une exception sinon.
 		 */
 		public static BufferedImage initBackground (String nomBackground){
 			BufferedImage background = null;
@@ -79,6 +79,23 @@ public class Constantes {
 				System.out.println("aucun background de ce nom trouve");
 			}
 			return background;
+		}
+		
+		/**
+		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
+		 * @param nomBouton
+		 * @return une BufferedImage bouton si un fichier de nom "nomBouton" existe dans l'arborescence de fichier. Leve une exception sinon
+		 */
+		public static BufferedImage initBouton (String nomBouton){
+			BufferedImage bouton = null;
+			String chemin = "images/boutons/";
+			try {
+				chemin = chemin + nomBouton;
+				bouton = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucun bouton de ce nom trouve");
+			}
+			return bouton;
 		}
 	}
 
