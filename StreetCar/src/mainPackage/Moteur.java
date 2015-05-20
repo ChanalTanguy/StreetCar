@@ -18,7 +18,7 @@ public class Moteur {
 		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
 		players[0] = new JoueurHumain(this);
-		players[0] = new JoueurIA(this);
+		players[0] = new JoueurHumain(this);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 2;
