@@ -34,16 +34,17 @@ public class Fenetre extends JFrame{
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int largeur = tk.getScreenSize().width;
 		int hauteur = tk.getScreenSize().height;
-		setSize(500, 500);
+		
+		setSize(largeur, hauteur);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addMouseListener(new GestionSouris(this));
-		
+
 	}
 	
 	public void disposition (){
-		Panneau panel1 = new Panneau(Color.orange, "zone de jeu");
+		Panneau panel1 = new Panneau(Color.orange, "zone de jeu", true);
 		Panneau panel2 = new Panneau(Color.white, "zone d'interface");
 		Panneau panel3 = new Panneau(Color.cyan, "notifications");
 		Panneau panel4 = new Panneau(Color.white, "historiques");

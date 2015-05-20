@@ -4,6 +4,7 @@ public class TestGraphique {
 
 	public static void main(String [] args)
 	{
-		Fenetre f = new Fenetre();
+		//Fenetre f = new Fenetre("yolo");
+		//f.disposition();
 	}
 }

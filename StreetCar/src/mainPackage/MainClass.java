@@ -1,5 +1,7 @@
 package mainPackage;
 
+import graphique.Fenetre;
+
 import javax.swing.SwingUtilities;
 
 public class MainClass implements Runnable{
@@ -9,7 +11,8 @@ public class MainClass implements Runnable{
 	}
 	
 	public void run(){
-		
+		Fenetre f = new Fenetre("Test");
+		f.disposition();
 	}
 
 }
