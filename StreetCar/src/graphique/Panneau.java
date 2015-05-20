@@ -49,6 +49,7 @@ public class Panneau extends JPanel{
 		zoneDeJeu = false;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
+		addMouseListener(new EcouteTerrain(this));
 		initImage();
 	}
 	
@@ -59,6 +60,7 @@ public class Panneau extends JPanel{
 		zoneDeJeu = panneauDeJeu;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
+		addMouseListener(new EcouteTerrain(this));
 		initImage();
 	}
 	
