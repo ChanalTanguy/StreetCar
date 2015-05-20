@@ -52,7 +52,7 @@ public class Constantes {
 		 * @param nomImage
 		 * @return une BufferedImage image si un fichier de nom "nomImage" existe dans l'arborescence de fichier. Leve une exception sinon.
 		 */
-		public static BufferedImage initImage (String nomImage){
+		public static BufferedImage initTuile (String nomImage){
 			BufferedImage imageResultat = null;
 			String chemin = "images/tuiles/";
 			try {
