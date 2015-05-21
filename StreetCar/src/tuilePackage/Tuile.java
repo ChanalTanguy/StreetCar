@@ -200,18 +200,23 @@ public class Tuile implements ActionsToken{
 	 */
 	public boolean canConnectTo (Tuile nouvTuile, String cote){
 		boolean connectionTrouvee = false;
-		switch (cote){
+		System.out.println(this+" "+nouvTuile+" "+cote);
+		switch (cote) {
 		case Constantes.Orientation.nord:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && nouvTuile.connectionsExistantes(Constantes.Orientation.sud) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && nouvTuile.connectionsExistantes(Constantes.Orientation.sud) )
+						     || ( !this.connectionsExistantes(Constantes.Orientation.nord) && !nouvTuile.connectionsExistantes(Constantes.Orientation.sud) );
 			break;
 		case Constantes.Orientation.sud:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && nouvTuile.connectionsExistantes(Constantes.Orientation.nord) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.sud) && nouvTuile.connectionsExistantes(Constantes.Orientation.nord) )
+							 || ( !this.connectionsExistantes(Constantes.Orientation.sud) && !nouvTuile.connectionsExistantes(Constantes.Orientation.nord) );
 			break;
 		case Constantes.Orientation.est:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && nouvTuile.connectionsExistantes(Constantes.Orientation.ouest) );	
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.est) && nouvTuile.connectionsExistantes(Constantes.Orientation.ouest) )	
+							 || ( !this.connectionsExistantes(Constantes.Orientation.est) && !nouvTuile.connectionsExistantes(Constantes.Orientation.ouest) );
 			break;
 		case Constantes.Orientation.ouest:
-			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && nouvTuile.connectionsExistantes(Constantes.Orientation.est) );
+			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.ouest) && nouvTuile.connectionsExistantes(Constantes.Orientation.est) )
+							 || ( !this.connectionsExistantes(Constantes.Orientation.ouest) && !nouvTuile.connectionsExistantes(Constantes.Orientation.est) );
 			break;
 		default:
 			throw new RuntimeException("cote non indique pour adjacence des Tuiles");
@@ -235,10 +240,10 @@ public class Tuile implements ActionsToken{
 	}
 	
 	public String toString (){
-		String resultat = "";
+		String resultat = "{";
 		
-		resultat = resultat + orientation + "\n";
-		resultat = resultat + listeConnections.toString();
+		resultat = resultat + orientation + ",";
+		resultat = resultat + listeConnections.toString()+ "}";
 		
 		return resultat;
 	}

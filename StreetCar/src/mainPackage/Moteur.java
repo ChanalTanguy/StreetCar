@@ -108,7 +108,7 @@ public class Moteur {
 		if (nbActions > 2) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
 				// Vérifie si le placement est valide
-				return plateauDeJeu.coupValide(c);
+				return plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c);
 			} else if (c.getType().equals(Constantes.Coup.rotation)) {
 				return true; // Rien d'autre à vérifier
 			} else

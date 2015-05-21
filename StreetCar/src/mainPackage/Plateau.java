@@ -95,7 +95,7 @@ public class Plateau {
 		return plateau;
 	}
 
-	public boolean coupValide (Coup coup){
+	public boolean coupValide (Tuile nouvTuile, Coup coup){
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
 			// Et que les 4 cases adjacente ne font pas conflit
@@ -104,19 +104,18 @@ public class Plateau {
 			Point coord = coup.getCoordonnee();
 			int x = coord.x;
 			int y = coord.y;
-			Tuile nouvTuile = getTuileAt(x,y);
+			Tuile ancTuile = getTuileAt(x,y);
 
+			// TODO : Vérifier qu'on peut poser la nouvelle tuile sur la tuile présente
 			
-			
-			valide = (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.est))
-				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
-				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.nord))
-				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.sud));
+			valide = (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
+				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))
+				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.est))
+				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest));
 
 			return valide;
-		} else {
-			return true; // Un coup qui n'a rien a voir avec le plateau est forcément valide au yeux du plateau (Duh)
-		}
+		} else 
+			return true;
 	}
 
 	public Tuile getTuileAt(int x, int y) {

@@ -203,7 +203,7 @@ public class Panneau extends JPanel{
 		
 		if(img != null)
 		{
-			rotation(drawable,img,angle,tailleCase+depart+x*tailleCase+1,tailleCase+depart+y*tailleCase+1,tailleCase-1);
+			rotation(drawable,img,angle,depart+x*tailleCase+1,depart+y*tailleCase+1,tailleCase-1);
 		}
 		
 	}
