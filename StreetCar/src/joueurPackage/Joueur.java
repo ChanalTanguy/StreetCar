@@ -24,6 +24,10 @@ public abstract class Joueur {
 		return phase;
 	}
 	
+	public int getLigne() {
+		return ligne;
+	}
+	
 	/**
 	 * Poser une tuile sur le plateau au coordonnée X,Y
 	 * Si il y a deja une tuile à ces coordonnées
