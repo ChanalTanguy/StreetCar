@@ -25,7 +25,8 @@ public class NewGamePanel extends JPanel {
 	
 	private void buildNewGamePanel(){
 		
-		JPanel zone1 = newZone("Niveau de l'adversaire");
+		JPanel zone1 = newRadioButtonZone("Niveau de l'adversaire");
+		JPanel zone2 = newButtonZone();
 		
 		ButtonGroup group = new ButtonGroup();
 		
@@ -34,17 +35,27 @@ public class NewGamePanel extends JPanel {
 		addNewRadioButton(zone1, group, "Moyen", null);
 		addNewRadioButton(zone1, group, "Difficile", null);
 		
+		addNewButton(zone2, "Démarrer", BorderLayout.WEST, null);
+		addNewButton(zone2, "Annuler", BorderLayout.EAST, null);
+		
 		this.add(zone1);
+		this.add(zone2);
 		
 	}
 	
-	private JPanel newZone(String title){
+	private JPanel newButtonZone(){
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		panel.setPreferredSize(new Dimension(350,40));
+		return panel;
+	}
+	
+	private JPanel newRadioButtonZone(String title){
 		JPanel panel = new JPanel();
 		//panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder(title));
-		panel.setPreferredSize(new Dimension(350,100));
+		panel.setPreferredSize(new Dimension(350,60));
 		return panel;
-		
 	}
 	
 	private void addNewRadioButton(JPanel panel, ButtonGroup group, String text, ActionListener action){
@@ -53,6 +64,14 @@ public class NewGamePanel extends JPanel {
 		group.add(rbutton);
 		if (text == selected){ rbutton.setSelected(true); };
 		rbutton.addActionListener(action);
+	}
+	
+	private void addNewButton(JPanel panel, String text, String position, ActionListener action){
+		Dimension size = new Dimension(150,50);
+		JButton button = new JButton(text);
+		button.setPreferredSize(size);
+		button.addActionListener(action);
+		panel.add(button, position);
 	}
 	
 }
