@@ -47,5 +47,15 @@ public class Plateau {
 	public void setTuileAt(int x, int y, Tuile t) {
 		plateau[x][y] = t;
 	}
+	
+	public Plateau clone() {
+		Plateau p = new Plateau();
+		for (int i = 0; i < Constantes.Dimensions.dimensionPlateau; i++) {
+			for (int j = 0; j < Constantes.Dimensions.dimensionPlateau; j++) {
+				p.setTuileAt(i, j, getTuileAt(i,j).clone());
+			}
+		}
+		return p;
+	}
 
 }
