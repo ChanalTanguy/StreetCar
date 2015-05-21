@@ -38,6 +38,11 @@ public class EcouteTerrain implements MouseListener {
 		int caseX = (x-p.depart)/p.tailleCase;
 		int caseY  = (y-p.depart)/p.tailleCase;
 		
+		if(estPioche(piocheX, piocheY))
+		{
+			illuminerPioche();
+		}
+		
 		//Carte dans la main
 		if(estDansMain(piocheX, piocheY))
 		{ 	
@@ -62,6 +67,17 @@ public class EcouteTerrain implements MouseListener {
 		}
 		
 		p.repaint();
+	}
+
+	private void illuminerPioche() {
+	
+		p.piocher = true;
+		
+	}
+
+	private boolean estPioche(int piocheX, int piocheY) {
+		
+		return piocheX>3*p.depart+p.ecart && piocheX<3*p.depart+p.ecart+p.tailleCase+20 && piocheY>820 && piocheY<820+p.tailleCase+20;
 	}
 
 	private void illuminerMain(int numCarte, int numMain) {

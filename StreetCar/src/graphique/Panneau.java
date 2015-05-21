@@ -40,6 +40,7 @@ public class Panneau extends JPanel{
 	BufferedImage tuile009 ;
 	BufferedImage tuile010 ;
 	BufferedImage tuile011 ;
+	BufferedImage pioche ;
 	public int main = -1;
 	public int carte = -1;
 	public int caseX = -1;
@@ -49,6 +50,7 @@ public class Panneau extends JPanel{
 		
 	int typeDeZone;
 	boolean contoursDessines;
+	public boolean piocher = false;
 		
 	public Panneau (Color newCouleur, String newName){
 		super();	
@@ -107,7 +109,10 @@ public class Panneau extends JPanel{
 		{
 			dessinerFond(crayon);
 			dessinerPlateau(crayon);
+			dessinerPioche(crayon);
+			
 			dessinerContenuPlateau(crayon, mot.getPlateau());
+			
 			dessinerMain1(crayon);
 			dessinerMain2(crayon);
 			
@@ -118,6 +123,7 @@ public class Panneau extends JPanel{
 			
 			if(main != -1){ colorMain(crayon); }
 			if(caseX != -1){ colorCase(crayon); }
+			if(piocher) { colorPioche(crayon);}
 		}
 		
 		if (contoursDessines){
@@ -127,6 +133,16 @@ public class Panneau extends JPanel{
 		
 	}
 	
+	private void colorPioche(Graphics2D drawable) {
+		drawable.setColor(Color.white);
+		drawable.drawRect(3*depart+2*ecart-1, 820-1, tailleCase+21, tailleCase+21);
+		piocher = false;
+	}
+
+	private void dessinerPioche(Graphics2D drawable) {	
+		drawable.drawImage(pioche, 3*depart+2*ecart, 820, tailleCase+20, tailleCase+20, this);
+	}
+
 	private void dessinerContenuPlateau(Graphics2D crayon, Plateau plateau) {
 		for(int i = 0; i<12; i++)
 		{
@@ -247,6 +263,7 @@ public class Panneau extends JPanel{
 		//Chargement des images
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
+		pioche = Constantes.Images.initBackground("pioche.png");
 		tuile001 = Constantes.Images.initTuile("001.jpg");
 		tuile002 = Constantes.Images.initTuile("002.jpg");
 		tuile003 = Constantes.Images.initTuile("003.jpg");
