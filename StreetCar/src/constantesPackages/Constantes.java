@@ -99,4 +99,32 @@ public class Constantes {
 		}
 	}
 
+	public static class Message {
+		public static String auTourDe (int numeroJoueur){
+			String notif = "C'est au tour du joueur ";
+			notif = notif + numeroJoueur;
+			return notif;
+		}
+		
+		public static String partieTerminee (int numeroGagnant){
+			String notif = "La partie est remportée par :\n";
+			notif = notif + "\tle joueur " + numeroGagnant;
+			return notif;
+		}
+		
+		public static String finDeTour (int numeroJoueur){
+			String notif = "Joueur " + numeroJoueur;
+			notif = notif + " piochez pour avoir 5 cartes en main;\n";
+			notif = notif + "(Vous pouvez éventuellement en voler à l'adversaire \n";
+			notif = notif + "s'il a terminé sa ligne";
+			return notif;
+		}
+		
+		public static final String poseImpossible = "Vous ne pouvez pas poser \nvotre tuile ici";
+		public static final String piocheImpossible = "Vous ne pouvez piocher \nqu'à la fin de votre tour";
+		public static final String volImpossible = "Vous ne pouvez pas voler ce joueur : \nCe joueur n'a pas fini sa ligne";
+		public static final String tramImpossible = "Votre tramway ne peut pas aller ici";
+		
+	}
+
 }
