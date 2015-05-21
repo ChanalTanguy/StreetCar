@@ -40,12 +40,16 @@ public class EcouteTerrain implements MouseListener {
 		
 		if(estPioche(piocheX, piocheY))
 		{
+			p.caseX = -1;
+			p.main = -1;
 			illuminerPioche();
 		}
 		
 		//Carte dans la main
 		if(estDansMain(piocheX, piocheY))
 		{ 	
+			p.piocher = false;
+			p.caseX = -1;
 			int numCarte = carteNo(piocheX);
 			int numMain = mainNo(piocheY);
 			
@@ -56,15 +60,19 @@ public class EcouteTerrain implements MouseListener {
 		
 		//Plateau
 		if(!estSurPlateau(caseX, caseY)){ caseX = -1; caseY = -1; }
-		else { 
+		else {
 			
+			p.piocher = false;
 			//Pour voir si l'on a selectionné au préalable la main du joueur
 			if(p.main != -1)
 			{
 				j.coupPlacerTuile(p.carte, caseX, caseY);
 				p.main = -1;
 			}
-			else illuminerCase(caseX, caseY);
+			else 
+			{
+				illuminerCase(caseX, caseY);
+			}
 		}
 		
 		p.repaint();
