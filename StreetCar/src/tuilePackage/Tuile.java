@@ -136,7 +136,7 @@ public class Tuile implements ActionsToken{
 	}
 	
 	public void setListeConnections (ArrayList<Connection> newListe){
-		if ( listeConnections.isEmpty() ){
+		if ( !listeConnections.isEmpty() ){
 			listeConnections.clear();
 		}
 		if ( listeConnections.addAll(newListe) ){
