@@ -124,6 +124,52 @@ public class Plateau {
 	public void setTuileAt(int x, int y, Tuile t) {
 		plateau[x][y] = t;
 	}
+	
+	public Point getTerminalPosition(int numberLigne, int numberTerminal) {
+		Point p;
+		switch (numberLigne) {
+		case 1 : 
+			if (numberTerminal == 1)
+				p = new Point(2,0);
+			else
+				p = new Point(10,13);
+			break;
+		case 2 : 
+			if (numberTerminal == 1)
+				p = new Point(6,0);
+			else
+				p = new Point(6,13);
+			break;
+		case 3 : 
+			if (numberTerminal == 1)
+				p = new Point(10,0);
+			else
+				p = new Point(2,13);
+			break;
+		case 4 : 
+			if (numberTerminal == 1)
+				p = new Point(13,2);
+			else
+				p = new Point(0,10);
+			break;
+		case 5 : 
+			if (numberTerminal == 1)
+				p = new Point(13,6);
+			else
+				p = new Point(0,6);
+			break;
+		case 6 : 
+			if (numberTerminal == 1)
+				p = new Point(13,10);
+			else
+				p = new Point(0,2);
+			break;
+		default :
+			p = null;
+		}
+		return p;
+	}
+	
 
 	public Plateau clone() {
 		Plateau p = new Plateau();
