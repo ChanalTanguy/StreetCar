@@ -10,7 +10,8 @@ public class JoueurIA extends Joueur {
 
 	public EcouteurBoucle ecouteurBoucle;
 	
-	public JoueurIA(Moteur m) {
+	public JoueurIA(Moteur m, int ligne) {
+		super(null, ligne);
 		ecouteurBoucle = new EcouteurBoucle(m);
 		new Timer(50, ecouteurBoucle);
 	}

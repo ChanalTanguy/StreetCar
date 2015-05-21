@@ -7,6 +7,12 @@ public abstract class Joueur {
 	
 	MainJoueur main;
 	int phase = 1;
+	int ligne;
+	
+	public Joueur(MainJoueur m, int ligne) {
+		main = m;
+		this.ligne = ligne;
+	}
 	
 	public abstract void attendCoup();
 	

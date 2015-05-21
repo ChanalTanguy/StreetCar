@@ -11,7 +11,8 @@ public class JoueurHumain extends Joueur {
 	Moteur moteur;
 	int tuileSelectionnee;
 	
-	public JoueurHumain(Moteur m) {
+	public JoueurHumain(Moteur m, int ligne) {
+		super(null, ligne);
 		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;
