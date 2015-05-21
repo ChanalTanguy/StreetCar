@@ -1,5 +1,6 @@
  package tuilePackage;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -9,6 +10,7 @@ public class Tuile implements ActionsToken{
 	private boolean immuable;
 	private String orientation;
 	private ArrayList<Connection> listeConnections;
+	BufferedImage imageTuile;
 	
 	/*
 	 * 2 Constructeurs
@@ -129,6 +131,10 @@ public class Tuile implements ActionsToken{
 	
 	public String getOrientation (){
 		return orientation;
+	}	
+	
+	public BufferedImage getImage (){
+		return imageTuile;
 	}
 	
 	public void setPresenceArbres (boolean newPresence){
@@ -150,6 +156,17 @@ public class Tuile implements ActionsToken{
 	public void setOrientation (String newOrientation){
 		orientation = new String(newOrientation);
 	}
+	
+	public void setImage (String nomImage, boolean backGround){
+		if (backGround){
+			imageTuile = Constantes.Images.initBackground(nomImage);
+		}
+		else {
+			imageTuile = Constantes.Images.initTuile(nomImage);
+		}
+	}
+	
+	
 	
 	/*
 	 * Methodes de l'objet
