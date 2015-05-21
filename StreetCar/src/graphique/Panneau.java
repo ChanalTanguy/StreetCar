@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import mainPackage.Plateau;
 import tuilePackage.Tuile;
@@ -19,6 +20,7 @@ public class Panneau extends JPanel{
 	String name;
 	Color couleur;
 	JTextArea message;
+	MainJoueur mainJoueur1, mainJoueur2;
 	
 	//Ajout Mathieu
 	int depart = 100;
@@ -83,6 +85,8 @@ public class Panneau extends JPanel{
 		contoursDessines = false;
 		//On est sensé créer un mouse listener par joueur, à modifier
 		addMouseListener(new EcouteTerrain(this, m));
+		mainJoueur1 = new MainJoueur();
+		mainJoueur2 = new MainJoueur();
 		initImage();
 	}
 	
@@ -116,8 +120,8 @@ public class Panneau extends JPanel{
 			
 			dessinerContenuPlateau(crayon, mot.getPlateau());
 			
-			dessinerMain1(crayon);
-			dessinerMain2(crayon);
+			dessinerMain1(crayon, mainJoueur1);
+			dessinerMain2(crayon, mainJoueur2);
 			
 			
 			//Visuel des cases
@@ -255,23 +259,29 @@ public class Panneau extends JPanel{
 		
 	}
 
-	private void dessinerMain1(Graphics2D drawable) {
+	private void dessinerMain1(Graphics2D drawable, MainJoueur main) {
 		//Attention, ici c'est toujours la main de base, il faut remplacer par la main du joueur 1
 		for(int i = 0;i<5;i++)
 		{
+			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
+/*
 			//drawable.drawRect(i*depart+ecart, 820, tailleCase+20, tailleCase+20);
 			if(i == 0 || i == 1 || i == 2) drawable.drawImage(tuile001, i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
 			else drawable.drawImage(tuile002, i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
+*/
 		}
 	}
 
-	private void dessinerMain2(Graphics2D drawable) {
+	private void dessinerMain2(Graphics2D drawable, MainJoueur main) {
 		//Attention, ici c'est toujours la main de base, il faut remplacer par la main du joueur 2
 		for(int i = 0;i<5;i++)
 		{
+			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
+/*			
 			//drawable.drawRect(i*depart+ecart, 20, tailleCase+20, tailleCase+20);
 			if(i == 0 || i == 1 || i == 2) drawable.drawImage(tuile001, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
 			else drawable.drawImage(tuile002, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
+*/
 		}
 	}
 	
