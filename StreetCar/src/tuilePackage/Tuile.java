@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import joueurPackage.MainJoueur;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
@@ -33,12 +34,14 @@ public class Tuile implements ActionsToken{
 	public static Tuile newLigneDroite() {
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.setImage(Constantes.Images.initTuile("001.jpg"));
 		return t;
 	}
 
 	public static Tuile newVirage() {
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("002.jpg"));
 		return t;
 	}
 
@@ -46,6 +49,7 @@ public class Tuile implements ActionsToken{
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("003.jpg"));
 		return t;
 	}
 	
@@ -53,6 +57,7 @@ public class Tuile implements ActionsToken{
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("004.jpg"));
 		return t;
 	}
 	
@@ -60,6 +65,7 @@ public class Tuile implements ActionsToken{
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("005.jpg"));
 		return t;
 	}
 	
@@ -67,6 +73,7 @@ public class Tuile implements ActionsToken{
 		Tuile t = new Tuile(false);
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("006.jpg"));
 		return t;
 	}
 	
@@ -75,6 +82,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.setImage(Constantes.Images.initTuile("007.jpg"));
 		return t;
 	}
 	
@@ -82,6 +90,7 @@ public class Tuile implements ActionsToken{
 		Tuile t = new Tuile(true);
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.setImage(Constantes.Images.initTuile("008.jpg"));
 		return t;
 	}
 	
@@ -90,6 +99,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.setImage(Constantes.Images.initTuile("009.jpg"));
 		return t;
 	}
 	
@@ -98,6 +108,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
+		t.setImage(Constantes.Images.initTuile("010.jpg"));
 		return t;
 	}
 	
@@ -107,6 +118,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("011.jpg"));
 		return t;
 	}
 	
@@ -115,6 +127,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.est));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.setImage(Constantes.Images.initTuile("012.jpg"));
 		return t;
 	}
 	
@@ -135,6 +148,10 @@ public class Tuile implements ActionsToken{
 	
 	public BufferedImage getImage (){
 		return imageTuile;
+	}
+	
+	public void setImage (BufferedImage i){
+		imageTuile = i;
 	}
 	
 	public void setPresenceArbres (boolean newPresence){
