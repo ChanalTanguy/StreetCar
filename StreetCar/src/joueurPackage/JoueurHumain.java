@@ -9,10 +9,9 @@ public class JoueurHumain extends Joueur {
 	private EcouteTerrain ecouteurPlateau;
 	private boolean enabled;
 	Moteur moteur;
-	int tuileSelectionnee;
 	
 	public JoueurHumain(Moteur m, int ligne) {
-		super(null, ligne);
+		super(new MainJoueur(), ligne);
 		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;
@@ -40,21 +39,13 @@ public class JoueurHumain extends Joueur {
 	}
 	
 	/**
-	 *  Selectionee une tuile
-	 */
-	public void coupSelectionTuile(int tuile) {
-		if (enabled)
-			tuileSelectionnee = tuile;
-	}
-	
-	/**
 	 *  Jouer un coup "Placer" si c'est au tour de ce joueur de jouer
 	 *  et une tuile a été préalablement selectionnée
 	 */
 	public void coupPlacerTuile(int carte, int x, int y) {
-		if (enabled && tuileSelectionnee != 0) {
-			moteur.jouerCoup(Coup.newPlacement(tuileSelectionnee, x, y));
-			tuileSelectionnee = 0;
+
+		if (enabled && carte != 0) {
+			moteur.jouerCoup(Coup.newPlacement(carte, x, y));
 		}
 	}
 	
