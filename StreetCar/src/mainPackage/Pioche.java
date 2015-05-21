@@ -30,22 +30,22 @@ public class Pioche extends ArrayList<Tuile>{
 			add(Tuile.newDoubleVirage());
 		}
 		for (int i = 0; i < 6; i++){
-			add(Tuile.newDoubleBiffurcation());
+			add(Tuile.newDoubleBifurcation());
 		}
 		for (int i = 0; i < 4; i++){
 			add(Tuile.newCroisement());
 		}
 		for (int i = 0; i < 2; i++){
-			add(Tuile.newBiffurcationsSeparesGauche());
+			add(Tuile.newBifurcationsSeparesGauche());
 		}
 		for (int i = 0; i < 2; i++){
-			add(Tuile.newBiffurcationsSeparesDroite());
+			add(Tuile.newBifurcationsSeparesDroite());
 		}
 		for (int i = 0; i < 4; i++){
 			add(Tuile.newQuadrupleVirages());
 		}
 		for (int i = 0; i < 6; i++){
-			add(Tuile.newBiffurcationsEmbrassees());
+			add(Tuile.newBifurcationsEmbrassees());
 		}
 		System.out.println("\tFin de l'initialisation de la pioche");
 	}
