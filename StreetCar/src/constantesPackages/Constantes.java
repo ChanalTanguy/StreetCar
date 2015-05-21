@@ -19,11 +19,11 @@ public class Constantes {
 		public static final int nbMaxTuiles = 126;
 	}
 	
-	public static class Tuile {
-		public static final int pointGauche = 1;
-		public static final int pointHaut = 2;
-		public static final int pointDroite = 3;
-		public static final int pointBas = 4;
+	public static class Panneau {
+		public static final int plateau = 1;
+		public static final int notifications = 2;
+		public static final int historiques = 3;
+		public static final int boutons = 4;
 	}
 	
 	public static class Rotation {

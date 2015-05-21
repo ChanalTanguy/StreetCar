@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import constantesPackages.Constantes;
 import mainPackage.Moteur;
 
 public class Fenetre extends JFrame{
@@ -37,25 +38,25 @@ public class Fenetre extends JFrame{
 	}
 	
 	public void disposition (Moteur m){
-		Panneau panel1 = new Panneau(Color.orange, "zone de jeu", true, m);
-		Panneau panel2 = new Panneau(Color.white, "zone d'interface");
-		Panneau panel3 = new Panneau(Color.cyan, "notifications");
-		Panneau panel4 = new Panneau(Color.white, "historiques");
-		Panneau panel5 = new Panneau(Color.pink, "onglets d'options/navigation");
+		Panneau zonePlateau = new Panneau(Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
+		Panneau regroupementLateral = new Panneau(Color.white, "zone de regroupement");
+		Panneau notifications = new Panneau(Color.cyan, "notifications", Constantes.Panneau.notifications);
+		Panneau historique = new Panneau(Color.white, "historiques", Constantes.Panneau.historiques);
+		Panneau menus = new Panneau(Color.pink, "onglets d'options/navigation", Constantes.Panneau.boutons);
 		Bouton but1 = new Bouton("bouton 1");
 		Bouton but2 = new Bouton("bouton 2");
 		
-		panel4.setLayout(new GridLayout(1, 2));
-		panel4.add(but1);
-		panel4.add(but2);
+		historique.setLayout(new GridLayout(1, 2));
+		historique.add(but1);
+		historique.add(but2);
 		
-		panel2.setLayout(new GridLayout(3,1));
-		panel2.add(panel3);
-		panel2.add(panel4);
-		panel2.add(panel5);
+		regroupementLateral.setLayout(new GridLayout(3,1));
+		regroupementLateral.add(notifications);
+		regroupementLateral.add(historique);
+		regroupementLateral.add(menus);
 		
-		add(panel1, BorderLayout.CENTER);
-		add(panel2, BorderLayout.EAST);
+		add(zonePlateau, BorderLayout.CENTER);
+		add(regroupementLateral, BorderLayout.EAST);
 		
 	}
 }

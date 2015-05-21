@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import constantesPackages.Constantes;
 import tuilePackage.Tuile;
 import mainPackage.Moteur;
 import mainPackage.Plateau;
@@ -44,25 +45,35 @@ public class Panneau extends JPanel{
 	Moteur mot;
 	//Ajout Mathieu
 		
-	boolean zoneDeJeu;
+	int typeDeZone;
 	boolean contoursDessines;
 		
 	public Panneau (Color newCouleur, String newName){
 		super();	
 		name = newName;
 		couleur = newCouleur;
-		zoneDeJeu = false;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
 		addMouseListener(new EcouteTerrain(this));
 		initImage();
 	}
 	
-	public Panneau (Color newCouleur, String newName, boolean panneauDeJeu, Moteur m){
+	public Panneau (Color newCouleur, String newName, int numeroDeZone){
 		super();		
 		name = newName;
 		couleur = newCouleur;
-		zoneDeJeu = panneauDeJeu;
+		typeDeZone = numeroDeZone;
+		contoursDessines = false;
+		addMouseListener(new GestionSouris(this));
+		//On est sensé créer un mouse listener par joueur, à modifier
+		initImage();
+	}
+	
+	public Panneau (Color newCouleur, String newName, int numeroDeZone, Moteur m){
+		super();		
+		name = newName;
+		couleur = newCouleur;
+		typeDeZone = numeroDeZone;
 		mot = m;
 		contoursDessines = false;
 		addMouseListener(new GestionSouris(this));
@@ -73,6 +84,10 @@ public class Panneau extends JPanel{
 	
 	public String getName (){
 		return name;
+	}
+	
+	public int getTypeZone (){
+		return typeDeZone;
 	}
 	
 	public void paintComponent (Graphics g){
@@ -86,7 +101,7 @@ public class Panneau extends JPanel{
 		crayon.setColor(couleur);
 		crayon.fillRect(0, 0, largeur, hauteur);
 		
-		if(zoneDeJeu)
+		if(typeDeZone == Constantes.Panneau.plateau)
 		{
 			dessinerFond(crayon);
 			dessinerPlateau(crayon);

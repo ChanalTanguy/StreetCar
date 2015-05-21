@@ -34,6 +34,7 @@ public class GestionSouris implements MouseListener{
 		if (but != null){
 			resultat = resultat + but.getText() + "\n";
 		}
+		resultat = resultat + "type panneau : " + pan.getTypeZone() + "\n";
 		System.out.println(resultat);
 	}
 
