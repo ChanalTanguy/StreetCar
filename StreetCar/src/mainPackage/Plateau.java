@@ -106,10 +106,12 @@ public class Plateau {
 			int y = coord.y;
 			Tuile nouvTuile = getTuileAt(x,y);
 
-			valide = getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.est)
-					&& getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.ouest)
-					&& getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.nord)
-					&& getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.sud);
+			
+			
+			valide = (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.est))
+				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
+				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.nord))
+				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.sud));
 
 			return valide;
 		} else {
