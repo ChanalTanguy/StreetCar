@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
@@ -16,10 +15,10 @@ public class MenuPanel extends JPanel {
 	
 	private void buildMenuPanel(){
 		
-		JPanel zone1 = newZone();
-		JPanel zone2 = newZone();
-		JPanel zone3 = newZone();
-		JPanel zone4 = newZone();
+		JPanel zone1 = newZone(3);
+		//JPanel zone2 = newZone(0);
+		JPanel zone3 = newZone(2);
+		JPanel zone4 = newZone(2);
 		
 		addNewButton(zone1, "Nouvelle partie", BorderLayout.NORTH, null);
 		addNewButton(zone4, "Retour", BorderLayout.SOUTH, null);
@@ -33,14 +32,15 @@ public class MenuPanel extends JPanel {
 		addNewButton(zone4, "Quitter",  BorderLayout.CENTER, null);
 		
 		this.add(zone1);
-		this.add(zone2);
+		//this.add(zone2);
 		this.add(zone3);
 		this.add(zone4);
 	}
 	
-	private JPanel newZone(){
+	private JPanel newZone(int size){
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
+		panel.setPreferredSize(new Dimension(200,50*size));
 		return panel;
 		
 	}
