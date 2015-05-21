@@ -17,39 +17,30 @@ public class Pioche extends ArrayList<Tuile>{
 		for (int i = 0; i < 30; i++){
 			add(Tuile.newLigneDroite());
 		}
-		System.out.println("ligne droite faite");
 		for (int i = 0; i < 26; i++){
 			add(Tuile.newVirage());
 		}
-		System.out.println("virage faite");
 		for (int i = 0; i < 10; i++){
 			add(Tuile.newBifurcationDroite());
 		}
-		System.out.println("bifur droite faite");
 		for (int i = 0; i < 10; i++){
 			add(Tuile.newBifurcationGauche());
 		}
-		System.out.println("bifur gauche faite");
 		for (int i = 0; i < 6; i++){
 			add(Tuile.newDoubleVirage());
 		}
-		System.out.println("double virage faite");
 		for (int i = 0; i < 6; i++){
 			add(Tuile.newDoubleBifurcation());
 		}
-		System.out.println("double bifur");
 		for (int i = 0; i < 4; i++){
 			add(Tuile.newCroisement());
 		}
-		System.out.println("croisement");
 		for (int i = 0; i < 2; i++){
 			add(Tuile.newBifurcationsSeparesGauche());
 		}
-		System.out.println("bifur sep gauche");
 		for (int i = 0; i < 2; i++){
 			add(Tuile.newBifurcationsSeparesDroite());
 		}
-		System.out.println("bifur set droite");
 		for (int i = 0; i < 4; i++){
 			add(Tuile.newQuadrupleVirages());
 		}

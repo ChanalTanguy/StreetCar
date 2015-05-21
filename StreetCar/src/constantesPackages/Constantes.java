@@ -57,7 +57,6 @@ public class Constantes {
 			String chemin = "images/tuiles/";
 			try {
 				chemin = chemin + nomImage;
-				System.out.println("\t"+chemin);
 				imageResultat = ImageIO.read(new File(chemin));
 			} catch (IOException e){
 				System.out.println("aucune image de ce nom trouvee");

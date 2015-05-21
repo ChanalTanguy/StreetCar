@@ -84,6 +84,7 @@ public class EcouteTerrain implements MouseListener {
 		p.repaint();
 	}
 
+	
 	private void illuminerPioche() {
 		p.piocher = true;	
 	}
@@ -156,12 +157,9 @@ public class EcouteTerrain implements MouseListener {
 		return b;
 	}
 
-	public void mouseEntered(MouseEvent e) {}
-	
+	public void mouseEntered(MouseEvent e) {}	
 	public void mouseExited(MouseEvent e) {}
-
 	public void mouseClicked(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
 
 }

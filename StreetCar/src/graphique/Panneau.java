@@ -19,10 +19,20 @@ import constantesPackages.Constantes;
 public class Panneau extends JPanel{
 	String name;
 	Color couleur;
+	
+	/*
+	 * AJOUT Kevin
+	 */
 	JTextArea message;
 	MainJoueur mainJoueur1, mainJoueur2;
+	int largeur, hauteur;
+	/*
+	 * FIN AJOUT Kevin
+	 */
 	
-	//Ajout Mathieu
+	/*
+	 * AJOUT Mathieu
+	 */
 	int depart = 100;
 	int tailleCase = 50;
 	int ecart = 220;
@@ -46,7 +56,9 @@ public class Panneau extends JPanel{
 	public int caseX = -1;
 	public int caseY = -1;
 	Moteur mot;
-	//Ajout Mathieu
+	/*
+	 * FIN AJOUT Mathieu
+	 */
 		
 	int typeDeZone;
 	boolean contoursDessines;
@@ -104,8 +116,8 @@ public class Panneau extends JPanel{
 	public void paintComponent (Graphics g){
 		Graphics2D crayon = (Graphics2D) g;
 		
-		int largeur = getSize().width;
-		int hauteur = getSize().height;
+		largeur = getSize().width;
+		hauteur = getSize().height;
 		
 		nettoyage(crayon);
 		
@@ -132,6 +144,12 @@ public class Panneau extends JPanel{
 			if(caseX != -1){ colorCase(crayon); }
 			if(piocher) { colorPioche(crayon);}
 		}
+		else if (typeDeZone == Constantes.Panneau.boutons){
+
+			int rayon = (largeur < hauteur ) ? largeur/8 : hauteur/8;
+			dispositionCarre(crayon, rayon);
+//			dispositionLosange(crayon, rayon);
+		}
 		
 		if (contoursDessines){
 			crayon.setColor(Color.black);
@@ -148,6 +166,15 @@ public class Panneau extends JPanel{
 		message.setText(newNotif);
 	}
 	
+	public void activerContours() {
+		contoursDessines = true;
+		repaint();
+	}
+	
+	public void desactiverContours() {
+		contoursDessines = false;
+		repaint();
+	}
 	
 	/*
 	 * Methodes Privates de Panneau.java
@@ -219,16 +246,6 @@ public class Panneau extends JPanel{
 		drawable.drawImage(op.filter(img,null), x, y, taille, taille, this);		
 	}
 
-	public void activerContours() {
-		contoursDessines = true;
-		repaint();
-	}
-	
-	public void desactiverContours() {
-		contoursDessines = false;
-		repaint();
-	}
-	
 	private void nettoyage(Graphics2D drawable) {
 		drawable.setColor(Color.white);
 		drawable.fillRect(0, 0, getWidth(), getHeight());
@@ -275,6 +292,68 @@ public class Panneau extends JPanel{
 		}
 	}
 	
+	private void dispositionCarre (Graphics2D crayon, int rayon){
+		dessinerUndoCar(crayon, rayon);
+		dessinerTipsCar(crayon, rayon);
+		dessinerHelpCar(crayon, rayon);
+		dessinerMenuCar(crayon, rayon);
+	}
+	
+	private void dessinerUndoCar (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/4-rayon, hauteur/6, 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/4-rayon, hauteur/6, 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerTipsCar (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/2, hauteur/6, 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2, hauteur/6, 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerHelpCar (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerMenuCar (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(2*largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), 2*largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
+	}
+
+	private void dispositionLosange (Graphics2D crayon, int rayon){
+		dessinerUndoLos(crayon, rayon);
+		dessinerTipsLos(crayon, rayon);
+		dessinerHelpLos(crayon, rayon);
+		dessinerMenuLos(crayon, rayon);
+	}
+	
+	private void dessinerUndoLos (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/2-rayon, hauteur/6, 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerTipsLos (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2-rayon, hauteur/6, 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerHelpLos (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval((5*largeur/6)-(2*rayon), hauteur/2-rayon, 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), (5*largeur/6)-(2*rayon), hauteur/2-rayon, 2*rayon, 2*rayon, this);
+	}
+	
+	private void dessinerMenuLos (Graphics2D crayon, int rayon){
+		crayon.setColor(Color.black);
+		crayon.drawOval(largeur/2-rayon, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/2-rayon, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
+	}
+	
 	private void initImage (){
 		//Chargement des images
 		fond = Constantes.Images.initBackground("tramOui.png");
@@ -291,6 +370,7 @@ public class Panneau extends JPanel{
 		tuile009 = Constantes.Images.initTuile("bifurcationSepareGauche.jpg");
 		tuile010 = Constantes.Images.initTuile("bifurcationSepareDroite.jpg");
 		tuile011 = Constantes.Images.initTuile("bifurcationsEmbrassees.jpg");
+		
 	}
 	
 }
