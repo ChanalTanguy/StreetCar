@@ -21,7 +21,7 @@ public class Moteur {
 		players[0] = new JoueurHumain(this,4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
-		nbActions = 2;
+		nbActions = 4;
 		players[currentPlayer].attendCoup();
 		pioche = new Pioche();
 		pioche.initialisation();
@@ -88,6 +88,7 @@ public class Moteur {
 			/*	/!\ ATTENTION TODO /!\
 			 *  Sinon mettre un message d'erreur <=> notifications
 			 */
+			System.out.println("ERROR ! Mauvais coup !");
 			
 		}
 

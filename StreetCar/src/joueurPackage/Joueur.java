@@ -43,7 +43,9 @@ public abstract class Joueur {
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 			main.setTuileAt(tuileDansMain, null);
 		} else {
+			System.out.println(main);
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
+			System.out.println(x+" "+y+" "+tuileDansMain);
 			main.setTuileAt(tuileDansMain, t);
 		}
 	}
