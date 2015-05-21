@@ -3,6 +3,8 @@ package graphique;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -130,15 +132,55 @@ public class Panneau extends JPanel{
 		{
 			for(int j = 0; j<12; j++)
 			{
-				dessinerTuile(plateau.getTuileAt(i, j));
+				if(plateau.getTuileAt(i, j) != null)
+				{
+					dessinerTuile(crayon,plateau.getTuileAt(i, j), i, j);
+				}
 			}
 		}
 		
 	}
 
-	private void dessinerTuile(Tuile tuileAt) {
-		// TODO avoir le visuel de toutes les tuiles
+	private void dessinerTuile(Graphics2D drawable, Tuile tuileAt, int x, int y) {
+		BufferedImage img = tuileAt.getImage();
+		String orient = tuileAt.getOrientation();
+		int angle;
+			
+		switch(orient)
+		{
+			case(Constantes.Orientation.nord) :
+				angle = 0;
+				break;
+			case(Constantes.Orientation.sud) :
+				angle = 180;
+				break;
+			case(Constantes.Orientation.est) :
+				angle = 90;
+				break;
+			case(Constantes.Orientation.ouest) :
+				angle = 270;
+				break;
+			default :
+				angle = 0;
+				break;
+		}
 		
+		if(img != null)
+		{
+			rotation(drawable,img,angle,tailleCase+depart+x*tailleCase+1,tailleCase+depart+y*tailleCase+1,tailleCase-1);
+		}
+		
+	}
+
+	private void rotation(Graphics2D drawable, BufferedImage img, int angle, int x, int y, int taille)
+	{
+		double rotationRequired = Math.toRadians(angle);
+		double locationX = img.getWidth() / 2;
+		double locationY = img.getHeight() / 2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		
+		drawable.drawImage(op.filter(img,null), x, y, taille, taille, this);		
 	}
 
 	public void activerContours() {

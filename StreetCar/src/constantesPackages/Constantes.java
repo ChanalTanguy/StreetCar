@@ -71,7 +71,7 @@ public class Constantes {
 		 */
 		public static BufferedImage initBackground (String nomBackground){
 			BufferedImage background = null;
-			String chemin = "images/";
+			String chemin = "images/background/";
 			try {
 				chemin = chemin + nomBackground;
 				background = ImageIO.read(new File(chemin));
