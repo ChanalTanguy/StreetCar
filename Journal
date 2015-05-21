@@ -18,3 +18,10 @@ Mardi 19/05
 * Création et implémentation de la classe Coup, gérant la pose d'une tuile
 * Ajout des méthodes créant les différents types de tuiles
 * Création d'une classe permettant d'instancier les images
+
+Mercredi 20/05
+* Implémentation de la partie graphique au reste du projet
+* Implémentation de l'IA Difficile
+* Ajout des images pour les différents logos, boutons et tuiles, et autres ressources graphiques
+* Codage de la classe gérant le menu principal
+* Écriture des méthodes d'écoute du terrain
