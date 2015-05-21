@@ -9,17 +9,21 @@ public class GestionSouris implements MouseListener{
 	Panneau pan = null;
 	Fenetre fen = null;
 	JButton but = null;
+	Panneau panNotif = null;
 	
-	public GestionSouris (Panneau referencePan){
+	public GestionSouris (Panneau referencePan, Panneau referenceNotif){
 		pan = referencePan;
+		panNotif = referenceNotif;
 	}
 	
-	public GestionSouris (Fenetre referenceFen){
+	public GestionSouris (Fenetre referenceFen, Panneau referenceNotif){
 		fen = referenceFen;
+		panNotif = referenceNotif;
 	}
 	
-	public GestionSouris (JButton referenceBut){
+	public GestionSouris (JButton referenceBut, Panneau referenceNotif){
 		but = referenceBut;
+		panNotif = referenceNotif;
 	}
 	
 	@Override
@@ -27,6 +31,7 @@ public class GestionSouris implements MouseListener{
 		String resultat = "";
 		if (pan != null){
 			resultat = resultat + pan.getName() + "\n";
+			resultat = resultat + "type panneau : " + pan.getTypeZone() + "\n";
 		}
 		if (fen != null){
 			resultat = resultat + fen.getName() + "\n";
@@ -34,8 +39,7 @@ public class GestionSouris implements MouseListener{
 		if (but != null){
 			resultat = resultat + but.getText() + "\n";
 		}
-		resultat = resultat + "type panneau : " + pan.getTypeZone() + "\n";
-		System.out.println(resultat);
+		panNotif.updateMessage(resultat);
 	}
 
 	@Override

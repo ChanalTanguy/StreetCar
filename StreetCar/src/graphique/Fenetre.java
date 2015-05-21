@@ -10,9 +10,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import constantesPackages.Constantes;
 import mainPackage.Moteur;
+import constantesPackages.Constantes;
 
 public class Fenetre extends JFrame{
 			
@@ -33,18 +34,23 @@ public class Fenetre extends JFrame{
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addMouseListener(new GestionSouris(this));
 
 	}
 	
 	public void disposition (Moteur m){
 		Panneau zonePlateau = new Panneau(Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
-		Panneau regroupementLateral = new Panneau(Color.white, "zone de regroupement");
+//		Panneau regroupementLateral = new Panneau(Color.white, "zone de regroupement");
+		JPanel regroupementLateral = new JPanel();
 		Panneau notifications = new Panneau(Color.cyan, "notifications", Constantes.Panneau.notifications);
 		Panneau historique = new Panneau(Color.white, "historiques", Constantes.Panneau.historiques);
-		Panneau menus = new Panneau(Color.pink, "onglets d'options/navigation", Constantes.Panneau.boutons);
-		Bouton but1 = new Bouton("bouton 1");
-		Bouton but2 = new Bouton("bouton 2");
+		Panneau menus = new Panneau(Color.pink, "boutons de menus", Constantes.Panneau.boutons);
+		Bouton but1 = new Bouton("bouton 1", notifications);
+		Bouton but2 = new Bouton("bouton 2", notifications);
+		
+		zonePlateau.addMouseListener(new GestionSouris(zonePlateau, notifications));
+		notifications.addMouseListener(new GestionSouris(notifications, notifications));
+		historique.addMouseListener(new GestionSouris(historique, notifications));
+		menus.addMouseListener(new GestionSouris(menus, notifications));
 		
 		historique.setLayout(new GridLayout(1, 2));
 		historique.add(but1);

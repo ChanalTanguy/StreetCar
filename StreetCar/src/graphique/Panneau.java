@@ -6,27 +6,25 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-import constantesPackages.Constantes;
-import tuilePackage.Tuile;
 import mainPackage.Moteur;
 import mainPackage.Plateau;
+import tuilePackage.Tuile;
+import constantesPackages.Constantes;
 
 public class Panneau extends JPanel{
 	String name;
 	Color couleur;
+	JTextArea message;
 	
 	//Ajout Mathieu
 	int depart = 100;
 	int tailleCase = 50;
 	int ecart = 220;
 	int nbCases = 12;
-	String message = "X = 0, Y = 0";
 	BufferedImage fond;
 	BufferedImage plateau ;
 	BufferedImage tuile001 ;
@@ -57,7 +55,6 @@ public class Panneau extends JPanel{
 		name = newName;
 		couleur = newCouleur;
 		contoursDessines = false;
-		addMouseListener(new GestionSouris(this));
 		addMouseListener(new EcouteTerrain(this));
 		initImage();
 	}
@@ -68,7 +65,11 @@ public class Panneau extends JPanel{
 		couleur = newCouleur;
 		typeDeZone = numeroDeZone;
 		contoursDessines = false;
-		addMouseListener(new GestionSouris(this));
+		if (numeroDeZone == Constantes.Panneau.notifications){
+			message = new JTextArea("Notifications");
+			message.setEditable(false);
+			add(message);
+		}
 		//On est sensé créer un mouse listener par joueur, à modifier
 		initImage();
 	}
@@ -80,7 +81,6 @@ public class Panneau extends JPanel{
 		typeDeZone = numeroDeZone;
 		mot = m;
 		contoursDessines = false;
-		addMouseListener(new GestionSouris(this));
 		//On est sensé créer un mouse listener par joueur, à modifier
 		addMouseListener(new EcouteTerrain(this, m));
 		initImage();
@@ -94,6 +94,9 @@ public class Panneau extends JPanel{
 		return typeDeZone;
 	}
 	
+	/*
+	 * Methode paintComponent de Panneau.java
+	 */
 	public void paintComponent (Graphics g){
 		Graphics2D crayon = (Graphics2D) g;
 		
@@ -132,6 +135,19 @@ public class Panneau extends JPanel{
 		}
 		
 	}
+	
+	/*
+	 * Methodes Public de Panneau.java
+	 */
+	
+	public void updateMessage (String newNotif){
+		message.setText(newNotif);
+	}
+	
+	
+	/*
+	 * Methodes Privates de Panneau.java
+	 */
 	
 	private void colorPioche(Graphics2D drawable) {
 		drawable.setColor(Color.white);
