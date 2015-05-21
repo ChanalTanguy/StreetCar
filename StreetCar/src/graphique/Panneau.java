@@ -201,25 +201,21 @@ public class Panneau extends JPanel{
 		}
 	}
 	
-	private void initImage() {
-		try {		
-			//Chargement des images
-			fond = ImageIO.read(new File("images/background/tramOui.png"));
-			plateau = ImageIO.read(new File("images/background/plateau.png"));
-			tuile001 = ImageIO.read(new File("images/tuiles/001.jpg"));
-			tuile002 = ImageIO.read(new File("images/tuiles/002.jpg"));
-			tuile003 = ImageIO.read(new File("images/tuiles/003.jpg"));
-			tuile004 = ImageIO.read(new File("images/tuiles/004.jpg"));
-			tuile005 = ImageIO.read(new File("images/tuiles/005.jpg"));
-			tuile006 = ImageIO.read(new File("images/tuiles/006.jpg"));
-			tuile007 = ImageIO.read(new File("images/tuiles/007.jpg"));
-			tuile008 = ImageIO.read(new File("images/tuiles/008.jpg"));
-			tuile009 = ImageIO.read(new File("images/tuiles/009.jpg"));
-			tuile010 = ImageIO.read(new File("images/tuiles/010.jpg"));
-			tuile011 = ImageIO.read(new File("images/tuiles/011.jpg"));
-		}
-		catch (IOException e) { e.printStackTrace();}	
-		
+	private void initImage (){
+		//Chargement des images
+		fond = Constantes.Images.initBackground("tramOui.png");
+		plateau = Constantes.Images.initBackground("plateau.png");
+		tuile001 = Constantes.Images.initTuile("001.jpg");
+		tuile002 = Constantes.Images.initTuile("002.jpg");
+		tuile003 = Constantes.Images.initTuile("003.jpg");
+		tuile004 = Constantes.Images.initTuile("004.jpg");
+		tuile005 = Constantes.Images.initTuile("005.jpg");
+		tuile006 = Constantes.Images.initTuile("006.jpg");
+		tuile007 = Constantes.Images.initTuile("007.jpg");
+		tuile008 = Constantes.Images.initTuile("008.jpg");
+		tuile009 = Constantes.Images.initTuile("009.jpg");
+		tuile010 = Constantes.Images.initTuile("010.jpg");
+		tuile011 = Constantes.Images.initTuile("011.jpg");
 	}
 	
 }
