@@ -3,6 +3,7 @@ package graphique;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -26,6 +27,7 @@ public class Panneau extends JPanel{
 	JTextArea message;
 	MainJoueur mainJoueur1, mainJoueur2;
 	int largeur, hauteur;
+	Point boutonSurligne = null;
 	/*
 	 * FIN AJOUT Kevin
 	 */
@@ -65,7 +67,7 @@ public class Panneau extends JPanel{
 	public boolean piocher = false;
 		
 	public Panneau (Color newCouleur, String newName){
-		super();	
+		super();
 		name = newName;
 		couleur = newCouleur;
 		contoursDessines = false;
@@ -79,10 +81,16 @@ public class Panneau extends JPanel{
 		couleur = newCouleur;
 		typeDeZone = numeroDeZone;
 		contoursDessines = false;
+		EcouteTerrain ecouteur = new EcouteTerrain(this);
+//		addMouseListener(new EcouteTerrain(this));
+		addMouseListener(ecouteur);
 		if (numeroDeZone == Constantes.Panneau.notifications){
 			message = new JTextArea("Notifications");
 			message.setEditable(false);
 			add(message);
+		}
+		else if (numeroDeZone == Constantes.Panneau.boutons){
+			addMouseMotionListener(ecouteur);
 		}
 		//On est sensé créer un mouse listener par joueur, à modifier
 		initImage();
@@ -108,6 +116,10 @@ public class Panneau extends JPanel{
 	
 	public int getTypeZone (){
 		return typeDeZone;
+	}
+	
+	public void setBoutonSurligne (Point bouton){
+		boutonSurligne = bouton;
 	}
 	
 	/*
@@ -149,6 +161,10 @@ public class Panneau extends JPanel{
 			int rayon = (largeur < hauteur ) ? largeur/8 : hauteur/8;
 			dispositionCarre(crayon, rayon);
 //			dispositionLosange(crayon, rayon);
+			
+			if (boutonSurligne != null){
+				surlignerBouton(crayon, boutonSurligne, rayon);
+			}
 		}
 		
 		if (contoursDessines){
@@ -276,6 +292,10 @@ public class Panneau extends JPanel{
 		
 	}
 
+	
+	/*
+	 * Methodes pour dessiner la main de chaque joueur
+	 */
 	private void dessinerMain1(Graphics2D drawable, MainJoueur main) {
 		//Attention, ici c'est toujours la main de base, il faut remplacer par la main du joueur 1
 		for(int i = 0;i<5;i++)
@@ -292,9 +312,14 @@ public class Panneau extends JPanel{
 		}
 	}
 	
+	
+	/*
+	 * Methodes pour dessiner les 4 boutons : Undo, Conseils, Help, Menu
+	 * selon 2 dispositions possibles
+	 */
 	private void dispositionCarre (Graphics2D crayon, int rayon){
 		dessinerUndoCar(crayon, rayon);
-		dessinerTipsCar(crayon, rayon);
+		dessinerConseilsCar(crayon, rayon);
 		dessinerHelpCar(crayon, rayon);
 		dessinerMenuCar(crayon, rayon);
 	}
@@ -305,7 +330,7 @@ public class Panneau extends JPanel{
 		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/4-rayon, hauteur/6, 2*rayon, 2*rayon, this);
 	}
 	
-	private void dessinerTipsCar (Graphics2D crayon, int rayon){
+	private void dessinerConseilsCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval(largeur/2, hauteur/6, 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2, hauteur/6, 2*rayon, 2*rayon, this);
@@ -325,7 +350,7 @@ public class Panneau extends JPanel{
 
 	private void dispositionLosange (Graphics2D crayon, int rayon){
 		dessinerUndoLos(crayon, rayon);
-		dessinerTipsLos(crayon, rayon);
+		dessinerConseilsLos(crayon, rayon);
 		dessinerHelpLos(crayon, rayon);
 		dessinerMenuLos(crayon, rayon);
 	}
@@ -336,7 +361,7 @@ public class Panneau extends JPanel{
 		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon, this);
 	}
 	
-	private void dessinerTipsLos (Graphics2D crayon, int rayon){
+	private void dessinerConseilsLos (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval(largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2-rayon, hauteur/6, 2*rayon, 2*rayon, this);
@@ -354,6 +379,18 @@ public class Panneau extends JPanel{
 		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/2-rayon, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
 	}
 	
+	/*
+	 * Methodes pour mettre en surbrillance le bouton sur
+	 * lequel le curseur se trouve s'il y en a un.
+	 */
+	private void surlignerBouton (Graphics2D crayon, Point centreBouton, int rayon){
+		crayon.setColor(Color.white);
+		crayon.drawOval(centreBouton.x-rayon, centreBouton.y-rayon, 2*rayon, 2*rayon);
+	}
+	
+	/*
+	 * Methodes d'init des Images
+	 */
 	private void initImage (){
 		//Chargement des images
 		fond = Constantes.Images.initBackground("tramOui.png");

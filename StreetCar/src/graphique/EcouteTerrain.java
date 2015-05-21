@@ -1,106 +1,125 @@
 package graphique;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
+import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
-import joueurPackage.*;
+import constantesPackages.Constantes;
 
-public class EcouteTerrain implements MouseListener {
+public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
-	Panneau p;
+	Panneau pan;
 	Moteur mot;
 	
-	EcouteTerrain(Panneau panneau)
+	EcouteTerrain(Panneau referencePan)
 	{
-		p = panneau;
+		pan = referencePan;
 	}
 	
-	EcouteTerrain(Panneau panneau, Moteur m)
+	EcouteTerrain(Panneau referencePannea, Moteur m)
 	{
-		p = panneau;
+		pan = referencePannea;
 		mot = m;
 	}
 	
 	public void mousePressed(MouseEvent e) {
-
-		//Joueur actif
-		JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
-		
-		//Coordonéess
-		int x = e.getX();
-		int y = e.getY();
-		
-		//
-		int piocheX = x-p.ecart;
-		int piocheY = y;
-		
-		int caseX = (x-p.depart)/p.tailleCase;
-		int caseY  = (y-p.depart)/p.tailleCase;
-		
-		if(estPioche(piocheX, piocheY))
-		{
-			p.caseX = -1;
-			p.main = -1;
-			illuminerPioche();
-		}
-		
-		//Carte dans la main
-		else if(estDansMain(piocheX, piocheY))
-		{ 	
-			p.piocher = false;
-			p.caseX = -1;
-			int numCarte = carteNo(piocheX);
-			int numMain = mainNo(piocheY);
+		if (pan.getTypeZone() == Constantes.Panneau.plateau){
+			//Joueur actif
+			JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
 			
-			//j.coupSelectionTuile(numCarte);
+			//Coordonéess
+			int x = e.getX();
+			int y = e.getY();
 			
-			illuminerMain(numCarte, numMain);
-		}
-		
-		//Plateau
-		else if(!estSurPlateau(caseX, caseY)){ 
-			caseX = -1; caseY = -1;
-			p.main = -1;
-			p.piocher = false;
-			p.caseX = -1;
-		}
-		else {
+			//
+			int piocheX = x-pan.ecart;
+			int piocheY = y;
 			
-			p.piocher = false;
-			//Pour voir si l'on a selectionné au préalable la main du joueur
-			if(p.main != -1)
+			int caseX = (x-pan.depart)/pan.tailleCase;
+			int caseY  = (y-pan.depart)/pan.tailleCase;
+			
+			if(estPioche(piocheX, piocheY))
 			{
-				j.coupPlacerTuile(p.carte, caseX, caseY);
-				p.main = -1;
+				pan.caseX = -1;
+				pan.main = -1;
+				illuminerPioche();
 			}
-			else 
-			{
-				illuminerCase(caseX, caseY);
+			
+			//Carte dans la main
+			else if(estDansMain(piocheX, piocheY))
+			{ 	
+				pan.piocher = false;
+				pan.caseX = -1;
+				int numCarte = carteNo(piocheX);
+				int numMain = mainNo(piocheY);
+				
+				//j.coupSelectionTuile(numCarte);
+				
+				illuminerMain(numCarte, numMain);
 			}
+			
+			//Plateau
+			else if(!estSurPlateau(caseX, caseY)){ 
+				caseX = -1; caseY = -1;
+				pan.main = -1;
+				pan.piocher = false;
+				pan.caseX = -1;
+			}
+			else {
+				pan.piocher = false;
+				//Pour voir si l'on a selectionné au préalable la main du joueur
+				if(pan.main != -1)
+				{
+					j.coupPlacerTuile(pan.carte, caseX, caseY);
+					pan.main = -1;
+				}
+				else 
+				{
+					illuminerCase(caseX, caseY);
+				}
+			}
+			pan.repaint();
 		}
-
-		
-		p.repaint();
+		else if (pan.getTypeZone() == Constantes.Panneau.boutons) {
+			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
+			int x = e.getX();
+			int y = e.getY();
+			
+			if ( estSurUndo(x, y, rayon) ){
+				System.out.println("clic sur le bouton Annuler");
+			}
+			else if ( estSurConseils(x, y, rayon) ){
+				System.out.println("clic sur le bouton Conseils");
+			}
+			else if ( estSurAide(x, y, rayon) ){
+				System.out.println("clic sur le bouton Aide");
+			}
+			else if ( estSurMenu(x, y, rayon) ){
+				System.out.println("clic sur le bouton Menu");
+			}
+			else { System.out.println("clic vide"); }
+		}
 	}
 
-	
 	private void illuminerPioche() {
-		p.piocher = true;	
+		pan.piocher = true;	
 	}
 
 	private boolean estPioche(int piocheX, int piocheY) {	
-		return piocheX>3*p.depart+p.ecart && piocheX<3*p.depart+p.ecart+p.tailleCase+20 && piocheY>820 && piocheY<820+p.tailleCase+20;
+		return piocheX>3*pan.depart+pan.ecart && piocheX<3*pan.depart+pan.ecart+pan.tailleCase+20 && piocheY>820 && piocheY<820+pan.tailleCase+20;
 	}
 
 	private void illuminerMain(int numCarte, int numMain) {
-		p.main = numMain;
-		p.carte = numCarte;		
+		pan.main = numMain;
+		pan.carte = numCarte;		
 	}
 	
 	private void illuminerCase(int x, int y) {
-		p.caseX = x;
-		p.caseY = y;
+		pan.caseX = x;
+		pan.caseY = y;
 	}
 
 	//Savoir quel joueur actif
@@ -151,15 +170,94 @@ public class EcouteTerrain implements MouseListener {
 	private boolean estSurPlateau(int caseX, int caseY) {
 		boolean b = true;
 		
-		if(caseX>p.nbCases || caseY>p.nbCases){ b = false; }
+		if(caseX>pan.nbCases || caseY>pan.nbCases){ b = false; }
 		if(caseX<=0 || caseY<=0){ b = false; }
 			
 		return b;
 	}
 
-	public void mouseEntered(MouseEvent e) {}	
+	/*
+	 * Methodes Privates liées au Panneau de type Boutons/Menus
+	 */
+	private boolean estSurUndo(int x, int y, int rayon) {
+		boolean resultat = false;
+		int difX, difY;
+		difX = x - (pan.getSize().width/4);
+		difY = y - (pan.getSize().height/6+rayon);
+		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
+		return resultat;
+	}
+	
+	private boolean estSurConseils(int x, int y, int rayon) {
+		boolean resultat;
+		int difX, difY;
+		difX = x - (pan.getSize().width/2+rayon);
+		difY = y - (pan.getSize().height/6+rayon);
+		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
+		return resultat;
+	}	
+
+	private boolean estSurAide(int x, int y, int rayon) {
+		boolean resultat;
+		int difX, difY;
+		difX = x - (pan.getSize().width/3+rayon);
+		difY = y - (5*pan.getSize().height/6-rayon);
+		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
+		return resultat;
+	}
+
+	private boolean estSurMenu(int x, int y, int rayon) {
+		boolean resultat;
+		int difX, difY;
+		difX = x - (2*pan.getSize().width/3+rayon);
+		difY = y - (5*pan.getSize().height/6-rayon);
+		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
+		return resultat;
+	}
+	/*
+	 * FIN Methodes pour Panneau de type Boutons/Menus
+	 */
+	
+	public void mouseEntered(MouseEvent e) {}
+	
 	public void mouseExited(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e) {}
+
+	public void mouseMoved(MouseEvent e) {
+//		System.out.println("Mouse moved at : " + e.getPoint());
+		if (pan.getTypeZone() == Constantes.Panneau.boutons) {
+			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
+			int x = e.getX();
+			int y = e.getY();
+			
+			if ( estSurUndo(x, y, rayon) ){
+				System.out.println("passage sur le bouton Annuler");
+				Point centre = new Point(pan.getSize().width/4, pan.getSize().height/6 + rayon);
+				pan.setBoutonSurligne(centre);
+			}
+			else if ( estSurConseils(x, y, rayon) ){
+				System.out.println("passage sur le bouton Conseils");
+				Point centre = new Point(pan.getSize().width/2 + rayon, pan.getSize().height/6 + rayon);
+				pan.setBoutonSurligne(centre);
+			}
+			else if ( estSurAide(x, y, rayon) ){
+				System.out.println("passage sur le bouton Aide");
+				Point centre = new Point(pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
+				pan.setBoutonSurligne(centre);
+			}
+			else if ( estSurMenu(x, y, rayon) ){
+				System.out.println("passage sur le bouton Menu");
+				Point centre = new Point(2*pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
+				pan.setBoutonSurligne(centre);
+			}
+			else { 
+				System.out.println("passage vide");
+				pan.setBoutonSurligne(null);
+			}
+		}
+		pan.repaint();
+	}
 
 }
