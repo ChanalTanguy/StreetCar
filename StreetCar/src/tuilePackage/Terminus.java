@@ -2,15 +2,17 @@ package tuilePackage;
 
 
 public class Terminus extends Tuile{
+	int numeroLigne;
 	int numeroTerminus;
 	
 	public Terminus (){
-		super();
+		super(true);
 	}
 	
-	public Terminus (int newNumero){
-		super();
-		numeroTerminus = newNumero;
+	public Terminus (int newLigne, int newTerminus){
+		super(true);
+		numeroLigne = newLigne;
+		numeroTerminus = newTerminus;
 	}
 	
 

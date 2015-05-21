@@ -93,4 +93,13 @@ public class MainJoueur {
 			i++;
 		}
 	}
+	
+	public MainJoueur clone() {
+		MainJoueur m = new MainJoueur();
+		for (int i = 0; i < 5; i++) {
+			setTuileAt(i, cartesJoueur[i].clone());
+		}
+		return m;
+	}
+	
 }

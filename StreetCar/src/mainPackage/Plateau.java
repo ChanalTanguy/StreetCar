@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import joueurPackage.Coup;
-import tuilePackage.Tuile;
+import tuilePackage.*;
 import constantesPackages.Constantes;
 
 public class Plateau {
@@ -12,8 +12,85 @@ public class Plateau {
 
 	public Plateau (){
 		plateau = new Tuile[Constantes.Dimensions.dimensionPlateau][Constantes.Dimensions.dimensionPlateau];
+		initialisationTuile();
 	}
 
+	public void initialisationTuile() {
+		// Mettre toutes les tuiles de bords (qui ne sont pas des terminaux) à la vertical
+		for (int i = 0; i<Constantes.Dimensions.dimensionPlateau;i++) {
+			if (i == 2 || i == 3 || i == 6 || i == 7 || i == 10 || i == 11 ) {
+				setTuileAt(0, i, new Tuile(true));
+				setTuileAt(Constantes.Dimensions.dimensionPlateau-1, i, new Tuile(true));
+			}
+		}
+		// à l'horizontal
+		for (int i = 1; i<Constantes.Dimensions.dimensionPlateau-1;i++) {
+			if (i == 2 || i == 3 || i == 6 || i == 7 || i == 10 || i == 11 ) {
+				setTuileAt(i, 0, new Tuile(true));
+				setTuileAt(i, Constantes.Dimensions.dimensionPlateau-1, new Tuile(true));
+			}
+		}
+
+		// Mettre les escales
+		setTuileAt( 1,  5, new Escale( 1));
+		setTuileAt( 2,  9, new Escale( 2));
+		setTuileAt( 4,  2, new Escale( 3));
+		setTuileAt( 4,  7, new Escale( 4));
+		setTuileAt( 5, 12, new Escale( 5));
+		setTuileAt( 6,  4, new Escale( 6));
+		setTuileAt( 7,  9, new Escale( 7));
+		setTuileAt( 8,  1, new Escale( 8));
+		setTuileAt( 9,  6, new Escale( 9));
+		setTuileAt( 9, 11, new Escale(10));
+		setTuileAt(11,  4, new Escale(11));
+		setTuileAt(12,  8, new Escale(12));
+
+		// Mettre les Terminus
+		Tuile t;
+		// /!\ DEAD ZONE ! Le code suivant est extremement moche, 
+		// et sera potentiellement soumis à un REFACTOR OF DOOM
+		
+		// Terminus du Nord
+		for(int i = 0; i<3;i++) {
+			// Tuile gauche
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.sud));
+			setTuileAt(2+4*i, 0, t);
+			// Tuile droite
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.sud));
+			setTuileAt(3+4*i, 0, t);
+		}
+
+		// Terminus du Sud
+		for(int i = 0; i<3;i++) {
+			// Tuile gauche
+			t = new Terminus(i+1,2); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.nord));
+			setTuileAt(10-4*i, 13, t);
+			// Tuile droite
+			t = new Terminus(i+1,2); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.nord));
+			setTuileAt(11-4*i, 13, t);
+		}
+		
+		// Terminus de l'est
+		for(int i = 0; i<3;i++) {
+			// Tuile haute
+			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.ouest));
+			setTuileAt(0, 2+4*i, t);
+			// Tuile basse
+			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
+			setTuileAt(0, 3+4*i, t);
+		}
+
+		// Terminus de l'ouest
+		for(int i = 0; i<3;i++) {
+			// Tuile haute
+			t = new Terminus(i+4,2); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.est));
+			setTuileAt(13, 10-4*i, t);
+			// Tuile basse
+			t = new Terminus(i+4,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.est));
+			setTuileAt(13, 11-4*i, t);
+		}
+	}
+	
 	public Tuile[][] getPlateau (){
 		return plateau;
 	}
@@ -47,7 +124,7 @@ public class Plateau {
 	public void setTuileAt(int x, int y, Tuile t) {
 		plateau[x][y] = t;
 	}
-	
+
 	public Plateau clone() {
 		Plateau p = new Plateau();
 		for (int i = 0; i < Constantes.Dimensions.dimensionPlateau; i++) {
