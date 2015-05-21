@@ -173,10 +173,7 @@ public class Tuile implements ActionsToken{
 	 */
 	
 	public void addConnection (Connection nouvelleConnection){
-		if ( listeConnections.add(nouvelleConnection) ){
-			System.out.println("ajout connection ok");
-		}
-		else { System.out.println("ajout annule"); }
+		listeConnections.add(nouvelleConnection);
 	}
 	
 	/**

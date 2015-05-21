@@ -17,11 +17,9 @@ public class Pioche extends ArrayList<Tuile>{
 		for (int i = 0; i < 30; i++){
 			add(Tuile.newLigneDroite());
 		}
-		System.out.println("init des 30 lignes droites ok");
 		for (int i = 0; i < 26; i++){
 			add(Tuile.newVirage());
 		}
-		System.out.println("init des 26 virages ok");
 		for (int i = 0; i < 10; i++){
 			add(Tuile.newBifurcationDroite());
 		}
