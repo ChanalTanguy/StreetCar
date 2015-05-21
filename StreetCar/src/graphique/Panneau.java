@@ -162,9 +162,9 @@ public class Panneau extends JPanel{
 	}
 
 	private void dessinerContenuPlateau(Graphics2D crayon, Plateau plateau) {
-		for(int i = 0; i<12; i++)
+		for(int i = 0; i<13; i++)
 		{
-			for(int j = 0; j<12; j++)
+			for(int j = 0; j<13; j++)
 			{
 				if(plateau.getTuileAt(i, j) != null)
 				{
@@ -262,11 +262,6 @@ public class Panneau extends JPanel{
 		for(int i = 0;i<5;i++)
 		{
 			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
-/*
-			//drawable.drawRect(i*depart+ecart, 820, tailleCase+20, tailleCase+20);
-			if(i == 0 || i == 1 || i == 2) drawable.drawImage(tuile001, i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
-			else drawable.drawImage(tuile002, i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
-*/
 		}
 	}
 
@@ -275,11 +270,6 @@ public class Panneau extends JPanel{
 		for(int i = 0;i<5;i++)
 		{
 			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
-/*			
-			//drawable.drawRect(i*depart+ecart, 20, tailleCase+20, tailleCase+20);
-			if(i == 0 || i == 1 || i == 2) drawable.drawImage(tuile001, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
-			else drawable.drawImage(tuile002, i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
-*/
 		}
 	}
 	
