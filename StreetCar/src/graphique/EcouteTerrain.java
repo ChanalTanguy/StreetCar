@@ -25,7 +25,7 @@ public class EcouteTerrain implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 
 		//Joueur actif
-		//JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
+		JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
 		
 		//Coordonéess
 		int x = e.getX();
@@ -61,7 +61,8 @@ public class EcouteTerrain implements MouseListener {
 			//Pour voir si l'on a selectionné au préalable la main du joueur
 			if(p.main != -1)
 			{
-				//j.coupPlacerTuile(p.carte, caseX, caseY);
+				j.coupPlacerTuile(p.carte, caseX, caseY);
+				p.main = -1;
 			}
 			else illuminerCase(caseX, caseY);
 		}
@@ -70,13 +71,10 @@ public class EcouteTerrain implements MouseListener {
 	}
 
 	private void illuminerPioche() {
-	
-		p.piocher = true;
-		
+		p.piocher = true;	
 	}
 
-	private boolean estPioche(int piocheX, int piocheY) {
-		
+	private boolean estPioche(int piocheX, int piocheY) {	
 		return piocheX>3*p.depart+p.ecart && piocheX<3*p.depart+p.ecart+p.tailleCase+20 && piocheY>820 && piocheY<820+p.tailleCase+20;
 	}
 

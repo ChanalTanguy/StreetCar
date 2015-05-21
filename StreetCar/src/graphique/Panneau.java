@@ -215,18 +215,18 @@ public class Panneau extends JPanel{
 	}
 
 	private void colorCase(Graphics2D drawable) {
+		main = -1;
 		drawable.setColor(Color.white);
 		drawable.drawRect(caseX*50+depart, caseY*50+depart, 50,50);		
-		caseX = -1;
-		drawable.setColor(Color.gray);	
+
 	}
 
 	private void colorMain(Graphics2D drawable) {
+		caseX = -1;
 		drawable.setColor(Color.white);
 		if(main == 2){ drawable.drawRect(carte*depart+ecart, 20, tailleCase+20, tailleCase+20); }
 		else drawable.drawRect(carte*depart+ecart, 820, tailleCase+20, tailleCase+20);
-		main = -1;
-		drawable.setColor(Color.gray);		
+		
 	}
 
 	private void dessinerPlateau(Graphics2D drawable) {
