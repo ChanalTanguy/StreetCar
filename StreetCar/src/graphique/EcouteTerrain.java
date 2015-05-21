@@ -46,7 +46,7 @@ public class EcouteTerrain implements MouseListener {
 		}
 		
 		//Carte dans la main
-		if(estDansMain(piocheX, piocheY))
+		else if(estDansMain(piocheX, piocheY))
 		{ 	
 			p.piocher = false;
 			p.caseX = -1;
@@ -59,7 +59,12 @@ public class EcouteTerrain implements MouseListener {
 		}
 		
 		//Plateau
-		if(!estSurPlateau(caseX, caseY)){ caseX = -1; caseY = -1; }
+		else if(!estSurPlateau(caseX, caseY)){ 
+			caseX = -1; caseY = -1;
+			p.main = -1;
+			p.piocher = false;
+			p.caseX = -1;
+		}
 		else {
 			
 			p.piocher = false;
@@ -74,6 +79,7 @@ public class EcouteTerrain implements MouseListener {
 				illuminerCase(caseX, caseY);
 			}
 		}
+
 		
 		p.repaint();
 	}
