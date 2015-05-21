@@ -29,6 +29,8 @@ public class Panneau extends JPanel{
 	int nbCases = 12;
 	BufferedImage fond;
 	BufferedImage plateau ;
+	BufferedImage tuile001;
+	BufferedImage tuile002;
 	BufferedImage tuile003;
 	BufferedImage tuile004 ;
 	BufferedImage tuile005 ;
@@ -278,15 +280,17 @@ public class Panneau extends JPanel{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		tuile001 = Constantes.Images.initTuile("ligneDroite.jpg");
+		tuile002 = Constantes.Images.initTuile("virage.jpg");
 		tuile003 = Constantes.Images.initTuile("bifurcationDroite.jpg");
 		tuile004 = Constantes.Images.initTuile("bifurcationGauche.jpg");
 		tuile005 = Constantes.Images.initTuile("separation.jpg");
 		tuile006 = Constantes.Images.initTuile("doubleVirage.jpg");
 		tuile007 = Constantes.Images.initTuile("doubleBifurcation.jpg");
 		tuile008 = Constantes.Images.initTuile("croisement.jpg");
-		tuile009 = Constantes.Images.initTuile("bifurcationSeparesGauche.jpg");
-		tuile010 = Constantes.Images.initTuile("bifurcationsSeparesDroite.jpg");
-		tuile011 = Constantes.Images.initTuile("bifurcationEmbrassees.jpg");
+		tuile009 = Constantes.Images.initTuile("bifurcationSepareGauche.jpg");
+		tuile010 = Constantes.Images.initTuile("bifurcationSepareDroite.jpg");
+		tuile011 = Constantes.Images.initTuile("bifurcationsEmbrassees.jpg");
 	}
 	
 }

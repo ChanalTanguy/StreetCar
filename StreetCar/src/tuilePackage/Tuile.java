@@ -99,7 +99,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
-		t.setImage(Constantes.Images.initTuile("bifurcationsSeparesGauche.jpg"));
+		t.setImage(Constantes.Images.initTuile("bifurcationSepareGauche.jpg"));
 		return t;
 	}
 	
@@ -108,7 +108,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.nord, Constantes.Orientation.sud));
-		t.setImage(Constantes.Images.initTuile("bifurcationsSeparesDroite.jpg"));
+		t.setImage(Constantes.Images.initTuile("bifurcationSepareDroite.jpg"));
 		return t;
 	}
 	
@@ -118,7 +118,7 @@ public class Tuile implements ActionsToken{
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
 		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.sud));
 		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
-		t.setImage(Constantes.Images.initTuile("quadrupleVirages.jpg"));
+		t.setImage(Constantes.Images.initTuile("quadrupleVirage.jpg"));
 		return t;
 	}
 	
