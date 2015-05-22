@@ -31,6 +31,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		if (pan.getTypeZone() == Constantes.Panneau.plateau){
 			//Joueur actif
 			JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
+		
+			int buttonDown = e.getButton();
 			
 			//Coordonéess
 			int x = e.getX();
@@ -43,6 +45,25 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			int caseX = (x-pan.depart)/pan.tailleCase;
 			int caseY  = (y-pan.depart)/pan.tailleCase;
 			
+			if(buttonDown == MouseEvent.BUTTON3) {
+		        // Bouton DROIT enfoncé
+				if(estDansMain(piocheX, piocheY))
+				{ 	
+					pan.piocher = false;
+					pan.caseX = -1;
+					int numCarte = carteNo(piocheX);
+					int numMain = mainNo(piocheY);
+					
+					j.coupTourner(numCarte);
+					
+					//illuminerMain(numCarte, numMain);
+					illuminerPioche();
+				}
+				pan.repaint();
+				
+		    }
+			else if(buttonDown == MouseEvent.BUTTON1)
+			{
 			//Si le joueur tente de cliquer
 			if(estPioche(piocheX, piocheY))
 			{
@@ -63,6 +84,11 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				//j.coupSelectionTuile(numCarte);
 				
 				illuminerMain(numCarte, numMain);
+			}
+			else if(boutonRotation(piocheX, piocheY))
+			{
+				//TODO faire la rotation de la case
+				//j.coupTourner();
 			}
 			
 			//Si le joueur clique en dehors du plateau de jeu
@@ -86,6 +112,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				}
 			}
 			pan.repaint();
+		}
 		}
 		else if (pan.getTypeZone() == Constantes.Panneau.boutons) {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
@@ -111,6 +138,12 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			}
 			else { System.out.println("clic vide"); }
 		}
+		
+	}
+
+	private boolean boutonRotation(int piocheX, int piocheY) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private void illuminerPioche() {
