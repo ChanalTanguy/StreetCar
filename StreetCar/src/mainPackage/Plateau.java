@@ -16,19 +16,15 @@ public class Plateau {
 	}
 
 	public void initialisationTuile() {
-		// Mettre toutes les tuiles de bords (qui ne sont pas des terminaux) à la vertical
-		for (int i = 0; i<Constantes.Dimensions.dimensionPlateau;i++) {
-			if (i == 2 || i == 3 || i == 6 || i == 7 || i == 10 || i == 11 ) {
-				setTuileAt(0, i, new Tuile(true));
-				setTuileAt(Constantes.Dimensions.dimensionPlateau-1, i, new Tuile(true));
-			}
+		// Mettre toutes les tuiles de bord vides à la vertical
+		for (int i = 0; i<14;i++) {
+			setTuileAt(0, i, new Tuile(true));
+			setTuileAt(13, i, new Tuile(true));
 		}
 		// à l'horizontal
-		for (int i = 1; i<Constantes.Dimensions.dimensionPlateau-1;i++) {
-			if (i == 2 || i == 3 || i == 6 || i == 7 || i == 10 || i == 11 ) {
-				setTuileAt(i, 0, new Tuile(true));
-				setTuileAt(i, Constantes.Dimensions.dimensionPlateau-1, new Tuile(true));
-			}
+		for (int i = 1; i<13;i++) {
+			setTuileAt(i, 0, new Tuile(true));
+			setTuileAt(i, 13, new Tuile(true));
 		}
 
 		// Mettre les escales
@@ -110,8 +106,8 @@ public class Plateau {
 			
 			valide = (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
 				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))
-				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.est))
-				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest));
+				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
+				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est));
 
 			return valide;
 		} else 
