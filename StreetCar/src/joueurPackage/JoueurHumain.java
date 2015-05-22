@@ -54,7 +54,7 @@ public class JoueurHumain extends Joueur {
 	 */
 	public void coupTourner(int tuile) {
 		if (enabled)
-			moteur.jouerCoup(Coup.newPioche());
+			moteur.jouerCoup(Coup.newRotation(tuile));
 	}
 	
 }

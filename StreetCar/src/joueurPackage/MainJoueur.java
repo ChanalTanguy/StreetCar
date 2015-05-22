@@ -64,7 +64,7 @@ public class MainJoueur {
 	 * @param p
 	 */
 	public void tourneTuileAt(int p) {
-		cartesJoueur[p].rotation(Constantes.Rotation.rotationGauche);
+		cartesJoueur[p].rotation(Constantes.Rotation.rotationDroite);
 	}
 	
 	/**
