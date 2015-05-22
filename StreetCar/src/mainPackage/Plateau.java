@@ -104,9 +104,18 @@ public class Plateau {
 			int y = coord.y;
 			Tuile ancTuile = getTuileAt(x,y);
 
-			// TODO : Vérifier qu'on peut poser la nouvelle tuile sur la tuile présente
+			if (ancTuile == null) 
+				valide = true;
+			else {
+				if (ancTuile.getPresenceArbres())
+					valide = false;
+				else {
+					valide = nouvTuile.canReplace(ancTuile);
+				}
+			}
 			
-			valide = (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
+			valide = valide
+				  && (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
 				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))
 				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
 				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est));
