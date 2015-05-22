@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import joueurPackage.MainJoueur;
 import constantesPackages.Constantes;
 
@@ -405,5 +407,27 @@ public class Tuile implements ActionsToken{
 		}
 		
 		return connectionTrouvee;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean canReplace(Tuile ancTuile) {
+		
+		boolean yesItCan = true;
+		ArrayList<Connection> listeConnections = (ArrayList<Connection>) this.listeConnections.clone();
+		
+		for (Connection c : ancTuile.getListeConnections()) {
+			boolean thisOneIsHere = false;
+			ListIterator<Connection> i = (ListIterator<Connection>) listeConnections.listIterator();
+			Connection c2;
+			while ((i.hasNext()) && !thisOneIsHere) {
+				if ((c2 = i.next()).equals(c)) {
+					thisOneIsHere = true;
+					listeConnections.remove(c2);
+				}
+			}
+			yesItCan &= thisOneIsHere;
+		}
+		yesItCan &= !listeConnections.isEmpty();
+		return yesItCan;
 	}
 }

@@ -193,9 +193,17 @@ public class Panneau extends JPanel{
 	 */
 	
 	private void colorPioche(Graphics2D drawable) {
-		drawable.setColor(Color.white);
-		drawable.drawRect(3*depart+2*ecart-1, 820-1, tailleCase+21, tailleCase+21);
-		piocher = false;
+		if(mot.getPioche().isEmpty())
+		{
+			drawable.setColor(Color.white);
+			drawable.fillRect(3*depart+2*ecart-1, 820-1, tailleCase+21, tailleCase+21);
+		}
+		else
+		{
+			drawable.setColor(Color.white);
+			drawable.drawRect(3*depart+2*ecart-1, 820-1, tailleCase+21, tailleCase+21);
+			piocher = false;
+		}
 	}
 
 	private void dessinerPioche(Graphics2D drawable) {	
