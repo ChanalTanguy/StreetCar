@@ -44,7 +44,7 @@ public class JoueurHumain extends Joueur {
 	 */
 	public void coupPlacerTuile(int carte, int x, int y) {
 
-		if (enabled && carte != 0) {
+		if (enabled && carte >= 0 && carte <= 4) {
 			moteur.jouerCoup(Coup.newPlacement(carte, x, y));
 		}
 	}
