@@ -70,22 +70,22 @@ public class Plateau {
 		// Terminus de l'est
 		for(int i = 0; i<3;i++) {
 			// Tuile haute
-			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.ouest));
-			setTuileAt(0, 10-4*i, t);
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.est));
+			setTuileAt(0, 10-(4*i), t);
 			// Tuile basse
-			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
-			setTuileAt(0, 10-4*i, t);
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.est));
+			setTuileAt(0, 11-(4*i), t);
 		}
 
 		// Terminus de l'ouest
 		for(int i = 0; i<3;i++) {
 			int j = (i-1)%3;
 			// Tuile haute
-			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.est));
-			setTuileAt(13, 10-4*i, t);
+			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.ouest));
+			setTuileAt(13, 10-(4*i), t);
 			// Tuile basse
-			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.est));
-			setTuileAt(13, 11-4*i, t);
+			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
+			setTuileAt(13, 11-(4*i), t);
 		}
 	}
 	
