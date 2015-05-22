@@ -303,10 +303,33 @@ public class Panneau extends JPanel{
 		for(int i = 0;i<5;i++)
 		{
 			Tuile t = main.getTuileAt(i);
+			
 			if (t != null)
-				drawable.drawImage(t.getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
-			//Pour dessiner le rotate
-			//drawable.drawImage(rotate, i*depart+ecart-10, 820-10, 20, 20, this);
+			{
+				BufferedImage img = t.getImage();
+				String orient = t.getOrientation();
+				int angle;
+
+				switch(orient)
+				{
+					case(Constantes.Orientation.nord) :
+						angle = 0;
+						break;
+					case(Constantes.Orientation.sud) :
+						angle = 180;
+						break;
+					case(Constantes.Orientation.est) :
+						angle = 90;
+						break;
+					case(Constantes.Orientation.ouest) :
+						angle = 270;
+						break;
+					default :
+						angle = 0;
+						break;
+				}
+				rotation(drawable,img,angle,i*depart+ecart, 820, tailleCase+20);
+			}		
 		}
 	}
 
@@ -314,13 +337,36 @@ public class Panneau extends JPanel{
 		for(int i = 0;i<5;i++)
 		{
 			Tuile t = main.getTuileAt(i);
+			
 			if (t != null)
-				drawable.drawImage(t.getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
-			//Pour dessiner le rotate
-			//drawable.drawImage(rotate, i*depart+ecart-10, 20-10, 20, 20, this);
+			{
+				BufferedImage img = t.getImage();
+				String orient = t.getOrientation();
+				int angle;
+				
+				switch(orient)
+				{
+					case(Constantes.Orientation.nord) :
+						angle = 0;
+						break;
+					case(Constantes.Orientation.sud) :
+						angle = 180;
+						break;
+					case(Constantes.Orientation.est) :
+						angle = 90;
+						break;
+					case(Constantes.Orientation.ouest) :
+						angle = 270;
+						break;
+					default :
+						angle = 0;
+						break;
+				}
+				
+				rotation(drawable,img,angle,i*depart+ecart, 20, tailleCase+20);
+			}
 		}
 	}
-	
 	
 	/*
 	 * Methodes pour dessiner les 4 boutons : Undo, Conseils, Help, Menu

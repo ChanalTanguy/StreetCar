@@ -56,8 +56,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 					
 					j.coupTourner(numCarte);
 					
-					//illuminerMain(numCarte, numMain);
-					illuminerPioche();
+					illuminerMain(numCarte, numMain);
+					//illuminerPioche();
 				}
 				pan.repaint();
 				
