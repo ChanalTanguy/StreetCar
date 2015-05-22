@@ -49,40 +49,42 @@ public class Plateau {
 		// Terminus du Nord
 		for(int i = 0; i<3;i++) {
 			// Tuile gauche
-			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.sud));
+			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.sud));
 			setTuileAt(2+4*i, 0, t);
 			// Tuile droite
-			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.sud));
+			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.sud));
 			setTuileAt(3+4*i, 0, t);
 		}
 
 		// Terminus du Sud
 		for(int i = 0; i<3;i++) {
+			int j = (i-1)%3;
 			// Tuile gauche
-			t = new Terminus(i+1,2); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.nord));
-			setTuileAt(10-4*i, 13, t);
+			t = new Terminus(j+4,2); t.addConnection(new Connection(Constantes.Orientation.est,Constantes.Orientation.nord));
+			setTuileAt(2+4*i, 13, t);
 			// Tuile droite
-			t = new Terminus(i+1,2); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.nord));
-			setTuileAt(11-4*i, 13, t);
+			t = new Terminus(j+4,2); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.nord));
+			setTuileAt(3+4*i, 13, t);
 		}
 		
 		// Terminus de l'est
 		for(int i = 0; i<3;i++) {
 			// Tuile haute
-			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.ouest));
-			setTuileAt(0, 2+4*i, t);
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.ouest));
+			setTuileAt(0, 10-4*i, t);
 			// Tuile basse
-			t = new Terminus(i+4,1); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
-			setTuileAt(0, 3+4*i, t);
+			t = new Terminus(i+1,1); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
+			setTuileAt(0, 10-4*i, t);
 		}
 
 		// Terminus de l'ouest
 		for(int i = 0; i<3;i++) {
+			int j = (i-1)%3;
 			// Tuile haute
-			t = new Terminus(i+4,2); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.est));
+			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.sud,Constantes.Orientation.est));
 			setTuileAt(13, 10-4*i, t);
 			// Tuile basse
-			t = new Terminus(i+4,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.est));
+			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.est));
 			setTuileAt(13, 11-4*i, t);
 		}
 	}
@@ -127,39 +129,39 @@ public class Plateau {
 		switch (numberLigne) {
 		case 1 : 
 			if (numberTerminal == 1)
-				p = new Point(2,0);
+				p = new Point(0,10);
 			else
-				p = new Point(10,13);
+				p = new Point(13,6);
 			break;
 		case 2 : 
 			if (numberTerminal == 1)
-				p = new Point(6,0);
+				p = new Point(0,6);
+			else
+				p = new Point(13,2);
+			break;
+		case 3 : 
+			if (numberTerminal == 1)
+				p = new Point(0,2);
+			else
+				p = new Point(13,10);
+			break;
+		case 4 : 
+			if (numberTerminal == 1)
+				p = new Point(2,0);
 			else
 				p = new Point(6,13);
 			break;
-		case 3 : 
+		case 5 : 
+			if (numberTerminal == 1)
+				p = new Point(6,0);
+			else
+				p = new Point(10,13);
+			break;
+		case 6 : 
 			if (numberTerminal == 1)
 				p = new Point(10,0);
 			else
 				p = new Point(2,13);
-			break;
-		case 4 : 
-			if (numberTerminal == 1)
-				p = new Point(13,2);
-			else
-				p = new Point(0,10);
-			break;
-		case 5 : 
-			if (numberTerminal == 1)
-				p = new Point(13,6);
-			else
-				p = new Point(0,6);
-			break;
-		case 6 : 
-			if (numberTerminal == 1)
-				p = new Point(13,10);
-			else
-				p = new Point(0,2);
 			break;
 		default :
 			p = null;
