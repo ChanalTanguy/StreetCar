@@ -106,8 +106,8 @@ public class Panneau extends JPanel{
 		contoursDessines = false;
 		//On est sensé créer un mouse listener par joueur, à modifier
 		addMouseListener(new EcouteTerrain(this, m));
-		mainJoueur1 = new MainJoueur();
-		mainJoueur2 = new MainJoueur();
+		mainJoueur1 = m.getTabPlayers()[0].getMain();
+		mainJoueur2 = m.getTabPlayers()[1].getMain();
 		initImage();
 	}
 	
@@ -302,7 +302,9 @@ public class Panneau extends JPanel{
 	private void dessinerMain1(Graphics2D drawable, MainJoueur main) {
 		for(int i = 0;i<5;i++)
 		{
-			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
+			Tuile t = main.getTuileAt(i);
+			if (t != null)
+				drawable.drawImage(t.getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
 			//Pour dessiner le rotate
 			//drawable.drawImage(rotate, i*depart+ecart-10, 820-10, 20, 20, this);
 		}
@@ -311,7 +313,9 @@ public class Panneau extends JPanel{
 	private void dessinerMain2(Graphics2D drawable, MainJoueur main) {
 		for(int i = 0;i<5;i++)
 		{
-			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
+			Tuile t = main.getTuileAt(i);
+			if (t != null)
+				drawable.drawImage(t.getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
 			//Pour dessiner le rotate
 			//drawable.drawImage(rotate, i*depart+ecart-10, 20-10, 20, 20, this);
 		}
