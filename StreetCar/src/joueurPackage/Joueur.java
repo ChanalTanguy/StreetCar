@@ -39,13 +39,11 @@ public abstract class Joueur {
 	 */
 	public void jouerTuileSurPlateau (int tuileDansMain, int x, int y, Plateau plateauDeJeu) {
 		Tuile t = plateauDeJeu.getTuileAt(x, y);
-		if (t != null) {
+		if (t == null) {
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 			main.setTuileAt(tuileDansMain, null);
 		} else {
-			System.out.println(main);
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
-			System.out.println(x+" "+y+" "+tuileDansMain);
 			main.setTuileAt(tuileDansMain, t);
 		}
 	}

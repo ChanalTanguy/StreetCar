@@ -40,7 +40,7 @@ public class Tuile implements ActionsToken{
 
 	public static Tuile newVirage() {
 		Tuile t = new Tuile(false);
-		t.addConnection(new Connection(Constantes.Orientation.ouest, Constantes.Orientation.nord));
+		t.addConnection(new Connection(Constantes.Orientation.est, Constantes.Orientation.nord));
 		t.setImage(Constantes.Images.initTuile("virage.jpg"));
 		return t;
 	}
