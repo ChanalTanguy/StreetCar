@@ -25,3 +25,19 @@ Mercredi 20/05
 * Ajout des images pour les différents logos, boutons et tuiles, et autres ressources graphiques
 * Codage de la classe gérant le menu principal
 * Écriture des méthodes d'écoute du terrain
+
+Jeudi 21/05
+* Ajout de fonctions de clonage pour Plateau et MainJoueur
+* Création de la fonction initialisant les tuiles du Plateau
+* Création du NewGamePanel et du SettingsPanel
+* Création des fonctions dessinant les tuiles sur le plateau et dans la main
+* Ajout des constantes contenant les messages de notification
+* Création de la fonction indiquant la position des terminus
+* Implémentation de la Pioche
+* Implémentation de la zone de notifications
+* Association des images aux différentes tuiles
+* Écriture dune portion de code déterminant si un jour a cliqué dans sa main puis sur le plateau
+* Implémentation de la pose de tuiles sur le plateau
+* Implémentation des boutons principaux
+* Correction de bugs divers
+* Refactoring divers
