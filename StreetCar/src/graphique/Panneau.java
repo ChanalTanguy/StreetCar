@@ -53,6 +53,7 @@ public class Panneau extends JPanel{
 	BufferedImage tuile010 ;
 	BufferedImage tuile011 ;
 	BufferedImage pioche ;
+	BufferedImage rotate ;
 	public int main = -1;
 	public int carte = -1;
 	public int caseX = -1;
@@ -146,12 +147,7 @@ public class Panneau extends JPanel{
 			
 			dessinerMain1(crayon, mainJoueur1);
 			dessinerMain2(crayon, mainJoueur2);
-			
-			
-			//Visuel des cases
-			//crayon.drawImage(tuile001, depart+5*tailleCase+1, depart+tailleCase*3+1, tailleCase-1, tailleCase-1, this);
-			//crayon.drawImage(tuile001, depart+5*tailleCase+1, depart+tailleCase*4+1, tailleCase-1, tailleCase-1, this);
-			
+					
 			if(main != -1){ colorMain(crayon); }
 			if(caseX != -1){ colorCase(crayon); }
 			if(piocher) { colorPioche(crayon);}
@@ -277,8 +273,15 @@ public class Panneau extends JPanel{
 	private void colorMain(Graphics2D drawable) {
 		caseX = -1;
 		drawable.setColor(Color.white);
-		if(main == 2){ drawable.drawRect(carte*depart+ecart, 20, tailleCase+20, tailleCase+20); }
-		else drawable.drawRect(carte*depart+ecart, 820, tailleCase+20, tailleCase+20);
+		if(main == 2){ 
+			drawable.drawRect(carte*depart+ecart, 20, tailleCase+20, tailleCase+20); 
+			drawable.drawImage(rotate, carte*depart+ecart-10, 20-10, 20, 20, this);
+		}
+		else 
+		{
+			drawable.drawRect(carte*depart+ecart, 820, tailleCase+20, tailleCase+20);
+			drawable.drawImage(rotate, carte*depart+ecart-10, 820-10, 20, 20, this);
+		}
 		
 	}
 
@@ -297,18 +300,20 @@ public class Panneau extends JPanel{
 	 * Methodes pour dessiner la main de chaque joueur
 	 */
 	private void dessinerMain1(Graphics2D drawable, MainJoueur main) {
-		//Attention, ici c'est toujours la main de base, il faut remplacer par la main du joueur 1
 		for(int i = 0;i<5;i++)
 		{
 			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 820, tailleCase+20, tailleCase+20, this);
+			//Pour dessiner le rotate
+			//drawable.drawImage(rotate, i*depart+ecart-10, 820-10, 20, 20, this);
 		}
 	}
 
 	private void dessinerMain2(Graphics2D drawable, MainJoueur main) {
-		//Attention, ici c'est toujours la main de base, il faut remplacer par la main du joueur 2
 		for(int i = 0;i<5;i++)
 		{
 			drawable.drawImage(main.getTuileAt(i).getImage(), i*depart+ecart, 20, tailleCase+20, tailleCase+20, this);
+			//Pour dessiner le rotate
+			//drawable.drawImage(rotate, i*depart+ecart-10, 20-10, 20, 20, this);
 		}
 	}
 	
@@ -396,6 +401,7 @@ public class Panneau extends JPanel{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		rotate = Constantes.Images.initBouton("tourner.png");
 		tuile001 = Constantes.Images.initTuile("ligneDroite.jpg");
 		tuile002 = Constantes.Images.initTuile("virage.jpg");
 		tuile003 = Constantes.Images.initTuile("bifurcationDroite.jpg");

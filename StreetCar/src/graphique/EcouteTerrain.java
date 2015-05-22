@@ -43,14 +43,16 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			int caseX = (x-pan.depart)/pan.tailleCase;
 			int caseY  = (y-pan.depart)/pan.tailleCase;
 			
+			//Si le joueur tente de cliquer
 			if(estPioche(piocheX, piocheY))
 			{
 				pan.caseX = -1;
 				pan.main = -1;
+				j.coupPiocher();
 				illuminerPioche();
 			}
 			
-			//Carte dans la main
+			//Si le joueur selectionne une carte dans sa main
 			else if(estDansMain(piocheX, piocheY))
 			{ 	
 				pan.piocher = false;
@@ -63,7 +65,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				illuminerMain(numCarte, numMain);
 			}
 			
-			//Plateau
+			//Si le joueur clique en dehors du plateau de jeu
 			else if(!estSurPlateau(caseX, caseY)){ 
 				caseX = -1; caseY = -1;
 				pan.main = -1;

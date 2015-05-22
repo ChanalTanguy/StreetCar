@@ -31,7 +31,7 @@ public class Fenetre extends JFrame{
 		catch (IOException e) { e.printStackTrace();}	
 		
 //		setSize(largeur, hauteur);
-		setSize(600, 400);
+		setSize(largeur, hauteur);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
