@@ -7,6 +7,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JOptionPane;
 
+import panelPackage.MenuWindow;
 import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
 import constantesPackages.Constantes;
@@ -135,10 +136,12 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			}
 			else if ( estSurMenu(x, y, rayon) ){
 				System.out.println("clic sur le bouton Menu");
-				JOptionPane pop = new JOptionPane();
+				/*JOptionPane pop = new JOptionPane();
 				pop.setSize(200, 200);
 				pop.setVisible(true);
-				pop.showMessageDialog(null, "bonjour", "Titre", JOptionPane.INFORMATION_MESSAGE);
+				pop.showMessageDialog(null, "bonjour", "Titre", JOptionPane.INFORMATION_MESSAGE);*/
+				MenuWindow menu = new MenuWindow();
+				menu.openMenuWindow();
 				
 			}
 			else { System.out.println("clic vide"); }
