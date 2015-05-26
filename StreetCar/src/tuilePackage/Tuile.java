@@ -202,7 +202,6 @@ public class Tuile implements ActionsToken{
 	 */
 	public boolean canConnectTo (Tuile nouvTuile, String cote){
 		boolean connectionTrouvee = false;
-		System.out.println(this+" "+nouvTuile+" "+cote);
 		switch (cote) {
 		case Constantes.Orientation.nord:
 			connectionTrouvee = ( this.connectionsExistantes(Constantes.Orientation.nord) && nouvTuile.connectionsExistantes(Constantes.Orientation.sud) )
