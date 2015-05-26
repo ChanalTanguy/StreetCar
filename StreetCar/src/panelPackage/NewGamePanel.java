@@ -21,7 +21,8 @@ public class NewGamePanel extends JPanel {
 	JPanel parentPanel;
 	
 	PanelListener listener = new PanelListener();
-	String selected = "Facile";
+	String selected1 = "Humain";
+	String selected2 = "Facile";
 	
 	public NewGamePanel(JDialog parent){
 		parentDialog = parent;
@@ -38,38 +39,48 @@ public class NewGamePanel extends JPanel {
 		this.buildNewGamePanel();
 	}
 	
-	public NewGamePanel(String niv){
-		selected = niv;
+	public NewGamePanel(String niv1, String niv2){
+		selected1 = niv1;
+		selected2 = niv2;
 		this.buildNewGamePanel();
 	}
 	
 	private void buildNewGamePanel(){
 		
-		JPanel zone1 = newRadioButtonZone("Niveau de l'adversaire");
-		JPanel zone2 = newButtonZone();
+		JPanel zone1 = newRadioButtonZone("Niveau du joueur");
+		JPanel zone2 = newRadioButtonZone("Niveau de l'adversaire");
+		JPanel zone3 = newButtonZone();
 		
-		ButtonGroup group = new ButtonGroup();
+		ButtonGroup group1 = new ButtonGroup();
 		
-		addNewRadioButton(zone1, group, "Humain", null);
-		addNewRadioButton(zone1, group, "Facile", null);
-		addNewRadioButton(zone1, group, "Moyen", null);
-		addNewRadioButton(zone1, group, "Difficile", null);
+		addNewRadioButton(zone1, group1, "Humain", selected1, null);
+		addNewRadioButton(zone1, group1, "Facile", selected1, null);
+		addNewRadioButton(zone1, group1, "Moyen", selected1, null);
+		addNewRadioButton(zone1, group1, "Difficile", selected1, null);
 		
-		addNewButton(zone2, "Démarrer", BorderLayout.WEST, null);
+		ButtonGroup group2 = new ButtonGroup();
 		
-		if(parentPanel != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel));}
-		if(parentDialog != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog));}
-		if(parentFrame != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame));}
+		addNewRadioButton(zone2, group2, "Humain", selected2, null);
+		addNewRadioButton(zone2, group2, "Facile", selected2, null);
+		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
+		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
+		
+		addNewButton(zone3, "Démarrer", BorderLayout.WEST, null);
+		
+		if(parentPanel != null){addNewButton(zone3, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel));}
+		if(parentDialog != null){addNewButton(zone3, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog));}
+		if(parentFrame != null){addNewButton(zone3, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame));}
 		
 		this.add(zone1);
 		this.add(zone2);
+		this.add(zone3);
 		
 	}
 	
 	private JPanel newButtonZone(){
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(350,40));
+		panel.setPreferredSize(new Dimension(400,60));
 		return panel;
 	}
 	
@@ -77,11 +88,11 @@ public class NewGamePanel extends JPanel {
 		JPanel panel = new JPanel();
 		//panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder(title));
-		panel.setPreferredSize(new Dimension(350,60));
+		panel.setPreferredSize(new Dimension(400,60));
 		return panel;
 	}
 	
-	private void addNewRadioButton(JPanel panel, ButtonGroup group, String text, ActionListener action){
+	private void addNewRadioButton(JPanel panel, ButtonGroup group, String text, String selected, ActionListener action){
 		JRadioButton rbutton = new JRadioButton(text);
 		panel.add(rbutton);
 		group.add(rbutton);
@@ -90,7 +101,7 @@ public class NewGamePanel extends JPanel {
 	}
 	
 	private void addNewButton(JPanel panel, String text, String position, ActionListener action){
-		Dimension size = new Dimension(150,50);
+		Dimension size = new Dimension(175,60);
 		JButton button = new JButton(text);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
