@@ -26,6 +26,9 @@ public class Pioche extends ArrayList<Tuile>{
 		for (int i = 0; i < 10; i++){
 			add(Tuile.newBifurcationGauche());
 		}
+		for (int i = 0; i < 10; i++){
+			add(Tuile.newSeparation());
+		}
 		for (int i = 0; i < 6; i++){
 			add(Tuile.newDoubleVirage());
 		}
