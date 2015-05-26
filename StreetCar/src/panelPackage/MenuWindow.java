@@ -17,7 +17,7 @@ public class MenuWindow {
 	public void openMenuWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		MenuPanel menu = new MenuPanel(win);
-		win.setSize(300,490);
+		win.setSize(425,690);
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);
@@ -29,7 +29,7 @@ public class MenuWindow {
 	public void openNewGameWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		NewGamePanel menu = new NewGamePanel(win);
-		win.setSize(400,150);
+		win.setSize(500,230);
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);

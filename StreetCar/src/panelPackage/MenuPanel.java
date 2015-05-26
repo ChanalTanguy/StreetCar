@@ -69,13 +69,13 @@ public class MenuPanel extends JPanel {
 		FlowLayout layout = new FlowLayout();
 		layout.setVgap(0);
 		panel.setLayout(layout);
-		panel.setPreferredSize(new Dimension(200,50*size+20));
+		panel.setPreferredSize(new Dimension(400,75*size+20));
 		return panel;
 
 	}
 
 	private void addNewButton(JPanel panel, String text, ActionListener action, ImageIcon img){
-		Dimension size = new Dimension(200,50);
+		Dimension size = new Dimension(400,75);
 		JButton button = new JButton(text, img);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
