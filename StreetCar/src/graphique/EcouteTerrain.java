@@ -97,7 +97,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			else if(boutonRotation(piocheX, piocheY))
 			{
 				//TODO faire la rotation de la case
-				//j.coupTourner();
+				System.out.println("Je suis passé par là");
+				j.coupTourner(carteNo(piocheX));
 			}
 			
 			//Si le joueur clique en dehors du plateau de jeu
@@ -157,21 +158,28 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		boolean b = false;
 		
 		int numMain = mainNo(piocheY);
+				
 		if(numMain == mot.getcurrentPlayer()+1)
 		{
+			System.out.println("Je suis passé par là");
+			
 			if(numMain == 1)
 			{
-				
+				for(int i = 70; i<=370;i+=100)
+				{
+					if(piocheX >= (pan.carte*pan.depart+pan.ecart-10) && piocheY >=10 && piocheX <=20 && piocheY <=20) b = true;
+				}
 			}
 			else
 			{
-				
-			}
-			
-			b = (piocheX >= 0 && piocheX <= 0 && piocheY >= 0 && piocheY <=0);			
+				for(int i = 70; i<=370;i+=100)
+				{
+					if(piocheX >= (pan.carte*pan.depart+pan.ecart-10) && piocheY >=810 && piocheX <=20 && piocheY <=820) b = true;
+				}
+			}			
 		}
+		
 		return b;
-	
 	}
 
 	private void illuminerPioche() {
@@ -194,8 +202,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	//Savoir quel joueur actif
 	private int mainNo(int piocheY) {
-		if(piocheY>20 && piocheY<90) return 2;
-		else if(piocheY>820 && piocheY<890) return 1;
+		if(piocheY>=20 && piocheY<=90) return 2;
+		else if(piocheY>=820 && piocheY<=890) return 1;
 		else return -1;
 	}
 
@@ -211,23 +219,15 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	//Fonction principale déterminant si l'on se trouve dans la main d'une des deux joueurs
 	private boolean estDansMain(int piocheX, int piocheY) {
-		boolean b = true;
+		boolean b = true;	
+		int numMain = mainNo(piocheY);
 		
-		//p.message = "X = " + piocheX + ", Y = " + piocheY;
-		if(piocheX>=0 && piocheX<470 && piocheY>=20 && piocheY<=90)  //Main du haut
+		if(piocheX>=0 && piocheX<470 && numMain != -1)  //Main quelquonque
 		{
 			for(int i = 70; i<=370;i+=100)
 			{
 				if(piocheX>=i && piocheX<=i+30) b = false;
 			}
-		}
-		
-		else if(piocheX>=0 && piocheX<470 && piocheY>820 && piocheY<890) //Main du bas
-		{
-			for(int i = 70; i<=370;i+=100)
-			{
-				if(piocheX>=i && piocheX<=i+30) b = false;
-			}	
 		}
 		
 		else b = false;
