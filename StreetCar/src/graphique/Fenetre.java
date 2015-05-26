@@ -43,6 +43,7 @@ public class Fenetre extends JFrame{
 //		Panneau regroupementLateral = new Panneau(Color.white, "zone de regroupement");
 		JPanel regroupementLateral = new JPanel();
 		Panneau notifications = new Panneau(Color.cyan, "notifications", Constantes.Panneau.notifications);
+		m.setPanNotif(notifications);
 		Panneau historique = new Panneau(Color.white, "historiques", Constantes.Panneau.historiques);
 		Panneau menus = new Panneau(Color.pink, "boutons de menus", Constantes.Panneau.boutons);
 		Bouton but1 = new Bouton("bouton 1", notifications);

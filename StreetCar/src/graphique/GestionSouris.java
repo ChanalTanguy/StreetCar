@@ -9,7 +9,7 @@ public class GestionSouris implements MouseListener{
 	Panneau pan = null;
 	Fenetre fen = null;
 	JButton but = null;
-	Panneau panNotif = null;
+	Panneau panNotif = null; 
 	
 	public GestionSouris (Panneau referencePan, Panneau referenceNotif){
 		pan = referencePan;
@@ -39,7 +39,7 @@ public class GestionSouris implements MouseListener{
 		if (but != null){
 			resultat = resultat + but.getText() + "\n";
 		}
-		panNotif.updateMessage(resultat);
+		//panNotif.updateMessage(resultat);
 	}
 
 	@Override

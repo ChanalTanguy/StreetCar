@@ -1,5 +1,6 @@
 package mainPackage;
 
+import graphique.Panneau;
 import constantesPackages.Constantes;
 import joueurPackage.*;
 
@@ -10,6 +11,7 @@ public class Moteur {
 	private Plateau plateauDeJeu;
 	private int nbActions;
 	private Pioche pioche;
+	private Panneau panNotif;
 	
 	/*
 	 * Constructeur
@@ -51,6 +53,10 @@ public class Moteur {
 		return pioche;
 	}
 	
+	public void setPanNotif(Panneau p) {
+		panNotif = p;
+	}
+	
 	
 	/*
 	 * Methodes du Moteur
@@ -62,6 +68,7 @@ public class Moteur {
 	 * @param c
 	 */
 	public void jouerCoup(Coup c) {
+		String msg = "";
 		if (coupValide(c)) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
 				players[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
@@ -73,7 +80,8 @@ public class Moteur {
 				players[currentPlayer].volerTuile(c.getTuile(), players[(currentPlayer+1)%2]);
 				nbActions--;
 			} else if (c.getType().equals(Constantes.Coup.pioche)) {
-				players[currentPlayer].piocher(pioche);
+				if (!pioche.isEmpty())
+					players[currentPlayer].piocher(pioche);
 				nbActions = 0;
 			} else {
 				System.out.println("Erreur : Cas non géré"); // Cas sensé inateignable
@@ -83,16 +91,32 @@ public class Moteur {
 				currentPlayer = (currentPlayer+1)%2;
 				nbActions = 4;
 			}
+			
+
+			if (nbActions > 2)
+				msg = Constantes.Message.auTourDe(currentPlayer+1);
+			else 
+				msg = Constantes.Message.finDeTour(currentPlayer+1);
+				
 		}
 		else {
-			/*	/!\ ATTENTION TODO /!\
-			 *  Sinon mettre un message d'erreur <=> notifications
-			 */
-			System.out.println("ERROR ! Mauvais coup !");
+			if (c.getType().equals(Constantes.Coup.placement))
+				msg = Constantes.Message.poseImpossible;
+			else if (c.getType().equals(Constantes.Coup.vol))
+				msg = Constantes.Message.volImpossible;
+			else if (c.getType().equals(Constantes.Coup.pioche))
+				msg = Constantes.Message.piocheImpossible;
+			else {
+				msg = Constantes.Message.tramImpossible; // N'EST PAS SENSE ARRIVER !
+			}
+			System.out.println("Mauvais coup");
 			
 		}
 
+		
 		players[currentPlayer].attendCoup();
+		panNotif.updateMessage(msg);
+		
 	}
 	
 	/*
@@ -107,8 +131,9 @@ public class Moteur {
 	private boolean coupValide(Coup c) {
 		if (nbActions > 2) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
-				// Vérifie si le placement est valide
-				return plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c);
+					// Vérifie si le joueur prend une tuile existante et vérifie si le placement est valide
+				return (players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
+						(plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
 			} else if (c.getType().equals(Constantes.Coup.rotation)) {
 				return true; // Rien d'autre à vérifier
 			} else
