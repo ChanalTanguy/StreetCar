@@ -40,21 +40,21 @@ public class Fenetre extends JFrame{
 	}
 	
 	public void disposition (Moteur m, Dimension dim){
-Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
+		Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
 		
 		JPanel regroupementLateral = new JPanel();
 		Panneau notifications = new Panneau (Color.cyan, "notifications", Constantes.Panneau.notifications);
 		m.setPanNotif(notifications);
 		
 		JPanel panelHistorique = new JPanel();
-		Panneau histo_ouest = new Panneau (Color.white, "histo_ouest", Constantes.Panneau.histo_ouest);
+		Panneau histo_ouest = new Panneau (Color.gray, "histo_ouest", Constantes.Panneau.histo_ouest);
 		
 		JPanel regroupementHistorique = new JPanel();
-		Panneau historique_central = new Panneau (Color.red, "historique_central", Constantes.Panneau.histo_central);
-		Panneau histo_nord = new Panneau (Color.orange, "histo_nord", Constantes.Panneau.histo_bouton_nord);
-		Panneau histo_sud = new Panneau (Color.blue, "histo_sud", Constantes.Panneau.histo_bouton_sud);
+		Panneau historique_central = new Panneau (Color.gray, "historique_central", Constantes.Panneau.histo_central);
+		Panneau histo_nord = new Panneau (Color.gray, "histo_nord", Constantes.Panneau.histo_bouton_nord);
+		Panneau histo_sud = new Panneau (Color.gray, "histo_sud", Constantes.Panneau.histo_bouton_sud);
 		
-		Panneau histo_est = new Panneau (Color.white, "histo_est", Constantes.Panneau.histo_est);
+		Panneau histo_est = new Panneau (Color.gray, "histo_est", Constantes.Panneau.histo_est);
 		
 		Panneau menus = new Panneau(Color.pink, "boutons de menus", Constantes.Panneau.menuBoutons);
 		
@@ -72,7 +72,9 @@ Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panne
 		zonePlateau.setPreferredSize(new Dimension(5*dim.width/6, dim.height));
 		regroupementLateral.setPreferredSize(new Dimension(dim.width/6, dim.height));
 		notifications.setPreferredSize(new Dimension(dim.width/6, dim.height/5));
-		menus.setPreferredSize(new Dimension(dim.width/6, dim.height/5));
+		
+		menus.setPreferredSize(new Dimension(dim.width/6, dim.height/5 /* + dim.height/20 */ ));
+		
 		histo_nord.setPreferredSize(new Dimension(dim.width/12, 50));
 		histo_sud.setPreferredSize(new Dimension(dim.width/12, 50));
 		
