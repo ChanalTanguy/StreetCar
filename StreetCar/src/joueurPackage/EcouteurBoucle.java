@@ -1,5 +1,6 @@
 package joueurPackage;
 
+import iaPackage.IAFacile;
 import iaPackage.InterfaceIA;
 
 import java.awt.event.ActionEvent;
@@ -13,9 +14,10 @@ public class EcouteurBoucle implements ActionListener {
 	Moteur moteur;
 	InterfaceIA ia;
 	
-	public EcouteurBoucle(Moteur m) {
+	public EcouteurBoucle(Moteur m, InterfaceIA IA) {
 		enabled = false;
 		moteur = m;
+		ia = IA;
 	}
 	
 	public void enable() {
