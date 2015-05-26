@@ -120,7 +120,7 @@ public class Panneau extends JPanel{
 		return typeDeZone;
 	}
 	
-	public void setmenuBoutonsurligne (Point2D bouton){
+	public void setBoutonSurligne (Point2D bouton){
 		menuBoutonsurligne = bouton;
 	}
 	
