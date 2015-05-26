@@ -100,7 +100,9 @@ public class Moteur {
 				
 		}
 		else {
-			if (c.getType().equals(Constantes.Coup.placement))
+			if (nbActions < 3)
+				msg = Constantes.Message.finDeTour(currentPlayer+1);
+			else if (c.getType().equals(Constantes.Coup.placement))
 				msg = Constantes.Message.poseImpossible;
 			else if (c.getType().equals(Constantes.Coup.vol))
 				msg = Constantes.Message.volImpossible;
