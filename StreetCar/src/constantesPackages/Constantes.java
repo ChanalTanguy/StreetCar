@@ -126,7 +126,7 @@ public class Constantes {
 		
 		public static final String poseImpossible = "Vous ne pouvez pas poser \nvotre tuile ici";
 		public static final String piocheImpossible = "Vous ne pouvez piocher \nqu'à la fin de votre tour";
-		public static final String volImpossible = "Vous ne pouvez pas voler ce joueur : \nCe joueur n'a pas fini sa ligne";
+		public static final String volImpossible = "Vous ne pouvez pas voler \nce joueur : \nCe joueur n'a pas fini sa ligne";
 		public static final String tramImpossible = "Votre tramway ne peut pas aller ici";
 		
 	}
