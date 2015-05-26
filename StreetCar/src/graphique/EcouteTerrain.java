@@ -83,6 +83,11 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				
 				//j.coupSelectionTuile(numCarte);
 				
+				if(mot.getcurrentPlayer() != numMain-1)
+				{
+					j.coupVoler(numCarte);
+				}
+				
 				illuminerMain(numCarte, numMain);
 			}
 			else if(boutonRotation(piocheX, piocheY))
