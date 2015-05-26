@@ -4,11 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import constantesPackages.Constantes;
 
 public class MenuPanel extends JPanel {
 
@@ -39,17 +47,17 @@ public class MenuPanel extends JPanel {
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
 		
-		if(parentPanel != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(this, parentPanel));}
-		if(parentDialog != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentDialog));}
-		if(parentFrame != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentFrame));}
+		if(parentPanel != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(this, parentPanel),null);}
+		if(parentDialog != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentDialog), null);}
+		if(parentFrame != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentFrame), null);}
 
-		addNewButton(zone2, "Nouvelle partie", listener.new ConfigureNewGameButtonListener());
-		addNewButton(zone2, "Sauvegarder la partie", null);
-		addNewButton(zone2, "Charger une partie", null);
-		addNewButton(zone2, "Succès", null);
-		addNewButton(zone2, "Options", null);
-		addNewButton(zone2, "Crédits", null);
-		addNewButton(zone3, "Quitter", listener.new QuitButtonListener());
+		addNewButton(zone2, "Nouvelle partie", listener.new ConfigureNewGameButtonListener(), null);
+		addNewButton(zone2, "Sauvegarder la partie", null, null);
+		addNewButton(zone2, "Charger une partie", null, null);
+		addNewButton(zone2, "Succès", null, null);
+		addNewButton(zone2, "Options", null, null);
+		addNewButton(zone2, "Crédits", null, null);
+		addNewButton(zone3, "Quitter", listener.new QuitButtonListener(), null);
 				
 		this.add(zone1);
 		this.add(zone2);
@@ -66,12 +74,22 @@ public class MenuPanel extends JPanel {
 
 	}
 
-	private void addNewButton(JPanel panel, String text, ActionListener action){
+	private void addNewButton(JPanel panel, String text, ActionListener action, ImageIcon img){
 		Dimension size = new Dimension(200,50);
-		JButton button = new JButton(text);
+		JButton button = new JButton(text, img);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
 		panel.add(button);
+	}
+	
+	private ImageIcon loadImage(String name){
+		ImageIcon img = null;
+		try {
+			img = new ImageIcon(ImageIO.read(new File("images/menu/"+name)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return img;
 	}
 
 }

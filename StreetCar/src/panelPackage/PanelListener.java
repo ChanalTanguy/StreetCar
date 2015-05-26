@@ -13,7 +13,10 @@ public class PanelListener {
 
 		// Clic sur le bouton "Nouvelle partie" du menu principal
 		
-		public void actionPerformed(ActionEvent e) {}
+		public void actionPerformed(ActionEvent e) {
+			MenuWindow win = new MenuWindow();
+			win.openNewGameWindow();
+		}
 		
 	}
 	

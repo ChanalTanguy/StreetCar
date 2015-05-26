@@ -7,14 +7,34 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import panelPackage.PanelListener.ReturnButtonListener;
+
 public class NewGamePanel extends JPanel {
 	
+	JDialog parentDialog;
+	JFrame parentFrame;
+	JPanel parentPanel;
+	
+	PanelListener listener = new PanelListener();
 	String selected = "Facile";
 	
-	public NewGamePanel(){
+	public NewGamePanel(JDialog parent){
+		parentDialog = parent;
+		this.buildNewGamePanel();
+	}
+	
+	public NewGamePanel(JFrame parent){
+		parentFrame = parent;
+		this.buildNewGamePanel();
+	}
+
+	public NewGamePanel(JPanel parent){
+		parentPanel = parent;
 		this.buildNewGamePanel();
 	}
 	
@@ -36,7 +56,10 @@ public class NewGamePanel extends JPanel {
 		addNewRadioButton(zone1, group, "Difficile", null);
 		
 		addNewButton(zone2, "Démarrer", BorderLayout.WEST, null);
-		addNewButton(zone2, "Annuler", BorderLayout.EAST, null);
+		
+		if(parentPanel != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel));}
+		if(parentDialog != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog));}
+		if(parentFrame != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame));}
 		
 		this.add(zone1);
 		this.add(zone2);
