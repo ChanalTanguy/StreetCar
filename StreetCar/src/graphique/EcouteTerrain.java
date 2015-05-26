@@ -47,7 +47,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			
 			if(buttonDown == MouseEvent.BUTTON3) {
 		        // Bouton DROIT enfoncé
-				if(estDansMain(piocheX, piocheY))
+				if(estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY)-1))
 				{ 	
 					pan.piocher = false;
 					pan.caseX = -1;
@@ -55,7 +55,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 					int numMain = mainNo(piocheY);
 					
 					j.coupTourner(numCarte);
-					
+										
 					illuminerMain(numCarte, numMain);
 					//illuminerPioche();
 				}
