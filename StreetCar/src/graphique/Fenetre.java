@@ -44,6 +44,7 @@ Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panne
 		
 		JPanel regroupementLateral = new JPanel();
 		Panneau notifications = new Panneau (Color.cyan, "notifications", Constantes.Panneau.notifications);
+		m.setPanNotif(notifications);
 		
 		JPanel panelHistorique = new JPanel();
 		Panneau histo_ouest = new Panneau (Color.white, "histo_ouest", Constantes.Panneau.histo_ouest);
