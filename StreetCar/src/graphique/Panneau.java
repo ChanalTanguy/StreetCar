@@ -413,12 +413,12 @@ public class Panneau extends JPanel{
 	
 	private void dessinerHelpCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3-rayon, hauteur/3 /*(2*hauteur/3)-(2*rayon)*/, 3*rayon, 3*rayon, this);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3-rayon, hauteur/3, 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerMenuCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/3 + 2*rayon, hauteur/3 /*(2*hauteur/3)-(2*rayon)*/, 3*rayon, 3*rayon, this);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/3 + 2*rayon, hauteur/3, 3*rayon, 3*rayon, this);
 	}
 
 /*

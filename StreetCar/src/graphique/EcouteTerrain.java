@@ -252,13 +252,15 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		boolean resultat;
 		Point2D centre = null;
 		double difX, difY;
-		difX = x - (pan.getSize().width/4 + 0.5*rayon);
-		difY = y - (pan.getSize().height/6 + 1.5*rayon);
+		double posX_centre = pan.getWidth()/4 + 0.5*rayon;
+		double posY_centre = pan.getHeight()/30 + 1.5*rayon;
 		
+		difX = x - posX_centre;
+		difY = y - posY_centre;
 		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
-			centre = new Point2D.Double (pan.getWidth()/4 + 0.5*rayon, pan.getHeight()/6 + 1.5*rayon);
+			centre = new Point2D.Double (posX_centre, posY_centre);
 		}
 		return centre;
 	}
@@ -268,8 +270,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		Point2D centre = null;
 		double difX, difY;
 		
-		double posX_centre = (pan.getWidth()/4 + 3.5*rayon);
-		double posY_centre = (pan.getHeight()/6 + 1.5*rayon);
+		double posX_centre = pan.getWidth()/4 + 3.5*rayon;
+		double posY_centre = pan.getHeight()/30 + 1.5*rayon;
 
 		difX = x - posX_centre;
 		difY = y - posY_centre;
@@ -286,8 +288,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		Point2D centre = null;
 		double difX, difY;
 
-		double posX_centre = (pan.getWidth()/3 + 0.5*rayon);
-		double posY_centre = (2*pan.getHeight()/3 - 0.5*rayon);
+		double posX_centre = pan.getWidth()/3 + 0.5*rayon;
+		double posY_centre = pan.getHeight()/3 + 1.5*rayon;
 		
 		difX = x - posX_centre;
 		difY = y - posY_centre;
@@ -304,8 +306,8 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		Point2D centre = null;
 		double difX, difY;
 		
-		double posX_centre = (pan.getWidth()/3 + 3.5*rayon);
-		double posY_centre = (2*pan.getHeight()/3 - 0.5*rayon);
+		double posX_centre = pan.getWidth()/3 + 3.5*rayon;
+		double posY_centre = pan.getHeight()/3 + 1.5*rayon;
 		
 		difX = x - posX_centre;
 		difY = y - posY_centre;
@@ -327,7 +329,6 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	public void mouseDragged(MouseEvent e) {}
 
 	public void mouseMoved(MouseEvent e) {
-//		System.out.println("Mouse moved at : " + e.getPoint());
 		if (pan.getTypeZone() == Constantes.Panneau.menuBoutons) {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
 			int x = e.getX();
@@ -335,22 +336,18 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			Point2D centre;
 			if ( (centre = estSurUndo(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Annuler");
-//				Point centre = new Point(pan.getSize().width/4, pan.getSize().height/6 + rayon);
 				pan.setBoutonSurligne(centre);
 			}
 			else if ( (centre = estSurConseils(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Conseils");
-//				Point centre = new Point(pan.getSize().width/2 + rayon, pan.getSize().height/6 + rayon);
 				pan.setBoutonSurligne(centre);
 			}
 			else if ( (centre = estSurAide(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Aide");
-//				centre = new Point(pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
 				pan.setBoutonSurligne(centre);
 			}
 			else if ( (centre = estSurMenu(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Menu");
-//				centre = new Point(2*pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
 				pan.setBoutonSurligne(centre);
 			}
 			else { 
