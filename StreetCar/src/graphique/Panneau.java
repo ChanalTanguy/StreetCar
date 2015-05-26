@@ -28,7 +28,7 @@ public class Panneau extends JPanel{
 	JTextArea message;
 	MainJoueur mainJoueur1, mainJoueur2;
 	int largeur, hauteur;
-	Point2D boutonSurligne = null;
+	Point2D menuBoutonsurligne = null;
 	/*
 	 * FIN AJOUT Kevin
 	 */
@@ -91,7 +91,7 @@ public class Panneau extends JPanel{
 			message.setEditable(false);
 			add(message);
 		}
-		else if (numeroDeZone == Constantes.Panneau.boutons){
+		else if (numeroDeZone == Constantes.Panneau.menuBoutons){
 			addMouseMotionListener(ecouteur);
 		}
 		//On est sensé créer un mouse listener par joueur, à modifier
@@ -120,8 +120,8 @@ public class Panneau extends JPanel{
 		return typeDeZone;
 	}
 	
-	public void setBoutonSurligne (Point2D bouton){
-		boutonSurligne = bouton;
+	public void setmenuBoutonsurligne (Point2D bouton){
+		menuBoutonsurligne = bouton;
 	}
 	
 	/*
@@ -153,15 +153,15 @@ public class Panneau extends JPanel{
 			if(caseX != -1){ colorCase(crayon); }
 			if(piocher) { colorPioche(crayon);}
 		}
-		else if (typeDeZone == Constantes.Panneau.boutons){
+		else if (typeDeZone == Constantes.Panneau.menuBoutons){
 
 			int rayon = (largeur < hauteur ) ? largeur/8 : hauteur/8;
 			dispositionCarre(crayon, rayon);
 
 //			dispositionLosange(crayon, rayon);
 			
-			if (boutonSurligne != null){
-				surlignerBouton(crayon, boutonSurligne, rayon);
+			if (menuBoutonsurligne != null){
+				surlignerBouton(crayon, menuBoutonsurligne, rayon);
 			}
 		}
 		
@@ -379,7 +379,7 @@ public class Panneau extends JPanel{
 	}
 	
 	/*
-	 * Methodes pour dessiner les 4 boutons : Undo, Conseils, Help, Menu
+	 * Methodes pour dessiner les 4 menuBoutons : Undo, Conseils, Help, Menu
 	 * selon 2 dispositions possibles
 	 */
 	private void dispositionCarre (Graphics2D crayon, int rayon){
