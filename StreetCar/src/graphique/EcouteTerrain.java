@@ -123,7 +123,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			pan.repaint();
 		}
 		}
-		else if (pan.getTypeZone() == Constantes.Panneau.boutons) {
+		else if (pan.getTypeZone() == Constantes.Panneau.menuBoutons) {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
 			int x = e.getX();
 			int y = e.getY();
@@ -154,7 +154,24 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	private boolean boutonRotation(int piocheX, int piocheY) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean b = false;
+		
+		int numMain = mainNo(piocheY);
+		if(numMain == mot.getcurrentPlayer()+1)
+		{
+			if(numMain == 1)
+			{
+				
+			}
+			else
+			{
+				
+			}
+			
+			b = (piocheX >= 0 && piocheX <= 0 && piocheY >= 0 && piocheY <=0);			
+		}
+		return b;
+	
 	}
 
 	private void illuminerPioche() {
@@ -184,7 +201,6 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	//Savoir quel carte de la main
 	private int carteNo(int piocheX) {
-		
 		for(int i = 0; i<=400; i+=100)
 		{
 			if(piocheX>i && piocheX<i+70) return i/100;
@@ -312,7 +328,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	public void mouseMoved(MouseEvent e) {
 //		System.out.println("Mouse moved at : " + e.getPoint());
-		if (pan.getTypeZone() == Constantes.Panneau.boutons) {
+		if (pan.getTypeZone() == Constantes.Panneau.menuBoutons) {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
 			int x = e.getX();
 			int y = e.getY();
