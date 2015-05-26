@@ -25,6 +25,7 @@ public class MenuWindow {
 		//win.setSize(400,150);
 		win.add(menu);
 		win.setResizable(false);
+		win.setLocationRelativeTo(null);
 		win.setVisible(true);
 		win.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
