@@ -4,12 +4,12 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
-import javax.swing.JOptionPane;
-
-import panelPackage.MenuWindow;
 import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
+import panelPackage.MenuWindow;
 import constantesPackages.Constantes;
 
 public class EcouteTerrain implements MouseListener, MouseMotionListener {
@@ -125,16 +125,16 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			int x = e.getX();
 			int y = e.getY();
 			
-			if ( estSurUndo(x, y, rayon) ){
+			if ( estSurUndo(x, y, rayon) != null){
 				System.out.println("clic sur le bouton Annuler");
 			}
-			else if ( estSurConseils(x, y, rayon) ){
+			else if ( estSurConseils(x, y, rayon) != null){
 				System.out.println("clic sur le bouton Conseils");
 			}
-			else if ( estSurAide(x, y, rayon) ){
+			else if ( estSurAide(x, y, rayon) != null){
 				System.out.println("clic sur le bouton Aide");
 			}
-			else if ( estSurMenu(x, y, rayon) ){
+			else if ( estSurMenu(x, y, rayon) != null){
 				System.out.println("clic sur le bouton Menu");
 				/*JOptionPane pop = new JOptionPane();
 				pop.setSize(200, 200);
@@ -229,40 +229,72 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	/*
 	 * Methodes Privates liées au Panneau de type Boutons/Menus
 	 */
-	private boolean estSurUndo(int x, int y, int rayon) {
-		boolean resultat = false;
-		int difX, difY;
-		difX = x - (pan.getSize().width/4);
-		difY = y - (pan.getSize().height/6+rayon);
+	private Point2D estSurUndo(int x, int y, int rayon) {
+		boolean resultat;
+		Point2D centre = null;
+		double difX, difY;
+		difX = x - (pan.getSize().width/4 + 0.5*rayon);
+		difY = y - (pan.getSize().height/6 + 1.5*rayon);
+		
+		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		return resultat;
+		if (resultat) {
+			centre = new Point2D.Double (pan.getWidth()/4 + 0.5*rayon, pan.getHeight()/6 + 1.5*rayon);
+		}
+		return centre;
 	}
 	
-	private boolean estSurConseils(int x, int y, int rayon) {
+	private Point2D estSurConseils(int x, int y, int rayon) {
 		boolean resultat;
-		int difX, difY;
-		difX = x - (pan.getSize().width/2+rayon);
-		difY = y - (pan.getSize().height/6+rayon);
+		Point2D centre = null;
+		double difX, difY;
+		
+		double posX_centre = (pan.getWidth()/4 + 3.5*rayon);
+		double posY_centre = (pan.getHeight()/6 + 1.5*rayon);
+
+		difX = x - posX_centre;
+		difY = y - posY_centre;
+		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		return resultat;
+		if (resultat) {
+			centre = new Point2D.Double (posX_centre, posY_centre);
+		}
+		return centre;
 	}	
 
-	private boolean estSurAide(int x, int y, int rayon) {
+	private Point2D estSurAide(int x, int y, int rayon) {
 		boolean resultat;
-		int difX, difY;
-		difX = x - (pan.getSize().width/3+rayon);
-		difY = y - (5*pan.getSize().height/6-rayon);
+		Point2D centre = null;
+		double difX, difY;
+
+		double posX_centre = (pan.getWidth()/3 + 0.5*rayon);
+		double posY_centre = (2*pan.getHeight()/3 - 0.5*rayon);
+		
+		difX = x - posX_centre;
+		difY = y - posY_centre;
+		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		return resultat;
+		if (resultat){
+			centre = new Point2D.Double(posX_centre, posY_centre);
+		}
+		return centre;
 	}
 
-	private boolean estSurMenu(int x, int y, int rayon) {
+	private Point2D estSurMenu(int x, int y, int rayon) {
 		boolean resultat;
-		int difX, difY;
-		difX = x - (2*pan.getSize().width/3+rayon);
-		difY = y - (5*pan.getSize().height/6-rayon);
+		Point2D centre = null;
+		double difX, difY;
+		
+		double posX_centre = (pan.getWidth()/3 + 3.5*rayon);
+		double posY_centre = (2*pan.getHeight()/3 - 0.5*rayon);
+		
+		difX = x - posX_centre;
+		difY = y - posY_centre;
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		return resultat;
+		if (resultat){
+			centre = new Point2D.Double(posX_centre, posY_centre);
+		}
+		return centre;
 	}
 	/*
 	 * FIN Methodes pour Panneau de type Boutons/Menus
@@ -281,25 +313,25 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
 			int x = e.getX();
 			int y = e.getY();
-			
-			if ( estSurUndo(x, y, rayon) ){
+			Point2D centre;
+			if ( (centre = estSurUndo(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Annuler");
-				Point centre = new Point(pan.getSize().width/4, pan.getSize().height/6 + rayon);
+//				Point centre = new Point(pan.getSize().width/4, pan.getSize().height/6 + rayon);
 				pan.setBoutonSurligne(centre);
 			}
-			else if ( estSurConseils(x, y, rayon) ){
+			else if ( (centre = estSurConseils(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Conseils");
-				Point centre = new Point(pan.getSize().width/2 + rayon, pan.getSize().height/6 + rayon);
+//				Point centre = new Point(pan.getSize().width/2 + rayon, pan.getSize().height/6 + rayon);
 				pan.setBoutonSurligne(centre);
 			}
-			else if ( estSurAide(x, y, rayon) ){
+			else if ( (centre = estSurAide(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Aide");
-				Point centre = new Point(pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
+//				centre = new Point(pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
 				pan.setBoutonSurligne(centre);
 			}
-			else if ( estSurMenu(x, y, rayon) ){
+			else if ( (centre = estSurMenu(x, y, rayon)) != null ){
 				System.out.println("passage sur le bouton Menu");
-				Point centre = new Point(2*pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
+//				centre = new Point(2*pan.getSize().width/3 + rayon, 5*pan.getSize().height/6 - rayon);
 				pan.setBoutonSurligne(centre);
 			}
 			else { 

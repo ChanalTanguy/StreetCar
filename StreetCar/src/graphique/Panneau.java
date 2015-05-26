@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
@@ -27,7 +28,7 @@ public class Panneau extends JPanel{
 	JTextArea message;
 	MainJoueur mainJoueur1, mainJoueur2;
 	int largeur, hauteur;
-	Point boutonSurligne = null;
+	Point2D boutonSurligne = null;
 	/*
 	 * FIN AJOUT Kevin
 	 */
@@ -119,7 +120,7 @@ public class Panneau extends JPanel{
 		return typeDeZone;
 	}
 	
-	public void setBoutonSurligne (Point bouton){
+	public void setBoutonSurligne (Point2D bouton){
 		boutonSurligne = bouton;
 	}
 	
@@ -156,6 +157,7 @@ public class Panneau extends JPanel{
 
 			int rayon = (largeur < hauteur ) ? largeur/8 : hauteur/8;
 			dispositionCarre(crayon, rayon);
+
 //			dispositionLosange(crayon, rayon);
 			
 			if (boutonSurligne != null){
@@ -389,66 +391,61 @@ public class Panneau extends JPanel{
 	
 	private void dessinerUndoCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawOval(largeur/4-rayon, hauteur/6, 2*rayon, 2*rayon);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/4-rayon, hauteur/6, 2*rayon, 2*rayon, this);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/4-rayon, hauteur/6, 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerConseilsCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawOval(largeur/2, hauteur/6, 2*rayon, 2*rayon);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2, hauteur/6, 2*rayon, 2*rayon, this);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), (largeur/4) + (2*rayon), hauteur/6, 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerHelpCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawOval(largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3-rayon, (2*hauteur/3)-(2*rayon), 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerMenuCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawOval(2*largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), 2*largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
+//		crayon.drawOval(2*largeur/3, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
+		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/3 + 2*rayon, (2*hauteur/3)-(2*rayon), 3*rayon, 3*rayon, this);
 	}
 
+/*
 	private void dispositionLosange (Graphics2D crayon, int rayon){
 		dessinerUndoLos(crayon, rayon);
 		dessinerConseilsLos(crayon, rayon);
 		dessinerHelpLos(crayon, rayon);
 		dessinerMenuLos(crayon, rayon);
 	}
-	
 	private void dessinerUndoLos (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval(largeur/2-rayon, hauteur/6, 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon, this);
 	}
-	
 	private void dessinerConseilsLos (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval(largeur/6, hauteur/2-rayon, 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), largeur/2-rayon, hauteur/6, 2*rayon, 2*rayon, this);
 	}
-	
 	private void dessinerHelpLos (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval((5*largeur/6)-(2*rayon), hauteur/2-rayon, 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), (5*largeur/6)-(2*rayon), hauteur/2-rayon, 2*rayon, 2*rayon, this);
 	}
-	
 	private void dessinerMenuLos (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
 		crayon.drawOval(largeur/2-rayon, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon);
 		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/2-rayon, (5*hauteur/6)-(2*rayon), 2*rayon, 2*rayon, this);
 	}
+*/
 	
 	/*
 	 * Methodes pour mettre en surbrillance le bouton sur
 	 * lequel le curseur se trouve s'il y en a un.
 	 */
-	private void surlignerBouton (Graphics2D crayon, Point centreBouton, int rayon){
+	private void surlignerBouton (Graphics2D crayon, Point2D centreBouton, int rayon){
 		crayon.setColor(Color.white);
-		crayon.drawOval(centreBouton.x-rayon, centreBouton.y-rayon, 2*rayon, 2*rayon);
+		crayon.drawOval((int)centreBouton.getX()-rayon, (int)centreBouton.getY()-rayon, 2*rayon, 2*rayon);
 	}
 	
 	/*
