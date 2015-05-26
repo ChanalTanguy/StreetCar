@@ -122,7 +122,46 @@ public class Plateau {
 
 			return valide;
 		} else 
-			return true;
+			return false;
+	}
+	
+	public String coupSimultaneValide(Tuile nouvTuile, Coup coup) {
+		if(coup.getType().equals(Constantes.Coup.placement)) {
+			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
+			// Et que les 4 cases adjacente ne font pas conflit
+
+			Point coord = coup.getCoordonnee();
+			int x = coord.x;
+			int y = coord.y;
+			Tuile ancTuile = getTuileAt(x,y);
+
+			if (ancTuile == null) 
+				return null; // Le moteur n'est pas sensé arriver ici : 
+						  // Si la tuile est vide le coup simultané n'a pas lieu d'être
+			
+			if (ancTuile.getPresenceArbres())
+				return null;
+
+			if (!nouvTuile.canReplace(ancTuile))
+				return null;
+			
+			int valide = 0;
+			
+			valide += (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))? 0 : 1;
+			valide += (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))? 0 : 2;
+			valide += (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))? 0 : 4;
+			valide += (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est))? 0 : 8;
+			
+			switch (valide) {
+			case 1 : return (getTuileAt(x,y+1).getPresenceArbres()) ? null : Constantes.Orientation.nord ;
+			case 2 : return (getTuileAt(x,y-1).getPresenceArbres()) ? null : Constantes.Orientation.sud  ;
+			case 4 : return (getTuileAt(x+1,y).getPresenceArbres()) ? null : Constantes.Orientation.ouest;
+			case 8 : return (getTuileAt(x-1,y).getPresenceArbres()) ? null : Constantes.Orientation.est  ;
+			default : return null;
+			}
+			
+		} else 
+			return null;
 	}
 
 	public Tuile getTuileAt(int x, int y) {
