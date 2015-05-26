@@ -77,19 +77,22 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			//Si le joueur selectionne une carte dans sa main
 			else if(estDansMain(piocheX, piocheY))
 			{ 	
-				pan.piocher = false;
-				pan.caseX = -1;
 				int numCarte = carteNo(piocheX);
 				int numMain = mainNo(piocheY);
-				
-				//j.coupSelectionTuile(numCarte);
-				
+								
 				if(mot.getcurrentPlayer() != numMain-1)
 				{
 					j.coupVoler(numCarte);
 				}
-				
+				else
+				{
+					pan.piocher = false;
+					pan.caseX = -1;
+
+					//j.coupSelectionTuile(numCarte);
+				}	
 				illuminerMain(numCarte, numMain);
+				
 			}
 			else if(boutonRotation(piocheX, piocheY))
 			{
@@ -107,7 +110,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			else {
 				pan.piocher = false;
 				//Pour voir si l'on a selectionné au préalable la main du joueur
-				if(pan.main != -1)
+				if(pan.main == mot.getcurrentPlayer()+1)
 				{
 					j.coupPlacerTuile(pan.carte, caseX, caseY);
 					pan.main = -1;
