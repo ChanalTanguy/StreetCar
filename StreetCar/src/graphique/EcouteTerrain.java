@@ -73,7 +73,14 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				j.coupPiocher();
 				illuminerPioche();
 			}
-			
+			/*
+			else if(boutonRotation(piocheX, piocheY))
+			{
+				//TODO faire la rotation de la case
+				System.out.println("Je suis passé par là");
+				j.coupTourner(carteNo(piocheX));
+			}
+			*/
 			//Si le joueur selectionne une carte dans sa main
 			else if(estDansMain(piocheX, piocheY))
 			{ 	
@@ -94,13 +101,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				illuminerMain(numCarte, numMain);
 				
 			}
-			else if(boutonRotation(piocheX, piocheY))
-			{
-				//TODO faire la rotation de la case
-				System.out.println("Je suis passé par là");
-				j.coupTourner(carteNo(piocheX));
-			}
-			
+						
 			//Si le joueur clique en dehors du plateau de jeu
 			else if(!estSurPlateau(caseX, caseY)){ 
 				caseX = -1; caseY = -1;
@@ -157,26 +158,21 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 		boolean b = false;
 		
-		int numMain = mainNo(piocheY);
-				
-		if(numMain == mot.getcurrentPlayer()+1)
+		if(pan.main != -1) //Cela veut dire que l'on avait sélectionné la main avant
 		{
-			System.out.println("Je suis passé par là");
-			
-			if(numMain == 1)
+			if(pan.main == 1) //bas
 			{
-				for(int i = 70; i<=370;i+=100)
+				System.out.println((pan.carte+1)*pan.depart + " " + piocheX);
+				if(piocheX >= (pan.carte*pan.depart+pan.ecart-10) && piocheX <= (pan.carte*pan.depart+pan.ecart+20) )
 				{
-					if(piocheX >= (pan.carte*pan.depart+pan.ecart-10) && piocheY >=10 && piocheX <=20 && piocheY <=20) b = true;
+					b = true;
 				}
 			}
-			else
+			
+			else //haut
 			{
-				for(int i = 70; i<=370;i+=100)
-				{
-					if(piocheX >= (pan.carte*pan.depart+pan.ecart-10) && piocheY >=810 && piocheX <=20 && piocheY <=820) b = true;
-				}
-			}			
+				
+			}
 		}
 		
 		return b;

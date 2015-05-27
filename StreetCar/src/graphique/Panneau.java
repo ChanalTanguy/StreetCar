@@ -297,12 +297,12 @@ public class Panneau extends JPanel{
 		drawable.setColor(Color.white);
 		if(main == 2){ 
 			drawable.drawRect(carte*depart+ecart, 20, tailleCase+20, tailleCase+20); 
-			drawable.drawImage(rotate, carte*depart+ecart-10, 20-10, 20, 20, this);
+			//drawable.drawImage(rotate, carte*depart+ecart-10, 20-10, 20, 20, this);
 		}
 		else 
 		{
 			drawable.drawRect(carte*depart+ecart, 820, tailleCase+20, tailleCase+20);
-			drawable.drawImage(rotate, carte*depart+ecart-10, 820-10, 20, 20, this);
+			//drawable.drawImage(rotate, carte*depart+ecart-10, 820-10, 20, 20, this);
 		}
 		
 	}
