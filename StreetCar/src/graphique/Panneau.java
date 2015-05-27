@@ -58,6 +58,10 @@ public class Panneau extends JPanel{
 	BufferedImage histogramme_haut;
 	BufferedImage histogramme_centre;
 	BufferedImage histogramme_bas;
+	BufferedImage bouton_Undo;
+	BufferedImage bouton_Conseil;
+	BufferedImage bouton_Aide;
+	BufferedImage bouton_Menu;
 	public int main = -1;
 	public int carte = -1;
 	public int caseX = -1;
@@ -200,6 +204,28 @@ public class Panneau extends JPanel{
 	public void desactiverContours() {
 		contoursDessines = false;
 		repaint();
+	}
+	
+	
+	
+	//change le bouton undo
+	public void changeImageUndo(String nomImage){
+		bouton_Undo = Constantes.Images.initBouton(nomImage);
+	}
+	
+	//change le bouton conseil
+	public void changeImageConseil(String nomImage){
+		bouton_Conseil = Constantes.Images.initBouton(nomImage);
+	}
+	
+	//change le bouton aide
+	public void changeImageAide(String nomImage){
+		bouton_Aide = Constantes.Images.initBouton(nomImage);
+	}
+		
+	//change le bouton menu
+	public void changeImageMenu(String nomImage){
+		bouton_Menu = Constantes.Images.initBouton(nomImage);
 	}
 	
 	/*
@@ -403,22 +429,23 @@ public class Panneau extends JPanel{
 	
 	private void dessinerUndoCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_undo.png"), largeur/4-rayon, hauteur/30, 3*rayon, 3*rayon, this);
+		crayon.drawImage(bouton_Undo, largeur/4-rayon, hauteur/30, 3*rayon, 3*rayon, this);
 	}
+
 	
 	private void dessinerConseilsCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_conseil.png"), (largeur/4) + (2*rayon), hauteur/30, 3*rayon, 3*rayon, this);
+		crayon.drawImage(bouton_Conseil, (largeur/4) + (2*rayon), hauteur/30, 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerHelpCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_aide.png"), largeur/3-rayon, hauteur/3, 3*rayon, 3*rayon, this);
+		crayon.drawImage(bouton_Aide, largeur/3-rayon, hauteur/3, 3*rayon, 3*rayon, this);
 	}
 	
 	private void dessinerMenuCar (Graphics2D crayon, int rayon){
 		crayon.setColor(Color.black);
-		crayon.drawImage(Constantes.Images.initBouton("bouton_menu.png"), largeur/3 + 2*rayon, hauteur/3, 3*rayon, 3*rayon, this);
+		crayon.drawImage(bouton_Menu, largeur/3 + 2*rayon, hauteur/3, 3*rayon, 3*rayon, this);
 	}
 
 /*
@@ -456,7 +483,7 @@ public class Panneau extends JPanel{
 	 */
 	private void surlignerBouton (Graphics2D crayon, Point2D centreBouton, int rayon){
 		crayon.setColor(Color.white);
-		crayon.drawOval((int)centreBouton.getX()-rayon, (int)centreBouton.getY()-rayon, 2*rayon, 2*rayon);
+		//crayon.drawOval((int)centreBouton.getX()-rayon, (int)centreBouton.getY()-rayon, 2*rayon, 2*rayon);
 	}
 	
 	/*
@@ -497,6 +524,10 @@ public class Panneau extends JPanel{
 		histogramme_haut = Constantes.Images.initBackground("histo_haut.png");
 		histogramme_centre = Constantes.Images.initBackground("histo_centre.png");
 		histogramme_bas = Constantes.Images.initBackground("histo_bas.png");
+		bouton_Undo = Constantes.Images.initBouton("bouton_undo.png");
+		bouton_Conseil = Constantes.Images.initBouton("bouton_conseil.png");
+		bouton_Aide = Constantes.Images.initBouton("bouton_aide.png");
+		bouton_Menu = Constantes.Images.initBouton("bouton_menu.png");
 		
 	}
 	

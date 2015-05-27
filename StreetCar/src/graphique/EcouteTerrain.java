@@ -256,7 +256,13 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
+			pan.changeImageUndo("bouton_undo_s.png");
+			pan.repaint();
 			centre = new Point2D.Double (posX_centre, posY_centre);
+		}
+		else{
+			pan.changeImageUndo("bouton_undo.png");
+			pan.repaint();
 		}
 		return centre;
 	}
@@ -274,7 +280,13 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
+			pan.changeImageConseil("bouton_conseil_s.png");
+			pan.repaint();
 			centre = new Point2D.Double (posX_centre, posY_centre);
+		}
+		else{
+			pan.changeImageConseil("bouton_conseil.png");
+			pan.repaint();
 		}
 		return centre;
 	}	
@@ -291,8 +303,14 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		difY = y - posY_centre;
 		
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		if (resultat){
-			centre = new Point2D.Double(posX_centre, posY_centre);
+		if (resultat) {
+			pan.changeImageAide("bouton_aide_s.png");
+			pan.repaint();
+			centre = new Point2D.Double (posX_centre, posY_centre);
+		}
+		else{
+			pan.changeImageAide("bouton_aide.png");
+			pan.repaint();
 		}
 		return centre;
 	}
@@ -308,8 +326,14 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		difX = x - posX_centre;
 		difY = y - posY_centre;
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
-		if (resultat){
-			centre = new Point2D.Double(posX_centre, posY_centre);
+		if (resultat) {
+			pan.changeImageMenu("bouton_menu_s.png");
+			pan.repaint();
+			centre = new Point2D.Double (posX_centre, posY_centre);
+		}
+		else{
+			pan.changeImageMenu("bouton_menu.png");
+			pan.repaint();
 		}
 		return centre;
 	}
