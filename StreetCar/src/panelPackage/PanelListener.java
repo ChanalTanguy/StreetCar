@@ -3,6 +3,8 @@ package panelPackage;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -32,12 +34,33 @@ public class PanelListener {
 		}
 	}
 	
+	public class SettingsButtonListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			MenuWindow win = new MenuWindow();
+			win.openSettingsWindow();
+		}
+		
+	}
+	
 	public class Quit implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
 		
+	}
+	
+	public class DebugCheckBoxListener implements ItemListener {
+
+		public void itemStateChanged(ItemEvent e) {
+			int change = e.getStateChange();
+			if (change == ItemEvent.SELECTED) {
+				
+		    } else if (change == ItemEvent.DESELECTED) {
+				
+		    }
+		}
 	}
 
 	public class ReturnButtonListener implements ActionListener {

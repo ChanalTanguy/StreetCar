@@ -55,7 +55,7 @@ public class MenuPanel extends JPanel {
 		addNewButton(zone2, "Sauvegarder la partie", null, null);
 		addNewButton(zone2, "Charger une partie", null, null);
 		addNewButton(zone2, "Défis", null, null);
-		addNewButton(zone2, "Options", null, null);
+		addNewButton(zone2, "Options", listener.new SettingsButtonListener(), null);
 		addNewButton(zone2, "Crédits", null, null);
 		addNewButton(zone3, "Quitter", listener.new QuitButtonListener(), null);
 				

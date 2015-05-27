@@ -38,4 +38,16 @@ public class MenuWindow {
 		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	
+	public void openSettingsWindow(){
+		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
+		SettingsPanel menu = new SettingsPanel(win);
+		win.setSize(500,180);
+		win.add(menu);
+		win.setResizable(false);
+		win.setLocationRelativeTo(null);
+		win.setVisible(true);
+		win.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+	}
+	
 }
