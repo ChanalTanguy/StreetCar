@@ -161,14 +161,9 @@ public class Tuile implements ActionsToken{
 	}
 	
 	public void setListeConnections (ArrayList<Connection> newListe){
-		if ( !listeConnections.isEmpty() ){
-			listeConnections.clear();
-		}
-		if ( listeConnections.addAll(newListe) ){
-			System.out.println("update de la liste ok");
-		}
-		else {
-			System.out.println("update refuse/annule");
+		listeConnections = new ArrayList<Connection>();
+		for (Connection c : newListe) {
+			listeConnections.add(c.clone());
 		}
 	}
 	
@@ -261,6 +256,8 @@ public class Tuile implements ActionsToken{
 		Tuile newTuile = new Tuile(immuable);
 		
 		newTuile.setListeConnections(listeConnections);
+		newTuile.setImage(imageTuile);
+		newTuile.setOrientation(orientation);
 		
 		return newTuile;
 	}
