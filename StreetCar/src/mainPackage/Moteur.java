@@ -162,10 +162,10 @@ public class Moteur {
 			System.out.println("Mauvais coup");
 			coupSimultane = null;
 		}
-		
-		players[currentPlayer].attendCoup();
 		panNotif.updateMessage(msg);
 		panJeu.repaint();
+		
+		players[currentPlayer].attendCoup();
 		
 	}
 

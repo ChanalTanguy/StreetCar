@@ -14,120 +14,120 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	Panneau pan;
 	Moteur mot;
-	
+
 	EcouteTerrain(Panneau referencePan)
 	{
 		pan = referencePan;
 	}
-	
+
 	EcouteTerrain(Panneau referencePannea, Moteur m)
 	{
 		pan = referencePannea;
 		mot = m;
 	}
-	
+
 	public void mousePressed(MouseEvent e) {
 		if (pan.getTypeZone() == Constantes.Panneau.plateau &&  mot.getTabPlayers()[mot.getcurrentPlayer()].getType() == 0){
 			//Joueur actif
 			JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
-		
+
 			int buttonDown = e.getButton();
-			
+
 			//Coordonéess
 			int x = e.getX();
 			int y = e.getY();
-			
+
 			//
 			int piocheX = x-pan.ecart;
 			int piocheY = y;
-			
+
 			int caseX = (x-pan.depart)/pan.tailleCase;
 			int caseY  = (y-pan.depart)/pan.tailleCase;
-			
+
 			if(buttonDown == MouseEvent.BUTTON3) {
-		        // Bouton DROIT enfoncé
+				// Bouton DROIT enfoncé
 				if(estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY)-1))
 				{ 	
 					pan.piocher = false;
 					pan.caseX = -1;
 					int numCarte = carteNo(piocheX);
 					int numMain = mainNo(piocheY);
-					
+
 					j.coupTourner(numCarte);
-										
+
 					illuminerMain(numCarte, numMain);
 					//illuminerPioche();
 				}
 				pan.repaint();
-				
-		    }
+
+			}
 			else if(buttonDown == MouseEvent.BUTTON1)
 			{
-			//Si le joueur tente de cliquer
-			if(estPioche(piocheX, piocheY))
-			{
-				pan.caseX = -1;
-				pan.main = -1;
-				j.coupPiocher();
-				illuminerPioche();
-			}
-			/*
+				//Si le joueur tente de cliquer
+				if(estPioche(piocheX, piocheY))
+				{
+					pan.caseX = -1;
+					pan.main = -1;
+					j.coupPiocher();
+					illuminerPioche();
+				}
+				/*
 			else if(boutonRotation(piocheX, piocheY))
 			{
 				//TODO faire la rotation de la case
 				System.out.println("Je suis passé par là");
 				j.coupTourner(carteNo(piocheX));
 			}
-			*/
-			//Si le joueur selectionne une carte dans sa main
-			else if(estDansMain(piocheX, piocheY))
-			{ 	
-				int numCarte = carteNo(piocheX);
-				int numMain = mainNo(piocheY);
-								
-				if(mot.getcurrentPlayer() != numMain-1)
-				{
-					j.coupVoler(numCarte);
+				 */
+				//Si le joueur selectionne une carte dans sa main
+				else if(estDansMain(piocheX, piocheY))
+				{ 	
+					int numCarte = carteNo(piocheX);
+					int numMain = mainNo(piocheY);
+
+					if(mot.getcurrentPlayer() != numMain-1)
+					{
+						j.coupVoler(numCarte);
+					}
+					else
+					{
+						pan.piocher = false;
+						pan.caseX = -1;
+
+						//j.coupSelectionTuile(numCarte);
+					}	
+					illuminerMain(numCarte, numMain);
+
 				}
-				else
-				{
+
+				//Si le joueur clique en dehors du plateau de jeu
+				else if(!estSurPlateau(caseX, caseY)){ 
+					caseX = -1; caseY = -1;
+					pan.main = -1;
 					pan.piocher = false;
 					pan.caseX = -1;
-
-					//j.coupSelectionTuile(numCarte);
-				}	
-				illuminerMain(numCarte, numMain);
-				
-			}
-						
-			//Si le joueur clique en dehors du plateau de jeu
-			else if(!estSurPlateau(caseX, caseY)){ 
-				caseX = -1; caseY = -1;
-				pan.main = -1;
-				pan.piocher = false;
-				pan.caseX = -1;
-			}
-			else {
-				pan.piocher = false;
-				//Pour voir si l'on a selectionné au préalable la main du joueur
-				if(pan.main == mot.getcurrentPlayer()+1)
-				{
-					j.coupPlacerTuile(pan.carte, caseX, caseY);
-					pan.main = -1;
 				}
-				else 
-				{
-					illuminerCase(caseX, caseY);
+				else {
+					pan.piocher = false;
+					//Pour voir si l'on a selectionné au préalable la main du joueur
+					if(pan.main == mot.getcurrentPlayer()+1)
+					{
+						j.coupPlacerTuile(pan.carte, caseX, caseY);
+						pan.main = -1;
+					}
+					else 
+					{
+						illuminerCase(caseX, caseY);
+					}
 				}
+				pan.repaint();
 			}
-			pan.repaint();
-		}
 		}
 		else if (pan.getTypeZone() == Constantes.Panneau.menuBoutons) {
 			int rayon = (pan.getSize().width < pan.getSize().height ) ? pan.getSize().width/8 : pan.getSize().height/8;
 			int x = e.getX();
 			int y = e.getY();
-			
+
 			if ( estSurUndo(x, y, rayon) != null){
 				System.out.println("clic sur le bouton Annuler");
 			}
@@ -145,17 +145,17 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				pop.showMessageDialog(null, "bonjour", "Titre", JOptionPane.INFORMATION_MESSAGE);*/
 				MenuWindow menu = new MenuWindow();
 				menu.openMenuWindow();
-				
+
 			}
 			else { System.out.println("clic vide"); }
 		}
-		
+
 	}
 
 	private boolean boutonRotation(int piocheX, int piocheY) {
 		// TODO Auto-generated method stub
 		boolean b = false;
-		
+
 		if(pan.main != -1) //Cela veut dire que l'on avait sélectionné la main avant
 		{
 			if(pan.main == 1) //bas
@@ -166,13 +166,13 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 					b = true;
 				}
 			}
-			
+
 			else //haut
 			{
-				
+
 			}
 		}
-		
+
 		return b;
 	}
 
@@ -188,7 +188,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		pan.main = numMain;
 		pan.carte = numCarte;		
 	}
-	
+
 	private void illuminerCase(int x, int y) {
 		pan.caseX = x;
 		pan.caseY = y;
@@ -207,7 +207,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		{
 			if(piocheX>i && piocheX<i+70) return i/100;
 		}
-		
+
 		return -1;
 	}
 
@@ -215,7 +215,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	private boolean estDansMain(int piocheX, int piocheY) {
 		boolean b = true;	
 		int numMain = mainNo(piocheY);
-		
+
 		if(piocheX>0 && piocheX<470 && numMain != -1)  //Main quelquonque
 		{
 			for(int i = 70; i<=370;i+=100)
@@ -223,19 +223,19 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				if(piocheX>=i && piocheX<=i+30) b = false;
 			}
 		}
-		
+
 		else b = false;
-			
+
 		return b;
 	}
 
 	//Fonction principale déterminant si l'on se trouve sur le plateau
 	private boolean estSurPlateau(int caseX, int caseY) {
 		boolean b = true;
-		
+
 		if(caseX>pan.nbCases || caseY>pan.nbCases){ b = false; }
 		if(caseX<=0 || caseY<=0){ b = false; }
-			
+
 		return b;
 	}
 
@@ -248,10 +248,10 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		double difX, difY;
 		double posX_centre = pan.getWidth()/4 + 0.5*rayon;
 		double posY_centre = pan.getHeight()/30 + 1.5*rayon;
-		
+
 		difX = x - posX_centre;
 		difY = y - posY_centre;
-		
+
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
 			pan.changeImageUndo("bouton_undo_s.png");
@@ -264,18 +264,18 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		}
 		return centre;
 	}
-	
+
 	private Point2D estSurConseils(int x, int y, int rayon) {
 		boolean resultat;
 		Point2D centre = null;
 		double difX, difY;
-		
+
 		double posX_centre = pan.getWidth()/4 + 3.5*rayon;
 		double posY_centre = pan.getHeight()/30 + 1.5*rayon;
 
 		difX = x - posX_centre;
 		difY = y - posY_centre;
-		
+
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
 			pan.changeImageConseil("bouton_conseil_s.png");
@@ -296,10 +296,10 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 		double posX_centre = pan.getWidth()/3 + 0.5*rayon;
 		double posY_centre = pan.getHeight()/3 + 1.5*rayon;
-		
+
 		difX = x - posX_centre;
 		difY = y - posY_centre;
-		
+
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
 		if (resultat) {
 			pan.changeImageAide("bouton_aide_s.png");
@@ -317,10 +317,10 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		boolean resultat;
 		Point2D centre = null;
 		double difX, difY;
-		
+
 		double posX_centre = pan.getWidth()/3 + 3.5*rayon;
 		double posY_centre = pan.getHeight()/3 + 1.5*rayon;
-		
+
 		difX = x - posX_centre;
 		difY = y - posY_centre;
 		resultat = ( (difX*difX + difY*difY) <= rayon*rayon );
@@ -338,9 +338,9 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	/*
 	 * FIN Methodes pour Panneau de type Boutons/Menus
 	 */
-	
+
 	public void mouseEntered(MouseEvent e) {}
-	
+
 	public void mouseExited(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}

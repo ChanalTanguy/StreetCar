@@ -14,15 +14,11 @@ public class JoueurIA extends Joueur {
 	public JoueurIA(Moteur m, int ligne) {
 		super(new MainJoueur(), ligne, 1);
 		ecouteurBoucle = new EcouteurBoucle(m, new IAFacile(m, this));
-		t = new Timer(50, ecouteurBoucle);
+		t = new Timer(450, ecouteurBoucle);
 	}
 	
 	public void attendCoup() {
-		ecouteurBoucle.enable();try {
-			Thread.sleep(450);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		ecouteurBoucle.enable();
 		if (!t.isRunning())
 			t.start();
 	}
