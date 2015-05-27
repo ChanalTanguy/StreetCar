@@ -80,4 +80,12 @@ public class Pioche extends ArrayList<Tuile>{
 	}
 */	
 	
+	public Pioche clone (){
+		Pioche renvoi = new Pioche();
+		for (int indexTuile = 0; indexTuile < this.size(); indexTuile++){
+			renvoi.add(this.get(indexTuile).clone());
+		}
+		return renvoi;
+	}
+	
 }
