@@ -18,8 +18,10 @@ public class ConfirmWindow extends JDialog {
 	
 	ActionListener actionYES;
 	ActionListener actionNO;
+	String message;
 	
-	public ConfirmWindow(ActionListener actionYES, ActionListener actionNO){
+	public ConfirmWindow(String msg, ActionListener actionYES, ActionListener actionNO){
+		this.message = msg;
 		this.actionYES = actionYES;
 		this.actionNO = actionNO;
 	}
@@ -49,7 +51,7 @@ public class ConfirmWindow extends JDialog {
 		JPanel zone1 = newZone(250, 40);
 		JPanel zone2 = newZone(200, 40);
 		
-		JLabel label = new JLabel("Êtes vous sûr ?", SwingConstants.CENTER);
+		JLabel label = new JLabel(message, SwingConstants.CENTER);
 		
 		zone1.add(label);
 		addNewButton(zone2, "OUI", BorderLayout.WEST, actionYES, null);

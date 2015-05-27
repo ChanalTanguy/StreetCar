@@ -47,14 +47,14 @@ public class MenuPanel extends JPanel {
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
 		
-		if(parentPanel != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(this, parentPanel),null);}
-		if(parentDialog != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentDialog), null);}
-		if(parentFrame != null){addNewButton(zone1, "Retour", listener.new ReturnButtonListener(parentFrame), null);}
+		if(parentPanel != null){addNewButton(zone1, "Reprendre", listener.new ReturnButtonListener(this, parentPanel),null);}
+		if(parentDialog != null){addNewButton(zone1, "Reprendre", listener.new ReturnButtonListener(parentDialog), null);}
+		if(parentFrame != null){addNewButton(zone1, "Reprendre", listener.new ReturnButtonListener(parentFrame), null);}
 
 		addNewButton(zone2, "Nouvelle partie", listener.new ConfigureNewGameButtonListener(), null);
 		addNewButton(zone2, "Sauvegarder la partie", null, null);
 		addNewButton(zone2, "Charger une partie", null, null);
-		addNewButton(zone2, "Succès", null, null);
+		addNewButton(zone2, "Défis", null, null);
 		addNewButton(zone2, "Options", null, null);
 		addNewButton(zone2, "Crédits", null, null);
 		addNewButton(zone3, "Quitter", listener.new QuitButtonListener(), null);
