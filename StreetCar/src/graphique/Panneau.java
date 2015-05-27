@@ -3,7 +3,6 @@ package graphique;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
@@ -26,7 +25,6 @@ public class Panneau extends JPanel{
 	 * AJOUT Kevin
 	 */
 	JTextArea message;
-	MainJoueur mainJoueur1, mainJoueur2;
 	int largeur, hauteur;
 	Point2D menuBoutonsurligne = null;
 	/*
@@ -91,7 +89,6 @@ public class Panneau extends JPanel{
 		typeDeZone = numeroDeZone;
 		contoursDessines = false;
 		EcouteTerrain ecouteur = new EcouteTerrain(this);
-//		addMouseListener(new EcouteTerrain(this));
 		addMouseListener(ecouteur);
 		if (numeroDeZone == Constantes.Panneau.notifications){
 			message = new JTextArea("Notifications");
@@ -114,8 +111,6 @@ public class Panneau extends JPanel{
 		contoursDessines = false;
 		//On est sensé créer un mouse listener par joueur, à modifier
 		addMouseListener(new EcouteTerrain(this, m));
-		mainJoueur1 = m.getTabPlayers()[0].getMain();
-		mainJoueur2 = m.getTabPlayers()[1].getMain();
 		initImage();
 	}
 	
@@ -153,8 +148,8 @@ public class Panneau extends JPanel{
 			
 			dessinerContenuPlateau(crayon, mot.getPlateau());
 			
-			dessinerMain1(crayon, mainJoueur1);
-			dessinerMain2(crayon, mainJoueur2);
+			dessinerMain1(crayon, mot.getTabPlayers()[0].getMain());
+			dessinerMain2(crayon, mot.getTabPlayers()[1].getMain());
 					
 			if(main != -1){ colorMain(crayon); }
 			if(caseX != -1){ colorCase(crayon); }

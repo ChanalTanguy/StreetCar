@@ -31,7 +31,6 @@ public class Fenetre extends JFrame{
 		}
 		catch (IOException e) { e.printStackTrace();}	
 		
-//		setSize(largeur, hauteur);
 		setSize(largeur, hauteur);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -45,6 +44,7 @@ public class Fenetre extends JFrame{
 		JPanel regroupementLateral = new JPanel();
 		Panneau notifications = new Panneau (Color.cyan, "notifications", Constantes.Panneau.notifications);
 		m.setPanNotif(notifications);
+		m.setPanJeu(zonePlateau);
 		
 		JPanel panelHistorique = new JPanel();
 		Panneau histo_ouest = new Panneau (Color.gray, "histo_ouest", Constantes.Panneau.histo_ouest);
@@ -88,14 +88,6 @@ public class Fenetre extends JFrame{
 		regroupementHistorique.add(historique_central, BorderLayout.CENTER);
 		regroupementHistorique.add(histo_sud, BorderLayout.SOUTH);
 		
-		Bouton but_centre = new Bouton("bouton_centre", notifications);
-		
-		JPanel pan_est = new JPanel();
-		JPanel pan_ouest = new JPanel();
-		JPanel pan_centre = new JPanel();
-		
-//		System.out.println("pan_centre.size() : " + pan_centre.getPreferredSize());
-
 		regroupementLateral.setLayout(new BorderLayout());
 		regroupementLateral.add(notifications, BorderLayout.NORTH);
 		regroupementLateral.add(panelHistorique, BorderLayout.CENTER);
@@ -105,6 +97,6 @@ public class Fenetre extends JFrame{
 		add(regroupementLateral, BorderLayout.EAST);
 		
 		pack();
-		
+		m.start();
 	}
 }

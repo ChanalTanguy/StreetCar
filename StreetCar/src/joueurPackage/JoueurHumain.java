@@ -1,17 +1,14 @@
 package joueurPackage;
 
-import graphique.EcouteTerrain;
-import constantesPackages.Constantes.Plateau;
 import mainPackage.Moteur;
 
 public class JoueurHumain extends Joueur {
 
-	private EcouteTerrain ecouteurPlateau;
 	private boolean enabled;
 	Moteur moteur;
 	
 	public JoueurHumain(Moteur m, int ligne) {
-		super(new MainJoueur(), ligne);
+		super(new MainJoueur(), ligne, 0);
 		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;

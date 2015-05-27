@@ -14,6 +14,7 @@ public class Moteur {
 	private int nbActions;
 	private Pioche pioche;
 	private Panneau panNotif;
+	private Panneau panJeu;
 	private Coup coupSimultane;
 	
 	
@@ -28,7 +29,6 @@ public class Moteur {
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 4;
-		players[currentPlayer].attendCoup();
 		pioche = new Pioche();
 		pioche.initialisation();
 		pioche.shuffle();
@@ -61,6 +61,13 @@ public class Moteur {
 		panNotif = p;
 	}
 	
+	public void setPanJeu (Panneau p){
+		panJeu = p;
+	}
+	
+	public void start (){
+		players[currentPlayer].attendCoup();
+	}
 	
 	/*
 	 * Methodes du Moteur
@@ -158,6 +165,7 @@ public class Moteur {
 		
 		players[currentPlayer].attendCoup();
 		panNotif.updateMessage(msg);
+		panJeu.repaint();
 		
 	}
 
@@ -177,7 +185,7 @@ public class Moteur {
 				return (players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
 						(plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
 			} else if (c.getType().equals(Constantes.Coup.rotation)) {
-				return true; // Rien d'autre à vérifier
+				return ( players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null ); // Rien d'autre à vérifier
 			} else
 				return false;
 		}

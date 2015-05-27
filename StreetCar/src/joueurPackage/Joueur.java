@@ -8,10 +8,12 @@ public abstract class Joueur {
 	MainJoueur main;
 	int phase = 1;
 	int ligne;
+	int typeJoueur;
 	
-	public Joueur(MainJoueur m, int ligne) {
+	public Joueur(MainJoueur m, int ligne, int type) {
 		main = m;
 		this.ligne = ligne;
+		typeJoueur = type;
 	}
 	
 	public abstract void attendCoup();
@@ -26,6 +28,10 @@ public abstract class Joueur {
 	
 	public int getLigne() {
 		return ligne;
+	}
+	
+	public int getType (){
+		return typeJoueur;
 	}
 	
 	/**

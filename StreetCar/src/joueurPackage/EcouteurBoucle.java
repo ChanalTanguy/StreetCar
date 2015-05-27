@@ -1,6 +1,5 @@
 package joueurPackage;
 
-import iaPackage.IAFacile;
 import iaPackage.InterfaceIA;
 
 import java.awt.event.ActionEvent;
@@ -27,13 +26,13 @@ public class EcouteurBoucle implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (enabled) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(750);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			Coup c = ia.getCoup();
-			moteur.jouerCoup(c);
 			enabled = false;
+			moteur.jouerCoup(c);
 		}
 	}
 

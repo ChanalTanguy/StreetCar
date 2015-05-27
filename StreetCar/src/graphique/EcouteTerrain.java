@@ -1,11 +1,9 @@
 package graphique;
 
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
@@ -29,7 +27,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	}
 	
 	public void mousePressed(MouseEvent e) {
-		if (pan.getTypeZone() == Constantes.Panneau.plateau){
+		if (pan.getTypeZone() == Constantes.Panneau.plateau &&  mot.getTabPlayers()[mot.getcurrentPlayer()].getType() == 0){
 			//Joueur actif
 			JoueurHumain j = (JoueurHumain) mot.getTabPlayers()[mot.getcurrentPlayer()];
 		
