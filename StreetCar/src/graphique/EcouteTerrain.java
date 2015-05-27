@@ -218,7 +218,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 		boolean b = true;	
 		int numMain = mainNo(piocheY);
 		
-		if(piocheX>=0 && piocheX<470 && numMain != -1)  //Main quelquonque
+		if(piocheX>0 && piocheX<470 && numMain != -1)  //Main quelquonque
 		{
 			for(int i = 70; i<=370;i+=100)
 			{
