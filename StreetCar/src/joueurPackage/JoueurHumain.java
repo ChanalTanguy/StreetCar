@@ -54,4 +54,11 @@ public class JoueurHumain extends Joueur {
 			moteur.jouerCoup(Coup.newRotation(tuile));
 	}
 	
+	public Joueur clone() {
+		JoueurHumain j = new JoueurHumain(moteur, this.ligne);
+		j.main = this.main.clone();
+		j.phase = this.phase;
+		
+		return j;
+	}
 }
