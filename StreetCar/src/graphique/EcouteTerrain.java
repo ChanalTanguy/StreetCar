@@ -129,15 +129,19 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			int y = e.getY();
 
 			if ( estSurUndo(x, y, rayon) != null){
+				pan.changeImageUndo("bouton_undo_a.png");
 				System.out.println("clic sur le bouton Annuler");
 			}
 			else if ( estSurConseils(x, y, rayon) != null){
+				pan.changeImageConseil("bouton_conseil_a.png");
 				System.out.println("clic sur le bouton Conseils");
 			}
 			else if ( estSurAide(x, y, rayon) != null){
+				pan.changeImageAide("bouton_aide_a.png");
 				System.out.println("clic sur le bouton Aide");
 			}
 			else if ( estSurMenu(x, y, rayon) != null){
+				pan.changeImageMenu("bouton_menu_a.png");
 				System.out.println("clic sur le bouton Menu");
 				/*JOptionPane pop = new JOptionPane();
 				pop.setSize(200, 200);
@@ -149,6 +153,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 			}
 			else { System.out.println("clic vide"); }
 		}
+		pan.repaint();
 
 	}
 
@@ -343,8 +348,17 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 
 	public void mouseExited(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
 	public void mouseDragged(MouseEvent e) {}
+	
+	
+	public void mouseReleased(MouseEvent e) {
+	//implementation des images de bouton cliqué	
+		pan.changeImageUndo("bouton_undo.png");
+		pan.changeImageMenu("bouton_menu.png");
+		pan.changeImageAide("bouton_aide.png");
+		pan.changeImageConseil("bouton_conseil.png");
+		pan.repaint();
+	}
 
 	public void mouseMoved(MouseEvent e) {
 		if (pan.getTypeZone() == Constantes.Panneau.menuBoutons) {
