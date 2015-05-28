@@ -222,7 +222,9 @@ public class Plateau {
 		Plateau p = new Plateau();
 		for (int i = 0; i < Constantes.Dimensions.dimensionPlateau; i++) {
 			for (int j = 0; j < Constantes.Dimensions.dimensionPlateau; j++) {
-				p.setTuileAt(i, j, getTuileAt(i,j).clone());
+				Tuile t = getTuileAt(i,j);
+				if (t != null)
+					p.setTuileAt(i, j, t.clone());
 			}
 		}
 		return p;
