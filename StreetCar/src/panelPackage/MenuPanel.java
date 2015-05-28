@@ -18,16 +18,13 @@ import javax.swing.JPanel;
 
 import constantesPackages.Constantes;
 
-public class MenuPanel extends JPanel {
+public class MenuPanel extends InterfacePanel {
 
 	JDialog parentDialog;
 	JFrame parentFrame;
 	JPanel parentPanel;
 
 	PanelListener listener = new PanelListener();
-	
-	double width = Constantes.Resolution.width;
-	double height = Constantes.Resolution.height;
 
 	public MenuPanel(JDialog parent){
 		parentDialog = parent;
@@ -93,12 +90,6 @@ public class MenuPanel extends JPanel {
 			e.printStackTrace();
 		}
 		return img;
-	}
-
-	private Dimension setNewDimension(double w, double h) {
-		double newHeight = height/(1024.0/h);
-		double newWidth = (newHeight*w)/h;
-		return new Dimension((int)newWidth, (int)newHeight);
 	}
 	
 }

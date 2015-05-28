@@ -18,10 +18,7 @@ import javax.swing.JPanel;
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 
-public class SettingsPanel extends JPanel {
-	
-	double width = Constantes.Resolution.width;
-	double height = Constantes.Resolution.height;
+public class SettingsPanel extends InterfacePanel {
 
 	JDialog parentDialog;
 	JFrame parentFrame;
@@ -91,12 +88,6 @@ public class SettingsPanel extends JPanel {
 	    box.setSelected(selected);
 	    box.addItemListener(action);
 		panel.add(box);
-	}
-	
-	private Dimension setNewDimension(double w, double h) {
-		double newHeight = height/(1024.0/h);
-		double newWidth = (newHeight*w)/h;
-		return new Dimension((int)newWidth, (int)newHeight);
 	}
 
 }
