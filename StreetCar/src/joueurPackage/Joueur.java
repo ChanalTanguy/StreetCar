@@ -80,4 +80,6 @@ public abstract class Joueur {
 			main.ajouterCarte(pioche.remove(0));
 	}
 	
+	public abstract Joueur clone();
+	
 }
