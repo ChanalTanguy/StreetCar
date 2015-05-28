@@ -36,8 +36,11 @@ public class Panneau extends JPanel{
 	 */
 	int depart = 100;
 	int tailleCase = 50;
+	int tailleCaseMain = 70;
 	int ecart = 220;
 	int nbCases = 12;
+	int mainHaut = 20;
+	int mainBas = 820;
 	BufferedImage fond;
 	BufferedImage plateau ;
 	BufferedImage tuile001;
@@ -309,7 +312,7 @@ public class Panneau extends JPanel{
 	private void colorCase(Graphics2D drawable) {
 		main = -1;
 		drawable.setColor(Color.white);
-		drawable.drawRect(caseX*50+depart, caseY*50+depart, 50,50);		
+		drawable.drawRect(caseX*tailleCase+depart, caseY*tailleCase+depart, tailleCase,tailleCase);		
 
 	}
 
@@ -317,19 +320,19 @@ public class Panneau extends JPanel{
 		caseX = -1;
 		drawable.setColor(Color.white);
 		if(main == 2){ 
-			drawable.drawRect(carte*depart+ecart, 20, tailleCase+20, tailleCase+20); 
+			drawable.drawRect(carte*depart+ecart, mainHaut, tailleCaseMain, tailleCaseMain); 
 			//drawable.drawImage(rotate, carte*depart+ecart-10, 20-10, 20, 20, this);
 		}
 		else 
 		{
-			drawable.drawRect(carte*depart+ecart, 820, tailleCase+20, tailleCase+20);
+			drawable.drawRect(carte*depart+ecart, mainBas, tailleCaseMain, tailleCaseMain);
 			//drawable.drawImage(rotate, carte*depart+ecart-10, 820-10, 20, 20, this);
 		}
 		
 	}
 
 	private void dessinerPlateau(Graphics2D drawable) {
-		drawable.drawImage(plateau, depart, depart, depart+12*tailleCase,depart+12*tailleCase, this);
+		drawable.drawImage(plateau, depart, depart, depart+nbCases*tailleCase,depart+nbCases*tailleCase, this);
 		
 	}
 
@@ -371,7 +374,7 @@ public class Panneau extends JPanel{
 						angle = 0;
 						break;
 				}
-				rotation(drawable,img,angle,i*depart+ecart, 820, tailleCase+20);
+				rotation(drawable,img,angle,i*depart+ecart, mainBas, tailleCaseMain);
 			}		
 		}
 	}
@@ -406,7 +409,7 @@ public class Panneau extends JPanel{
 						break;
 				}
 				
-				rotation(drawable,img,angle,i*depart+ecart, 20, tailleCase+20);
+				rotation(drawable,img,angle,i*depart+ecart, mainHaut, tailleCaseMain);
 			}
 		}
 	}
