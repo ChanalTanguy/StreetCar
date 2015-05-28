@@ -33,15 +33,6 @@ public class Coup {
 	}
 	
 	/**
-	 * Crée un coup Rotation
-	 * @param tuile
-	 * @return
-	 */
-	static public Coup newRotation(int tuile) {
-		return new Coup(Constantes.Coup.rotation,tuile,null);
-	}
-	
-	/**
 	 * Crée un coup Placement
 	 * @param tuile
 	 * @return

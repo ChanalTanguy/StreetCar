@@ -54,7 +54,6 @@ public class Constantes {
 		public static final String pioche = "Pioche";
 		public static final String vol = "Vol";
 		public static final String placement = "Placement";
-		public static final String rotation = "Rotation";
 	}
 	
 	public static class Images {

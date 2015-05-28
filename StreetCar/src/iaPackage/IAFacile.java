@@ -1,6 +1,5 @@
 package iaPackage;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import joueurPackage.Coup;
@@ -14,12 +13,10 @@ import constantesPackages.Constantes;
 public class IAFacile implements InterfaceIA {
 
 	Moteur moteur;
-	ArrayList<Coup> listeCoup;
 	JoueurIA joueur;
 	
 	public IAFacile(Moteur moteur, JoueurIA joueurIA) {
 		this.moteur = moteur;
-		listeCoup = new ArrayList<Coup>();
 		joueur = joueurIA;
 	}
 	
@@ -27,9 +24,6 @@ public class IAFacile implements InterfaceIA {
 	public Coup getCoup() {
 		if(moteur.getNbActions()<3)
 			return Coup.newPioche();
-		
-		if (!listeCoup.isEmpty())
-			return listeCoup.remove(0);
 		
 		Coup coup;
 		int nbRot;
@@ -54,10 +48,9 @@ public class IAFacile implements InterfaceIA {
 		} while (!p.coupValide(t, coup));
 		
 		for (int i = 0; i < nbRot; i++) {
-			listeCoup.add(Coup.newRotation(coup.getTuile()));
+			joueur.tournerTuileMain(coup.getTuile());
 		}
-		listeCoup.add(coup);
-		return listeCoup.remove(0);
+		return coup;
 		
 	}
 

@@ -51,7 +51,7 @@ public class JoueurHumain extends Joueur {
 	 */
 	public void coupTourner(int tuile) {
 		if (enabled)
-			moteur.jouerCoup(Coup.newRotation(tuile));
+			tournerTuileMain(tuile);
 	}
 	
 	public Joueur clone() {

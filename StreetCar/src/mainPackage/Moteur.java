@@ -86,9 +86,6 @@ public class Moteur {
 				players[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
 				nbActions--;
 				coupSimultane = null;
-			} else if (c.getType().equals(Constantes.Coup.rotation)) {
-				players[currentPlayer].tournerTuileMain(c.getTuile());
-				// La rotation est une action gratuite
 			} else if (c.getType().equals(Constantes.Coup.vol)) {
 				players[currentPlayer].volerTuile(c.getTuile(), players[(currentPlayer+1)%2]);
 				nbActions--;
@@ -184,8 +181,6 @@ public class Moteur {
 					// Vérifie si le joueur prend une tuile existante et vérifie si le placement est valide
 				return (players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
 						(plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
-			} else if (c.getType().equals(Constantes.Coup.rotation)) {
-				return ( players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null ); // Rien d'autre à vérifier
 			} else
 				return false;
 		}
@@ -198,8 +193,6 @@ public class Moteur {
 					&&	 players[(currentPlayer+1)%2].getMain().getTuileAt(c.getTuile()) != null);
 			} else if (c.getType().equals(Constantes.Coup.pioche)) {
 				return true; // Rien d'autre à vérifier (Quand la main est pleine, piocher mettra fin au tour)
-			} else if (c.getType().equals(Constantes.Coup.rotation)) {
-				return true; // Rien d'autre à vérifier
 			} else
 				return false;
 		}
