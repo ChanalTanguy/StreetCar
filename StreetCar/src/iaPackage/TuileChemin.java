@@ -4,10 +4,10 @@ import java.awt.Point;
 
 class TuileChemin {
 
-	Point position;
-	String direction;
-	int priority;
-	public int heuristique;
+	private Point position;
+	private String direction;
+	private int priority;
+	private int heuristique;
 	
 	public TuileChemin(Point po, String d, int pr, int h) {
 		position = po;
@@ -16,4 +16,19 @@ class TuileChemin {
 		heuristique = h;
 	}
 	
+	Point getPosition() {
+		return position;
+	}
+	
+	String getDirection() {
+		return direction;
+	}
+	
+	int getPriority() {
+		return priority;
+	}
+	
+	int getHeuristique() {
+		return heuristique;
+	}
 }
