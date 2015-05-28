@@ -23,7 +23,7 @@ public class JoueurIA extends Joueur {
 			t.start();
 	}
 	
-	public JoueurIA clone() {
+	public Joueur clone() {
 
 		JoueurIA j = new JoueurIA(ecouteurBoucle.moteur, this.ligne);
 		j.main = this.main.clone();
