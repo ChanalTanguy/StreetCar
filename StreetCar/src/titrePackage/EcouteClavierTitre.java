@@ -27,16 +27,16 @@ public class EcouteClavierTitre implements KeyListener {
 			switch (e.getKeyCode())
 			{
 				case KeyEvent.VK_UP:
-					if(pan.selectionné == 1) pan.selectionné = 10;
-					else if(pan.selectionné == 10) pan.selectionné = 5;
-					else pan.selectionné = (pan.selectionné-1)%6;
+					if(pan.selectionner == 1) pan.selectionner = 10;
+					else if(pan.selectionner == 10) pan.selectionner = 5;
+					else pan.selectionner = (pan.selectionner-1)%6;
 					break;
 				case KeyEvent.VK_DOWN:
-					if(pan.selectionné == 5) pan.selectionné = 10;
-					else pan.selectionné = pan.selectionné%5+1;
+					if(pan.selectionner == 5) pan.selectionner = 10;
+					else pan.selectionner = pan.selectionner%5+1;
 					break;
 				case KeyEvent.VK_ENTER:
-					if(pan.selectionné != -1) effectuerAction(pan.selectionné);
+					if(pan.selectionner != -1) effectuerAction(pan.selectionner);
 					break;
 			}
 			pan.repaint();
@@ -44,15 +44,16 @@ public class EcouteClavierTitre implements KeyListener {
 		
 	}
 
-	private void effectuerAction(int selectionné) {
+	private void effectuerAction(int selectionner) {
 		
-		switch(selectionné)
+		switch(selectionner)
 		{
 			case 1 : //Nouvelle partie
+				fen.fermeture();
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
 				f.disposition(m, f.getSize());
-				fen.fermeture();
+
 				break;
 			case 2 : //Charger partie
 				
