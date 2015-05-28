@@ -245,7 +245,7 @@ public class Panneau extends JPanel{
 	}
 
 	private void dessinerPioche(Graphics2D drawable) {	
-		drawable.drawImage(pioche, 3*depart+2*ecart, 820, tailleCase+70, tailleCase+70, this);
+		drawable.drawImage(pioche, 3*depart+2*ecart-50, 820-50, tailleCase+70, tailleCase+70, this);
 	}
 
 	private void dessinerContenuPlateau(Graphics2D crayon, Plateau plateau) {
