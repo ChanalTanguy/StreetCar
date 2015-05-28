@@ -87,6 +87,7 @@ public class Plateau {
 			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
 			setTuileAt(13, 11-(4*i), t);
 		}
+		
 	}
 	
 	public Tuile[][] getPlateau (){
