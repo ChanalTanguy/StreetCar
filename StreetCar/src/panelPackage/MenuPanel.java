@@ -19,15 +19,15 @@ import javax.swing.JPanel;
 import constantesPackages.Constantes;
 
 public class MenuPanel extends JPanel {
-	
-	double width = Constantes.Resolution.width;
-	double height = Constantes.Resolution.height;
 
 	JDialog parentDialog;
 	JFrame parentFrame;
 	JPanel parentPanel;
 
 	PanelListener listener = new PanelListener();
+	
+	double width = Constantes.Resolution.width;
+	double height = Constantes.Resolution.height;
 
 	public MenuPanel(JDialog parent){
 		parentDialog = parent;
@@ -72,13 +72,13 @@ public class MenuPanel extends JPanel {
 		FlowLayout layout = new FlowLayout();
 		layout.setVgap(0);
 		panel.setLayout(layout);
-		panel.setPreferredSize(new Dimension((int)(width/3.2),(int)(height/13.65)*size+(int)(height/51.2)));
+		panel.setPreferredSize(setNewDimension(400,75*size+20));
 		return panel;
 
 	}
 
 	private void addNewButton(JPanel panel, String text, ActionListener action, ImageIcon img){
-		Dimension size = new Dimension((int)(width/3.2),(int)(height/13.65));
+		Dimension size = setNewDimension(400,75);
 		JButton button = new JButton(text, img);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
@@ -95,4 +95,10 @@ public class MenuPanel extends JPanel {
 		return img;
 	}
 
+	private Dimension setNewDimension(double w, double h) {
+		double newHeight = height/(1024.0/h);
+		double newWidth = (newHeight*w)/h;
+		return new Dimension((int)newWidth, (int)newHeight);
+	}
+	
 }

@@ -15,9 +15,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 
 public class SettingsPanel extends JPanel {
+	
+	double width = Constantes.Resolution.width;
+	double height = Constantes.Resolution.height;
 
 	JDialog parentDialog;
 	JFrame parentFrame;
@@ -62,19 +66,19 @@ public class SettingsPanel extends JPanel {
 	private JPanel newButtonZone(int x, int y){
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(x,y));
+		panel.setPreferredSize(setNewDimension(x,y));
 		return panel;
 	}
 	
 	private JPanel newCheckBoxZone(int x, int y){
 		JPanel panel = new JPanel();
 		//panel.setBorder(BorderFactory.createTitledBorder(title));
-		panel.setPreferredSize(new Dimension(x,y));
+		panel.setPreferredSize(setNewDimension(x,y));
 		return panel;
 	}
 	
 	private void addNewButton(JPanel panel, String text, String position, ActionListener action, ImageIcon img){
-		Dimension size = new Dimension(175,40);
+		Dimension size = setNewDimension(175,40);
 		JButton button = new JButton(text, img);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
@@ -87,6 +91,12 @@ public class SettingsPanel extends JPanel {
 	    box.setSelected(selected);
 	    box.addItemListener(action);
 		panel.add(box);
+	}
+	
+	private Dimension setNewDimension(double w, double h) {
+		double newHeight = height/(1024.0/h);
+		double newWidth = (newHeight*w)/h;
+		return new Dimension((int)newWidth, (int)newHeight);
 	}
 
 }

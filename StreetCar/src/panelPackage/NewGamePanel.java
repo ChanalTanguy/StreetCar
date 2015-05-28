@@ -12,9 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 
 public class NewGamePanel extends JPanel {
+	
+	double width = Constantes.Resolution.width;
+	double height = Constantes.Resolution.height;
 	
 	JDialog parentDialog;
 	JFrame parentFrame;
@@ -80,7 +84,7 @@ public class NewGamePanel extends JPanel {
 	private JPanel newButtonZone(){
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(new Dimension(400,60));
+		panel.setPreferredSize(setNewDimension(400,60));
 		return panel;
 	}
 	
@@ -88,7 +92,7 @@ public class NewGamePanel extends JPanel {
 		JPanel panel = new JPanel();
 		//panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder(title));
-		panel.setPreferredSize(new Dimension(400,60));
+		panel.setPreferredSize(setNewDimension(400,60));
 		return panel;
 	}
 	
@@ -101,11 +105,17 @@ public class NewGamePanel extends JPanel {
 	}
 	
 	private void addNewButton(JPanel panel, String text, String position, ActionListener action){
-		Dimension size = new Dimension(175,60);
+		Dimension size = setNewDimension(175,60);
 		JButton button = new JButton(text);
 		button.setPreferredSize(size);
 		button.addActionListener(action);
 		panel.add(button, position);
+	}
+	
+	private Dimension setNewDimension(double w, double h) {
+		double newHeight = height/(1024.0/h);
+		double newWidth = (newHeight*w)/h;
+		return new Dimension((int)newWidth, (int)newHeight);
 	}
 	
 }

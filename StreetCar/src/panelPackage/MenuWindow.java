@@ -59,7 +59,6 @@ public class MenuWindow {
 	private void setNewSize(JDialog win, double w, double h) {
 		double newHeight = height/(1024.0/h);
 		double newWidth = (newHeight*w)/h;
-		System.out.println((newHeight*w)/h);
 		win.setSize((int)newWidth, (int)newHeight);
 	}
 	
