@@ -19,12 +19,8 @@ import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 
 public class SettingsPanel extends InterfacePanel {
-
-	JDialog parentDialog;
-	JFrame parentFrame;
-	JPanel parentPanel;
-
-	PanelListener listener = new PanelListener();
+	
+	Dimension buttonSize = setNewDimension(175,40);
 	
 	boolean selectDebug = false;
 
@@ -50,21 +46,14 @@ public class SettingsPanel extends InterfacePanel {
 		
 		addNewCheckBox(zone1, "Activer le mode debug", listener.new DebugCheckBoxListener(), selectDebug);
 		
-		addNewButton(zone2, "Confirmer", BorderLayout.WEST, null, null);
+		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		
-		if(parentPanel != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel),null);}
-		if(parentDialog != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog), null);}
-		if(parentFrame != null){addNewButton(zone2, "Annuler", BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame), null);}
+		if(parentPanel != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel),null);}
+		if(parentDialog != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog), null);}
+		if(parentFrame != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame), null);}
 		
 		this.add(zone1);
 		this.add(zone2);
-	}
-
-	private JPanel newButtonZone(int x, int y){
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel.setPreferredSize(setNewDimension(x,y));
-		return panel;
 	}
 	
 	private JPanel newCheckBoxZone(int x, int y){
@@ -72,14 +61,6 @@ public class SettingsPanel extends InterfacePanel {
 		//panel.setBorder(BorderFactory.createTitledBorder(title));
 		panel.setPreferredSize(setNewDimension(x,y));
 		return panel;
-	}
-	
-	private void addNewButton(JPanel panel, String text, String position, ActionListener action, ImageIcon img){
-		Dimension size = setNewDimension(175,40);
-		JButton button = new JButton(text, img);
-		button.setPreferredSize(size);
-		button.addActionListener(action);
-		panel.add(button, position);
 	}
 	
 	private void addNewCheckBox(JPanel panel, String text, ItemListener action, boolean selected){
