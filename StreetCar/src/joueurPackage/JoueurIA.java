@@ -22,6 +22,10 @@ public class JoueurIA extends Joueur {
 		if (!t.isRunning())
 			t.start();
 	}
+
+	public void stopPlayer() {
+		ecouteurBoucle.disable();
+	}
 	
 	public Joueur clone() {
 

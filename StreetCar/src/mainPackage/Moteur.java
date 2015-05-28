@@ -69,6 +69,10 @@ public class Moteur {
 		players[currentPlayer].attendCoup();
 	}
 	
+	public void stop () {
+		players[currentPlayer].stopPlayer();
+	}
+	
 	/*
 	 * Methodes du Moteur
 	 */

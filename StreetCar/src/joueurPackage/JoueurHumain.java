@@ -18,6 +18,10 @@ public class JoueurHumain extends Joueur {
 	public void attendCoup() {
 		enabled = true;
 	}
+
+	public void stopPlayer() {
+		enabled = false;
+	}
 	
 	/**
 	 *  Jouer un coup "Piocher" si c'est au tour de ce joueur de jouer

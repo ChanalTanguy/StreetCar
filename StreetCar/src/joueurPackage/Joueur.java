@@ -18,6 +18,10 @@ public abstract class Joueur {
 	
 	public abstract void attendCoup();
 	
+	public abstract Joueur clone();
+
+	public abstract void stopPlayer();
+	
 	public MainJoueur getMain() {
 		return main;
 	}
@@ -79,7 +83,5 @@ public abstract class Joueur {
 		while (!main.isFull())
 			main.ajouterCarte(pioche.remove(0));
 	}
-	
-	public abstract Joueur clone();
 	
 }

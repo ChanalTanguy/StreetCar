@@ -22,6 +22,10 @@ public class EcouteurBoucle implements ActionListener {
 	public void enable() {
 		enabled = true;
 	}
+
+	public void disable() {
+		enabled = false;
+	}
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if (enabled) {
@@ -31,8 +35,11 @@ public class EcouteurBoucle implements ActionListener {
 				e.printStackTrace();
 			}
 			Coup c = ia.getCoup();
-			enabled = false;
-			moteur.jouerCoup(c);
+			if (enabled) { // Ce if là existe pour stopper un bot en pleine reflexion
+						   // Si le joueur va dans le menu entre temps.
+				enabled = false;
+				moteur.jouerCoup(c);
+			}
 		}
 	}
 
