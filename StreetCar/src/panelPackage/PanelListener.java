@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import windowPackage.ConfirmWindow;
+import windowPackage.MenuWindow;
+
 public class PanelListener {
 
 	public class ConfigureNewGameButtonListener implements ActionListener {
@@ -27,9 +30,13 @@ public class PanelListener {
 	public class QuitButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
+			/*ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
 			PanelListener listener = new PanelListener();
-			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf));
+			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf));*/
+			
+			PanelListener listener = new PanelListener();
+			ConfirmWindow conf = null;
+			conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", listener.new Quit(), listener.new ReturnButtonListener(conf));
 			conf.openConfirmWindow();
 		}
 	}

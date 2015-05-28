@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 
 import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
-import panelPackage.MenuWindow;
+import windowPackage.MenuWindow;
 import constantesPackages.Constantes;
 
 public class EcouteTerrain implements MouseListener, MouseMotionListener {
@@ -352,7 +352,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 	
 	
 	public void mouseReleased(MouseEvent e) {
-	//implementation des images de bouton cliqué	
+	//implementation des images de bouton cliquï¿½	
 		pan.changeImageUndo("bouton_undo.png");
 		pan.changeImageMenu("bouton_menu.png");
 		pan.changeImageAide("bouton_aide.png");

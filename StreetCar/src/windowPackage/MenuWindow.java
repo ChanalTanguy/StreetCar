@@ -1,4 +1,4 @@
-package panelPackage;
+package windowPackage;
 
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -11,6 +11,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import panelPackage.MenuPanel;
+import panelPackage.NewGamePanel;
+import panelPackage.SettingsPanel;
 import constantesPackages.Constantes;
 
 public class MenuWindow {
