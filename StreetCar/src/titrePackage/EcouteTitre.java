@@ -30,7 +30,7 @@ public class EcouteTitre implements MouseListener {
 		int x = e.getX();
 		int y = e.getY();
 		
-		//if(pan.selectionné != -1)
+		//if(pan.selectionner != -1)
 			
 		menus(x, y);
 		quitter(x,y);
@@ -41,8 +41,8 @@ public class EcouteTitre implements MouseListener {
 	private void quitter(int x, int y) {
 		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*50 && y<((10+4)*50+45))
 		{
-			if(pan.selectionné == 10) effectuerAction(pan.selectionné);
-			pan.selectionné = 10;
+			if(pan.selectionner == 10) effectuerAction(pan.selectionner);
+			pan.selectionner = 10;
 			pan.selection = true;
 		}	
 	}
@@ -54,8 +54,8 @@ public class EcouteTitre implements MouseListener {
 		{
 			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*50 && y<((i+4)*50+45)) 
 			{
-				if(i == pan.selectionné) effectuerAction(pan.selectionné);
-				pan.selectionné = i;
+				if(i == pan.selectionner) effectuerAction(pan.selectionner);
+				pan.selectionner = i;
 				pan.selection = true;
 				b = false;
 			}
@@ -67,15 +67,15 @@ public class EcouteTitre implements MouseListener {
 	}
 
 	
-	private void effectuerAction(int selectionné) {
+	private void effectuerAction(int selectionner) {
 		
-		switch(selectionné)
+		switch(selectionner)
 		{
 			case 1 : //Nouvelle partie
+				fen.fermeture();
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
 				f.disposition(m, f.getSize());
-				fen.fermeture();
 				break;
 			case 2 : //Charger partie
 				

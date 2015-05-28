@@ -15,7 +15,7 @@ import constantesPackages.Constantes;
 public class PanneauTitre extends JPanel{
 
 	Boolean selection = false;
-	int selectionné = -1;
+	int selectionner = -1;
 	
 	PanneauTitre(FenetreTitre fen)
 	{
@@ -49,8 +49,8 @@ public class PanneauTitre extends JPanel{
 		if(selection)
 		{
 			crayon.setColor(Color.white);
-			crayon.drawImage(fleche, getWidth()/4, (selectionné+4)*51, 90, 35, this);
-			//crayon.drawRect(getWidth()/3, (selectionné+4)*50, 300, 45);
+			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*51, 90, 35, this);
+			//crayon.drawRect(getWidth()/3, (selectionner+4)*50, 300, 45);
 		}			
 	}
 	
