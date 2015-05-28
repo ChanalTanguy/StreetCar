@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import constantesPackages.Constantes;
 
 public class MenuWindow {
+	
 	double width = Constantes.Resolution.width;
 	double height = Constantes.Resolution.height;
 

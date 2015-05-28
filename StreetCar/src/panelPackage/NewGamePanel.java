@@ -15,10 +15,7 @@ import javax.swing.JRadioButton;
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 
-public class NewGamePanel extends JPanel {
-	
-	double width = Constantes.Resolution.width;
-	double height = Constantes.Resolution.height;
+public class NewGamePanel extends InterfacePanel {
 	
 	JDialog parentDialog;
 	JFrame parentFrame;
@@ -110,12 +107,6 @@ public class NewGamePanel extends JPanel {
 		button.setPreferredSize(size);
 		button.addActionListener(action);
 		panel.add(button, position);
-	}
-	
-	private Dimension setNewDimension(double w, double h) {
-		double newHeight = height/(1024.0/h);
-		double newWidth = (newHeight*w)/h;
-		return new Dimension((int)newWidth, (int)newHeight);
 	}
 	
 }
