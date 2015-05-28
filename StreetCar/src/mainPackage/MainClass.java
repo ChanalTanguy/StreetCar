@@ -10,9 +10,10 @@ public class MainClass implements Runnable{
 		SwingUtilities.invokeLater( new MainClass() );
 	}
 	
+	//Pour passer par l'écran titre, faire FenetreTitre f = new FenetreTitre("Street Car"); 
 	public void run(){
 		Moteur m = new Moteur(new Plateau());
-		Fenetre f = new Fenetre("Street Car");
+		Fenetre f = new Fenetre("Street Car"); 
 		f.disposition(m, f.getSize());
 	}
 }
