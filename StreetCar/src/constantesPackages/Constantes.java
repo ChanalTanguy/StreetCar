@@ -1,5 +1,7 @@
 package constantesPackages;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +9,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Constantes {
+	
+	public static class Resolution {
+		public static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		public static final double width = screenSize.getWidth();
+		public static final double height = screenSize.getHeight();
+	}
 	
 	public static class Dimensions {
 		public static final int dimensionTuile = 50;
