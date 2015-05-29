@@ -21,32 +21,29 @@ public class EcouteClavierTitre implements KeyListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_UP:
+				if(pan.selectionner == -1) {pan.selectionner = 1; pan.selection = true;}
+				if(pan.selectionner == 1) pan.selectionner = 10;
+				else if(pan.selectionner == 10) pan.selectionner = 5;
+				else pan.selectionner = (pan.selectionner-1)%6;
+				break;
+			case KeyEvent.VK_DOWN:
+				if(pan.selectionner == -1) {pan.selectionner = 10; pan.selection = true;}
+				if(pan.selectionner == 5) pan.selectionner = 10;
+				else pan.selectionner = pan.selectionner%5+1;
+				break;
+			case KeyEvent.VK_ENTER:
+				if(pan.selectionner != -1) effectuerAction(pan.selectionner);
+				break;
+			case KeyEvent.VK_BACK_SPACE:
+				System.out.print(true);
+				if(pan.actif != 0) pan.actif = 0; //On retourne au menu avec un return
+				break;
+		}
+		pan.repaint();
 	
-			switch (e.getKeyCode())
-			{
-				case KeyEvent.VK_UP:
-					if(pan.selectionner == -1) {pan.selectionner = 1; pan.selection = true;}
-					if(pan.selectionner == 1) pan.selectionner = 10;
-					else if(pan.selectionner == 10) pan.selectionner = 5;
-					else pan.selectionner = (pan.selectionner-1)%6;
-					break;
-				case KeyEvent.VK_DOWN:
-					if(pan.selectionner == -1) {pan.selectionner = 10; pan.selection = true;}
-					if(pan.selectionner == 5) pan.selectionner = 10;
-					else pan.selectionner = pan.selectionner%5+1;
-					break;
-				case KeyEvent.VK_ENTER:
-					if(pan.selectionner != -1) effectuerAction(pan.selectionner);
-					break;
-				case KeyEvent.VK_BACK_SPACE:
-					System.out.print(true);
-					if(pan.actif != 0) pan.actif = 0; //On retourne au menu avec un return
-					break;
-			}
-			pan.repaint();
-		
-		
 	}
 
 	private void effectuerAction(int selectionner) {

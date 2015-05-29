@@ -115,7 +115,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 			case 5 : //Crédits
 				pan.actif = 5;
 				break;
-			case 6 :
+			case 10 :
 				fen.fermeture();
 				break;
 		}
