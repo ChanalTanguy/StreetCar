@@ -16,10 +16,7 @@ import panelPackage.NewGamePanel;
 import panelPackage.SettingsPanel;
 import constantesPackages.Constantes;
 
-public class MenuWindow {
-	
-	double width = Constantes.Resolution.width;
-	double height = Constantes.Resolution.height;
+public class MenuWindow extends InterfaceWindow {
 
 	public MenuWindow(){
 	}
@@ -58,12 +55,6 @@ public class MenuWindow {
 		win.setVisible(true);
 		win.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-	}
-	
-	private void setNewSize(JDialog win, double w, double h) {
-		double newHeight = height/(1024.0/h);
-		double newWidth = (newHeight*w)/h;
-		win.setSize((int)newWidth, (int)newHeight);
 	}
 	
 }

@@ -16,5 +16,11 @@ public class InterfaceWindow extends JDialog {
 		double newWidth = (newHeight*w)/h;
 		return new Dimension((int)newWidth, (int)newHeight);
 	}
+	
+	protected void setNewSize(JDialog win, double w, double h) {
+		double newHeight = height/(1024.0/h);
+		double newWidth = (newHeight*w)/h;
+		win.setSize((int)newWidth, (int)newHeight);
+	}
 
 }
