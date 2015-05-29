@@ -27,7 +27,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			int x = e.getX();
 			int y = e.getY();
 			
-			int piocheX = x - pan.getEcart() - 2*pan.getDepart()/3;
+			// on supprime le decalage de dessin par rapport a la bordure gauche.
+			int piocheX = x - pan.getDepart(); // - 2*pan.getDepart()/3;
 			int piocheY = y;
 			
 			int caseX = (x - pan.getDepart()) / pan.getTailleCase();
@@ -152,22 +153,28 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			clicValideSurPioche = true;
 		}
 		return clicValideSurPioche;
-/*		
-		return piocheX >= (3*pan.getDepart() + pan.getEcart()) 
-			&& piocheX <= (3*pan.getDepart() + pan.getEcart() + pan.getTailleCase() + 20)
-			&& piocheY >= 820
-			&& piocheY <= 820 + pan.getTailleCase() + 20;
-*/
 	}
 	private boolean estDansMain(int piocheX, int piocheY) {
-		System.out.println("piocheX : " + piocheX);
+		System.out.println("piocheX avant : " + piocheX);
+		
+		piocheX = piocheX + pan.getDecalageMain();
+
+		System.out.println("piocheX apres : " + piocheX);
 		
 		boolean clicValide = true;
 		// indique dans quelle main le clic a ete effectue
 		int numeroMain = mainNo(piocheY);
-		if (piocheX >= 0 && piocheX <= 470 && numeroMain != -1){
-			for (int posX = pan.getTailleCaseMain(); posX <= 370; posX += pan.getTailleCaseMain() + pan.getPetitEcartMain()){
-				if (piocheX > posX && piocheX < posX+30){
+		int zoneDeLaMain = 4 * (pan.getTailleCaseMain() + pan.getPetitEcartMain()) + pan.getTailleCaseMain();
+		
+		if (piocheX > 0 && piocheX < zoneDeLaMain && numeroMain != -1){
+			int nombreEcarts = 4;
+			int borneGauche = pan.getTailleCaseMain();
+			int borneDroite = borneGauche + pan.getPetitEcartMain();
+			
+			System.out.println("bornes : " + borneGauche + " " + borneDroite);
+			
+			for (int numeroEcart = 0; numeroEcart < nombreEcarts; numeroEcart++){
+				if (piocheX > borneGauche && piocheX < borneDroite){
 					clicValide = false;
 				}
 			}
@@ -175,6 +182,24 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		else {
 			clicValide = false;
 		}
+		
+		
+///////
+		
+		if (piocheX > 0 && piocheX < zoneDeLaMain && numeroMain != -1){
+			// renvoi faux si le clic se trouve sur l'intervalle entre 2 tuiles
+			int nombreEcarts = 4;
+			int decalage = pan.getTailleCaseMain() + pan.getPetitEcartMain();
+			for (int posX = pan.getTailleCaseMain(); posX < nombreEcarts * decalage; posX += decalage ){
+				if (piocheX > posX && piocheX < posX + pan.getPetitEcartMain()){
+					clicValide = false;
+				}
+			}
+		}
+		else {
+			clicValide = false;
+		}
+
 		return clicValide;
 	}
 
@@ -206,8 +231,9 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		return numeroMain;
 	}
 	private int tuileNo(int piocheX) {
-		for (int posX = 0; posX <= 400; posX += 100){
-			if ( piocheX > posX && piocheX < posX+70){
+		int intervalle = pan.getTailleCaseMain() + pan.getPetitEcartMain();
+		for (int posX = 0; posX <= 4 * intervalle; posX += intervalle){
+			if ( piocheX > posX && piocheX < posX+pan.getTailleCaseMain()){
 				return posX/100;
 			}
 		}

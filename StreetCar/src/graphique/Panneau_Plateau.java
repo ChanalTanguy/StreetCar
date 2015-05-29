@@ -48,12 +48,17 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs d'Entiers Fixes
 	 */
 	private int depart = 100;
-	private int tailleCase = 50;
-	private int tailleCaseMain = 70;
+	private int tailleCase; // = 50;
+	private int tailleCaseMain; // = 70;
 	private int ecart = 150;
 	private int petitEcartMain = 30;
-	private int mainDuHaut = 20;
-	private int mainDuBas; // = 820;
+	private int mainDuHaut = 20; // = depart - 10 - tailleCaseMain;
+	private int mainDuBas = 820; // = 820;
+	private int decalageMain = 2*depart;
+	private int departPlateau;
+	int largeurPossible;
+	int hauteurPossible;
+	
 	/*
 	 * FIN Entiers Fixes
 	 */
@@ -90,6 +95,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public String getNotifications (){
 		return notifications;
+	}
+	public int getDecalageMain (){
+		return decalageMain;
 	}
 	
 	public void setMainSelectionnee (int numeroMain) {
@@ -131,7 +139,29 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		largeur = getSize().width;
 		hauteur = getSize().height;
-		mainDuBas = hauteur - tailleCaseMain - 20;
+		
+		System.out.println("largeur/hauteur : " + largeur + " " + hauteur);
+		
+		largeurPossible = largeur - (largeur/7 + 20) - depart;
+		hauteurPossible = hauteur - 2*depart;
+		
+//		System.out.println("possibles : " + largeurPossible + " " + hauteurPossible);
+		
+		if (largeurPossible < hauteurPossible) {
+			tailleCase = largeurPossible/mot.getPlateau().length();
+			departPlateau = largeurPossible/2;
+		}
+		else {
+			tailleCase = hauteurPossible/mot.getPlateau().length();
+			departPlateau = hauteurPossible/2;
+		}
+		tailleCaseMain = tailleCase + tailleCase/2;
+
+//		System.out.println("tailles : " + tailleCase + " " + tailleCaseMain);
+		
+		mainDuHaut = depart - 10 - tailleCaseMain;
+		mainDuBas = depart + mot.getPlateau().length() * tailleCase + 10;
+		
 		
 //		nettoyage(crayon);
 		
@@ -141,6 +171,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerFond(crayon);
 		
 		dessinerPlateau(crayon);
+		dessinerQuadrillage(crayon);
 		
 		dessinerContenuPlateau(crayon, mot.getPlateau());
 		
@@ -160,11 +191,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if ( piocheSelectionnee ){
 			dessinerPiocheSelectionnee(crayon);
 		}
-		
+/*		
 		if (contoursSurlignes){
 			crayon.setColor(Color.red);
 			crayon.drawRect(0, 0, largeur-1, hauteur-1);
 		}
+*/
 	}
 	
 	/*
@@ -181,9 +213,26 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.drawImage(fond, 0, 0, largeur, hauteur, this);
 	}
 	private void dessinerPlateau (Graphics2D crayon) {
-		int dimLargeur = depart + (mot.getPlateau().length()-2) * tailleCase;
-		int dimHauteur = dimLargeur;
-		crayon.drawImage(plateau, depart, depart, dimLargeur, dimHauteur, this);
+/*
+//		int dimPlateau = depart + (mot.getPlateau().length()-2) * tailleCase;
+		int dimPlateau = mot.getPlateau().length() * tailleCase;
+		
+//		crayon.drawImage(plateau, depart, depart, dimPlateau, dimPlateau, this);
+		int positionDepartY = depart + hauteurPossible/2 - departPlateau;
+		crayon.drawImage(plateau, depart, positionDepartY, dimPlateau, dimPlateau, this);
+*/		
+		int dimPlateau = mot.getPlateau().length() * tailleCase;
+		int dimensionHaute = hauteur - 2*depart;
+		crayon.drawImage(plateau, depart, depart, dimPlateau, dimPlateau, this);
+		
+		
+	}
+	private void dessinerQuadrillage (Graphics2D crayon){
+		crayon.setColor(Color.black);
+		for (int numeroLigne = 0; numeroLigne < mot.getPlateau().length()+1; numeroLigne++){
+			crayon.drawLine( depart, depart + numeroLigne*tailleCase, depart + mot.getPlateau().length()*tailleCase, depart + numeroLigne*tailleCase );
+			crayon.drawLine( depart + numeroLigne*tailleCase, depart, depart + numeroLigne*tailleCase, depart + mot.getPlateau().length()*tailleCase );
+		}
 	}
 	private void dessinerPioche (Graphics2D crayon) {
 		crayon.drawImage(pioche, 6*largeur/7, hauteur/2-tailleCase, 2*tailleCase, 2*tailleCase, this);
@@ -255,7 +304,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 				angle = 0;
 				break;
 		}
-		dessinerRotation(crayon, tuileAt.getImage(), angle, 2*depart + depart/6 + numeroTuile * (tailleCaseMain + petitEcartMain), coordY, tailleCaseMain);
+		dessinerRotation(crayon, tuileAt.getImage(), angle, decalageMain + numeroTuile * (tailleCaseMain + petitEcartMain), coordY, tailleCaseMain);
 		
 	}
 	private void dessinerRotation (Graphics2D crayon, BufferedImage image, int angle, int coordX, int coordY, int dimension){
@@ -276,7 +325,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerMainSelectionner(Graphics2D crayon) {
 		System.out.println("tuileMainSelectionnee : " + tuileMainSelectionnee);
 		
-		int coordX = 2*depart + depart/6 + tuileMainSelectionnee * (tailleCaseMain + petitEcartMain);
+		int coordX = 2*depart + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
 		casePlateauSelectionnee = -1;
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
