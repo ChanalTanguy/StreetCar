@@ -3,6 +3,7 @@ package iaPackage;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 import joueurPackage.Coup;
 import joueurPackage.JoueurIA;
@@ -16,10 +17,12 @@ public class IADifficile implements InterfaceIA {
 
 	Moteur moteur;
 	JoueurIA joueur;
+	Random r;
 
 	public IADifficile(Moteur moteur, JoueurIA joueurIA) {
 		this.moteur = moteur;
 		joueur = joueurIA;
+		r = new Random();
 	}
 
 	public Coup getCoup() {
@@ -28,11 +31,16 @@ public class IADifficile implements InterfaceIA {
 		if(moteur.getNbActions()<3)
 			return Coup.newPioche();
 		
+
+		// * Tenter un coup
+		// ** Evaluer le plateau
+		// *** Faire ça avec tout les coups
+		// **** Prendre le coup le mieux évaluer.
 		MainJoueur main = joueur.getMain();
 		Plateau plateau = (Plateau) moteur.getPlateau().clone();
 		int coutCoup = Integer.MAX_VALUE;
-		Coup coupAJouer = null, coupCourant;
-		int nbRotationMeilleurCoup = 0;
+		ArrayList<CoupEtRotation> coupsAJouer = new ArrayList<CoupEtRotation>(); 
+		Coup coupCourant;
 		int c;
 
 		for (int numTuile = 0; numTuile < 5; numTuile++) { 								// Pour chaque Tuile non null dans la main...
@@ -47,9 +55,11 @@ public class IADifficile implements InterfaceIA {
 							if (plateau.coupValide(main.getTuileAt(numTuile), coupCourant)) {
 								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 								if ((c = evaluationPlateau(plateau)) < coutCoup) {
-									coupAJouer = coupCourant;
-									nbRotationMeilleurCoup = nbRotation;
+									coupsAJouer.clear();
+									coupsAJouer.add(new CoupEtRotation(coupCourant,nbRotation));
 									coutCoup = c;
+								} else if (c == coutCoup){
+									coupsAJouer.add(new CoupEtRotation(coupCourant,nbRotation));
 								}
 								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 							}
@@ -60,16 +70,12 @@ public class IADifficile implements InterfaceIA {
 			}
 		}
 
+		CoupEtRotation coupChoisi = coupsAJouer.get(r.nextInt(coupsAJouer.size()));
 
-
-		for (int i = 0; i < nbRotationMeilleurCoup; i++) {
-			joueur.tournerTuileMain(coupAJouer.getTuile());
+		for (int i = 0; i < coupChoisi.nbRotation; i++) {
+			joueur.tournerTuileMain(coupChoisi.getCoup().getTuile());
 		}
-		return coupAJouer;
-		// * Tenter un coup
-		// ** Evaluer le plateau
-		// *** Faire ça avec tout les coups
-		// **** Prendre le coup le mieux évaluer.
+		return coupChoisi.getCoup();
 
 	}
 
@@ -80,7 +86,7 @@ public class IADifficile implements InterfaceIA {
 	}
 
 	private int evaluationPlateau(Plateau p) {
-		return coutChemin(joueur.getLigne(),null,p);
+		return coutChemin(joueur.getLigne(),null,p)-coutChemin(moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getLigne(),null,p)/4;
 	}
 	
 	private final static int coutTuileFixe = 1;
