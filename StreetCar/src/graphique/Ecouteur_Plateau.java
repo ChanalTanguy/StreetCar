@@ -110,6 +110,7 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					pan.setMainSelectionnee(-1);
 					pan.setPiocheSelectionnee(false);
 					pan.setCaseSelectionnee(false);
+					pan.repaint();
 				}
 				break;
 			}
@@ -144,10 +145,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurPioche(int piocheX, int piocheY) {
 		boolean clicValideSurPioche = false;
-		int borneGauche = 6*pan.getLargeur()/7;
-		int borneDroite = borneGauche + 2*pan.getTailleCase();
-		int borneHaute = pan.getHauteur()/2-pan.getTailleCase();
-		int borneBasse = borneHaute + 2*pan.getTailleCase();
+		int borneGauche = pan.getPositionXPioche();
+		int borneDroite = borneGauche + pan.getDimensionPioche();
+		int borneHaute = pan.getPositionYPioche();
+		int borneBasse = borneHaute + pan.getDimensionPioche();
 		
 		if ( piocheX >= borneGauche && piocheX <= borneDroite
 		&&	 piocheY >= borneHaute && piocheY <= borneBasse ){

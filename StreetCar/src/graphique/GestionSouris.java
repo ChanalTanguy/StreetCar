@@ -30,34 +30,26 @@ public class GestionSouris implements MouseListener{
 		panNotif = referenceNotif;
 	}
 	
-	public void mouseClicked(MouseEvent event) {
-		String resultat = "";
-		if (pan != null){
-			resultat = resultat + pan.getName() + "\n";
-			resultat = resultat + "type panneau : " + pan.getTypeZone() + "\n";
-		}
-		if (fen != null){
-			resultat = resultat + fen.getName() + "\n";
-		}
-		if (but != null){
-			resultat = resultat + but.getText() + "\n";
-		}
-		//panNotif.updateMessage(resultat);
-	}
+	public void mouseClicked(MouseEvent event) {}
 
 	public void mouseEntered(MouseEvent event) {
+/*
 		if (pan != null){
+
 			pan.activerContours();
 		}
+*/		
 		if (pan_secondaire != null){
 			pan_secondaire.activerContours();
 		}
 	}
 
 	public void mouseExited(MouseEvent event) {
+/*
 		if (pan != null){
 			pan.desactiverContours();
 		}
+*/		
 		if (pan_secondaire != null){
 			pan_secondaire.desactiverContours();
 		}

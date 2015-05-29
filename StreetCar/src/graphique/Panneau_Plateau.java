@@ -45,7 +45,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	
 	/*
-	 * Attributs d'Entiers Fixes
+	 * Attributs d'Entiers de Positionnement
 	 */
 	private int depart = 100;
 	private int tailleCase; // = 50;
@@ -55,6 +55,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int mainDuHaut = 20; // = depart - 10 - tailleCaseMain;
 	private int mainDuBas = 820; // = 820;
 	private int decalageMain;
+	private int positionXPioche;
+	private int positionYPioche;
+	private int dimensionPioche;
 	
 	/*
 	 * FIN Entiers Fixes
@@ -95,6 +98,15 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public int getDecalageMain (){
 		return decalageMain;
+	}
+	public int getPositionXPioche (){
+		return positionXPioche;
+	}
+	public int getPositionYPioche (){
+		return positionYPioche;
+	}
+	public int getDimensionPioche (){
+		return dimensionPioche;
 	}
 	
 	public void setMainSelectionnee (int numeroMain) {
@@ -154,6 +166,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		mainDuHaut = depart - 10 - tailleCaseMain;
 		mainDuBas = depart + mot.getPlateau().length() * tailleCase + 10;
+		
+		positionXPioche = 6*largeur/7;
+		positionYPioche = hauteur/2-tailleCase;
+		dimensionPioche = 2*tailleCase;
 		
 //		nettoyage(crayon);
 		
@@ -218,7 +234,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	private void dessinerPioche (Graphics2D crayon) {
-		crayon.drawImage(pioche, 6*largeur/7, hauteur/2-tailleCase, 2*tailleCase, 2*tailleCase, this);
+		crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
 	private void dessinerMain1 (Graphics2D crayon, MainJoueur main) {
 		for (int numeroTuile = 0; numeroTuile < main.length(); numeroTuile++){
