@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import objectPackage.Plateau;
+import windowPackage.NewGameWindow;
 import mainPackage.Moteur;
 
 
@@ -49,11 +50,15 @@ public class EcouteClavierTitre implements KeyListener {
 		switch(selectionner)
 		{
 			case 1 : //Nouvelle partie
+				
+				NewGameWindow g = new NewGameWindow();
+				g.openNewGameWindow();
+				/*
 				fen.fermeture();
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
 				f.disposition_V2(m, f.getSize());
-
+				*/
 				break;
 			case 2 : //Charger partie
 				

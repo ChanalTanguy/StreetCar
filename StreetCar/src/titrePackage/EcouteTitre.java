@@ -1,4 +1,5 @@
 package titrePackage;
+
 import graphique.Fenetre;
 
 import java.awt.event.MouseEvent;
@@ -6,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import objectPackage.Plateau;
+import windowPackage.NewGameWindow;
 import mainPackage.Moteur;
 
 public class EcouteTitre implements MouseListener, MouseMotionListener {
@@ -88,10 +90,12 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		switch(selectionner)
 		{
 			case 1 : //Nouvelle partie
-				fen.fermeture();
+				NewGameWindow g = new NewGameWindow();
+				g.openNewGameWindow();
+				/*
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
-				f.disposition_V2(m, f.getSize());
+				f.disposition_V2(m, f.getSize());*/
 				break;
 			case 2 : //Charger partie
 				
