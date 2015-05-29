@@ -71,6 +71,9 @@ public class IADifficile implements InterfaceIA {
 		}
 
 		CoupEtRotation coupChoisi = coupsAJouer.get(r.nextInt(coupsAJouer.size()));
+		//for (CoupEtRotation cr : coups AJouer) 
+		//	System.out.println(cr.nbRotation+" " +cr.getCoup().getCoordonnee()+" "+cr.getCoup().getTuile() + " " + coutCoup);
+		System.out.println(coutCoup);
 
 		for (int i = 0; i < coupChoisi.nbRotation; i++) {
 			joueur.tournerTuileMain(coupChoisi.getCoup().getTuile());
@@ -86,12 +89,15 @@ public class IADifficile implements InterfaceIA {
 	}
 
 	private int evaluationPlateau(Plateau p) {
-		return coutChemin(joueur.getLigne(),null,p)-coutChemin(moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getLigne(),null,p)/4;
+		int c1 = coutChemin(joueur.getLigne(),null,p);
+		int c2 = coutChemin(moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getLigne(),null,p);
+		return (3*c1)-(c2);
 	}
 	
 	private final static int coutTuileFixe = 1;
-	private final static int coutTuileNull = 2;
-	private final static int coutTuilePossible = 4;
+	private final static int coutTuileNull = 3;
+	private final static int coutTuilePossible = 5;
+	private final static int coutHeuristique = 3;
 	
 	
 	private int coutChemin(int ligne, int[] escales, Plateau p) {
@@ -100,9 +106,12 @@ public class IADifficile implements InterfaceIA {
 			(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
 		
 		Point po = p.getTerminalPosition(ligne, 1);
+		Point depart = po;
 		Point objectif = p.getTerminalPosition(ligne, 2);
 		TuileChemin tuileCheminCourant = new TuileChemin(po,Constantes.Orientation.nord,0,magellanDistance(po,objectif));
 				
+		
+		
 		// TODO : Prendre en compte les escales
 		
 		do {
@@ -131,7 +140,7 @@ public class IADifficile implements InterfaceIA {
 			
 			// Cas du Terminus (Gérée de cette façon, car on commence le chemin sur une escale...
 			// Sur une direction ou elle n'est pas connectée.) Le cout d'une escale est nul.
-			else if (t.getTypeTuile() == 1) {
+			else if (t.getTypeTuile() == 1 && pCourant.equals(depart)) {
 				if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est) && t.connectionsExistantes(Constantes.Orientation.est)) {
 					po = new Point(pCourant.x+1,pCourant.y);
 					file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority(),magellanDistance(po,objectif)));
@@ -221,7 +230,7 @@ public class IADifficile implements InterfaceIA {
 	
 	
 	private int magellanDistance(Point p1, Point p2) {
-		return 2*(absolu(p1.x-p2.x)+absolu(p1.y-p2.y));
+		return coutHeuristique*(absolu(p1.x-p2.x)+absolu(p1.y-p2.y));
 	}
 	
 	private int absolu(int i) {
