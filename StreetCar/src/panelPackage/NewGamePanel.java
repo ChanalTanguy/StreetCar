@@ -15,12 +15,15 @@ import javax.swing.JRadioButton;
 
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
+import windowPackage.InterfaceWindow;
 import windowPackage.MenuWindow;
 
 public class NewGamePanel extends InterfacePanel {
 
 	String selected1 = "Humain";
 	String selected2 = "Facile";
+	
+	boolean openMenu;
 
 	Dimension buttonSize = setNewDimension(175,60);
 
@@ -28,12 +31,18 @@ public class NewGamePanel extends InterfacePanel {
 		parentDialog = parent;
 		this.buildNewGamePanel();
 	}
+	
+	public NewGamePanel(JDialog parent, boolean b){
+		parentDialog = parent;
+		openMenu = b;
+		this.buildNewGamePanel();
+	}
 
-	public NewGamePanel(String niv1, String niv2){
+	/*public NewGamePanel(String niv1, String niv2){
 		selected1 = niv1;
 		selected2 = niv2;
 		this.buildNewGamePanel();
-	}
+	}*/
 
 	private void buildNewGamePanel(){
 
@@ -56,8 +65,14 @@ public class NewGamePanel extends InterfacePanel {
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
 		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog), null);
-		addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
 
+		
+		if (openMenu){
+			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+		} else {
+			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+		}
+		
 		this.add(zone1);
 		this.add(zone2);
 		this.add(zone3);
