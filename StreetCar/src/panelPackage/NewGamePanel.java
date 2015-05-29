@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
+import windowPackage.MenuWindow;
 
 public class NewGamePanel extends InterfacePanel {
 
@@ -54,8 +55,8 @@ public class NewGamePanel extends InterfacePanel {
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
-		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(), null);
-		addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog), null);
+		addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
 
 		this.add(zone1);
 		this.add(zone2);
@@ -65,7 +66,6 @@ public class NewGamePanel extends InterfacePanel {
 
 	private JPanel newRadioButtonZone(String title){
 		JPanel panel = new JPanel();
-		//panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder(title));
 		panel.setPreferredSize(setNewDimension(400,60));
 		return panel;

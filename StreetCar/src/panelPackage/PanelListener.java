@@ -26,7 +26,7 @@ public class PanelListener {
 	public class ConfigureNewGameButtonListener implements ActionListener {
 
 		JDialog parent;
-		
+
 		public ConfigureNewGameButtonListener(JDialog parent){
 			this.parent = parent;
 		}
@@ -38,10 +38,17 @@ public class PanelListener {
 		}
 
 	}
-	
+
 	public class StartNewGameButtonListener implements ActionListener {
 
+		JDialog parent;
+
+		public StartNewGameButtonListener(JDialog parent){
+			this.parent = parent;
+		}
+
 		public void actionPerformed(ActionEvent e) {
+			parent.dispose();
 			Moteur m = new Moteur(new Plateau());
 			Fenetre f = new Fenetre("Street Car");
 			f.disposition_V2(m, f.getSize());
@@ -54,37 +61,37 @@ public class PanelListener {
 			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
 			PanelListener listener = new PanelListener();
 			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf, null));
-			
+
 			conf.openConfirmWindow();
 		}
 	}
-	
+
 	public class SettingsButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			SettingsWindow win = new SettingsWindow();
 			win.openSettingsWindow();
 		}
-		
+
 	}
-	
+
 	public class Quit implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
-		
+
 	}
-	
+
 	public class DebugCheckBoxListener implements ItemListener {
 
 		public void itemStateChanged(ItemEvent e) {
 			int change = e.getStateChange();
 			if (change == ItemEvent.SELECTED) {
-				
-		    } else if (change == ItemEvent.DESELECTED) {
-				
-		    }
+
+			} else if (change == ItemEvent.DESELECTED) {
+
+			}
 		}
 	}
 
