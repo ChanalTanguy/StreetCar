@@ -13,6 +13,7 @@ public class Terminus extends Tuile{
 		super(true);
 		numeroLigne = newLigne;
 		numeroTerminus = newTerminus;
+		typeTuile = 1;
 	}
 	
 

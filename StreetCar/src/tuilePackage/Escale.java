@@ -11,5 +11,6 @@ public class Escale extends Tuile{
 	public Escale (int newNumero){
 		super(true);
 		numeroEscale = newNumero;
+		typeTuile = 2;
 	}
 }

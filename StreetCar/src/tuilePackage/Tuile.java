@@ -4,9 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
-import joueurPackage.MainJoueur;
 import constantesPackages.Constantes;
 
 public class Tuile implements ActionsToken{
@@ -14,6 +11,7 @@ public class Tuile implements ActionsToken{
 	private String orientation;
 	private ArrayList<Connection> listeConnections;
 	BufferedImage imageTuile;
+	int typeTuile;
 	
 	/*
 	 * 2 Constructeurs
@@ -22,12 +20,14 @@ public class Tuile implements ActionsToken{
 		immuable = false;
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
+		typeTuile = 0;
 	}
 	
 	public Tuile (boolean presenceArbres){
 		immuable = presenceArbres;
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
+		typeTuile = 0;
 	}
 	
 	/*
@@ -152,6 +152,10 @@ public class Tuile implements ActionsToken{
 		return imageTuile;
 	}
 	
+	public int getTypeTuile (){
+		return typeTuile;
+	}
+	
 	public void setImage (BufferedImage i){
 		imageTuile = i;
 	}
@@ -178,6 +182,10 @@ public class Tuile implements ActionsToken{
 		else {
 			imageTuile = Constantes.Images.initTuile(nomImage);
 		}
+	}
+
+	public void setType(int i) {
+		typeTuile = i;
 	}
 	
 	
@@ -258,6 +266,7 @@ public class Tuile implements ActionsToken{
 		newTuile.setListeConnections(listeConnections);
 		newTuile.setImage(imageTuile);
 		newTuile.setOrientation(orientation);
+		newTuile.setType(typeTuile);
 		
 		return newTuile;
 	}
@@ -373,7 +382,7 @@ public class Tuile implements ActionsToken{
 	 * @param cote : chaine de caracteres indiquant sur quel cote doit etre chercher l'extremite des connections
 	 * @return true : une connection possede une extremite est sur le cote indique, false sinon.
 	 */
-	private boolean connectionsExistantes (String cote){
+	public boolean connectionsExistantes (String cote){
 		boolean connectionTrouvee = false;
 		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
 		
@@ -426,4 +435,19 @@ public class Tuile implements ActionsToken{
 		yesItCan &= !listeConnections.isEmpty();
 		return yesItCan;
 	}
+	
+	public ArrayList<String> getDirectionConnectedTo(String direction) {
+
+		ArrayList<String> listDirection = new ArrayList<String>();
+		
+		for (Connection c : listeConnections) {
+			if (c.getPointA().equals(direction))
+				listDirection.add(c.getPointB());
+			if (c.getPointB().equals(direction))
+				listDirection.add(c.getPointA());
+		}
+		
+		return listDirection;
+	}
+	
 }

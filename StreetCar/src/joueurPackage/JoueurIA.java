@@ -1,6 +1,6 @@
 package joueurPackage;
 
-import iaPackage.IAFacile;
+import iaPackage.IADifficile;
 
 import javax.swing.Timer;
 
@@ -13,7 +13,7 @@ public class JoueurIA extends Joueur {
 	
 	public JoueurIA(Moteur m, int ligne) {
 		super(new MainJoueur(), ligne, 1);
-		ecouteurBoucle = new EcouteurBoucle(m, new IAFacile(m, this));
+		ecouteurBoucle = new EcouteurBoucle(m, new IADifficile(m, this));
 		t = new Timer(450, ecouteurBoucle);
 	}
 	
