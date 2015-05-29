@@ -29,16 +29,6 @@ public class SettingsPanel extends InterfacePanel {
 		this.buildSettingsPanel();
 	}
 
-	public SettingsPanel(JFrame parent){
-		parentFrame = parent;
-		this.buildSettingsPanel();
-	}
-
-	public SettingsPanel(JPanel parent){
-		parentPanel = parent;
-		this.buildSettingsPanel();
-	}
-
 	private void buildSettingsPanel(){
 
 		JPanel zone1 = newCheckBoxZone(400,50);
@@ -48,9 +38,7 @@ public class SettingsPanel extends InterfacePanel {
 		
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		
-		if(parentPanel != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(this, parentPanel),null);}
-		if(parentDialog != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog), null);}
-		if(parentFrame != null){addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentFrame), null);}
+		addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		
 		this.add(zone1);
 		this.add(zone2);

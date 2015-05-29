@@ -13,13 +13,12 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import panelPackage.PanelListener.ReturnButtonListener;
 import constantesPackages.Constantes;
 
 public class InterfacePanel extends JPanel {
 	
 	JDialog parentDialog;
-	JFrame parentFrame;
-	JPanel parentPanel;
 	
 	PanelListener listener = new PanelListener();
 	

@@ -26,28 +26,17 @@ public class MenuPanel extends InterfacePanel {
 		parentDialog = parent;
 		this.buildMenuPanel();
 	}
-	
-	public MenuPanel(JFrame parent){
-		parentFrame = parent;
-		this.buildMenuPanel();
-	}
-
-	public MenuPanel(JPanel parent){
-		parentPanel = parent;
-		this.buildMenuPanel();
-	}
 
 	private void buildMenuPanel(){
 
 		JPanel zone1 = newZone(1);
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
-		
-		if(parentPanel != null){addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(this, parentPanel),null);}
-		if(parentDialog != null){addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(parentDialog), null);}
-		if(parentFrame != null){addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(parentFrame), null);}
+	
+		addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), null);
 
-		addNewButton(zone2, "Nouvelle partie", buttonSize, null, listener.new ConfigureNewGameButtonListener(), null);
+		addNewButton(zone2, "Nouvelle partie", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog), null);
+
 		addNewButton(zone2, "Sauvegarder la partie", buttonSize, null, null, null);
 		addNewButton(zone2, "Charger une partie", buttonSize, null, null, null);
 		addNewButton(zone2, "Défis", buttonSize, null, null, null);

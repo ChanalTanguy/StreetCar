@@ -12,7 +12,7 @@ public class NewGameWindow extends InterfaceWindow {
 	public NewGameWindow(){
 	}
 	
-	public void openNewGameWindow(){
+	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		NewGamePanel menu = new NewGamePanel(win);
 		setNewSize(win,500,230);

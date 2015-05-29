@@ -21,7 +21,7 @@ public class MenuWindow extends InterfaceWindow {
 	public MenuWindow(){
 	}
 	
-	public void openMenuWindow(){
+	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		MenuPanel menu = new MenuPanel(win);
 		setNewSize(win,425,690);

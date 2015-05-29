@@ -1,5 +1,7 @@
 package panelPackage;
 
+import graphique.Fenetre;
+
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import mainPackage.Moteur;
+import objectPackage.Plateau;
 import windowPackage.ConfirmWindow;
+import windowPackage.InterfaceWindow;
 import windowPackage.MenuWindow;
 import windowPackage.NewGameWindow;
 import windowPackage.SettingsWindow;
@@ -20,13 +25,27 @@ public class PanelListener {
 
 	public class ConfigureNewGameButtonListener implements ActionListener {
 
-		// Clic sur le bouton "Nouvelle partie" du menu principal
-
-		public void actionPerformed(ActionEvent e) {
-			NewGameWindow win = new NewGameWindow();
-			win.openNewGameWindow();
+		JDialog parent;
+		
+		public ConfigureNewGameButtonListener(JDialog parent){
+			this.parent = parent;
 		}
 
+		public void actionPerformed(ActionEvent e) {
+			parent.dispose();
+			NewGameWindow win = new NewGameWindow();
+			win.openWindow();
+		}
+
+	}
+	
+	public class StartNewGameButtonListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			Moteur m = new Moteur(new Plateau());
+			Fenetre f = new Fenetre("Street Car");
+			f.disposition_V2(m, f.getSize());
+		}
 	}
 
 	public class QuitButtonListener implements ActionListener {
@@ -34,7 +53,7 @@ public class PanelListener {
 		public void actionPerformed(ActionEvent e) {
 			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
 			PanelListener listener = new PanelListener();
-			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf));
+			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf, null));
 			
 			conf.openConfirmWindow();
 		}
@@ -74,26 +93,16 @@ public class PanelListener {
 		// Clic sur le bouton "Cancel" d'un des menus
 
 		JDialog parentDialog;
-		JPanel parentPanel;
-		JFrame parentFrame;
-		JPanel panel;
+		MenuWindow window;
 
-		public ReturnButtonListener(JDialog parent){
+		public ReturnButtonListener(JDialog parent, MenuWindow window){
 			parentDialog = parent;
-		}
-
-		public ReturnButtonListener(JPanel panel, JPanel parent){
-			parentPanel = parent;
-		}
-
-		public ReturnButtonListener(JFrame parent){
-			parentFrame = parent;
+			this.window = window;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if(parentDialog != null){ parentDialog.dispose(); }
-			if(parentPanel != null){ parentPanel.remove(panel); }
-			if(parentFrame != null){ parentFrame.dispose(); }
+			parentDialog.dispose();
+			if (window != null) { window.openWindow(); }
 		}
 
 	}
