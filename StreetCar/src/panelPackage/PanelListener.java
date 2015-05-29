@@ -44,13 +44,16 @@ public class PanelListener {
 	public class StartNewGameButtonListener implements ActionListener {
 
 		JDialog parent;
+		Fenetre mainGame;
 
-		public StartNewGameButtonListener(JDialog parent){
+		public StartNewGameButtonListener(JDialog parent, Fenetre main){
 			this.parent = parent;
+			this.mainGame = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
+			if(mainGame != null){mainGame.dispose();}
 			Moteur m = new Moteur(new Plateau());
 			Fenetre f = new Fenetre("Street Car");
 			f.disposition_V2(m, f.getSize());

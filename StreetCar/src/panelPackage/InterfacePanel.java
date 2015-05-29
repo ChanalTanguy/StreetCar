@@ -1,5 +1,7 @@
 package panelPackage;
 
+import graphique.Fenetre;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -19,6 +21,8 @@ import constantesPackages.Constantes;
 public class InterfacePanel extends JPanel {
 	
 	JDialog parentDialog;
+	
+	Fenetre mainGame;
 	
 	PanelListener listener = new PanelListener();
 	
@@ -53,6 +57,10 @@ public class InterfacePanel extends JPanel {
 			e.printStackTrace();
 		}
 		return img;
+	}
+	
+	protected void setMainGameWindow(Fenetre f){
+		mainGame = f;
 	}
 
 }
