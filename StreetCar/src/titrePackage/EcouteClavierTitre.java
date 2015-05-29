@@ -38,7 +38,6 @@ public class EcouteClavierTitre implements KeyListener {
 				if(pan.selectionner != -1) effectuerAction(pan.selectionner);
 				break;
 			case KeyEvent.VK_BACK_SPACE:
-				System.out.print(true);
 				if(pan.actif != 0) pan.actif = 0; //On retourne au menu avec un return
 				break;
 		}

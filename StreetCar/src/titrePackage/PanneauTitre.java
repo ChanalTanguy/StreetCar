@@ -18,9 +18,10 @@ public class PanneauTitre extends JPanel{
 	Boolean selection = false;
 	int selectionner = -1;
 	public int actif = 0;
-	
+
 	
 	BufferedImage background ;
+	BufferedImage backgroundCredits;
 	BufferedImage nouvellePartie ;
 	BufferedImage chargerPartie;
 	BufferedImage defis;
@@ -49,7 +50,8 @@ public class PanneauTitre extends JPanel{
 		credits = Constantes.Images.initBackground("credits.png");
 		quitter = Constantes.Images.initBackground("quitter.png");
 		titre = Constantes.Images.initBackground("titre.png");
-		fleche = Constantes.Images.initBackground("fleche.png");		
+		fleche = Constantes.Images.initBackground("fleche.png");
+		backgroundCredits = Constantes.Images.initBackground("tramCred.png");
 	}
 
 	public void paintComponent (Graphics g){
@@ -75,7 +77,7 @@ public class PanneauTitre extends JPanel{
 		if(selection)
 		{
 			crayon.setColor(Color.white);
-			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*51, 90, 35, this);
+			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*51, 84, 50, this);
 		}
 	}
 
@@ -88,9 +90,12 @@ public class PanneauTitre extends JPanel{
 		
 	}
 
+	//Pas encore complet
 	public void credits(Graphics2D crayon) {
-		// TODO Auto-generated method stub
-		
+		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
+		crayon.setColor(Color.white);
+		crayon.drawRect(getWidth()-300, getHeight()-175, 175, 55);
+	
 	}
 	
 }

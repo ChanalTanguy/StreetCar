@@ -38,10 +38,28 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 			menusAction(x, y);
 			quitterAction(x,y);
 		}
-		
+		if(pan.actif == 3) //Defis
+		{
+			retour(x,y);
+		}
+		if(pan.actif == 4) //Options
+		{
+			
+		}
+		if(pan.actif == 5) //Credits
+		{
+			retour(x,y);
+		}
 		pan.repaint();
 	}
 	
+	private void retour(int x, int y) {
+		// TODO Auto-generated method stub
+		System.out.println("X " + x + " Y " + y);
+		if(x>980 && x<980+300 && y>850 && y<850+45) pan.actif = 0;
+		
+	}
+
 	private void quitterAction(int x, int y) {
 		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*50 && y<((10+4)*50+45))
 		{
