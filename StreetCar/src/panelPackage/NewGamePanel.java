@@ -64,7 +64,7 @@ public class NewGamePanel extends InterfacePanel {
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
-		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog), null);
+		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog, mainGame), null);
 
 		
 		if (openMenu){

@@ -1,5 +1,7 @@
 package windowPackage;
 
+import graphique.Fenetre;
+
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
@@ -10,6 +12,8 @@ public class InterfaceWindow extends JDialog {
 	
 	double width = Constantes.Resolution.width;
 	double height = Constantes.Resolution.height;
+	
+	Fenetre mainGame;
 	
 	protected Dimension setNewDimension(double w, double h) {
 		double newHeight = height/(1024.0/h);
@@ -23,7 +27,8 @@ public class InterfaceWindow extends JDialog {
 		win.setSize((int)newWidth, (int)newHeight);
 	}
 	
-	public void openWindow() {
+	protected void setMainGameWindow(Fenetre f){
+		mainGame = f;
 	}
 
 }
