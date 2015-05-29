@@ -27,7 +27,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs pour Details Visuels
 	 */
 	private int mainSelectionnee = -1;
-	private int casePlateauSelectionnee = -1;
+	private boolean casePlateauSelectionnee = false; // -1;
 	private int tuileMainSelectionnee = -1;
 	private int coordXSelection = -1;
 	private int coordYSelection = -1;
@@ -54,10 +54,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int petitEcartMain = 30;
 	private int mainDuHaut = 20; // = depart - 10 - tailleCaseMain;
 	private int mainDuBas = 820; // = 820;
-	private int decalageMain = 2*depart;
-	private int departPlateau;
-	int largeurPossible;
-	int hauteurPossible;
+	private int decalageMain;
 	
 	/*
 	 * FIN Entiers Fixes
@@ -109,7 +106,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setPiocheSelectionnee (boolean piocheClic){
 		piocheSelectionnee = piocheClic;
 	}
-	public void setCaseSelectionnee (int caseSelected){
+	public void setCaseSelectionnee (boolean caseSelected){
 		casePlateauSelectionnee = caseSelected;
 	}
 	public void setCoordXSelection (int newCoordX){
@@ -140,28 +137,23 @@ public class Panneau_Plateau extends Pan_Abstract{
 		largeur = getSize().width;
 		hauteur = getSize().height;
 		
-		System.out.println("largeur/hauteur : " + largeur + " " + hauteur);
-		
-		largeurPossible = largeur - (largeur/7 + 20) - depart;
-		hauteurPossible = hauteur - 2*depart;
-		
-//		System.out.println("possibles : " + largeurPossible + " " + hauteurPossible);
+		int largeurPossible = largeur - (largeur/7 + 20) - depart;
+		int hauteurPossible = hauteur - 2*depart;
 		
 		if (largeurPossible < hauteurPossible) {
 			tailleCase = largeurPossible/mot.getPlateau().length();
-			departPlateau = largeurPossible/2;
 		}
 		else {
 			tailleCase = hauteurPossible/mot.getPlateau().length();
-			departPlateau = hauteurPossible/2;
 		}
-		tailleCaseMain = tailleCase + tailleCase/2;
+		
+		decalageMain = depart + 2*tailleCase;
 
-//		System.out.println("tailles : " + tailleCase + " " + tailleCaseMain);
+		tailleCaseMain = tailleCase + tailleCase/2;
+		petitEcartMain = tailleCaseMain/2;
 		
 		mainDuHaut = depart - 10 - tailleCaseMain;
 		mainDuBas = depart + mot.getPlateau().length() * tailleCase + 10;
-		
 		
 //		nettoyage(crayon);
 		
@@ -182,10 +174,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerMain2(crayon, mot.getTabPlayers()[1].getMain());
 		
 		if ( mainSelectionnee != -1 ){
-			dessinerMainSelectionner(crayon);
+			dessinerMainSelectionnee(crayon);
 		}
-		if ( casePlateauSelectionnee != -1 ){
-			System.out.println("une case est selectionnee");
+		if ( casePlateauSelectionnee /*!= -1*/ ){
+			System.out.println("case selectionnee");
 			dessinerCaseSelectionnee(crayon);
 		}
 		if ( piocheSelectionnee ){
@@ -213,25 +205,16 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.drawImage(fond, 0, 0, largeur, hauteur, this);
 	}
 	private void dessinerPlateau (Graphics2D crayon) {
-/*
-//		int dimPlateau = depart + (mot.getPlateau().length()-2) * tailleCase;
 		int dimPlateau = mot.getPlateau().length() * tailleCase;
-		
-//		crayon.drawImage(plateau, depart, depart, dimPlateau, dimPlateau, this);
-		int positionDepartY = depart + hauteurPossible/2 - departPlateau;
-		crayon.drawImage(plateau, depart, positionDepartY, dimPlateau, dimPlateau, this);
-*/		
-		int dimPlateau = mot.getPlateau().length() * tailleCase;
-		int dimensionHaute = hauteur - 2*depart;
 		crayon.drawImage(plateau, depart, depart, dimPlateau, dimPlateau, this);
-		
-		
 	}
 	private void dessinerQuadrillage (Graphics2D crayon){
 		crayon.setColor(Color.black);
-		for (int numeroLigne = 0; numeroLigne < mot.getPlateau().length()+1; numeroLigne++){
-			crayon.drawLine( depart, depart + numeroLigne*tailleCase, depart + mot.getPlateau().length()*tailleCase, depart + numeroLigne*tailleCase );
-			crayon.drawLine( depart + numeroLigne*tailleCase, depart, depart + numeroLigne*tailleCase, depart + mot.getPlateau().length()*tailleCase );
+		for (int numeroLigne = 1; numeroLigne < mot.getPlateau().length(); numeroLigne++){
+			// ligne horizontale
+			crayon.drawLine( depart + tailleCase, depart + numeroLigne*tailleCase, depart + (mot.getPlateau().length()-1)*tailleCase, depart + numeroLigne*tailleCase );
+			// ligne verticale
+			crayon.drawLine( depart + numeroLigne*tailleCase, depart + tailleCase, depart + numeroLigne*tailleCase, depart + (mot.getPlateau().length()-1)*tailleCase );
 		}
 	}
 	private void dessinerPioche (Graphics2D crayon) {
@@ -322,11 +305,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	
 	// 3 Methodes de dessin de details visuels
-	private void dessinerMainSelectionner(Graphics2D crayon) {
-		System.out.println("tuileMainSelectionnee : " + tuileMainSelectionnee);
-		
-		int coordX = 2*depart + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
-		casePlateauSelectionnee = -1;
+	private void dessinerMainSelectionnee(Graphics2D crayon) {
+		int coordX = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
+		casePlateauSelectionnee = false; //-1;
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
 		case 1 :
