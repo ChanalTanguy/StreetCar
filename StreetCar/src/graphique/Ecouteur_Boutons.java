@@ -38,7 +38,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 			pan.changeImageMenu("bouton_menu_a.png");
 			System.out.println("clic sur le bouton Menu");
 			MenuWindow menu = new MenuWindow();
-			menu.openMenuWindow();
+			menu.openWindow();
 			pan.changeImageMenu("bouton_menu.png");
 		}
 		else { System.out.println("clic vide"); }

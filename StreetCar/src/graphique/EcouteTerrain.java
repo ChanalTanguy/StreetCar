@@ -148,7 +148,7 @@ public class EcouteTerrain implements MouseListener, MouseMotionListener {
 				pop.setVisible(true);
 				pop.showMessageDialog(null, "bonjour", "Titre", JOptionPane.INFORMATION_MESSAGE);*/
 				MenuWindow menu = new MenuWindow();
-				menu.openMenuWindow();
+				menu.openWindow();
 
 			}
 			else { System.out.println("clic vide"); }
