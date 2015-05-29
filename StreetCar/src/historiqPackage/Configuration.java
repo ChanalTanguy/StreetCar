@@ -2,8 +2,8 @@ package historiqPackage;
 
 import joueurPackage.Joueur;
 import mainPackage.Moteur;
-import mainPackage.Pioche;
-import mainPackage.Plateau;
+import objectPackage.Pioche;
+import objectPackage.Plateau;
 
 public class Configuration {
 	private Joueur[] tabJoueurs;
