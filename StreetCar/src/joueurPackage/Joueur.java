@@ -81,8 +81,9 @@ public abstract class Joueur {
 	 * @param pioche 
 	 */
 	public void piocher(Pioche pioche) {
-		while (!main.isFull())
-			main.ajouterCarte(pioche.remove(0));
+		if (!pioche.isEmpty())
+			while (!main.isFull() && !pioche.isEmpty())
+				main.ajouterCarte(pioche.remove(0));
 	}
 	
 }
