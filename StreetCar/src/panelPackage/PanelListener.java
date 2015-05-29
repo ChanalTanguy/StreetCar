@@ -26,15 +26,17 @@ public class PanelListener {
 	public class ConfigureNewGameButtonListener implements ActionListener {
 
 		JDialog parent;
+		boolean openWindow;
 
-		public ConfigureNewGameButtonListener(JDialog parent){
+		public ConfigureNewGameButtonListener(JDialog parent, boolean b){
 			this.parent = parent;
+			this.openWindow = b;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
 			NewGameWindow win = new NewGameWindow();
-			win.openWindow();
+			win.openWindow(openWindow);
 		}
 
 	}

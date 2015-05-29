@@ -35,7 +35,7 @@ public class MenuPanel extends InterfacePanel {
 	
 		addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), null);
 
-		addNewButton(zone2, "Nouvelle partie", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog), null);
+		addNewButton(zone2, "Nouvelle partie", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), null);
 
 		addNewButton(zone2, "Sauvegarder la partie", buttonSize, null, null, null);
 		addNewButton(zone2, "Charger une partie", buttonSize, null, null, null);

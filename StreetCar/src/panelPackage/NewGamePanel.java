@@ -23,7 +23,7 @@ public class NewGamePanel extends InterfacePanel {
 	String selected1 = "Humain";
 	String selected2 = "Facile";
 	
-	boolean openMenu;
+	boolean openMenu = false;
 
 	Dimension buttonSize = setNewDimension(175,60);
 
@@ -68,9 +68,9 @@ public class NewGamePanel extends InterfacePanel {
 
 		
 		if (openMenu){
-			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
-		} else {
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+		} else {
+			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}
 		
 		this.add(zone1);
