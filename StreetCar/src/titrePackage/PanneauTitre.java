@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Box.Filler;
 
 import constantesPackages.Constantes;
 
@@ -16,6 +17,19 @@ public class PanneauTitre extends JPanel{
 
 	Boolean selection = false;
 	int selectionner = -1;
+	public int actif = 0;
+	
+	
+	BufferedImage background ;
+	BufferedImage nouvellePartie ;
+	BufferedImage chargerPartie;
+	BufferedImage defis;
+	BufferedImage options ;
+	BufferedImage credits ;
+	BufferedImage quitter ;
+	BufferedImage titre ;
+	BufferedImage fleche ;
+	
 	
 	PanneauTitre(FenetreTitre fen)
 	{
@@ -23,23 +37,33 @@ public class PanneauTitre extends JPanel{
 		EcouteTitre ecoute = new EcouteTitre(this, fen);
 		this.addMouseListener(ecoute);
 		this.addMouseMotionListener(ecoute);
+		initImage();
 	}
 	
+	private void initImage() {
+		background = Constantes.Images.initBackground("tram.png");
+		nouvellePartie = Constantes.Images.initBackground("nouvellePartie.png");
+		chargerPartie = Constantes.Images.initBackground("chargerPartie.png");
+		defis = Constantes.Images.initBackground("defis.png");
+		options = Constantes.Images.initBackground("options.png");
+		credits = Constantes.Images.initBackground("credits.png");
+		quitter = Constantes.Images.initBackground("quitter.png");
+		titre = Constantes.Images.initBackground("titre.png");
+		fleche = Constantes.Images.initBackground("fleche.png");		
+	}
+
 	public void paintComponent (Graphics g){
 		Graphics2D crayon = (Graphics2D) g;
-		
-		BufferedImage background = Constantes.Images.initBackground("tram.png");
-		BufferedImage nouvellePartie = Constantes.Images.initBackground("nouvellePartie.png");
-		BufferedImage chargerPartie = Constantes.Images.initBackground("chargerPartie.png");
-		BufferedImage defis = Constantes.Images.initBackground("defis.png");
-		BufferedImage options = Constantes.Images.initBackground("options.png");
-		BufferedImage credits = Constantes.Images.initBackground("credits.png");
-		BufferedImage quitter = Constantes.Images.initBackground("quitter.png");
-		BufferedImage titre = Constantes.Images.initBackground("titre.png");
-		BufferedImage fleche = Constantes.Images.initBackground("fleche.png");
-			
+
 		crayon.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-				
+		
+		if(actif == 0) ecranTitre(crayon); 
+		if(actif == 3) defis(crayon);
+		if(actif == 4) options(crayon);
+		if(actif == 5) credits(crayon);
+	}
+
+	private void ecranTitre(Graphics2D crayon) {
 		crayon.drawImage(titre, getWidth()/5, 50, 900, 90, this);
 		crayon.drawImage(nouvellePartie, getWidth()/3, (1+4)*50, 300, 45, this);
 		crayon.drawImage(chargerPartie, getWidth()/3, (2+4)*50, 300, 45, this);
@@ -47,13 +71,26 @@ public class PanneauTitre extends JPanel{
 		crayon.drawImage(options, getWidth()/3, (4+4)*50, 300, 45, this);
 		crayon.drawImage(credits, getWidth()/3, (5+4)*50, 300, 45, this);
 		crayon.drawImage(quitter, getWidth()/3, (10+4)*50, 300, 45, this);
-		
+			
 		if(selection)
 		{
 			crayon.setColor(Color.white);
 			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*51, 90, 35, this);
-			//crayon.drawRect(getWidth()/3, (selectionner+4)*50, 300, 45);
-		}			
+		}
+	}
+
+	public void defis(Graphics2D crayon) {
+		// TODO Auto-generated method stub
+	}
+
+	public void options(Graphics2D crayon) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void credits(Graphics2D crayon) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

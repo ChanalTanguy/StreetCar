@@ -33,8 +33,11 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		int x = e.getX();
 		int y = e.getY();
 
-		menusAction(x, y);
-		quitterAction(x,y);
+		if(pan.actif == 0)
+		{
+			menusAction(x, y);
+			quitterAction(x,y);
+		}
 		
 		pan.repaint();
 	}
@@ -90,26 +93,29 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		switch(selectionner)
 		{
 			case 1 : //Nouvelle partie
+				
 				NewGameWindow g = new NewGameWindow();
-				g.openNewGameWindow();
+				g.openWindow();
 				/*
+				fen.fermeture();
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
-				f.disposition_V2(m, f.getSize());*/
+				f.disposition_V2(m, f.getSize());
+				*/
 				break;
 			case 2 : //Charger partie
 				
 				break;
 			case 3 : //Défis
-				
+				pan.actif = 3;
 				break;
 			case 4 : //Options
-				
+				pan.actif = 4;
 				break;
 			case 5 : //Crédits
-				
+				pan.actif = 5;
 				break;
-			case 10 : //Quitter
+			case 6 :
 				fen.fermeture();
 				break;
 		}
