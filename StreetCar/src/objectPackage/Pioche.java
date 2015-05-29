@@ -1,9 +1,9 @@
-package mainPackage;
+package objectPackage;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import tuilePackage.Tuile;
+import objectPackage.tuilePackage.Tuile;
 
 public class Pioche extends ArrayList<Tuile>{
 	

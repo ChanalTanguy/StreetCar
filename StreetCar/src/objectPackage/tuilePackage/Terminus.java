@@ -1,4 +1,4 @@
-package tuilePackage;
+package objectPackage.tuilePackage;
 
 
 public class Terminus extends Tuile{

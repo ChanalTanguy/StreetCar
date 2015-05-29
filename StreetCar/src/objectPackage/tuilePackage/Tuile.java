@@ -1,4 +1,4 @@
- package tuilePackage;
+ package objectPackage.tuilePackage;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

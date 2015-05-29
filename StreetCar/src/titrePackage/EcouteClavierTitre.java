@@ -4,8 +4,8 @@ import graphique.Fenetre;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import objectPackage.Plateau;
 import mainPackage.Moteur;
-import mainPackage.Plateau;
 
 
 public class EcouteClavierTitre implements KeyListener {

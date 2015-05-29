@@ -4,8 +4,8 @@ import graphique.Fenetre;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import objectPackage.Plateau;
 import mainPackage.Moteur;
-import mainPackage.Plateau;
 
 public class EcouteTitre implements MouseListener {
 
