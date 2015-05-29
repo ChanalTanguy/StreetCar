@@ -11,9 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import windowPackage.FUCKINGConfirmWindow;
 import windowPackage.ConfirmWindow;
 import windowPackage.MenuWindow;
+import windowPackage.NewGameWindow;
+import windowPackage.SettingsWindow;
 
 public class PanelListener {
 
@@ -22,7 +23,7 @@ public class PanelListener {
 		// Clic sur le bouton "Nouvelle partie" du menu principal
 
 		public void actionPerformed(ActionEvent e) {
-			MenuWindow win = new MenuWindow();
+			NewGameWindow win = new NewGameWindow();
 			win.openNewGameWindow();
 		}
 
@@ -42,7 +43,7 @@ public class PanelListener {
 	public class SettingsButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			MenuWindow win = new MenuWindow();
+			SettingsWindow win = new SettingsWindow();
 			win.openSettingsWindow();
 		}
 		
