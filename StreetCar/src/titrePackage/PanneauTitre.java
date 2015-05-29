@@ -20,7 +20,9 @@ public class PanneauTitre extends JPanel{
 	PanneauTitre(FenetreTitre fen)
 	{
 		super();
-		this.addMouseListener(new EcouteTitre(this, fen));
+		EcouteTitre ecoute = new EcouteTitre(this, fen);
+		this.addMouseListener(ecoute);
+		this.addMouseMotionListener(ecoute);
 	}
 	
 	public void paintComponent (Graphics g){
