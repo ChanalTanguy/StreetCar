@@ -52,7 +52,7 @@ public class EcouteClavierTitre implements KeyListener {
 				fen.fermeture();
 				Moteur m = new Moteur(new Plateau());
 				Fenetre f = new Fenetre("Street Car");
-				f.disposition(m, f.getSize());
+				f.disposition_V2(m, f.getSize());
 
 				break;
 			case 2 : //Charger partie
