@@ -1,10 +1,12 @@
-package mainPackage;
+package objectPackage;
 
-import java.awt.Dimension;
 import java.awt.Point;
 
 import joueurPackage.Coup;
-import tuilePackage.*;
+import objectPackage.tuilePackage.Connection;
+import objectPackage.tuilePackage.Escale;
+import objectPackage.tuilePackage.Terminus;
+import objectPackage.tuilePackage.Tuile;
 import constantesPackages.Constantes;
 
 public class Plateau {
@@ -94,6 +96,10 @@ public class Plateau {
 		return plateau;
 	}
 
+	public int length (){
+		return plateau.length;
+	}
+	
 	public boolean coupValide (Tuile nouvTuile, Coup coup){
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser

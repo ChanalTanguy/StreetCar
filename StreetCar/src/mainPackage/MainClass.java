@@ -4,6 +4,8 @@ import graphique.Fenetre;
 
 import javax.swing.SwingUtilities;
 
+import objectPackage.Plateau;
+
 public class MainClass implements Runnable{
 
 	public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class MainClass implements Runnable{
 	public void run(){
 		Moteur m = new Moteur(new Plateau());
 		Fenetre f = new Fenetre("Street Car"); 
-		f.disposition(m, f.getSize());
+//		f.disposition(m, f.getSize());
+		f.disposition_V2(m, f.getSize());
 	}
 }

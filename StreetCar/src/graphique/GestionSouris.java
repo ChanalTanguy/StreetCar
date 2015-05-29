@@ -9,13 +9,17 @@ public class GestionSouris implements MouseListener{
 	Panneau pan = null;
 	Fenetre fen = null;
 	JButton but = null;
-	Panneau panNotif = null; 
+	Panneau panNotif = null;
+	Pan_Abstract pan_secondaire = null;
+	Pan_Abstract pan_secondaire_notif = null;
 	
 	public GestionSouris (Panneau referencePan, Panneau referenceNotif){
 		pan = referencePan;
 		panNotif = referenceNotif;
 	}
-	
+	public GestionSouris (Pan_Abstract referencePan_Abs){
+		pan_secondaire = referencePan_Abs;
+	}
 	public GestionSouris (Fenetre referenceFen, Panneau referenceNotif){
 		fen = referenceFen;
 		panNotif = referenceNotif;
@@ -26,7 +30,6 @@ public class GestionSouris implements MouseListener{
 		panNotif = referenceNotif;
 	}
 	
-	@Override
 	public void mouseClicked(MouseEvent event) {
 		String resultat = "";
 		if (pan != null){
@@ -42,28 +45,25 @@ public class GestionSouris implements MouseListener{
 		//panNotif.updateMessage(resultat);
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent event) {
 		if (pan != null){
 			pan.activerContours();
 		}
+		if (pan_secondaire != null){
+			pan_secondaire.activerContours();
+		}
 	}
 
-	@Override
 	public void mouseExited(MouseEvent event) {
 		if (pan != null){
 			pan.desactiverContours();
 		}
+		if (pan_secondaire != null){
+			pan_secondaire.desactiverContours();
+		}
 	}
 
-	@Override
-	public void mousePressed(MouseEvent event) {
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent event) {
-		
-	}
+	public void mousePressed(MouseEvent event) {}
+	public void mouseReleased(MouseEvent event) {}
 
 }

@@ -3,8 +3,6 @@ package graphique;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +18,16 @@ public class Fenetre extends JFrame{
 			
 	public Fenetre (String title){
 		super(title);
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int largeur = tk.getScreenSize().width;
-		int hauteur = tk.getScreenSize().height;
+		int largeur = (int) Constantes.Resolution.width;
+		int hauteur = (int) Constantes.Resolution.height;
+		
+		
+		if (largeur > hauteur){
+			largeur = 7*hauteur/6;
+		}
+		else {
+			hauteur = 7*largeur/6;
+		}
 		
 		try {		
 			//Chargement des images
@@ -30,14 +35,59 @@ public class Fenetre extends JFrame{
 			this.setIconImage(icone);
 		}
 		catch (IOException e) { e.printStackTrace();}	
-		
+	
 		setSize(largeur, hauteur);
+//		setSize(1100, 900);
+
+		
 		setLocationRelativeTo(null);
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setUndecorated(true);
+		setVisible(true);
 
 	}
 	
+	public void disposition_V2 (Moteur referenceMoteur, Dimension dim){
+		// Variables Kévin
+		int quotient = 9;
+		int largeurPanneauPrincipal = ( (quotient-1) * dim.width/quotient);
+		int largeurPanneauLateral = dim.width/quotient;
+		int hauteur = dim.height;
+		int hauteurNotif = hauteur/6;
+		int hauteurBoutons = hauteur/9;
+		// FIN Variables
+		
+		// Panneau de jeu principal
+		Panneau_Plateau zonePlateau = new Panneau_Plateau (Color.orange, referenceMoteur);
+		
+		// JPanel Lateral
+		JPanel regroupementLateral = new JPanel();
+		// Panneau de notifications
+		referenceMoteur.setPanJeu(zonePlateau);
+		// Panneau de navigations via l'historique
+		Panneau_Historique zoneHistorique = new Panneau_Historique (Color.gray, referenceMoteur);
+		// Panneau de menus des boutons
+		Panneau_Boutons zoneBoutons = new Panneau_Boutons (Color.pink);
+		
+		// Redimensionnement des differents Panneaux
+		zonePlateau.setPreferredSize( new Dimension( largeurPanneauPrincipal, hauteur) );
+		regroupementLateral.setPreferredSize( new Dimension( largeurPanneauLateral, hauteur ) );
+		zoneBoutons.setPreferredSize( new Dimension( largeurPanneauLateral, hauteurBoutons ) );
+		
+		// Disposition dans le JPanel Lateral
+		regroupementLateral.setLayout(new BorderLayout());
+//		regroupementLateral.add(zoneNotifications, BorderLayout.NORTH);
+		regroupementLateral.add(zoneHistorique, BorderLayout.CENTER);
+		regroupementLateral.add(zoneBoutons, BorderLayout.SOUTH);
+		
+		// Disposition du Panneau de Jeu et du JPanel Lateral
+		add(zonePlateau, BorderLayout.CENTER);
+		add(regroupementLateral, BorderLayout.EAST);
+		
+		pack();
+		referenceMoteur.start();
+	}
+/*	
 	public void disposition (Moteur m, Dimension dim){
 		Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
 		
@@ -73,7 +123,7 @@ public class Fenetre extends JFrame{
 		regroupementLateral.setPreferredSize(new Dimension(dim.width/6, dim.height));
 		notifications.setPreferredSize(new Dimension(dim.width/6, dim.height/5));
 		
-		menus.setPreferredSize(new Dimension(dim.width/6, dim.height/5 /* + dim.height/20 */ ));
+		menus.setPreferredSize(new Dimension(dim.width/6, dim.height/5 ));
 		
 		histo_nord.setPreferredSize(new Dimension(dim.width/12, 50));
 		histo_sud.setPreferredSize(new Dimension(dim.width/12, 50));
@@ -99,4 +149,5 @@ public class Fenetre extends JFrame{
 		pack();
 		m.start();
 	}
+*/
 }

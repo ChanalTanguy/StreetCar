@@ -1,6 +1,6 @@
 package joueurPackage;
 
-import tuilePackage.Tuile;
+import objectPackage.tuilePackage.Tuile;
 import constantesPackages.Constantes;
 
 public class MainJoueur {
@@ -35,6 +35,9 @@ public class MainJoueur {
 		return cartesJoueur[p];
 	}
 
+	public int length (){
+		return cartesJoueur.length;
+	}
 	/**
 	 * Modifie la p ième tuile de la main
 	 * @param p

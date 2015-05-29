@@ -6,8 +6,8 @@ import joueurPackage.Coup;
 import joueurPackage.JoueurIA;
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
-import mainPackage.Plateau;
-import tuilePackage.Tuile;
+import objectPackage.Plateau;
+import objectPackage.tuilePackage.Tuile;
 import constantesPackages.Constantes;
 
 public class IAFacile implements InterfaceIA {

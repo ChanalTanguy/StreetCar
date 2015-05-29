@@ -1,7 +1,8 @@
 package joueurPackage;
 
-import mainPackage.*;
-import tuilePackage.*;
+import objectPackage.Pioche;
+import objectPackage.Plateau;
+import objectPackage.tuilePackage.Tuile;
 
 public abstract class Joueur {
 	

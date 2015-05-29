@@ -1,10 +1,16 @@
 package mainPackage;
 
+import graphique.Panneau_Plateau;
+
 import java.awt.Point;
 
-import graphique.Panneau;
+import joueurPackage.Coup;
+import joueurPackage.Joueur;
+import joueurPackage.JoueurHumain;
+import joueurPackage.JoueurIA;
+import objectPackage.Pioche;
+import objectPackage.Plateau;
 import constantesPackages.Constantes;
-import joueurPackage.*;
 
 public class Moteur {
 
@@ -13,9 +19,9 @@ public class Moteur {
 	private Plateau plateauDeJeu;
 	private int nbActions;
 	private Pioche pioche;
-	private Panneau panNotif;
-	private Panneau panJeu;
+	private Panneau_Plateau panJeu;
 	private Coup coupSimultane;
+	
 	
 	
 	/*
@@ -24,7 +30,7 @@ public class Moteur {
 	public Moteur(Plateau referencePlateau) {
 		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
-		players[0] = new JoueurIA(this,1);
+		players[0] = new JoueurHumain(this,1);
 		players[1] = new JoueurIA(this,4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
@@ -57,12 +63,8 @@ public class Moteur {
 		return pioche;
 	}
 	
-	public void setPanNotif(Panneau p) {
-		panNotif = p;
-	}
-	
-	public void setPanJeu (Panneau p){
-		panJeu = p;
+	public void setPanJeu (Panneau_Plateau referencePanJeu){
+		panJeu = referencePanJeu;
 	}
 	
 	public void start (){
@@ -163,7 +165,7 @@ public class Moteur {
 			System.out.println("Mauvais coup");
 			coupSimultane = null;
 		}
-		panNotif.updateMessage(msg);
+		panJeu.setNotifications(msg);
 		panJeu.repaint();
 		
 		players[currentPlayer].attendCoup();
