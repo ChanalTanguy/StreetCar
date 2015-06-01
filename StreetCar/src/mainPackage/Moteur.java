@@ -185,10 +185,8 @@ public class Moteur {
 		for (int numeroPlayer = 0; numeroPlayer < players.length; numeroPlayer++){
 			players[numeroPlayer] = dernierTour.getJoueurAt(numeroPlayer).clone();
 		}
-		plateauDeJeu = dernierTour.getPlateauDuTour();
+		plateauDeJeu = dernierTour.getPlateauDuTour().clone();
 		nbActions = 4;
-		pioche = dernierTour.getPiocheDuTour();
-		currentPlayer = dernierTour.getJoueurCourant();	
 		panJeu.repaint();
 		players[currentPlayer].attendCoup();
 	}
