@@ -1,4 +1,4 @@
-package joueurPackage;
+	package joueurPackage;
 
 import mainPackage.Moteur;
 
@@ -6,9 +6,11 @@ public class JoueurHumain extends Joueur {
 
 	private boolean enabled;
 	Moteur moteur;
+
+	private static int typeHumain = 0;
 	
 	public JoueurHumain(Moteur m, int ligne) {
-		super(new MainJoueur(), ligne, 0);
+		super(new MainJoueur(), ligne, typeHumain);
 		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;
@@ -59,10 +61,12 @@ public class JoueurHumain extends Joueur {
 	}
 	
 	public Joueur clone() {
-		JoueurHumain j = new JoueurHumain(moteur, this.ligne);
-		j.main = this.main.clone();
-		j.phase = this.phase;
+		JoueurHumain joueur_renvoi = new JoueurHumain(moteur, objectif.getLigne());
 		
-		return j;
+		joueur_renvoi.main = this.main.clone();
+		joueur_renvoi.phase = this.phase;
+		joueur_renvoi.objectif = this.objectif.clone();
+		
+		return joueur_renvoi;
 	}
 }
