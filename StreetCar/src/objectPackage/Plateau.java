@@ -12,6 +12,20 @@ import constantesPackages.Constantes;
 public class Plateau {
 	private Tuile[][] plateau;
 
+	private static final int[][] PositionEscale = {  { 1, 5},
+												     { 2, 9},
+												     { 4, 2},
+												     { 4, 7},
+												     { 5,12},
+												     { 6, 4},
+												     { 7, 9},
+												     { 8, 1},
+												     { 9, 6},
+												     { 9,11},
+												     {11, 4},
+												     {12, 8}
+	};
+	
 	public Plateau (){
 		plateau = new Tuile[Constantes.Dimensions.dimensionPlateau][Constantes.Dimensions.dimensionPlateau];
 		initialisationTuile();
@@ -30,18 +44,18 @@ public class Plateau {
 		}
 
 		// Mettre les escales
-		setTuileAt( 1,  5, new Escale( 1));
-		setTuileAt( 2,  9, new Escale( 2));
-		setTuileAt( 4,  2, new Escale( 3));
-		setTuileAt( 4,  7, new Escale( 4));
-		setTuileAt( 5, 12, new Escale( 5));
-		setTuileAt( 6,  4, new Escale( 6));
-		setTuileAt( 7,  9, new Escale( 7));
-		setTuileAt( 8,  1, new Escale( 8));
-		setTuileAt( 9,  6, new Escale( 9));
-		setTuileAt( 9, 11, new Escale(10));
-		setTuileAt(11,  4, new Escale(11));
-		setTuileAt(12,  8, new Escale(12));
+		setTuileAt( PositionEscale[ 0][0], PositionEscale[ 0][1], new Escale( 1));
+		setTuileAt( PositionEscale[ 1][0], PositionEscale[ 1][1], new Escale( 2));
+		setTuileAt( PositionEscale[ 2][0], PositionEscale[ 2][1], new Escale( 3));
+		setTuileAt( PositionEscale[ 3][0], PositionEscale[ 3][1], new Escale( 4));
+		setTuileAt( PositionEscale[ 4][0], PositionEscale[ 4][1], new Escale( 5));
+		setTuileAt( PositionEscale[ 5][0], PositionEscale[ 5][1], new Escale( 6));
+		setTuileAt( PositionEscale[ 6][0], PositionEscale[ 6][1], new Escale( 7));
+		setTuileAt( PositionEscale[ 7][0], PositionEscale[ 7][1], new Escale( 8));
+		setTuileAt( PositionEscale[ 8][0], PositionEscale[ 8][1], new Escale( 9));
+		setTuileAt( PositionEscale[ 9][0], PositionEscale[ 9][1], new Escale(10));
+		setTuileAt( PositionEscale[10][0], PositionEscale[10][1], new Escale(11));
+		setTuileAt( PositionEscale[11][0], PositionEscale[11][1], new Escale(12));
 
 		// Mettre les Terminus
 		Tuile t;
@@ -224,6 +238,14 @@ public class Plateau {
 		return p;
 	}
 	
+	public Point getEscalelPosition(int numberEscale) {
+		
+		try {
+			return new Point(PositionEscale[numberEscale-1][0],PositionEscale[numberEscale-1][1]);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	public Plateau clone() {
 		Plateau p = new Plateau();

@@ -9,12 +9,16 @@ public abstract class Joueur {
 	MainJoueur main;
 	int phase = 1;
 	int ligne;
+	int[] escales;
 	int typeJoueur;
 	
 	public Joueur(MainJoueur m, int ligne, int type) {
 		main = m;
 		this.ligne = ligne;
 		typeJoueur = type;
+		escales = new int[2];
+		escales[0] = 1;
+		escales[0] = 5;
 	}
 	
 	public abstract void attendCoup();
@@ -37,6 +41,10 @@ public abstract class Joueur {
 	
 	public int getType (){
 		return typeJoueur;
+	}
+	
+	public int[] getEscales() {
+		return escales;
 	}
 	
 	/**
