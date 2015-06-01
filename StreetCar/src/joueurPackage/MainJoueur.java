@@ -12,7 +12,7 @@ public class MainJoueur {
 	}
 	
 	public String toString(){
-		String resultat = "nombre de tuiles : " + nombreDeTuilesJouables() + "\n";
+		String resultat = nombreDeTuilesJouables() + "\n"; //On peut ajouter "nombre de tuiles : " +
 		for (int numTuile = 0; numTuile < cartesJoueur.length; numTuile++){
 			//resultat += "\t Debut Tuile \n";
 			resultat += cartesJoueur[numTuile].toString() + "\n";

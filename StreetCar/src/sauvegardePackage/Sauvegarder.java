@@ -1,13 +1,9 @@
 package sauvegardePackage;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-
-import javax.imageio.stream.FileImageOutputStream;
-
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import objectPackage.Pioche;
@@ -28,15 +24,17 @@ public class Sauvegarder {
 		mot = moteur;
 		dateCourante = new Date();
 		name = "Sauvegarde du " + dateCourante + ".txt";
+		save(this);
 	}
 	
 	Sauvegarder(Moteur moteur, String nom)
 	{
 		mot = moteur;
 		name = nom + ".txt";
+		save(this);
 	}
 	
-	void save(Sauvegarder s)
+	private void save(Sauvegarder s)
 	{
 		joueur = mot.getcurrentPlayer();
 		mainJactif = mot.getTabPlayers()[joueur].getMain();
@@ -49,18 +47,16 @@ public class Sauvegarder {
 		try 
 		{
 			FileWriter f = new FileWriter(new File(name));
-
-			f.write("Joueur actif : " + joueur);
+			f.write(new String(""+joueur));
 			f.write(System.getProperty("line.separator"));
+						
+			f.write(mainJactif.toString());
+				
+			f.write(mainJinact.toString());
+					
+			f.write(pio.toString());
+			f.write(System.getProperty("line.separator"));		
 			
-			f.write("Main joueur actif : " + mainJactif.toString());
-			f.write(System.getProperty("line.separator"));
-			
-			f.write("Main joueur inactif : " + mainJinact.toString());
-			f.write(System.getProperty("line.separator"));
-			
-			f.write("Plateau :");
-			f.write(System.getProperty("line.separator"));
 			for(int i=0; i<12; i++)
 			{
 				for(int j=0; j<12; j++)

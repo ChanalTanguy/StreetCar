@@ -9,9 +9,11 @@ public class MainSauvegarde {
 	public static void main(String args[])
 	{
 		Moteur m = new Moteur(new Plateau());
-		Sauvegarder s = new Sauvegarder(m);
+		Sauvegarder s = new Sauvegarder(m, "test");
 		
-		s.save(s);
-	
+		Chargement c = new Chargement();
+		c.charger(m, "test.txt");
+		
+		Sauvegarder copyC = new Sauvegarder(m, "testCopy");
 	}
 }

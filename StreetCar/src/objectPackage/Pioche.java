@@ -1,6 +1,7 @@
 package objectPackage;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Random;
 
 import objectPackage.tuilePackage.Tuile;
@@ -69,16 +70,17 @@ public class Pioche extends ArrayList<Tuile>{
 		this.addAll(tampon);
 	}
 	
-/*	
+	
 	public String toString (){
 		String resultat = "";
 		ListIterator<Tuile> iterateurPioche = this.listIterator();
+		resultat = resultat + this.size() + " "; 
 		while ( iterateurPioche.hasNext() ){
 			resultat = resultat + iterateurPioche.next().toString() + " ";
 		}
 		return resultat;
 	}
-*/	
+
 	
 	public Pioche clone (){
 		Pioche renvoi = new Pioche();
