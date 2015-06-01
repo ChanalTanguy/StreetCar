@@ -8,12 +8,14 @@ class TuileChemin {
 	private String direction;
 	private int priority;
 	private int heuristique;
+	private TuileChemin previous;
 	
-	public TuileChemin(Point po, String d, int pr, int h) {
+	public TuileChemin(Point po, String d, int pri, int h, TuileChemin pre) {
 		position = po;
 		direction = d;
-		priority = pr;
+		priority = pri;
 		heuristique = h;
+		previous = pre;
 	}
 	
 	Point getPosition() {
@@ -30,5 +32,9 @@ class TuileChemin {
 	
 	int getHeuristique() {
 		return heuristique;
+	}
+	
+	TuileChemin getPrevious() {
+		return previous;
 	}
 }
