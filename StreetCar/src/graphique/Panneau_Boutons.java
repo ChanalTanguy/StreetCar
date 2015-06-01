@@ -18,9 +18,9 @@ public class Panneau_Boutons extends Pan_Abstract{
 	
 	Ecouteur_Boutons ecouteur;
 	
-	public Panneau_Boutons (Color newCouleur){
+	public Panneau_Boutons (Color newCouleur, Panneau_Plateau referencePanneauDeJeu){
 		super(newCouleur); 
-		ecouteur = new Ecouteur_Boutons(this);
+		ecouteur = new Ecouteur_Boutons(this, referencePanneauDeJeu);
 		addMouseListener(ecouteur);
 		addMouseMotionListener(ecouteur);
 		initialiserImages();

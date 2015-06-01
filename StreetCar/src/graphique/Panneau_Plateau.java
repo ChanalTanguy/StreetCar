@@ -108,6 +108,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public int getDimensionPioche (){
 		return dimensionPioche;
 	}
+	public Moteur getMoteur (){
+		return mot;
+	}
 	
 	public void setMainSelectionnee (int numeroMain) {
 		mainSelectionnee = numeroMain;

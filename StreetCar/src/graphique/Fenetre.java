@@ -36,8 +36,8 @@ public class Fenetre extends JFrame{
 		}
 		catch (IOException e) { e.printStackTrace();}	
 	
-		setSize(largeur, hauteur);
-//		setSize(1100, 900);
+//		setSize(largeur, hauteur);
+		setSize(800, 800);
 
 		
 		setLocationRelativeTo(null);
@@ -53,7 +53,6 @@ public class Fenetre extends JFrame{
 		int largeurPanneauPrincipal = ( (quotient-1) * dim.width/quotient);
 		int largeurPanneauLateral = dim.width/quotient;
 		int hauteur = dim.height;
-		int hauteurNotif = hauteur/6;
 		int hauteurBoutons = hauteur/9;
 		// FIN Variables
 		
@@ -67,7 +66,7 @@ public class Fenetre extends JFrame{
 		// Panneau de navigations via l'historique
 		Panneau_Historique zoneHistorique = new Panneau_Historique (Color.gray, referenceMoteur);
 		// Panneau de menus des boutons
-		Panneau_Boutons zoneBoutons = new Panneau_Boutons (Color.pink);
+		Panneau_Boutons zoneBoutons = new Panneau_Boutons (Color.pink, zonePlateau);
 		
 		// Redimensionnement des differents Panneaux
 		zonePlateau.setPreferredSize( new Dimension( largeurPanneauPrincipal, hauteur) );
@@ -87,8 +86,10 @@ public class Fenetre extends JFrame{
 		pack();
 		referenceMoteur.start();
 	}
-/*	
+	
+	
 	public void disposition (Moteur m, Dimension dim){
+/*
 		Panneau zonePlateau = new Panneau (Color.orange, "zone de jeu", Constantes.Panneau.plateau, m);
 		
 		JPanel regroupementLateral = new JPanel();
@@ -148,6 +149,7 @@ public class Fenetre extends JFrame{
 		
 		pack();
 		m.start();
-	}
 */
+	}
+
 }
