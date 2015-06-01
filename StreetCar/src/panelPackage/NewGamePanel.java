@@ -38,12 +38,6 @@ public class NewGamePanel extends InterfacePanel {
 		this.buildNewGamePanel();
 	}
 
-	/*public NewGamePanel(String niv1, String niv2){
-		selected1 = niv1;
-		selected2 = niv2;
-		this.buildNewGamePanel();
-	}*/
-
 	private void buildNewGamePanel(){
 
 		JPanel zone1 = newRadioButtonZone("Niveau du joueur");

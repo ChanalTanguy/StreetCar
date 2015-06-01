@@ -52,16 +52,13 @@ public class SettingsPanel extends InterfacePanel {
 		} else {
 			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}
-		
-		//addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
-		
+				
 		this.add(zone1);
 		this.add(zone2);
 	}
 	
 	private JPanel newCheckBoxZone(int x, int y){
 		JPanel panel = new JPanel();
-		//panel.setBorder(BorderFactory.createTitledBorder(title));
 		panel.setPreferredSize(setNewDimension(x,y));
 		return panel;
 	}

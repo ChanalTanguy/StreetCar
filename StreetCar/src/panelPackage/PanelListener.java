@@ -24,6 +24,8 @@ import windowPackage.SettingsWindow;
 public class PanelListener {
 
 	public class ConfigureNewGameButtonListener implements ActionListener {
+		
+		// Ouvre la fenêtre de configuration d'une nouvelle partie
 
 		JDialog parent;
 		boolean openWindow;
@@ -42,6 +44,8 @@ public class PanelListener {
 	}
 
 	public class StartNewGameButtonListener implements ActionListener {
+		
+		// Démarre une nouvelle partie
 
 		JDialog parent;
 		Fenetre mainGame;
@@ -61,6 +65,8 @@ public class PanelListener {
 	}
 
 	public class QuitButtonListener implements ActionListener {
+		
+		// Ouvre la fenêtre demandant de confirmer la fermeture du jeu
 
 		public void actionPerformed(ActionEvent e) {
 			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
@@ -72,6 +78,8 @@ public class PanelListener {
 	}
 
 	public class SettingsButtonListener implements ActionListener {
+		
+		// Ouvre la fenêtre de configuration des options
 		
 		JDialog parent;
 		boolean openWindow;
@@ -90,6 +98,8 @@ public class PanelListener {
 	}
 
 	public class Quit implements ActionListener {
+		
+		// Quitte le jeu
 
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
@@ -98,6 +108,8 @@ public class PanelListener {
 	}
 
 	public class DebugCheckBoxListener implements ItemListener {
+		
+		// Agit selon si le mode debug est activé ou non
 
 		public void itemStateChanged(ItemEvent e) {
 			int change = e.getStateChange();
@@ -111,7 +123,7 @@ public class PanelListener {
 
 	public class ReturnButtonListener implements ActionListener {
 
-		// Clic sur le bouton "Cancel" d'un des menus
+		// Ferme la	fenêtre courante
 
 		JDialog parentDialog;
 		MenuWindow window;
