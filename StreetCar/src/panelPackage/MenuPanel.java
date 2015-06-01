@@ -40,7 +40,7 @@ public class MenuPanel extends InterfacePanel {
 		addNewButton(zone2, "Sauvegarder la partie", buttonSize, null, null, null);
 		addNewButton(zone2, "Charger une partie", buttonSize, null, null, null);
 		addNewButton(zone2, "Défis", buttonSize, null, null, null);
-		addNewButton(zone2, "Options", buttonSize, null, listener.new SettingsButtonListener(), null);
+		addNewButton(zone2, "Options", buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), null);
 		addNewButton(zone2, "Crédits", buttonSize, null, null, null);
 		addNewButton(zone3, "Quitter", buttonSize, null, listener.new QuitButtonListener(), null);
 				

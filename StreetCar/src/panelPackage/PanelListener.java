@@ -72,10 +72,19 @@ public class PanelListener {
 	}
 
 	public class SettingsButtonListener implements ActionListener {
+		
+		JDialog parent;
+		boolean openWindow;
+		
+		public SettingsButtonListener(JDialog parent, boolean b){
+			this.parent = parent;
+			this.openWindow = b;
+		}
 
 		public void actionPerformed(ActionEvent e) {
+			parent.dispose();
 			SettingsWindow win = new SettingsWindow();
-			win.openSettingsWindow();
+			win.openWindow(openWindow);
 		}
 
 	}

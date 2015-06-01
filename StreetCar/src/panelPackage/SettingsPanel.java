@@ -17,15 +17,24 @@ import javax.swing.JPanel;
 
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
+import windowPackage.MenuWindow;
 
 public class SettingsPanel extends InterfacePanel {
 	
 	Dimension buttonSize = setNewDimension(175,40);
 	
+	boolean openMenu = false;
+	
 	boolean selectDebug = false;
 
 	public SettingsPanel(JDialog parent){
 		parentDialog = parent;
+		this.buildSettingsPanel();
+	}
+	
+	public SettingsPanel(JDialog parent, boolean b){
+		parentDialog = parent;
+		openMenu = b;
 		this.buildSettingsPanel();
 	}
 
@@ -38,7 +47,13 @@ public class SettingsPanel extends InterfacePanel {
 		
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		
-		addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+		if (openMenu){
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+		} else {
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+		}
+		
+		//addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		
 		this.add(zone1);
 		this.add(zone2);
