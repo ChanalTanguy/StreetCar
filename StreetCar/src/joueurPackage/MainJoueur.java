@@ -12,8 +12,12 @@ public class MainJoueur {
 	}
 	
 	public String toString(){
-		String resultat = "";
-		
+		String resultat = "nombre de tuiles : " + nombreDeTuilesJouables() + "\n";
+		for (int numTuile = 0; numTuile < cartesJoueur.length; numTuile++){
+			resultat += "\t Debut Tuile \n";
+			resultat += cartesJoueur[numTuile].toString() + "\n";
+			resultat += "\t Fin Tuile \n";
+		}
 		return resultat;
 	}
 	
@@ -24,6 +28,15 @@ public class MainJoueur {
 		tab[2] = Tuile.newLigneDroite();
 		tab[3] = Tuile.newVirage();
 		tab[4] = Tuile.newVirage();
+	}
+	private int nombreDeTuilesJouables (){
+		int compteur = 0;
+		for (int numTuile = 0; numTuile < cartesJoueur.length; numTuile++){
+			if ( cartesJoueur[numTuile] != null ){
+				compteur++;
+			}
+		}
+		return compteur;
 	}
 
 	/**
@@ -100,7 +113,7 @@ public class MainJoueur {
 	public MainJoueur clone() {
 		MainJoueur m = new MainJoueur();
 		for (int i = 0; i < 5; i++) {
-			setTuileAt(i, cartesJoueur[i].clone());
+			m.setTuileAt(i, cartesJoueur[i].clone());
 		}
 		return m;
 	}

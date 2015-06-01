@@ -1,6 +1,8 @@
 package mainPackage;
 
 import graphique.Panneau_Plateau;
+import historiqPackage.Configuration;
+import historiqPackage.Historique;
 
 import java.awt.Point;
 
@@ -13,7 +15,6 @@ import objectPackage.Plateau;
 import constantesPackages.Constantes;
 
 public class Moteur {
-
 	private Joueur[] players;
 	private int currentPlayer;
 	private Plateau plateauDeJeu;
@@ -22,7 +23,8 @@ public class Moteur {
 	private Panneau_Plateau panJeu;
 	private Coup coupSimultane;
 	
-	
+	private int numeroDeTour = 0;
+	private Historique historiqueDeTours;
 	
 	/*
 	 * Constructeur
@@ -31,14 +33,21 @@ public class Moteur {
 		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
 		players[0] = new JoueurHumain(this,1);
-		players[1] = new JoueurIA(this,4);
+		players[1] = new JoueurHumain(this,4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 4;
 		pioche = new Pioche();
 		pioche.initialisation();
 		pioche.shuffle();
+		
+		Configuration configurationInitiale = new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++);
+		historiqueDeTours = new Historique();
+		historiqueDeTours.add(configurationInitiale);
 	}
+	/*
+	 * FIN Constructeur
+	 */
 	
 	/* 
 	 * Accesseurs
@@ -46,19 +55,15 @@ public class Moteur {
 	public int getcurrentPlayer (){
 		return currentPlayer;
 	}
-	
 	public Joueur[] getTabPlayers (){
 		return players;
 	}
-	
 	public Plateau getPlateau (){
 		return plateauDeJeu;
 	}
-	
 	public int getNbActions (){
 		return nbActions;
 	}
-
 	public Pioche getPioche (){
 		return pioche;
 	}
@@ -66,19 +71,19 @@ public class Moteur {
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
 		panJeu = referencePanJeu;
 	}
+	/*
+	 * FIN Accesseurs
+	 */
 	
+	/*
+	 * Methodes Public du Moteur
+	 */
 	public void start (){
 		players[currentPlayer].attendCoup();
 	}
-	
 	public void stop () {
 		players[currentPlayer].stopPlayer();
 	}
-	
-	/*
-	 * Methodes du Moteur
-	 */
-	
 	/**
 	 * Vérifie si un coup est valide puis l'execute si c'est le cas. 
 	 * Change le joueur si besoin puis permet au joueur courant de jouer.
@@ -108,6 +113,8 @@ public class Moteur {
 			if (nbActions == 0) {
 				currentPlayer = (currentPlayer+1)%2;
 				nbActions = 4;
+				
+				historiqueDeTours.add(new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++));
 			}
 			if (nbActions > 2)
 				msg = Constantes.Message.auTourDe(currentPlayer+1);
@@ -171,11 +178,24 @@ public class Moteur {
 		players[currentPlayer].attendCoup();
 		
 	}
+	public void annulerTour (){
+		System.out.println("annulation du tour");
+		Configuration dernierTour = historiqueDeTours.last();
 
-	/*
-	 * Methodes privee du Moteur
-	 */
+		for (int numeroPlayer = 0; numeroPlayer < players.length; numeroPlayer++){
+			players[numeroPlayer] = dernierTour.getJoueurAt(numeroPlayer).clone();
+		}
+		plateauDeJeu = dernierTour.getPlateauDuTour();
+		nbActions = 4;
+		pioche = dernierTour.getPiocheDuTour();
+		currentPlayer = dernierTour.getJoueurCourant();	
+		panJeu.repaint();
+		players[currentPlayer].attendCoup();
+	}
 	
+	/*
+	 * Methodes Private du Moteur
+	 */
 	/**
 	 * Vérifie si le coup c peut être jouer dans la configuration actuelle
 	 * @param c

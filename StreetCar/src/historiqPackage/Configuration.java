@@ -15,12 +15,13 @@ public class Configuration {
 	/*
 	 * CONSTRUCTEUR
 	 */
-	public Configuration (Moteur mot){
-		tabJoueurs = new Joueur[mot.getTabPlayers().length];
-		joueurCourantDuTour = mot.getcurrentPlayer();
-		plateauDuTour = mot.getPlateau().clone();
-		piocheDuTour = mot.getPioche().clone();
-		numeroDuTour = 0;
+	public Configuration (Joueur[] referenceTabJoueurs, int currentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour){
+		tabJoueurs = new Joueur[referenceTabJoueurs.length];
+		instanciationJoueurs(referenceTabJoueurs);
+		joueurCourantDuTour = currentPlayer;
+		plateauDuTour = plateauDeJeu.clone();
+		piocheDuTour = pioche.clone();
+		numeroDuTour = numeroDeTour;
 	}
 	
 	/*
@@ -41,6 +42,34 @@ public class Configuration {
 	public int getNumeroTour (){
 		return numeroDuTour;
 	}
+
+	/*
+	 * Methodes Public de Configuration
+	 */
+	public String toString (){
+		String chaine_resultat = "";
+		for (int numJoueur = 0; numJoueur < tabJoueurs.length; numJoueur++){
+			chaine_resultat += "Main du joueur " + numJoueur + " : \n";
+			chaine_resultat += "\t" + tabJoueurs[numJoueur].getMain().toString() + "\n";
+		}
+		return chaine_resultat;
+	}
 	
-	
+	/*
+	 * Methodes Private de Configuration
+	 */
+	private void instanciationJoueurs (Joueur[] referenceTabJoueurs){
+		System.out.println("\t\tINSTANCIATION");
+		for (int numeroJoueur = 0; numeroJoueur < tabJoueurs.length; numeroJoueur++){
+			
+			System.out.println("reference du joueur " + numeroJoueur + " : ");
+			System.out.println(referenceTabJoueurs[numeroJoueur].getMain().toString());
+			
+			tabJoueurs[numeroJoueur] = referenceTabJoueurs[numeroJoueur].clone();
+			
+			System.out.println("main du joueur " + numeroJoueur + " : ");
+			System.out.println(tabJoueurs[numeroJoueur].getMain().toString());
+		}
+		System.out.println("\t\tFIN INSTANCIATION");
+	}
 }
