@@ -59,17 +59,8 @@ public class Configuration {
 	 * Methodes Private de Configuration
 	 */
 	private void instanciationJoueurs (Joueur[] referenceTabJoueurs){
-		System.out.println("\t\tINSTANCIATION");
 		for (int numeroJoueur = 0; numeroJoueur < tabJoueurs.length; numeroJoueur++){
-			
-			System.out.println("reference du joueur " + numeroJoueur + " : ");
-			System.out.println(referenceTabJoueurs[numeroJoueur].getMain().toString());
-			
 			tabJoueurs[numeroJoueur] = referenceTabJoueurs[numeroJoueur].clone();
-			
-			System.out.println("main du joueur " + numeroJoueur + " : ");
-			System.out.println(tabJoueurs[numeroJoueur].getMain().toString());
 		}
-		System.out.println("\t\tFIN INSTANCIATION");
 	}
 }

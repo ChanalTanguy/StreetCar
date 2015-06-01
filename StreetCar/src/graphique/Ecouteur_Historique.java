@@ -16,16 +16,16 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();
 		int coordY = e.getY();
-		if ( estSurBoutonHaut(coordX, coordY) ){
-			System.out.print("sur bouton du haut ");
+		if ( estSurBoutonHaut(coordX, coordY) ){ //&& pan.getZoneEncadree() != 1){
+//			System.out.println("sur bouton du haut ");
 			pan.setEncadrer(1);
 		}
-		else if ( estSurBoutonBas(coordX, coordY) ){
-			System.out.print("sur bouton du bas ");
+		else if ( estSurBoutonBas(coordX, coordY) ){ //&& pan.getZoneEncadree() != 2){
+//			System.out.println("sur bouton du bas ");
 			pan.setEncadrer(2);
 		}
-		else if ( estSurHistoriqueCentral(coordX, coordY) ){
-			System.out.print("sur historique central ");
+		else if ( estSurHistoriqueCentral(coordX, coordY) ){ //&& pan.getZoneEncadree() != 3){
+//			System.out.println("sur historique central ");
 			pan.setEncadrer(3);
 		}
 		else {
@@ -33,7 +33,9 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		}
 	}
 
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+		pan.setEncadrer(0);
+	}
 	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
