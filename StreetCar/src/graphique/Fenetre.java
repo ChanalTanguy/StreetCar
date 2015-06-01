@@ -18,8 +18,8 @@ public class Fenetre extends JFrame{
 			
 	public Fenetre (String title){
 		super(title);
-		int largeur = 9*(int)Constantes.Resolution.width/10;
-		int hauteur = 9*(int)Constantes.Resolution.height/10;
+		int largeur = (int)(9.0*Constantes.Resolution.width/10.0);
+		int hauteur = (int)(9.0*Constantes.Resolution.height/10.0);
 		
 		
 		if (largeur > hauteur){
