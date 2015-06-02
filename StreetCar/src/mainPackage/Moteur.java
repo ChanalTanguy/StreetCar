@@ -78,7 +78,6 @@ public class Moteur {
 	
 	public Historique getHistorique (){
 		return historiqueDeTours;
-
 	}
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
