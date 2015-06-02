@@ -55,16 +55,14 @@ public class Sauvegarder {
 			f.write(System.getProperty("line.separator"));
 			
 			f.write(mainJactif.toString());
-			f.write("{Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]}");
-			f.write(System.getProperty("line.separator"));
 			f.write(mainJinact.toString());
 					
 			f.write(pio.toString());
 			f.write(System.getProperty("line.separator"));		
 			
-			for(int i=0; i<12; i++)
+			for(int i=1; i<13; i++)
 			{
-				for(int j=0; j<12; j++)
+				for(int j=1; j<13; j++)
 				{
 					if(plat[i][j] == null) f.write("{null} ");
 					else f.write(plat[i][j].toString() + " ");
