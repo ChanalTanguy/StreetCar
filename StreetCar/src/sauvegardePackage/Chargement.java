@@ -16,6 +16,7 @@ public class Chargement {
 
 	int joueur;
 	int nbCartes;
+	int numTour;
 	String tuileS;
 	String pioche;
 	String lignePlateau;
@@ -31,6 +32,10 @@ public class Chargement {
 			//Joueur actif
 			joueur = Character.getNumericValue((br.readLine().charAt(0)));
 			System.out.println("Joueur " + joueur);
+			
+			//Num tour
+			numTour = Character.getNumericValue((br.readLine().charAt(0)));
+			System.out.println("Tour " + numTour);
 			
 			//Nb cartes dans main joueur actif
 			nbCartes = Character.getNumericValue((br.readLine().charAt(0)));

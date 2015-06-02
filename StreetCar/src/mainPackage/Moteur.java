@@ -10,6 +10,7 @@ import joueurPackage.Coup;
 import joueurPackage.Joueur;
 import joueurPackage.JoueurHumain;
 import joueurPackage.JoueurIA;
+import joueurPackage.MainJoueur;
 import objectPackage.Pioche;
 import objectPackage.Plateau;
 import constantesPackages.Constantes;
@@ -67,10 +68,34 @@ public class Moteur {
 	public Pioche getPioche (){
 		return pioche;
 	}
+	public int getNumTour()
+	{
+		return numeroDeTour;
+	}
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
 		panJeu = referencePanJeu;
 	}
+	
+	public void setcurrentPlayer (int referenceCurrentPlayer){
+		currentPlayer = referenceCurrentPlayer;
+	}
+	public void setMainPlayers (MainJoueur referenceMainJoueur, int player){
+		//players[player].setMain(referenceMainJoueur); //TODO faire set main
+	}
+
+	public void setNbActions (int referenceNbActions){
+		nbActions = referenceNbActions;
+	}
+	public void setPioche (Pioche referencePioche){
+		pioche = referencePioche;
+	}
+	public void setNumTour(int referenceNumTour)
+	{
+		numeroDeTour = referenceNumTour;
+	}
+	
+	
 	/*
 	 * FIN Accesseurs
 	 */

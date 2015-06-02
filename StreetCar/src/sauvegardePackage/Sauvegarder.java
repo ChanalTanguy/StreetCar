@@ -13,6 +13,7 @@ public class Sauvegarder {
 
 	Moteur mot;
 	int joueur;
+	int numTour;
 	Pioche pio;
 	Tuile[][] plat;
 	MainJoueur mainJactif, mainJinact;
@@ -41,6 +42,7 @@ public class Sauvegarder {
 		mainJinact =  mot.getTabPlayers()[1-joueur].getMain();
 		pio = mot.getPioche();
 		plat = mot.getPlateau().getPlateau();
+		//numTour = mot.getNumTour();
 		//TODO Prendre en compte l'historique ?
 		//TODO Prendre en compte les objectifs de chacun
 		
@@ -49,9 +51,10 @@ public class Sauvegarder {
 			FileWriter f = new FileWriter(new File(name));
 			f.write(new String(""+joueur));
 			f.write(System.getProperty("line.separator"));
-						
+			f.write(new String(""+numTour));
+			f.write(System.getProperty("line.separator"));
+			
 			f.write(mainJactif.toString());
-				
 			f.write(mainJinact.toString());
 					
 			f.write(pio.toString());
