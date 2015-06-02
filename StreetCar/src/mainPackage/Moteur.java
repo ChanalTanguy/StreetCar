@@ -48,7 +48,7 @@ public class Moteur {
 		
 		Configuration configurationInitiale = new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++);
 		historiqueDeTours = new Historique();
-		historiqueDeTours.add(configurationInitiale);
+		historiqueDeTours.ajouter(configurationInitiale);
 	}
 	/*
 	 * FIN Constructeur
