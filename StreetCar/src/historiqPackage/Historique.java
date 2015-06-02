@@ -40,17 +40,34 @@ public class Historique extends ArrayList<Configuration>{
 		return this.get(this.size()-1);
 	}
 	
+// Les 4 "methodes" Incr et Decr sont possiblement inutiles
+// Plutot utiliser les 2 methodes "defilement"
 	public void incrPrecedentes (){
-		nombreConfigsPrecedentes++;
+			nombreConfigsPrecedentes++;
 	}
 	public void incrSuivantes (){
 		nombreConfigsSuivantes++;
 	}
 	public void decrPrecedentes (){
-		nombreConfigsPrecedentes--;
+		if (nombreConfigsPrecedentes > 0){
+			nombreConfigsPrecedentes--;
+		}
 	}
 	public void decrSuivantes (){
 		nombreConfigsSuivantes--;
+	}
+	
+	public void defilementVersHaut (){
+		if ( nombreConfigsPrecedentes > 0){
+			nombreConfigsPrecedentes--;
+			nombreConfigsSuivantes++;
+		}
+	}
+	public void defilementVersBas (){
+		if ( nombreConfigsSuivantes < this.size() ){
+			nombreConfigsPrecedentes++;
+			nombreConfigsSuivantes--;
+		}
 	}
 	
 	public String toString (){
