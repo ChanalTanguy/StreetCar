@@ -121,6 +121,7 @@ public class Panneau_Historique extends Pan_Abstract{
 	
 	public void setEncadrer (int newZone){
 		encadrerZone = newZone;
+		repaint();
 	}
 	/*
 	 * FIN ACCESSEURS
@@ -220,12 +221,8 @@ public class Panneau_Historique extends Pan_Abstract{
 			int posYString = coordYOnglet + 2*dimensionOnglet/3;
 			
 			int numTourActif = numTour + moteur.getHistorique().getNbConfigsPrecedentes();
-			
-			System.out.println("numTour : " + numTour);
-			System.out.println("nb Configs Precedentes : " + moteur.getHistorique().getNbConfigsPrecedentes() );
-			System.out.println("test : " + moteur.getHistorique().get(numTourActif).getNumeroTour() );
-			
-			String chaineTour = "" + moteur.getHistorique().get(numTourActif).getNumeroTour();
+
+			String chaineTour = "" + numTourActif;
 			
 			crayon.setColor(Color.black);
 			crayon.drawString(chaineTour , posXString, posYString);

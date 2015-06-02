@@ -34,10 +34,12 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		else if ( estSurDefilementHaut(coordX, coordY) ){
 			System.out.println("sur Defilement Haut");
 			moteur.getHistorique().defilementVersHaut();
+			panneauHistorique.repaint();
 		}
 		else if ( estSurDefilementBas(coordX, coordY) ){
 			System.out.println("sur Defilement Bas");
 			moteur.getHistorique().defilementVersBas();
+			panneauHistorique.repaint();
 		}
 		else {
 			System.out.println("clic vide");
@@ -46,25 +48,19 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();
 		int coordY = e.getY();
-		if ( estSurDefilementHaut(coordX, coordY) ){ //&& pan.getZoneEncadree() != 1){
-//			System.out.println("bonjour Haut");
+		if ( estSurDefilementHaut(coordX, coordY) && panneauHistorique.getZoneEncadree() != 1 ){
 			panneauHistorique.setEncadrer(1);
 		}
-		else if ( estSurDefilementBas(coordX, coordY) ){ //&& pan.getZoneEncadree() != 2){
-//			System.out.println("bonjour Bas");
+		else if ( estSurDefilementBas(coordX, coordY) && panneauHistorique.getZoneEncadree() != 2 ){
 			panneauHistorique.setEncadrer(2);
 		}
-//		else if ( estSurOnglets(coordX, coordY) != -1){ //&& pan.getZoneEncadree() != 3){
-//			panneauHistorique.setEncadrer(3);
-//		}
-		else {
-//			System.out.println("Au revoir");
-			panneauHistorique.setEncadrer(0);
+		else if ( panneauHistorique.getZoneEncadree() != -1){
+			panneauHistorique.setEncadrer(-1);
 		}
-		panneauHistorique.repaint();
+//		panneauHistorique.repaint();
 	}
 	public void mouseExited(MouseEvent e) {
-		panneauHistorique.setEncadrer(0);
+		panneauHistorique.setEncadrer(-1);
 	}
 
 	public void mouseReleased(MouseEvent e) {}

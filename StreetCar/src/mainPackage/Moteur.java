@@ -17,7 +17,7 @@ import objectPackage.Plateau;
 import constantesPackages.Constantes;
 
 public class Moteur {
-	private Joueur[] players;
+	private Joueur[] tabPlayers;
 	private int currentPlayer;
 	private Plateau plateauDeJeu;
 	private int nbActions;
@@ -34,11 +34,11 @@ public class Moteur {
 	 */
 	public Moteur(Plateau referencePlateau) {
 		System.out.println("\tconstructeur de moteur");
-		players = new Joueur[2];
-		players[0] = new JoueurHumain(this,1);
-		players[0].setLigne(1);
-		players[1] = new JoueurHumain(this,4);
-		players[1].setLigne(4);
+		tabPlayers = new Joueur[2];
+		tabPlayers[0] = new JoueurHumain(this,1);
+		tabPlayers[0].setLigne(1);
+		tabPlayers[1] = new JoueurHumain(this,4);
+		tabPlayers[1].setLigne(4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 4;
@@ -46,9 +46,11 @@ public class Moteur {
 		pioche.initialisation();
 		pioche.shuffle();
 		
-		Configuration configurationInitiale = new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++);
 		historiqueDeTours = new Historique();
+		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours);
 		historiqueDeTours.add(configurationInitiale);
+		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
+		
 	}
 	/*
 	 * FIN Constructeur
@@ -61,7 +63,7 @@ public class Moteur {
 		return currentPlayer;
 	}
 	public Joueur[] getTabPlayers (){
-		return players;
+		return tabPlayers;
 	}
 	public Plateau getPlateau (){
 		return plateauDeJeu;
@@ -91,7 +93,7 @@ public class Moteur {
 		currentPlayer = referenceCurrentPlayer;
 	}
 	public void setMainPlayers (MainJoueur referenceMainJoueur, int player){
-		players[player].setMain(referenceMainJoueur);
+		tabPlayers[player].setMain(referenceMainJoueur);
 	}
 
 	public void setNbActions (int referenceNbActions){
@@ -118,10 +120,10 @@ public class Moteur {
 	 * Methodes Public du Moteur
 	 */
 	public void start (){
-		players[currentPlayer].attendCoup();
+		tabPlayers[currentPlayer].attendCoup();
 	}
 	public void stop () {
-		players[currentPlayer].stopPlayer();
+		tabPlayers[currentPlayer].stopPlayer();
 	}
 	/**
 	 * Vérifie si un coup est valide puis l'execute si c'est le cas. 
@@ -133,16 +135,16 @@ public class Moteur {
 		String r;
 		if (coupValide(c)) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
-				players[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
+				tabPlayers[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
 				nbActions--;
 				coupSimultane = null;
 			} else if (c.getType().equals(Constantes.Coup.vol)) {
-				players[currentPlayer].volerTuile(c.getTuile(), players[(currentPlayer+1)%2]);
+				tabPlayers[currentPlayer].volerTuile(c.getTuile(), tabPlayers[(currentPlayer+1)%2]);
 				nbActions--;
 				coupSimultane = null;
 			} else if (c.getType().equals(Constantes.Coup.pioche)) {
 				if (!pioche.isEmpty())
-					players[currentPlayer].piocher(pioche);
+					tabPlayers[currentPlayer].piocher(pioche);
 				nbActions = 0;
 				coupSimultane = null;
 			} else {
@@ -154,7 +156,7 @@ public class Moteur {
 				nbActions = 4;
 				
 				// Mise a Jour de l'historique de tours
-				historiqueDeTours.ajouter(new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++));
+				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours));
 				panHistorique.repaint();
 			}
 			if (nbActions > 2)
@@ -162,7 +164,7 @@ public class Moteur {
 			else 
 				msg = Constantes.Message.finDeTour(currentPlayer+1);
 		}
-		else if ((r = plateauDeJeu.coupSimultaneValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c)) != null && nbActions == 4)
+		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()),c)) != null && nbActions == 4)
 		{
 			if (coupSimultane == null) {
 				coupSimultane = c;
@@ -187,8 +189,8 @@ public class Moteur {
 				}
 						
 				if (b) {
-					players[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
-					players[currentPlayer].jouerTuileSurPlateau(coupSimultane.getTuile(), coupSimultane.getCoordonnee().x, coupSimultane.getCoordonnee().y, plateauDeJeu);
+					tabPlayers[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
+					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupSimultane.getTuile(), coupSimultane.getCoordonnee().x, coupSimultane.getCoordonnee().y, plateauDeJeu);
 					nbActions -= 2;
 					msg = Constantes.Message.finDeTour(currentPlayer+1);
 				} else {
@@ -216,7 +218,7 @@ public class Moteur {
 		panJeu.setNotifications(msg);
 		panJeu.repaint();
 		
-		players[currentPlayer].attendCoup();
+		tabPlayers[currentPlayer].attendCoup();
 		
 	}
 // Methodes de Kévin
@@ -224,13 +226,13 @@ public class Moteur {
 		System.out.println("annulation du tour");
 		Configuration dernierTour = historiqueDeTours.last();
 
-		for (int numeroPlayer = 0; numeroPlayer < players.length; numeroPlayer++){
-			players[numeroPlayer] = dernierTour.getJoueurAt(numeroPlayer).clone();
+		for (int numeroPlayer = 0; numeroPlayer < tabPlayers.length; numeroPlayer++){
+			tabPlayers[numeroPlayer] = dernierTour.getJoueurAt(numeroPlayer).clone();
 		}
 		plateauDeJeu = dernierTour.getPlateauDuTour().clone();
 		nbActions = 4;
 		panJeu.repaint();
-		players[currentPlayer].attendCoup();
+		tabPlayers[currentPlayer].attendCoup();
 	}
 	public void chargerTour (int numeroTourACharger){
 		int numTourActif = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
@@ -238,6 +240,22 @@ public class Moteur {
 		System.out.println("vrai tour a charger : " + numTourActif);
 		
 		Configuration configACharger = historiqueDeTours.get(numTourActif);
+		
+		System.out.println("numeroTour dans Moteur : " + configACharger.getNumeroTour());
+		System.out.println("configs precedentes : " + configACharger.getHistorique().getNbConfigsPrecedentes());
+		
+		plateauDeJeu = configACharger.getPlateauDuTour().clone();
+		pioche = configACharger.getPiocheDuTour().clone();
+		tabPlayers = new Joueur[configACharger.getNombreJoueurs()];
+		for (int numeroJoueur = 0; numeroJoueur < tabPlayers.length; numeroJoueur++){
+			tabPlayers[numeroJoueur] = configACharger.getJoueurAt(numeroJoueur).clone();
+		}
+		currentPlayer = configACharger.getJoueurCourant();
+		historiqueDeTours = configACharger.getHistorique().clone();
+		
+		
+		
+/*		
 		plateauDeJeu = configACharger.getPlateauDuTour().clone();
 		pioche = configACharger.getPiocheDuTour().clone();
 		currentPlayer = configACharger.getJoueurCourant();
@@ -245,14 +263,15 @@ public class Moteur {
 			players[numJoueur] = configACharger.getJoueurAt(numJoueur).clone();
 		}
 		numeroDeTour = configACharger.getNumeroTour();
-		System.out.println("numTour : " + numeroDeTour);
-		
-		effacerConfigSuivantes(numTourActif);
+		System.out.println("numTour dans moteur : " + numeroDeTour);
+*/		
+//		effacerConfigSuivantes(numTourActif);
 		
 		panJeu.repaint();
 		panHistorique.repaint();
 		
-		players[currentPlayer].attendCoup();
+		tabPlayers[currentPlayer].attendCoup();
+
 	}
 	private void effacerConfigSuivantes (int numeroTourMax){
 		for (int numTour = numeroTourMax; numTour < historiqueDeTours.size(); numTour++){
@@ -273,8 +292,8 @@ public class Moteur {
 		if (nbActions > 2) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
 					// Vérifie si le joueur prend une tuile existante et vérifie si le placement est valide
-				return (players[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
-						(plateauDeJeu.coupValide(players[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
+				return (tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
+						(plateauDeJeu.coupValide(tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
 			} else
 				return false;
 		}
@@ -283,8 +302,8 @@ public class Moteur {
 				// true si l'autre joueur est en phase 2, que la carte volé est différente de null
 				// et que la main du joueur n'est pas pleine (2 remplacements ont été fait)
 				// false sinon
-				return ((!players[(currentPlayer+1)%2].getMain().isFull()) && (players[(currentPlayer+1)%2].getPhase() == 2)
-					&&	 players[(currentPlayer+1)%2].getMain().getTuileAt(c.getTuile()) != null);
+				return ((!tabPlayers[(currentPlayer+1)%2].getMain().isFull()) && (tabPlayers[(currentPlayer+1)%2].getPhase() == 2)
+					&&	 tabPlayers[(currentPlayer+1)%2].getMain().getTuileAt(c.getTuile()) != null);
 			} else if (c.getType().equals(Constantes.Coup.pioche)) {
 				return true; // Rien d'autre à vérifier (Quand la main est pleine, piocher mettra fin au tour)
 			} else
