@@ -11,6 +11,7 @@ import constantesPackages.Constantes;
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import objectPackage.Pioche;
+import objectPackage.Plateau;
 import objectPackage.tuilePackage.Connection;
 import objectPackage.tuilePackage.Tuile;
 
@@ -19,10 +20,13 @@ public class Chargement {
 	int joueur;
 	int nbCartes;
 	int numTour;
+	int nbPioche;
 	String tuileS;
 	String pioche;
 	String lignePlateau;
 	MainJoueur main = new MainJoueur();
+	Pioche pio = new Pioche();
+	Plateau plat = new Plateau();
 	Tuile tuile;
 	
 	void charger(Moteur mot, String name)
@@ -62,17 +66,17 @@ public class Chargement {
 				main.setTuileAt(i, creerTuile(tuileS));
 				mot.setMainPlayers(main.clone(), 1-joueur);
 			}
+
+			nbPioche = Integer.parseInt(br.readLine());
 			
 			pioche = br.readLine();
-			//System.out.println(pioche);
 			
-			//TODO spliter et rentrer les tuiles dans la pioche, exemple de split avec rajout en brut du "}"
 			String[]tabPioche = pioche.split("} ");
 			for(int i = 0; i<tabPioche.length; i++)
 			{
-				System.out.println(tabPioche[i]+"}");
+				pio.add(creerTuile(tabPioche[i]+"}"));
 			}
-
+			
 			//TODO spliter et rentrer les tuiles du plateau, exemple de split avec rajout en brut du "}"
 			for(int i = 0; i<12; i++)
 			{
@@ -82,14 +86,15 @@ public class Chargement {
 				String[]tabPlat = lignePlateau.split("} ");
 				for(int j=0; j<tabPlat.length;j++)
 				{
-					//System.out.println(tabPlat[j]+"}");
+					tabPlat[j]+="}";
+					if(!(tabPlat[j].equals("{null}")) && !(tabPlat[j].equals("{Nord:[]}"))) 
+					{
+						plat.setTuileAt(i, j, creerTuile(tabPlat[j]));
+					}
 				}
-				
 			}
-
-
-			
-			
+			mot.setPlateau(plat);
+				
 			System.out.println("Fichier chargé");
 			f.close();
 		}

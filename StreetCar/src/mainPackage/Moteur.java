@@ -104,6 +104,10 @@ public class Moteur {
 	{
 		numeroDeTour = referenceNumTour;
 	}
+	public void setPlateau(Plateau referencePlateau) {
+		plateauDeJeu = referencePlateau;
+	}
+	
 	
 	
 	/*
@@ -262,5 +266,4 @@ public class Moteur {
 				return false;
 		}
 	}
-	
 }
