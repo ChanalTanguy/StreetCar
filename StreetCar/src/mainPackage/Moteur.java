@@ -69,6 +69,9 @@ public class Moteur {
 	public Pioche getPioche (){
 		return pioche;
 	}
+	public Historique getHistorique (){
+		return historiqueDeTours;
+	}
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
 		panJeu = referencePanJeu;
