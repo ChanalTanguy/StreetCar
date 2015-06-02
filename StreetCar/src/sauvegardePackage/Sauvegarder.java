@@ -55,6 +55,8 @@ public class Sauvegarder {
 			f.write(System.getProperty("line.separator"));
 			
 			f.write(mainJactif.toString());
+			f.write("{Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]}");
+			f.write(System.getProperty("line.separator"));
 			f.write(mainJinact.toString());
 					
 			f.write(pio.toString());

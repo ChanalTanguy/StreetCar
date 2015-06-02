@@ -22,7 +22,7 @@ public class Chargement {
 	String tuileS;
 	String pioche;
 	String lignePlateau;
-	MainJoueur main;
+	MainJoueur main = new MainJoueur();
 	Tuile tuile;
 	
 	void charger(Moteur mot, String name)
@@ -42,29 +42,39 @@ public class Chargement {
 			
 			//Nb cartes dans main joueur actif
 			nbCartes = Character.getNumericValue((br.readLine().charAt(0)));
-			
+
 			//Cartes dans main joueur actif
 			for(int i = 0; i<nbCartes; i++)
 			{
 				tuileS = br.readLine();
-				System.out.println("Tuile " + i + " " + tuileS);
-				tuile = creerTuile(tuileS);
-				System.out.println(tuile.toString());
-				//main.setTuileAt(i, creerTuile(tuileS));
-				//mot.setMainPlayers(main, joueur);
+				if(i==4) 
+				{
+					tuile = creerTuile(tuileS);
+					System.out.println(tuile.toString());
+				}
 				
+				main.setTuileAt(i, creerTuile(tuileS));
+				mot.setMainPlayers(main, joueur);		
 			}
+			
+			System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().getTuileAt(4).toString());
 
 			//Nb cartes dans main joueur inactif
 			nbCartes =  Character.getNumericValue((br.readLine().charAt(0)));
-			//System.out.println("NbCartes inactif " + nbCartes);
 
 			//Cartes dans main joueur inactif
 			for(int i = 0; i<nbCartes; i++)
 			{
 				tuileS = br.readLine();
-				//System.out.println("Tuile " + i + " " + tuileS);
+				tuile = creerTuile(tuileS);
+				main.setTuileAt(i, creerTuile(tuileS));
+				mot.setMainPlayers(main, 1-joueur);
 			}
+			//System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
+			//System.out.println("Main 1 : " + mot.getTabPlayers()[1].getMain().toString());
+			
+			pioche = br.readLine();
+			//System.out.println(pioche);
 
 			//TODO spliter et rentrer les tuiles du plateau, exemple de split avec rajout en brut du "}"
 			for(int i = 0; i<12; i++)
@@ -81,7 +91,7 @@ public class Chargement {
 			}
 
 			pioche = br.readLine();
-			System.out.println(pioche);
+			//System.out.println(pioche);
 			//TODO spliter et rentrer les tuiles dans la pioche, exemple de split avec rajout en brut du "}"
 			/*String[]tabPioche = pioche.split("} ");
 			for(int i = 0; i<tabPioche.length; i++)
@@ -96,6 +106,7 @@ public class Chargement {
 		catch (IOException e) {e.printStackTrace();}
 	}
 
+	//Permet de créer une tuile à partie d'une chaine de caractère de la forme {Orientation:[(Connection;Connection), (...;...)]}
 	private Tuile creerTuile(String tuileS2) {
 		Tuile t = new Tuile();
 		String[] orient;
@@ -109,13 +120,13 @@ public class Chargement {
 		orientation = orient[0].substring(1);
 		t.setOrientation(orientation);
 		
+		
 		//Connections
 		connect = orient[1].split(","); //Ce split est là pour les multi-connections
 		
 		for(int i = 0; i<connect.length; i++)
 		{
-
-			connections = connect[i].substring(2, connect[i].length()-3).split(";");
+			connections = connect[i].substring(2,connect[i].length()-1).replace(")", "").replace("]", "").split(";");
 			con = new Connection(connections[0], connections[1]);
 			t.getListeConnections().add(con);
 		}
