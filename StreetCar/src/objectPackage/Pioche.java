@@ -74,7 +74,7 @@ public class Pioche extends ArrayList<Tuile>{
 	public String toString (){
 		String resultat = "";
 		ListIterator<Tuile> iterateurPioche = this.listIterator();
-		resultat = resultat + this.size() + " "; 
+		resultat = resultat + this.size() + System.getProperty("line.separator");
 		while ( iterateurPioche.hasNext() ){
 			resultat = resultat + iterateurPioche.next().toString() + " ";
 		}
