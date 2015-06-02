@@ -2,8 +2,12 @@ package panelPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
@@ -28,6 +32,10 @@ public class ConfirmPanel extends PanelInterface {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.getColor("gris_tram", 4607576));
 		this.buildConfirmPanel();
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
+		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
+		this.setCursor(monCurseur);
 	}
 	
 	protected void buildConfirmPanel(){
