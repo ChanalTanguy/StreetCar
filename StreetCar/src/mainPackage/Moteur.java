@@ -1,5 +1,6 @@
 package mainPackage;
 
+import graphique.Panneau_Historique;
 import graphique.Panneau_Plateau;
 import historiqPackage.Configuration;
 import historiqPackage.Historique;
@@ -22,6 +23,7 @@ public class Moteur {
 	private int nbActions;
 	private Pioche pioche;
 	private Panneau_Plateau panJeu;
+	private Panneau_Historique panHistorique;
 	private Coup coupSimultane;
 	
 	private int numeroDeTour = 0;
@@ -71,17 +73,18 @@ public class Moteur {
 		return pioche;
 	}
 
-	public int getNumTour()
-	{
+	public int getNumTour(){
 		return numeroDeTour;
 	}
-	
 	public Historique getHistorique (){
 		return historiqueDeTours;
 	}
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
 		panJeu = referencePanJeu;
+	}
+	public void setPanHistorique (Panneau_Historique referencePanHistorique){
+		panHistorique = referencePanHistorique;
 	}
 	
 	public void setcurrentPlayer (int referenceCurrentPlayer){
@@ -146,7 +149,9 @@ public class Moteur {
 				currentPlayer = (currentPlayer+1)%2;
 				nbActions = 4;
 				
+				// Mise a Jour de l'historique de tours
 				historiqueDeTours.add(new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++));
+				panHistorique.repaint();
 			}
 			if (nbActions > 2)
 				msg = Constantes.Message.auTourDe(currentPlayer+1);
