@@ -58,13 +58,17 @@ public class Fenetre extends JFrame{
 		
 		// Panneau de jeu principal
 		Panneau_Plateau zonePlateau = new Panneau_Plateau (Color.orange, referenceMoteur);
+		// Liaison Moteur <-> Panneau_Plateau
+		referenceMoteur.setPanJeu(zonePlateau);
 		
 		// JPanel Lateral
 		JPanel regroupementLateral = new JPanel();
-		// Panneau de notifications
-		referenceMoteur.setPanJeu(zonePlateau);
+		
 		// Panneau de navigations via l'historique
 		Panneau_Historique zoneHistorique = new Panneau_Historique (Color.gray, referenceMoteur);
+		// Liaison Moteur <-> Panneau_Historique
+		referenceMoteur.setPanHistorique(zoneHistorique);
+		
 		// Panneau de menus des boutons
 		Panneau_Boutons zoneBoutons = new Panneau_Boutons (Color.pink, zonePlateau);
 		
@@ -75,7 +79,6 @@ public class Fenetre extends JFrame{
 		
 		// Disposition dans le JPanel Lateral
 		regroupementLateral.setLayout(new BorderLayout());
-//		regroupementLateral.add(zoneNotifications, BorderLayout.NORTH);
 		regroupementLateral.add(zoneHistorique, BorderLayout.CENTER);
 		regroupementLateral.add(zoneBoutons, BorderLayout.SOUTH);
 		

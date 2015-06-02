@@ -37,6 +37,7 @@ public class ConfirmPanel extends InterfacePanel {
 		JPanel zone2 = newZone(200, 40);
 		
 		JLabel label = new JLabel(message, SwingConstants.CENTER);
+		label.setForeground(Color.white);
 		
 		zone1.add(label);
 		addNewButton(zone2, buttonSize, BorderLayout.WEST, actionYES, loadImage("oui.png"));
