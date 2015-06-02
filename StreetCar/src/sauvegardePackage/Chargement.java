@@ -46,18 +46,10 @@ public class Chargement {
 			//Cartes dans main joueur actif
 			for(int i = 0; i<nbCartes; i++)
 			{
-				tuileS = br.readLine();
-				if(i==4) 
-				{
-					tuile = creerTuile(tuileS);
-					System.out.println(tuile.toString());
-				}
-				
+				tuileS = br.readLine();			
 				main.setTuileAt(i, creerTuile(tuileS));
-				mot.setMainPlayers(main, joueur);		
+				mot.setMainPlayers(main.clone(), joueur);		
 			}
-			
-			System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
 
 			//Nb cartes dans main joueur inactif
 			nbCartes =  Character.getNumericValue((br.readLine().charAt(0)));
@@ -68,14 +60,18 @@ public class Chargement {
 				tuileS = br.readLine();
 				tuile = creerTuile(tuileS);
 				main.setTuileAt(i, creerTuile(tuileS));
-				mot.setMainPlayers(main, 1);
+				mot.setMainPlayers(main.clone(), 1-joueur);
 			}
-			System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
-			//System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
-			//System.out.println("Main 1 : " + mot.getTabPlayers()[1].getMain().toString());
 			
 			pioche = br.readLine();
 			//System.out.println(pioche);
+			
+			//TODO spliter et rentrer les tuiles dans la pioche, exemple de split avec rajout en brut du "}"
+			String[]tabPioche = pioche.split("} ");
+			for(int i = 0; i<tabPioche.length; i++)
+			{
+				System.out.println(tabPioche[i]+"}");
+			}
 
 			//TODO spliter et rentrer les tuiles du plateau, exemple de split avec rajout en brut du "}"
 			for(int i = 0; i<12; i++)
@@ -91,14 +87,7 @@ public class Chargement {
 				
 			}
 
-			pioche = br.readLine();
-			//System.out.println(pioche);
-			//TODO spliter et rentrer les tuiles dans la pioche, exemple de split avec rajout en brut du "}"
-			/*String[]tabPioche = pioche.split("} ");
-			for(int i = 0; i<tabPioche.length; i++)
-			{
-				System.out.println(tabPioche[i]+"}");
-			}*/
+
 			
 			
 			System.out.println("Fichier chargé");

@@ -10,7 +10,7 @@ public class MainSauvegarde {
 	{
 		Moteur m = new Moteur(new Plateau());
 		
-		//Sauvegarder s = new Sauvegarder(m, "test");
+		Sauvegarder s = new Sauvegarder(m, "test");
 		
 		Chargement c = new Chargement();
 		c.charger(m, "test.txt");
