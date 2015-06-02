@@ -210,6 +210,7 @@ public class Moteur {
 		players[currentPlayer].attendCoup();
 		
 	}
+// Methodes de Kévin
 	public void annulerTour (){
 		System.out.println("annulation du tour");
 		Configuration dernierTour = historiqueDeTours.last();
@@ -221,6 +222,9 @@ public class Moteur {
 		nbActions = 4;
 		panJeu.repaint();
 		players[currentPlayer].attendCoup();
+	}
+	public void chargerTour (int numeroTourACharger){
+		
 	}
 	
 	/*
