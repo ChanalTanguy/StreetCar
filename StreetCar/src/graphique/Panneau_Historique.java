@@ -1,7 +1,5 @@
 package graphique;
 
-import historiqPackage.Historique;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,35 +9,44 @@ import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
 public class Panneau_Historique extends Pan_Abstract{
-	BufferedImage boutonHaut, boutonBas, historiqueCentral;
-	Historique historiqueDeConfigs;
+	private BufferedImage boutonHaut, boutonBas, historiqueCentral;
 	
 	// Variable permettant de separer le Panneau en 3 parties pour les 3 images;
 	private int diviseurDeDimension;
 	private int encadrerZone;
 	
 	/*
-	 * Attributs d'Entier de positionnement
+	 * Attributs d'Entiers de positionnement
 	 */
 	private int coordX, coordY;
+	
 	private int coordXOnglet, coordYOnglet;
 	private int dimensionOnglet;
-	private int petitDecalageX = 1;
-	private int petitDecalageY = 10;
+	
+	private int petitDecalageY = 20;
 	private int ecart = 10;
+	private int elargissementX = 15;
+	
 	private int largeurImage, hauteurImage;
+	/*
+	 * FIN Attributs d'Entiers de positionnement
+	 */
+	
+	private int nbOngletsActifs;
+	private boolean retourConfirme;
+	
 	/*
 	 * FIN Attributs
 	 */
 	
-	Moteur mot;
+	private Moteur moteur;
 	
 	public Panneau_Historique (Color newCouleur, Moteur referenceMoteur){
 		super(newCouleur);
-		mot = referenceMoteur;
+		moteur = referenceMoteur;
 		encadrerZone = 0;
 		initialiserImages();
-		Ecouteur_Historique ecouteur = new Ecouteur_Historique(this);
+		Ecouteur_Historique ecouteur = new Ecouteur_Historique(this, moteur);
 		addMouseListener(ecouteur);
 		addMouseMotionListener(ecouteur);
 	}
@@ -52,6 +59,24 @@ public class Panneau_Historique extends Pan_Abstract{
 	}
 	public int getZoneEncadree (){
 		return encadrerZone;
+	}
+	public boolean getRetourConfirme (){
+		return retourConfirme;
+	}
+	public int getCoordXOnglet (){
+		return coordXOnglet;
+	}
+	public int getCoordYOnglet (){
+		return coordYOnglet;
+	}
+	public int getPetitDecalageY (){
+		return petitDecalageY;
+	}
+	public int getEcart (){
+		return ecart;
+	}
+	public int getDimensionOnglet (){
+		return dimensionOnglet;
 	}
 	
 	public void setEncadrer (int newZone){
@@ -87,6 +112,16 @@ public class Panneau_Historique extends Pan_Abstract{
 	}
 	
 	/*
+	 * Methodes Public de Panneau_Historique
+	 */
+	/**
+	 * Methode ouvrant une pop-up de confirmation pour naviguer vers un autre tour
+	 */
+	public void demandeConfirmation (){
+		
+	}
+	
+	/*
 	 * Methodes Private de Panneau_Historique
 	 */
 	private void activerCadreZone (Graphics2D crayon){
@@ -112,21 +147,18 @@ public class Panneau_Historique extends Pan_Abstract{
 	private void dessinerPartieCentrale (Graphics2D crayon){
 		coordY = hauteur/diviseurDeDimension;
 		hauteurImage = (diviseurDeDimension-2)*hauteur/diviseurDeDimension;
-		crayon.drawImage(historiqueCentral, coordX-10, coordY, largeurImage+2*10, hauteurImage, this);
+		crayon.drawImage(historiqueCentral, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 
-		coordXOnglet = coordX + petitDecalageX;
+		coordXOnglet = coordX;
 		coordYOnglet = coordY + petitDecalageY;
-		dimensionOnglet = largeurImage - 2*petitDecalageX;
-		int compteur = (hauteurImage - 2*petitDecalageY) / (dimensionOnglet + ecart);
+		dimensionOnglet = largeurImage;
 		
-		System.out.println();
-		System.out.println("largeur/hauteur dispo: " + dimensionOnglet + " " + (hauteurImage - 2*petitDecalageY));
-		System.out.println("dimensionOnglet : " + dimensionOnglet);
-		System.out.println("compteur : " + compteur);
-		System.out.println();
+		int nbMaxOnglets = (hauteurImage - 2*petitDecalageY) / (dimensionOnglet + ecart);
+		nbOngletsActifs = ( moteur.getHistorique().size() < nbMaxOnglets ) ? moteur.getHistorique().size() : nbMaxOnglets;
 		
-		dessinerOnglet(crayon, compteur);
+		moteur.getHistorique().setNbMaxOnglets(nbMaxOnglets);
 		
+		dessinerOnglet(crayon, nbOngletsActifs);
 	}
 	private void dessinerPartieBasse (Graphics2D crayon){
 		coordY = (diviseurDeDimension-1)*hauteur/diviseurDeDimension;
@@ -135,10 +167,19 @@ public class Panneau_Historique extends Pan_Abstract{
 	}
 	
 	private void dessinerOnglet (Graphics2D crayon, int nombreOnglet){
-		crayon.setColor(Color.white);
 		for (int numOnglet = 0; numOnglet < nombreOnglet; numOnglet++){
+			crayon.setColor(Color.white);
 			crayon.fillRect(coordXOnglet, coordYOnglet, dimensionOnglet, dimensionOnglet);
-			coordYOnglet += dimensionOnglet + petitDecalageY;
+			
+			int posXString = coordXOnglet + 2*dimensionOnglet/5;
+			int posYString = coordYOnglet + 2*dimensionOnglet/3;
+			String numTour = "" + (numOnglet+moteur.getHistorique().getNbConfigsPrecedentes());
+			crayon.setColor(Color.black);
+			crayon.drawString(numTour , posXString, posYString);
+			
+			coordYOnglet += dimensionOnglet + ecart;
+			
+			
 		}
 	}
 	
