@@ -14,7 +14,6 @@ public class Pioche extends ArrayList<Tuile>{
 	
 	// A TERMINER <= En attente de l'initialisation des differentes tuiles existantes.
 	public void initialisation (){
-		System.out.println("\tlancement de l'initialisation de la pioche");
 		for (int i = 0; i < 30; i++){
 			add(Tuile.newLigneDroite());
 		}
@@ -51,7 +50,6 @@ public class Pioche extends ArrayList<Tuile>{
 		for (int i = 0; i < 6; i++){
 			add(Tuile.newBifurcationsEmbrassees());
 		}
-		System.out.println("\tFin de l'initialisation de la pioche");
 	}
 	
 	/**

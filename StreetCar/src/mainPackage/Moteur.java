@@ -33,7 +33,6 @@ public class Moteur {
 	 * Constructeur
 	 */
 	public Moteur(Plateau referencePlateau) {
-		System.out.println("\tconstructeur de moteur");
 		tabPlayers = new Joueur[2];
 		tabPlayers[0] = new JoueurHumain(this,1);
 		tabPlayers[0].setLigne(1);
@@ -237,13 +236,13 @@ public class Moteur {
 	public void chargerTour (int numeroTourACharger){
 		int numTourActif = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
 		
-		System.out.println("vrai tour a charger : " + numTourActif);
+//		System.out.println("vrai tour a charger : " + numTourActif);
 		
 		Configuration configACharger = historiqueDeTours.get(numTourActif);
-		
+/*		
 		System.out.println("numeroTour dans Moteur : " + configACharger.getNumeroTour());
 		System.out.println("configs precedentes : " + configACharger.getHistorique().getNbConfigsPrecedentes());
-		
+*/		
 		plateauDeJeu = configACharger.getPlateauDuTour().clone();
 		pioche = configACharger.getPiocheDuTour().clone();
 		tabPlayers = new Joueur[configACharger.getNombreJoueurs()];
@@ -252,32 +251,13 @@ public class Moteur {
 		}
 		currentPlayer = configACharger.getJoueurCourant();
 		historiqueDeTours = configACharger.getHistorique().clone();
-		
-		
-		
-/*		
-		plateauDeJeu = configACharger.getPlateauDuTour().clone();
-		pioche = configACharger.getPiocheDuTour().clone();
-		currentPlayer = configACharger.getJoueurCourant();
-		for (int numJoueur = 0; numJoueur < players.length; numJoueur++){
-			players[numJoueur] = configACharger.getJoueurAt(numJoueur).clone();
-		}
-		numeroDeTour = configACharger.getNumeroTour();
-		System.out.println("numTour dans moteur : " + numeroDeTour);
-*/		
-//		effacerConfigSuivantes(numTourActif);
-		
+
+		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 		panJeu.repaint();
 		panHistorique.repaint();
-		
+
 		tabPlayers[currentPlayer].attendCoup();
 
-	}
-	private void effacerConfigSuivantes (int numeroTourMax){
-		for (int numTour = numeroTourMax; numTour < historiqueDeTours.size(); numTour++){
-			historiqueDeTours.remove(historiqueDeTours.get(numTour));
-		}
-		historiqueDeTours.setNbConfigsSuivantes(0);
 	}
 	
 	/*
