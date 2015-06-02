@@ -57,7 +57,7 @@ public class Chargement {
 				mot.setMainPlayers(main, joueur);		
 			}
 			
-			System.out.println("Main 0 : " + main.toString());
+			System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
 
 			//Nb cartes dans main joueur inactif
 			nbCartes =  Character.getNumericValue((br.readLine().charAt(0)));
@@ -68,8 +68,9 @@ public class Chargement {
 				tuileS = br.readLine();
 				tuile = creerTuile(tuileS);
 				main.setTuileAt(i, creerTuile(tuileS));
-				mot.setMainPlayers(main, 1-joueur);
+				mot.setMainPlayers(main, 1);
 			}
+			System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
 			//System.out.println("Main 0 : " + mot.getTabPlayers()[0].getMain().toString());
 			//System.out.println("Main 1 : " + mot.getTabPlayers()[1].getMain().toString());
 			

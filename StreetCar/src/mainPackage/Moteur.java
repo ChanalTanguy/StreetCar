@@ -91,7 +91,7 @@ public class Moteur {
 		currentPlayer = referenceCurrentPlayer;
 	}
 	public void setMainPlayers (MainJoueur referenceMainJoueur, int player){
-		//players[player].setMain(referenceMainJoueur);
+		players[player].setMain(referenceMainJoueur);
 	}
 
 	public void setNbActions (int referenceNbActions){
