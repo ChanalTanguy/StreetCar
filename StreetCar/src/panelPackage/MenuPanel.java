@@ -1,6 +1,7 @@
 package panelPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -32,27 +33,32 @@ public class MenuPanel extends InterfacePanel {
 		JPanel zone1 = newZone(1);
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
-	
-		addNewButton(zone1, "Reprendre", buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), null);
-
-		addNewButton(zone2, "Nouvelle partie", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), null);
-
-		addNewButton(zone2, "Sauvegarder la partie", buttonSize, null, null, null);
-		addNewButton(zone2, "Charger une partie", buttonSize, null, null, null);
-		addNewButton(zone2, "Défis", buttonSize, null, null, null);
-		addNewButton(zone2, "Options", buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), null);
-		addNewButton(zone2, "Crédits", buttonSize, null, null, null);
-		addNewButton(zone3, "Quitter", buttonSize, null, listener.new QuitButtonListener(), null);
-				
+		
+		addNewButton(zone1, "", buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), loadImage("reprendre_menu.png"));
+		
+		addNewButton(zone2, "", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), loadImage("nouvellePartie_menu.png"));
+		addNewButton(zone2, "", buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
+		addNewButton(zone2, "", buttonSize, null, null, loadImage("chargerPartie_menu.png"));
+		addNewButton(zone2, "", buttonSize, null, null, loadImage("defis_menu.png"));
+		addNewButton(zone2, "", buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), loadImage("options_menu.png"));
+		addNewButton(zone2, "", buttonSize, null, null, loadImage("credits_menu.png"));
+		
+		addNewButton(zone3, "", buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
+		
+		
 		this.add(zone1);
 		this.add(zone2);
 		this.add(zone3);
+		
+		this.setBackground(Color.getColor("gris_tram", 4607576));
+		
 	}
 
 	private JPanel newZone(int size){
 		JPanel panel = new JPanel();
 		FlowLayout layout = new FlowLayout();
 		layout.setVgap(0);
+		panel.setBackground(Color.getColor("gris_tram", 4607576)); 
 		panel.setLayout(layout);
 		panel.setPreferredSize(setNewDimension(400,75*size+20));
 		return panel;

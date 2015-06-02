@@ -52,7 +52,7 @@ public class InterfacePanel extends JPanel {
 	protected ImageIcon loadImage(String name){
 		ImageIcon img = null;
 		try {
-			img = new ImageIcon(ImageIO.read(new File("images/menu/"+name)));
+			img = new ImageIcon(ImageIO.read(new File("images/background/"+name)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
