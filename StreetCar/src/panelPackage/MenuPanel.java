@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 import constantesPackages.Constantes;
 
-public class MenuPanel extends InterfacePanel {
+public class MenuPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(400,75);
 

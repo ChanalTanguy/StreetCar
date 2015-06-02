@@ -20,7 +20,7 @@ import panelPackage.MenuPanel;
 import panelPackage.NewGamePanel;
 import constantesPackages.Constantes;
 
-public class ConfirmWindow extends InterfaceWindow {
+public class ConfirmWindow extends WindowInterface {
 	
 	ActionListener actionYES;
 	ActionListener actionNO;

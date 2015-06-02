@@ -19,7 +19,7 @@ import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 import windowPackage.MenuWindow;
 
-public class SettingsPanel extends InterfacePanel {
+public class SettingsPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(175,40);
 	

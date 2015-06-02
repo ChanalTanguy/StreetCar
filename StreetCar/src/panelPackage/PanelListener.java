@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import windowPackage.ConfirmWindow;
-import windowPackage.InterfaceWindow;
+import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 import windowPackage.NewGameWindow;
 import windowPackage.SettingsWindow;

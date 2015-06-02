@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import panelPackage.SettingsPanel;
 
-public class SettingsWindow extends InterfaceWindow {
+public class SettingsWindow extends WindowInterface {
 	
 	public SettingsWindow(){
 		

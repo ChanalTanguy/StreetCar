@@ -15,10 +15,10 @@ import javax.swing.JRadioButton;
 
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
-import windowPackage.InterfaceWindow;
+import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 
-public class NewGamePanel extends InterfacePanel {
+public class NewGamePanel extends PanelInterface {
 
 	String selected1 = "Humain";
 	String selected2 = "Facile";

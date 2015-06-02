@@ -16,7 +16,7 @@ import panelPackage.NewGamePanel;
 import panelPackage.SettingsPanel;
 import constantesPackages.Constantes;
 
-public class MenuWindow extends InterfaceWindow {
+public class MenuWindow extends WindowInterface {
 
 	public MenuWindow(){
 	}

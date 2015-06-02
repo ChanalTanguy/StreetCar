@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import panelPackage.PanelListener.ReturnButtonListener;
 import constantesPackages.Constantes;
 
-public class InterfacePanel extends JPanel {
+public class PanelInterface extends JPanel {
 	
 	JDialog parentDialog;
 	

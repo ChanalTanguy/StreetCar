@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import panelPackage.NewGamePanel;
 
-public class NewGameWindow extends InterfaceWindow {
+public class NewGameWindow extends WindowInterface {
 
 	public NewGameWindow(){
 	}

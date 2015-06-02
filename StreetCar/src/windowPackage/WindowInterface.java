@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 
 import constantesPackages.Constantes;
 
-public class InterfaceWindow extends JDialog {
+public class WindowInterface extends JDialog {
 	
 	double width = Constantes.Resolution.width;
 	double height = Constantes.Resolution.height;
