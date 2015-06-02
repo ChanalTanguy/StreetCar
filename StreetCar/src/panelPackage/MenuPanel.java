@@ -34,16 +34,16 @@ public class MenuPanel extends InterfacePanel {
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
 		
-		addNewButton(zone1, "", buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), loadImage("reprendre_menu.png"));
+		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), loadImage("reprendre_menu.png"));
 		
-		addNewButton(zone2, "", buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), loadImage("nouvellePartie_menu.png"));
-		addNewButton(zone2, "", buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
-		addNewButton(zone2, "", buttonSize, null, null, loadImage("chargerPartie_menu.png"));
-		addNewButton(zone2, "", buttonSize, null, null, loadImage("defis_menu.png"));
-		addNewButton(zone2, "", buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), loadImage("options_menu.png"));
-		addNewButton(zone2, "", buttonSize, null, null, loadImage("credits_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), loadImage("nouvellePartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, null, loadImage("chargerPartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, null, loadImage("defis_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), loadImage("options_menu.png"));
+		addNewButton(zone2, buttonSize, null, null, loadImage("credits_menu.png"));
 		
-		addNewButton(zone3, "", buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
+		addNewButton(zone3, buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
 		
 		
 		this.add(zone1);

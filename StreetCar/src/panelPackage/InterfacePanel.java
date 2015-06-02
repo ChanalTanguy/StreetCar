@@ -4,6 +4,7 @@ import graphique.Fenetre;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,14 @@ public class InterfacePanel extends JPanel {
 		button.addActionListener(action);
 		panel.add(button, position);
 	}
+	
+	protected void addNewButton(JPanel panel, Dimension size, String position, ActionListener action, ImageIcon img){
+		ImageIcon sizedImg = resizeImage(img, size);
+		JButton button = new JButton("", sizedImg);
+		button.setPreferredSize(size);
+		button.addActionListener(action);
+		panel.add(button, position);
+	}
 
 	protected Dimension setNewDimension(double w, double h) {
 		double newHeight = height/(1024.0/h);
@@ -57,6 +66,13 @@ public class InterfacePanel extends JPanel {
 			e.printStackTrace();
 		}
 		return img;
+	}
+	
+	protected ImageIcon resizeImage(ImageIcon img, Dimension size){
+		Image src = img.getImage() ;
+		Image sizedSrc = src.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);  
+		ImageIcon sizedImg = new ImageIcon(sizedSrc);
+		return sizedImg;
 	}
 	
 	protected void setMainGameWindow(Fenetre f){
