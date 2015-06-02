@@ -1,7 +1,11 @@
 package panelPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -59,7 +63,12 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
 		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog, mainGame), null);
-
+		
+		//changement du pointeur
+				Toolkit tk = Toolkit.getDefaultToolkit();
+				Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
+				Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
+				this.setCursor(monCurseur);
 		
 		if (openMenu){
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);

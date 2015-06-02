@@ -2,8 +2,12 @@ package panelPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,6 +49,12 @@ public class MenuPanel extends PanelInterface {
 		
 		addNewButton(zone3, buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
 		
+		//changement du pointeur
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
+		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
+		this.setCursor(monCurseur);
+
 		
 		this.add(zone1);
 		this.add(zone2);
