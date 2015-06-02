@@ -77,14 +77,12 @@ public class Historique extends ArrayList<Configuration>{
 	public boolean ajouter (Configuration config){
 		boolean ajoutValide = add(config);
 		if (ajoutValide){
-			System.out.println("size/nbMaxOnglets : " + this.size() + " " + nombreMaxOnglets);
 			if ( this.size() > nombreMaxOnglets ) {
 				nombreConfigsPrecedentes++;
 			}
 		}
 		return ajoutValide;
 	}
-	
 	public boolean retirer (Configuration config){
 		boolean retraitValide = remove(config);
 		if (retraitValide){
