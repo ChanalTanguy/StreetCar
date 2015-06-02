@@ -31,7 +31,6 @@ public class Panneau_Historique extends Pan_Abstract{
 	
 	private int borneGauche_Bouton, borneDroite_Bouton;
 	private int borneHaute_BoutonSuperieur, borneBasse_BoutonSuperieur;
-	
 	private int borneHaute_BoutonInferieur, borneBasse_BoutonInferieur;
 	/*
 	 * FIN Attributs d'Entiers de positionnement
@@ -99,6 +98,9 @@ public class Panneau_Historique extends Pan_Abstract{
 	public int getDimensionOnglet (){
 		return dimensionOnglet;
 	}
+	public int getNbOngletsActifs (){
+		return nbOngletsActifs;
+	}
 	
 	public int getCoordX (){
 		return coordX;
@@ -145,7 +147,7 @@ public class Panneau_Historique extends Pan_Abstract{
 			crayon.drawRect(0, 0, largeur-1, hauteur-1);
 		}
 		if (encadrerZone > 0){
-			activerCadreZone(crayon);
+			
 		}
 	}
 	
@@ -162,25 +164,15 @@ public class Panneau_Historique extends Pan_Abstract{
 	/*
 	 * Methodes Private de Panneau_Historique
 	 */
-	private void activerCadreZone (Graphics2D crayon){
-		crayon.setColor(Color.white);
-		switch (encadrerZone){
-		case 1:
-			crayon.drawRect(1, 1, largeur-1, hauteur/diviseurDeDimension);
-			break;
-		case 2:
-			crayon.drawRect(1, hauteur/diviseurDeDimension, largeur-1, (diviseurDeDimension-2)*hauteur/diviseurDeDimension);
-			break;
-		case 3:
-			crayon.drawRect(1, (diviseurDeDimension-1)*hauteur/diviseurDeDimension, largeur-1, hauteur/diviseurDeDimension);
-			break;
-		}
-		repaint();
-	}
 	private void dessinerPartieHaute (Graphics2D crayon){
 		coordY = 0;
 		hauteurImage = hauteur/diviseurDeDimension;
 		crayon.drawImage(boutonHaut, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
+		
+		if ( encadrerZone == 1){
+			crayon.setColor(Color.white);
+			crayon.drawRect(coordX - elargissementX, coordY+1, largeurImage + 2*elargissementX, hauteurImage-2);
+		}
 		
 		borneGauche_Bouton = coordX - elargissementX;
 		borneDroite_Bouton = borneGauche_Bouton + largeurImage + 2*elargissementX;
@@ -201,18 +193,23 @@ public class Panneau_Historique extends Pan_Abstract{
 		
 		moteur.getHistorique().setNbMaxOnglets(nbMaxOnglets);
 		
-		dessinerOnglet(crayon, nbOngletsActifs);
+		dessinerOnglets(crayon, nbOngletsActifs);
 	}
 	private void dessinerPartieBasse (Graphics2D crayon){
 		coordY = (diviseurDeDimension-1)*hauteur/diviseurDeDimension;
 		hauteurImage = hauteur/diviseurDeDimension;
 		crayon.drawImage(boutonBas, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 		
+		if ( encadrerZone == 2){
+			crayon.setColor(Color.white);
+			crayon.drawRect(coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage-2);
+		}
+		
 		borneHaute_BoutonInferieur = coordY;
 		borneBasse_BoutonInferieur = borneHaute_BoutonInferieur + hauteurImage;
 	}
 	
-	private void dessinerOnglet (Graphics2D crayon, int nombreMaxTour){
+	private void dessinerOnglets (Graphics2D crayon, int nombreMaxTour){
 		int coordYOnglet = borneHaute_Onglet;
 		for (int numTour = 0; numTour < nombreMaxTour; numTour++){
 			
