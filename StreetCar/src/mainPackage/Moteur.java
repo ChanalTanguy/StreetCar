@@ -35,7 +35,7 @@ public class Moteur {
 	public Moteur(Plateau referencePlateau) {
 		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
-		players[0] = new JoueurHumain(this,1);
+		players[0] = new JoueurIA(this,1);
 		players[0].setLigne(1);
 		players[1] = new JoueurIA(this,4);
 		players[1].setLigne(4);
@@ -150,7 +150,7 @@ public class Moteur {
 				nbActions = 4;
 				
 				// Mise a Jour de l'historique de tours
-				historiqueDeTours.add(new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++));
+				historiqueDeTours.ajouter(new Configuration (players, currentPlayer, plateauDeJeu, pioche, numeroDeTour++));
 				panHistorique.repaint();
 			}
 			if (nbActions > 2)
