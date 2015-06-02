@@ -42,9 +42,9 @@ public class Sauvegarder {
 		mainJinact =  mot.getTabPlayers()[1-joueur].getMain();
 		pio = mot.getPioche();
 		plat = mot.getPlateau().getPlateau();
-		//numTour = mot.getNumTour();
+		numTour = mot.getNumTour();
 		//TODO Prendre en compte l'historique ?
-		//TODO Prendre en compte les objectifs de chacun
+		//TODO Prendre en compte les objectifs de chacun joueur.objectif
 		
 		try 
 		{
@@ -55,6 +55,8 @@ public class Sauvegarder {
 			f.write(System.getProperty("line.separator"));
 			
 			f.write(mainJactif.toString());
+			f.write("{Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]}");
+			f.write(System.getProperty("line.separator"));
 			f.write(mainJinact.toString());
 					
 			f.write(pio.toString());
@@ -64,7 +66,7 @@ public class Sauvegarder {
 			{
 				for(int j=0; j<12; j++)
 				{
-					if(plat[i][j] == null) f.write("null ");
+					if(plat[i][j] == null) f.write("{null} ");
 					else f.write(plat[i][j].toString() + " ");
 				}
 				f.write(System.getProperty("line.separator"));

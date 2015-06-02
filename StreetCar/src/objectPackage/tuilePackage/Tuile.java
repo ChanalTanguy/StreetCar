@@ -246,7 +246,7 @@ public class Tuile implements ActionsToken{
 	public String toString (){
 		String resultat = "{";
 		
-		resultat = resultat + orientation + ",";
+		resultat = resultat + orientation + ":";
 		resultat = resultat + listeConnections.toString()+ "}";
 		
 		return resultat;

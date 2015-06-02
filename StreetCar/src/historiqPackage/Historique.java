@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Historique extends ArrayList<Configuration>{
 	int nombreConfigsPrecedentes, nombreConfigsSuivantes;
-	
+	int nombreMaxOnglets;
 	/*
 	 * Constructeur
 	 */
@@ -25,6 +25,10 @@ public class Historique extends ArrayList<Configuration>{
 	}
 	public int getNbConfigsSuivantes (){
 		return nombreConfigsSuivantes;
+	}
+	
+	public void setNbMaxOnglets (int newValue){
+		nombreMaxOnglets = newValue;
 	}
 	/*
 	 * FIN Accesseurs
@@ -68,6 +72,27 @@ public class Historique extends ArrayList<Configuration>{
 			nombreConfigsPrecedentes++;
 			nombreConfigsSuivantes--;
 		}
+	}
+	
+	public boolean ajouter (Configuration config){
+		boolean ajoutValide = add(config);
+		if (ajoutValide){
+			System.out.println("size/nbMaxOnglets : " + this.size() + " " + nombreMaxOnglets);
+			if ( this.size() > nombreMaxOnglets ) {
+				nombreConfigsPrecedentes++;
+			}
+		}
+		return ajoutValide;
+	}
+	
+	public boolean retirer (Configuration config){
+		boolean retraitValide = remove(config);
+		if (retraitValide){
+			if ( this.size() > nombreMaxOnglets ){
+				nombreConfigsSuivantes--;
+			}
+		}
+		return retraitValide;
 	}
 	
 	public String toString (){

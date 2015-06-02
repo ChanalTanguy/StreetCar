@@ -122,7 +122,7 @@ public class Connection {
 	
 	public String toString (){
 		String resultat = "";
-		resultat = resultat + "( " + pointA + "; " + pointB + ")";
+		resultat = resultat + "(" + pointA + ";" + pointB + ")";
 		return resultat;
 	}
 	

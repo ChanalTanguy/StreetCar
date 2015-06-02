@@ -50,6 +50,11 @@ public abstract class Joueur {
 		objectif.setLigne(newLigne);
 	}
 	
+	public void setMain(MainJoueur referenceMain)
+	{
+		main = referenceMain;
+	}
+	
 	
 	/*
 	 * FIN Accesseurs
