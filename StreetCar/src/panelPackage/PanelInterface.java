@@ -3,6 +3,7 @@ package panelPackage;
 import graphique.Fenetre;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -29,6 +30,14 @@ public class PanelInterface extends JPanel {
 	
 	double width = Constantes.Resolution.width;
 	double height = Constantes.Resolution.height;
+	
+	protected JPanel newZone(int x, int y){
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		panel.setBackground(Color.getColor("gris_tram", 4607576));
+		panel.setPreferredSize(setNewDimension(x,y));
+		return panel;
+	}
 	
 	protected JPanel newButtonZone(int x, int y){
 		JPanel panel = new JPanel();
