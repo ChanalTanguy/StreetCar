@@ -11,8 +11,10 @@ public class JoueurIA extends Joueur {
 	public EcouteurBoucle ecouteurBoucle;
 	public Timer t;
 	
+	private static int typeIA = 1;
+	
 	public JoueurIA(Moteur m, int ligne) {
-		super(new MainJoueur(), ligne, 1);
+		super(new MainJoueur(), ligne, typeIA);
 		ecouteurBoucle = new EcouteurBoucle(m, new IADifficile(m, this));
 		t = new Timer(450, ecouteurBoucle);
 	}
@@ -28,11 +30,13 @@ public class JoueurIA extends Joueur {
 	}
 	
 	public Joueur clone() {
-
-		JoueurIA j = new JoueurIA(ecouteurBoucle.moteur, this.ligne);
-		j.main = this.main.clone();
-		j.phase = this.phase;
-		return j;
+		JoueurIA joueur_renvoi = new JoueurIA(ecouteurBoucle.moteur, objectif.getLigne());
+		
+		joueur_renvoi.main = this.main.clone();
+		joueur_renvoi.phase = this.phase;
+		
+		
+		return joueur_renvoi;
 	}
 
 }

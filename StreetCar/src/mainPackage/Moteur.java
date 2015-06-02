@@ -34,7 +34,9 @@ public class Moteur {
 		System.out.println("\tconstructeur de moteur");
 		players = new Joueur[2];
 		players[0] = new JoueurHumain(this,1);
-		players[1] = new JoueurHumain(this,4);
+		players[0].setLigne(1);
+		players[1] = new JoueurIA(this,4);
+		players[1].setLigne(4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 4;
@@ -68,9 +70,15 @@ public class Moteur {
 	public Pioche getPioche (){
 		return pioche;
 	}
+
 	public int getNumTour()
 	{
 		return numeroDeTour;
+	}
+	
+	public Historique getHistorique (){
+		return historiqueDeTours;
+
 	}
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
