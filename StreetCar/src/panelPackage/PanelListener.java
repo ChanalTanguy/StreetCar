@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import windowPackage.ConfirmWindow;
+import windowPackage.CreditsWindow;
 import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 import windowPackage.NewGameWindow;
@@ -75,6 +76,26 @@ public class PanelListener {
 
 			conf.openConfirmWindow();
 		}
+	}
+	
+	public class CreditsButtonListener implements ActionListener {
+		
+		// Ouvre la fenêtre de configuration d'une nouvelle partie
+
+		JDialog parent;
+		boolean openWindow;
+
+		public CreditsButtonListener(JDialog parent, boolean b){
+			this.parent = parent;
+			this.openWindow = b;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			parent.dispose();
+			CreditsWindow win = new CreditsWindow();
+			win.openWindow(openWindow);
+		}
+
 	}
 
 	public class SettingsButtonListener implements ActionListener {

@@ -19,6 +19,9 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		int coordX = e.getX();
 		int coordY = e.getY();
 		int tourSelectionne;
+		
+		System.out.println("coords : " + coordX + " " + coordY);
+		
 		if ( (tourSelectionne = estSurOnglets(coordX, coordY)) != -1){
 			panneauHistorique.demandeConfirmation();
 			if ( panneauHistorique.getRetourConfirme() ){
@@ -26,10 +29,15 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 			}
 		}
 		else if ( estSurDefilementHaut(coordX, coordY) ){
-			moteur.getHistorique().defilementVersHaut();
+			System.out.println("sur Defilement Haut");
+//			moteur.getHistorique().defilementVersHaut();
 		}
 		else if ( estSurDefilementBas(coordX, coordY) ){
-			moteur.getHistorique().defilementVersBas();
+			System.out.println("sur Defilement Bas");
+//			moteur.getHistorique().defilementVersBas();
+		}
+		else {
+			System.out.println("clic vide");
 		}
 	}
 	public void mouseMoved(MouseEvent e) {
@@ -81,12 +89,23 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	}
 	
 	private boolean estSurDefilementHaut (int coordX, int coordY){
-		boolean clicValide = false; 
+		boolean clicValide = false;
+		
+		clicValide = coordX >= panneauHistorique.getBorneGauche_Bouton() && coordX <= panneauHistorique.getBorneDroite_Bouton();
+		
+//		System.out.println("largeur/hauteur : " + panneauHistorique.getLargeurImage() + " " + panneauHistorique.getHauteurImage() );
+		
+		int resultat = (2 - 3*coordX) * panneauHistorique.getHauteurImage();
+		
+		clicValide = clicValide && coordY >= resultat;
+		
 		
 		return clicValide;
 	}
 	private boolean estSurDefilementBas (int coordX, int coordY){
 		boolean clicValide = false;
+		
+		
 		
 		return clicValide;
 	}

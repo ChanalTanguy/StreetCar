@@ -56,14 +56,6 @@ public class ConfirmPanel extends PanelInterface {
 		this.add(confirm);
 		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
-	
-	private JPanel newZone(int x, int y){
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel.setBackground(Color.getColor("gris_tram", 4607576));
-		panel.setPreferredSize(setNewDimension(x,y));
-		return panel;
-	}
 
 	public void setListeners(ActionListener actionYES, ActionListener actionNO){
 		this.actionYES = actionYES;
