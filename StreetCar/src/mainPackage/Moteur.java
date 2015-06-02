@@ -233,7 +233,32 @@ public class Moteur {
 		players[currentPlayer].attendCoup();
 	}
 	public void chargerTour (int numeroTourACharger){
+		int numTourActif = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
 		
+		System.out.println("vrai tour a charger : " + numTourActif);
+		
+		Configuration configACharger = historiqueDeTours.get(numTourActif);
+		plateauDeJeu = configACharger.getPlateauDuTour().clone();
+		pioche = configACharger.getPiocheDuTour().clone();
+		currentPlayer = configACharger.getJoueurCourant();
+		for (int numJoueur = 0; numJoueur < players.length; numJoueur++){
+			players[numJoueur] = configACharger.getJoueurAt(numJoueur).clone();
+		}
+		numeroDeTour = configACharger.getNumeroTour();
+		System.out.println("numTour : " + numeroDeTour);
+		
+		effacerConfigSuivantes(numTourActif);
+		
+		panJeu.repaint();
+		panHistorique.repaint();
+		
+		players[currentPlayer].attendCoup();
+	}
+	private void effacerConfigSuivantes (int numeroTourMax){
+		for (int numTour = numeroTourMax; numTour < historiqueDeTours.size(); numTour++){
+			historiqueDeTours.remove(historiqueDeTours.get(numTour));
+		}
+		historiqueDeTours.setNbConfigsSuivantes(0);
 	}
 	
 	/*
@@ -266,4 +291,5 @@ public class Moteur {
 				return false;
 		}
 	}
+
 }

@@ -3,8 +3,8 @@ package historiqPackage;
 import java.util.ArrayList;
 
 public class Historique extends ArrayList<Configuration>{
-	int nombreConfigsPrecedentes, nombreConfigsSuivantes;
-	int nombreMaxOnglets;
+	private int nombreConfigsPrecedentes, nombreConfigsSuivantes;
+	private int nombreMaxOnglets;
 	/*
 	 * Constructeur
 	 */
@@ -27,6 +27,12 @@ public class Historique extends ArrayList<Configuration>{
 		return nombreConfigsSuivantes;
 	}
 	
+	public void setNbConfigsPrecedentes (int newValue){
+		nombreConfigsPrecedentes = newValue;
+	}
+	public void setNbConfigsSuivantes (int newValue){
+		nombreConfigsSuivantes = newValue;
+	}
 	public void setNbMaxOnglets (int newValue){
 		nombreMaxOnglets = newValue;
 	}

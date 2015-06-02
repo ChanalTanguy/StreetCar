@@ -220,6 +220,11 @@ public class Panneau_Historique extends Pan_Abstract{
 			int posYString = coordYOnglet + 2*dimensionOnglet/3;
 			
 			int numTourActif = numTour + moteur.getHistorique().getNbConfigsPrecedentes();
+			
+			System.out.println("numTour : " + numTour);
+			System.out.println("nb Configs Precedentes : " + moteur.getHistorique().getNbConfigsPrecedentes() );
+			System.out.println("test : " + moteur.getHistorique().get(numTourActif).getNumeroTour() );
+			
 			String chaineTour = "" + moteur.getHistorique().get(numTourActif).getNumeroTour();
 			
 			crayon.setColor(Color.black);
