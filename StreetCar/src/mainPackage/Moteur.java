@@ -83,6 +83,7 @@ public class Moteur {
 	
 	public void setPanJeu (Panneau_Plateau referencePanJeu){
 		panJeu = referencePanJeu;
+		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 	}
 	public void setPanHistorique (Panneau_Historique referencePanHistorique){
 		panHistorique = referencePanHistorique;
@@ -156,6 +157,9 @@ public class Moteur {
 				
 				// Mise a Jour de l'historique de tours
 				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours));
+				historiqueDeTours.last().setHistorique(historiqueDeTours);
+				
+				
 				panHistorique.repaint();
 			}
 			if (nbActions > 2)
@@ -251,7 +255,9 @@ public class Moteur {
 		}
 		currentPlayer = configACharger.getJoueurCourant();
 		historiqueDeTours = configACharger.getHistorique().clone();
-
+		
+		System.out.println("historiqueDeTour size :  " + historiqueDeTours.size());
+		
 		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 		panJeu.repaint();
 		panHistorique.repaint();

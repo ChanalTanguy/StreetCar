@@ -137,6 +137,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * FIN ACCESSEURS
 	 */
 	
+	/*
+	 * Constructeur
+	 */
 	public Panneau_Plateau (Color newCouleur, Moteur referenceMoteur){
 		super(newCouleur);
 		mot = referenceMoteur;
@@ -145,7 +148,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		addMouseListener( new Ecouteur_Plateau(this, referenceMoteur) );
 	}
+	/*
+	 * FIN Constructeur
+	 */
 	
+	/*
+	 * Methode paintComponent de Panneau_Plateau
+	 */
 	public void paintComponent (Graphics g){
 		crayon = (Graphics2D) g;
 		
@@ -173,8 +182,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 		positionXPioche = 6*largeur/7;
 		positionYPioche = hauteur/2-tailleCase;
 		dimensionPioche = 2*tailleCase;
-		
-//		nettoyage(crayon);
 		
 		crayon.setColor(couleur);
 		crayon.fillRect(0, 0, largeur, hauteur);
@@ -211,15 +218,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	
 	/*
+	 * Methodes Public de Panneau_Plateau 
+	 */
+	
+	/*
 	 * Methodes Private de Panneau_Plateau
 	 */
-	// Methode de clean
-	private void nettoyage(Graphics2D crayon) {
-		crayon.setColor(Color.white);
-		crayon.fillRect(0, 0, largeur, hauteur);
-	}
-	
-	// 6 Methodes de dessin principales
+	// Methodes de dessin principales
 	private void dessinerFond (Graphics2D crayon) {
 		crayon.drawImage(fond, 0, 0, largeur, hauteur, this);
 	}

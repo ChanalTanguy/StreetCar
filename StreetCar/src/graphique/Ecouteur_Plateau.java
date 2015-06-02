@@ -8,11 +8,11 @@ import joueurPackage.JoueurHumain;
 import mainPackage.Moteur;
 
 public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
-	Panneau_Plateau pan;
+	Panneau_Plateau panneauDeJeu;
 	Moteur mot;
 	
 	public Ecouteur_Plateau (Panneau_Plateau referencePan, Moteur referenceMoteur){
-		pan = referencePan;
+		panneauDeJeu = referencePan;
 		mot = referenceMoteur;
 	}
 	
@@ -28,20 +28,22 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			int y = e.getY();
 			
 			// on supprime le decalage de dessin par rapport a la bordure gauche.
-			int piocheX = x - pan.getDepart();
+			int piocheX = x - panneauDeJeu.getDepart();
 			int piocheY = y;
 			
-			int caseX = (x - pan.getDepart()) / pan.getTailleCase();
-			int caseY = (y - pan.getDepart()) / pan.getTailleCase();
+			int caseX = (x - panneauDeJeu.getDepart() - 8) / panneauDeJeu.getTailleCase();
+			int caseY = (y - panneauDeJeu.getDepart() - 10) / panneauDeJeu.getTailleCase();
 			
-//			System.out.println("casesX/Y : " + caseX + " " + caseY);
+			System.out.println("x/y : " + x + " " + y);
+			System.out.println("decalage de depart : " + panneauDeJeu.getDepart());
+			System.out.println("casesX/Y : " + caseX + " " + caseY);
 			
 			switch (buttonDown){
 			// bouton droit de la souris
 			case MouseEvent.BUTTON3:
 				if ( estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY) - 1) ){
-					pan.setPiocheSelectionnee(false);
-					pan.setCaseSelectionnee(false);
+					panneauDeJeu.setPiocheSelectionnee(false);
+					panneauDeJeu.setCaseSelectionnee(false);
 					int numeroTuile = tuileNo(piocheX);
 					int numeroMain = mainNo(piocheY);
 					joueur.coupTourner(numeroTuile);
@@ -56,8 +58,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				if ( estSurPioche(x, y) ){
 					System.out.println("clic sur pioche");
 					
-					pan.setCaseSelectionnee(false);
-					pan.setMainSelectionnee(-1);
+					panneauDeJeu.setCaseSelectionnee(false);
+					panneauDeJeu.setMainSelectionnee(-1);
 					joueur.coupPiocher();
 					selectionnerPioche();
 				}
@@ -79,8 +81,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 						joueur.coupVoler(numeroTuile);
 					}
 					else {
-						pan.setPiocheSelectionnee(false);
-						pan.setCaseSelectionnee(false);
+						panneauDeJeu.setPiocheSelectionnee(false);
+						panneauDeJeu.setCaseSelectionnee(false);
 						
 						// joueur.coupSelectionTuile(numeroTuile);
 					}
@@ -90,16 +92,17 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				else if ( estSurPlateau(caseX, caseY) ){
 					System.out.println("clic sur le plateau");
 					
-					pan.setPiocheSelectionnee(false);
+					panneauDeJeu.setPiocheSelectionnee(false);
 					// Pour voir si l'on a selectionne au prealable 
 					// la main du joueur
-					if (pan.getMainSelectionnee() == mot.getcurrentPlayer()+1){
-						joueur.coupPlacerTuile(pan.getTuileMainSelectionnee(), caseX, caseY);
-						pan.setMainSelectionnee(-1);
+					if (panneauDeJeu.getMainSelectionnee() == mot.getcurrentPlayer()+1){
+						joueur.coupPlacerTuile(panneauDeJeu.getTuileMainSelectionnee(), caseX, caseY);
+						
+						panneauDeJeu.setMainSelectionnee(-1);
 					}
 					else {
 						selectionnerCase(caseX, caseY);
-						pan.setCaseSelectionnee(true);
+						panneauDeJeu.setCaseSelectionnee(true);
 					}
 				}
 				else {
@@ -107,10 +110,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					
 					caseX = -1;
 					caseY = -1;
-					pan.setMainSelectionnee(-1);
-					pan.setPiocheSelectionnee(false);
-					pan.setCaseSelectionnee(false);
-					pan.repaint();
+					panneauDeJeu.setMainSelectionnee(-1);
+					panneauDeJeu.setPiocheSelectionnee(false);
+					panneauDeJeu.setCaseSelectionnee(false);
+					panneauDeJeu.repaint();
 				}
 				break;
 			}
@@ -145,10 +148,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurPioche(int piocheX, int piocheY) {
 		boolean clicValideSurPioche = false;
-		int borneGauche = pan.getPositionXPioche();
-		int borneDroite = borneGauche + pan.getDimensionPioche();
-		int borneHaute = pan.getPositionYPioche();
-		int borneBasse = borneHaute + pan.getDimensionPioche();
+		int borneGauche = panneauDeJeu.getPositionXPioche();
+		int borneDroite = borneGauche + panneauDeJeu.getDimensionPioche();
+		int borneHaute = panneauDeJeu.getPositionYPioche();
+		int borneBasse = borneHaute + panneauDeJeu.getDimensionPioche();
 		
 		if ( piocheX >= borneGauche && piocheX <= borneDroite
 		&&	 piocheY >= borneHaute && piocheY <= borneBasse ){
@@ -159,18 +162,18 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	private boolean estDansMain(int piocheX, int piocheY) {
 		boolean clicValide = true;
 		
-		piocheX = piocheX + pan.getDepart();
+		piocheX = piocheX + panneauDeJeu.getDepart();
 		
 		// indique dans quelle main le clic a ete effectue
 		int numeroMain = mainNo(piocheY);
-		int zoneDeLaMain = pan.getDecalageMain() + 4*( pan.getTailleCaseMain() + pan.getPetitEcartMain() ) + pan.getTailleCaseMain();
+		int zoneDeLaMain = panneauDeJeu.getDecalageMain() + 4*( panneauDeJeu.getTailleCaseMain() + panneauDeJeu.getPetitEcartMain() ) + panneauDeJeu.getTailleCaseMain();
 		
-		if (piocheX >= pan.getDecalageMain() && piocheX <= zoneDeLaMain && numeroMain != -1){
+		if (piocheX >= panneauDeJeu.getDecalageMain() && piocheX <= zoneDeLaMain && numeroMain != -1){
 			int nombreEcarts = 4;
 			
 			for (int numeroEcart = 0; numeroEcart < nombreEcarts; numeroEcart++){
-				int borneGauche = pan.getDecalageMain() + pan.getTailleCaseMain() + numeroEcart * (pan.getTailleCaseMain() + pan.getPetitEcartMain());
-				int borneDroite = borneGauche + pan.getPetitEcartMain();
+				int borneGauche = panneauDeJeu.getDecalageMain() + panneauDeJeu.getTailleCaseMain() + numeroEcart * (panneauDeJeu.getTailleCaseMain() + panneauDeJeu.getPetitEcartMain());
+				int borneDroite = borneGauche + panneauDeJeu.getPetitEcartMain();
 				
 				if (piocheX > borneGauche && piocheX < borneDroite){
 					clicValide = false;
@@ -184,26 +187,26 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	}
 
 	private void selectionnerMain (int numeroTuile, int numeroMain){
-		pan.setMainSelectionnee(numeroMain);
-		pan.setTuileSelectionnee(numeroTuile);
-		pan.repaint();
+		panneauDeJeu.setMainSelectionnee(numeroMain);
+		panneauDeJeu.setTuileSelectionnee(numeroTuile);
+		panneauDeJeu.repaint();
 	}
 	private void selectionnerPioche() {
-		pan.setPiocheSelectionnee(true);
-		pan.repaint();
+		panneauDeJeu.setPiocheSelectionnee(true);
+		panneauDeJeu.repaint();
 	}
 	private void selectionnerCase(int caseX, int caseY) {
-		pan.setCoordXSelection(caseX);
-		pan.setCoordYSelection(caseY);
-		pan.repaint();
+		panneauDeJeu.setCoordXSelection(caseX);
+		panneauDeJeu.setCoordYSelection(caseY);
+		panneauDeJeu.repaint();
 	}
 
 	private int mainNo(int piocheY) {
 		int numeroMain;
-		if ( piocheY >= pan.getMaintDuBas() && piocheY <= pan.getMaintDuBas() + pan.getTailleCaseMain() ){
+		if ( piocheY >= panneauDeJeu.getMaintDuBas() && piocheY <= panneauDeJeu.getMaintDuBas() + panneauDeJeu.getTailleCaseMain() ){
 			numeroMain = 1;
 		}
-		else if ( piocheY >= pan.getMainDuHaut() && piocheY <= pan.getMainDuHaut() + pan.getTailleCaseMain() ){
+		else if ( piocheY >= panneauDeJeu.getMainDuHaut() && piocheY <= panneauDeJeu.getMainDuHaut() + panneauDeJeu.getTailleCaseMain() ){
 			numeroMain = 2;
 		}
 		else {
@@ -212,10 +215,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		return numeroMain;
 	}
 	private int tuileNo(int piocheX) {
-		piocheX = piocheX + pan.getDepart();
+		piocheX = piocheX + panneauDeJeu.getDepart();
 		// on definit les deux bornes d'une tuile
-		int borneGauche = pan.getDecalageMain();
-		int borneDroite = borneGauche + pan.getTailleCaseMain();
+		int borneGauche = panneauDeJeu.getDecalageMain();
+		int borneDroite = borneGauche + panneauDeJeu.getTailleCaseMain();
 		
 		for (int numeroTuile = 0; numeroTuile < 5; numeroTuile++){
 			// Si la position X se trouve entre les 2 bornes, on retourne le numero de la tuile
@@ -224,8 +227,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			}
 			// Sinon on decale les bornes pour le prochain test
 			else {
-				borneGauche = borneDroite + pan.getPetitEcartMain();
-				borneDroite = borneGauche + pan.getTailleCaseMain();
+				borneGauche = borneDroite + panneauDeJeu.getPetitEcartMain();
+				borneDroite = borneGauche + panneauDeJeu.getTailleCaseMain();
 			}
 		}
 		return -1;
