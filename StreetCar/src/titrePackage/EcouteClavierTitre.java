@@ -61,7 +61,7 @@ public class EcouteClavierTitre implements KeyListener {
 				*/
 				break;
 			case 2 : //Charger partie
-				
+				pan.actif = 2;
 				break;
 			case 3 : //Défis
 				pan.actif = 3;
