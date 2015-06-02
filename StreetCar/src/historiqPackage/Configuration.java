@@ -48,10 +48,13 @@ public class Configuration {
 	 */
 	public String toString (){
 		String chaine_resultat = "";
+		chaine_resultat += joueurCourantDuTour + "\n";
+		chaine_resultat += numeroDuTour + "\n";
 		for (int numJoueur = 0; numJoueur < tabJoueurs.length; numJoueur++){
-			chaine_resultat += "Main du joueur " + numJoueur + " : \n";
-			chaine_resultat += "\t" + tabJoueurs[numJoueur].getMain().toString() + "\n";
+			chaine_resultat += tabJoueurs[numJoueur].getMain().toString() + "\n";
 		}
+		chaine_resultat += piocheDuTour.toString();
+		chaine_resultat += plateauDuTour.toString();
 		return chaine_resultat;
 	}
 	
