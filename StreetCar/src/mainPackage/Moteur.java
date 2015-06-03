@@ -59,6 +59,25 @@ public class Moteur {
 	 * FIN Constructeur
 	 */
 	
+	/*
+	 * Constructeur 2
+	 */
+	public void setPlayers(Joueur j1, Joueur j2) {
+		tabPlayers[0] = j1;
+		tabPlayers[0].setLigne(1);
+		tabPlayers[1] = j2;
+		tabPlayers[1].setLigne(4);
+		currentPlayer = 0;
+		
+		historiqueDeTours.clear();
+		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents);
+		historiqueDeTours.add(configurationInitiale);
+		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
+	}
+	/*
+	 * FIN Constructeur 2
+	 */
+	
 	/* 
 	 * Accesseurs
 	 */
