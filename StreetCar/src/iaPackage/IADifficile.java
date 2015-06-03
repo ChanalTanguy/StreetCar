@@ -19,6 +19,8 @@ public class IADifficile implements InterfaceIA {
 	JoueurIA joueur;
 	Random r;
 	CoupEtRotation coupEnAttente;
+	
+	private final static boolean trace = false;
 
 	public IADifficile(Moteur moteur, JoueurIA joueurIA) {
 		this.moteur = moteur;
@@ -91,7 +93,8 @@ public class IADifficile implements InterfaceIA {
 				}
 			}
 		}
-		System.out.println("Temps d'execution prémière partie (ms) : "+(System.currentTimeMillis()-t));
+		if (trace == true)
+			System.out.println("Temps d'execution prémière partie (ms) : "+(System.currentTimeMillis()-t));
 
 		for (int i = 0; i < toutLesCoupUnique.size(); i++) {
 			for (int j = i+1; j < toutLesCoupUnique.size(); j++) {
@@ -119,11 +122,13 @@ public class IADifficile implements InterfaceIA {
 			joueur.tournerTuileMain(coupChoisi[0].getCoup().getTuile());
 		}
 
-		System.out.println("Temps d'execution total (ms) : "+(System.currentTimeMillis()-t));
-		System.out.println("Résultat : ");
-		System.out.println("Coup 1 : "+coupChoisi[0].getCoup().getTuile()+" "+coupChoisi[0].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[0].getNbRotation()+"; cout : "+coupChoisi[0].getCout());
-		System.out.println("Coup 2 : "+coupChoisi[1].getCoup().getTuile()+" "+coupChoisi[1].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[1].getNbRotation()+"; cout : "+coupChoisi[1].getCout());
-		System.out.println();
+		if (trace == true) {
+			System.out.println("Temps d'execution total (ms) : "+(System.currentTimeMillis()-t));
+			System.out.println("Résultat : ");
+			System.out.println("Coup 1 : "+coupChoisi[0].getCoup().getTuile()+" "+coupChoisi[0].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[0].getNbRotation()+"; cout : "+coupChoisi[0].getCout());
+			System.out.println("Coup 2 : "+coupChoisi[1].getCoup().getTuile()+" "+coupChoisi[1].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[1].getNbRotation()+"; cout : "+coupChoisi[1].getCout());
+			System.out.println();
+		}
 		
 
 		return coupChoisi[0].getCoup();
