@@ -21,10 +21,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		int coordY = e.getY();
 		int tourSelectionne;
 		
-		System.out.println("coords : " + coordX + " " + coordY);
-		
 		if ( (tourSelectionne = estSurOnglets(coordX, coordY)) != -1){
-			System.out.println("tour selec : " + tourSelectionne);
 			
 //			panneauHistorique.demandeConfirmation();
 //			if ( panneauHistorique.getRetourConfirme() ){
@@ -32,18 +29,14 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 //			}
 		}
 		else if ( estSurDefilementHaut(coordX, coordY) ){
-			System.out.println("sur Defilement Haut");
 			moteur.getHistorique().defilementVersHaut();
 			panneauHistorique.repaint();
 		}
 		else if ( estSurDefilementBas(coordX, coordY) ){
-			System.out.println("sur Defilement Bas");
 			moteur.getHistorique().defilementVersBas();
 			panneauHistorique.repaint();
 		}
-		else {
-			System.out.println("clic vide");
-		}
+		else {}
 	}
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();

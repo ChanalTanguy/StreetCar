@@ -23,7 +23,7 @@ import windowPackage.MenuWindow;
 
 public class CreditsPanel extends PanelInterface {
 	
-	Dimension buttonSize = setNewDimension(250,75);
+	Dimension buttonSize = setNewDimension(250,60);
 	Dimension imageSize = setNewDimension(750,475);
 	
 	boolean openMenu = false;
@@ -46,7 +46,7 @@ public class CreditsPanel extends PanelInterface {
 		//int panelWidth = (int)((8.0/10.0)*width);
 		//int panelHeight = (int)((8.0/10.0)*height);
 		
-		JPanel zone1 = newZone(imageSize.width, imageSize.height);
+		JPanel zone1 = newZone(imageSize.width, imageSize.height+20);
 		
 		JPanel zone2 = newButtonZone(buttonSize.width, buttonSize.height);
 		
