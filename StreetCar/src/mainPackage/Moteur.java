@@ -145,6 +145,7 @@ public class Moteur {
 				panJeu.ajouterCoup(coupChoisi.getCoordonnee());
 				ajouterCoup(coupChoisi.getCoordonnee());
 				
+				
 				coupSimultane = null;
 			} else if (coupChoisi.getType().equals(Constantes.Coup.vol)) {
 				tabPlayers[currentPlayer].volerTuile(coupChoisi.getTuile(), tabPlayers[(currentPlayer+1)%2]);
@@ -166,9 +167,10 @@ public class Moteur {
 				// Mise a Jour de l'historique de tours
 				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents));
 				historiqueDeTours.last().setHistorique(historiqueDeTours);
-
+				
 				panJeu.afficherCoupsPrecedents();
 				panJeu.effacerCoupsJoues();
+				effacerCoupsPrecedents();
 				
 				panHistorique.repaint();
 			}
@@ -258,12 +260,16 @@ public class Moteur {
 		}
 		currentPlayer = configACharger.getJoueurCourant();
 		historiqueDeTours = configACharger.getHistorique().clone();
+		
 		int numeroCoup = 0;
 		while ( numeroCoup < coupsPrecedents.length && configACharger.getCoupsPrecedents()[numeroCoup] != null){
 			coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup].clone();
 			numeroCoup++;
 		}
+		
 		panJeu.setCoupsPrecedents(coupsPrecedents);
+		
+		effacerCoupsPrecedents();
 		
 		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 		panJeu.repaint();
@@ -313,6 +319,10 @@ public class Moteur {
 			coupsPrecedents[numeroCoup] = coupJoue;
 		}
 	}
-
+	private void effacerCoupsPrecedents (){
+		for (int numeroCoup = 0; numeroCoup < coupsPrecedents.length; numeroCoup++){
+			coupsPrecedents[numeroCoup] = null;
+		}
+	}
 	
 }
