@@ -159,6 +159,10 @@ public class Tuile implements ActionsToken{
 		return typeTuile;
 	}
 	
+	public int getEscale() {
+		return escale;
+	}
+	
 	public void setImage (BufferedImage i){
 		imageTuile = i;
 	}

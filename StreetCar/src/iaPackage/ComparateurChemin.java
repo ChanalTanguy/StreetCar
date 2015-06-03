@@ -2,7 +2,7 @@ package iaPackage;
 
 import java.util.Comparator;
 
-class ComparateurChemin implements Comparator<TuileChemin>{
+public class ComparateurChemin implements Comparator<TuileChemin>{
 
 	@Override
 	public int compare(TuileChemin o1, TuileChemin o2) {

@@ -2,7 +2,7 @@ package iaPackage;
 
 import java.awt.Point;
 
-class TuileChemin {
+public class TuileChemin {
 
 	private int x;
 	private int y;
@@ -20,27 +20,27 @@ class TuileChemin {
 		previous = pre;
 	}
 	
-	Point getPosition() {
+	public Point getPosition() {
 		return new Point(x,y);
 	}
 	
-	String getDirection() {
+	public String getDirection() {
 		return direction;
 	}
 	
-	int getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 	
-	int getHeuristique() {
+	public int getHeuristique() {
 		return heuristique;
 	}
 	
-	TuileChemin getPrevious() {
+	public TuileChemin getPrevious() {
 		return previous;
 	}
 	
-	static int compare(TuileChemin o1, TuileChemin o2) {
+	public static int compare(TuileChemin o1, TuileChemin o2) {
 		return (o1.getPriority()+o1.getHeuristique())-(o2.getPriority()+o2.getHeuristique());
 	}
 }

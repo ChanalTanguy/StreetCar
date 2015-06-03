@@ -1,8 +1,15 @@
 package objectPackage;
 
+import iaPackage.ComparateurChemin;
+import iaPackage.RejectList;
+import iaPackage.TuileChemin;
+
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import joueurPackage.Coup;
+import joueurPackage.Objectifs;
 import objectPackage.tuilePackage.Connection;
 import objectPackage.tuilePackage.Escale;
 import objectPackage.tuilePackage.Terminus;
@@ -13,19 +20,19 @@ public class Plateau {
 	private Tuile[][] plateau;
 
 	private static final int[][] PositionEscale = {  { 1, 5},
-												     { 2, 9},
-												     { 4, 2},
-												     { 4, 7},
-												     { 5,12},
-												     { 6, 4},
-												     { 7, 9},
-												     { 8, 1},
-												     { 9, 6},
-												     { 9,11},
-												     {11, 4},
-												     {12, 8}
+		{ 2, 9},
+		{ 4, 2},
+		{ 4, 7},
+		{ 5,12},
+		{ 6, 4},
+		{ 7, 9},
+		{ 8, 1},
+		{ 9, 6},
+		{ 9,11},
+		{11, 4},
+		{12, 8}
 	};
-	
+
 	public Plateau (){
 		plateau = new Tuile[Constantes.Dimensions.dimensionPlateau][Constantes.Dimensions.dimensionPlateau];
 		initialisationTuile();
@@ -63,7 +70,7 @@ public class Plateau {
 		setTuileAt( PositionEscale[11][0], PositionEscale[11][1], new Escale(12));
 
 		// Mettre les Terminus
-		
+
 		// Terminus du Nord
 		for(int i = 0; i<3;i++) {
 			// Tuile gauche
@@ -84,7 +91,7 @@ public class Plateau {
 			t = new Terminus(j+4,2); t.addConnection(new Connection(Constantes.Orientation.ouest,Constantes.Orientation.nord));
 			setTuileAt(3+4*i, 13, t);
 		}
-		
+
 		// Terminus de l'est
 		for(int i = 0; i<3;i++) {
 			// Tuile haute
@@ -105,9 +112,9 @@ public class Plateau {
 			t = new Terminus(j+1,2); t.addConnection(new Connection(Constantes.Orientation.nord,Constantes.Orientation.ouest));
 			setTuileAt(13, 11-(4*i), t);
 		}
-		
+
 	}
-	
+
 	public Tuile[][] getPlateau (){
 		return plateau;
 	}
@@ -115,7 +122,7 @@ public class Plateau {
 	public int length (){
 		return plateau.length;
 	}
-	
+
 	public boolean coupValide (Tuile nouvTuile, Coup coup){
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
@@ -136,18 +143,18 @@ public class Plateau {
 					valide = nouvTuile.canReplace(ancTuile);
 				}
 			}
-			
+
 			valide = valide
-				  && (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
-				  && (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))
-				  && (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
-				  && (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est));
+					&& (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))
+					&& (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))
+					&& (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))
+					&& (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est));
 
 			return valide;
 		} else 
 			return false;
 	}
-	
+
 	public String coupSimultaneValide(Tuile nouvTuile, Coup coup) {
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
@@ -160,21 +167,21 @@ public class Plateau {
 
 			if (ancTuile == null) 
 				return null; // Le moteur n'est pas sensé arriver ici : 
-						  // Si la tuile est vide le coup simultané n'a pas lieu d'être
-			
+			// Si la tuile est vide le coup simultané n'a pas lieu d'être
+
 			if (ancTuile.getPresenceArbres())
 				return null;
 
 			if (!nouvTuile.canReplace(ancTuile))
 				return null;
-			
+
 			int valide = 0;
-			
+
 			valide += (getTuileAt(x,y+1) == null || getTuileAt(x,y+1).canConnectTo(nouvTuile, Constantes.Orientation.nord))? 0 : 1;
 			valide += (getTuileAt(x,y-1) == null || getTuileAt(x,y-1).canConnectTo(nouvTuile, Constantes.Orientation.sud))? 0 : 2;
 			valide += (getTuileAt(x+1,y) == null || getTuileAt(x+1,y).canConnectTo(nouvTuile, Constantes.Orientation.ouest))? 0 : 4;
 			valide += (getTuileAt(x-1,y) == null || getTuileAt(x-1,y).canConnectTo(nouvTuile, Constantes.Orientation.est))? 0 : 8;
-			
+
 			switch (valide) {
 			case 1 : return (getTuileAt(x,y+1).getPresenceArbres()) ? null : Constantes.Orientation.nord ;
 			case 2 : return (getTuileAt(x,y-1).getPresenceArbres()) ? null : Constantes.Orientation.sud  ;
@@ -182,7 +189,7 @@ public class Plateau {
 			case 8 : return (getTuileAt(x-1,y).getPresenceArbres()) ? null : Constantes.Orientation.est  ;
 			default : return null;
 			}
-			
+
 		} else 
 			return null;
 	}
@@ -195,7 +202,7 @@ public class Plateau {
 		plateau[x][y] = t;
 		Tuile tAdjacente;
 		for (int i = 0; i < 4; i++) {
-			
+
 			tAdjacente = null;
 			switch (i) {
 			case 0 : if (x != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateau[x+1][y]; break;
@@ -210,10 +217,10 @@ public class Plateau {
 					t.setEscale(e.getNumeroEscale());
 				}
 			}
-			
+
 		}
 	}
-	
+
 	public Point getTerminalPosition(int numberLigne, int numberTerminal) {
 		Point p;
 		switch (numberLigne) {
@@ -258,9 +265,9 @@ public class Plateau {
 		}
 		return p;
 	}
-	
+
 	public Point getEscalelPosition(int numberEscale) {
-		
+
 		try {
 			return new Point(PositionEscale[numberEscale-1][0],PositionEscale[numberEscale-1][1]);
 		} catch (Exception e) {
@@ -278,6 +285,101 @@ public class Plateau {
 			}
 		}
 		return p;
+	}
+
+	public boolean ObjectifComplet(Objectifs objectifs) {
+
+		int[] escales = new int[3];
+		for (int i = 0; i< 3; i++)
+			escales[i] = objectifs.getEscalesCibles()[i];
+
+		return atteindreObjectifDepuisPosition(getTerminalPosition(objectifs.getLigne(),1),Constantes.Orientation.ouest,getTerminalPosition(objectifs.getLigne(),2), escales);
+
+	}
+
+	private boolean atteindreObjectifDepuisPosition(Point depart, String direction, Point arrive, int[] escale) {
+
+		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
+		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
+		Point po = depart;
+		TuileChemin tuileCheminCourant = new TuileChemin(po,direction,0,0, null);
+		file.add(tuileCheminCourant);
+		po = new Point();
+		RejectList seens = new RejectList();
+		boolean found = false;
+		
+		boolean plusDEscale;
+		plusDEscale = (escale[0] == -1 && escale[1] == -1 && escale[2] == -1);
+
+		do {
+			tuileCheminCourant = file.remove();
+			Point pCourant = tuileCheminCourant.getPosition();
+			Tuile t = plateau[pCourant.x][pCourant.y];
+
+			if (!seens.contain(tuileCheminCourant)) {
+				seens.add(tuileCheminCourant);
+				
+				if (t != null) {
+					if (t.getTypeTuile() == 1 && pCourant.equals(depart)) {
+						if (t.connectionsExistantes(Constantes.Orientation.est)) {
+							po.x = pCourant.x+1; po.y = pCourant.y;
+							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (t.connectionsExistantes(Constantes.Orientation.ouest)) {
+							po.x = pCourant.x-1; po.y = pCourant.y;
+							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (t.connectionsExistantes(Constantes.Orientation.sud)) {
+							po.x = pCourant.x; po.y = pCourant.y+1;
+							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (t.connectionsExistantes(Constantes.Orientation.nord)) {
+							po.x = pCourant.x; po.y = pCourant.y-1;
+							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+					}
+					else {
+						ArrayList<String> listeDirectionPossible = t.getDirectionConnectedTo(tuileCheminCourant.getDirection());
+						if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
+							po.x = pCourant.x+1; po.y = pCourant.y;
+							if (listeDirectionPossible.contains(Constantes.Orientation.est))
+								file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.ouest)) {
+							po.x = pCourant.x-1; po.y = pCourant.y;
+							if (listeDirectionPossible.contains(Constantes.Orientation.ouest))
+								file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.sud)) {
+							po.x = pCourant.x; po.y = pCourant.y+1;
+							if (listeDirectionPossible.contains(Constantes.Orientation.sud))
+								file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+						if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.nord)) {
+							po.x = pCourant.x; po.y = pCourant.y-1;
+							if (listeDirectionPossible.contains(Constantes.Orientation.nord))
+								file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+1,0, tuileCheminCourant));
+						}
+					}
+					
+					if (t.getEscale() != 0 && !plusDEscale) {
+						for (int i = 0; i < 3; i++) {
+							if (escale[i] == t.getEscale()) {
+								escale[i] = -1;
+								found = atteindreObjectifDepuisPosition(pCourant, tuileCheminCourant.getDirection(), arrive, escale);
+								escale[i] = t.getEscale();
+							}
+						}
+					}
+					
+					if (pCourant.equals(arrive) && plusDEscale)
+						found = true;
+				}
+				
+			}
+		} while(!found && !file.isEmpty());
+
+		return found;
 	}
 
 }
