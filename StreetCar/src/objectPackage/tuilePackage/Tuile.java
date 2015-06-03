@@ -10,9 +10,9 @@ public class Tuile implements ActionsToken{
 	private boolean immuable;
 	private String orientation;
 	private ArrayList<Connection> listeConnections;
-	BufferedImage imageTuile;
-	int typeTuile;
-	int escale;
+	private BufferedImage imageTuile;
+	private int typeTuile; // 0 : classique, 1 : terminus, 2 : Escale, 3 : Bord
+	private int escale;
 	
 	/*
 	 * 2 Constructeurs
@@ -273,6 +273,7 @@ public class Tuile implements ActionsToken{
 		newTuile.setImage(imageTuile);
 		newTuile.setOrientation(orientation);
 		newTuile.setType(typeTuile);
+		newTuile.setEscale(escale);
 		
 		return newTuile;
 	}

@@ -33,14 +33,19 @@ public class Plateau {
 
 	public void initialisationTuile() {
 		// Mettre toutes les tuiles de bord vides à la vertical
+		Tuile t;
 		for (int i = 0; i<14;i++) {
-			setTuileAt(0, i, new Tuile(true));
-			setTuileAt(13, i, new Tuile(true));
+			setTuileAt(0, i, t = new Tuile(true));
+			t.setType(3);
+			setTuileAt(13, i, t = new Tuile(true));
+			t.setType(3);
 		}
 		// à l'horizontal
 		for (int i = 1; i<13;i++) {
-			setTuileAt(i, 0, new Tuile(true));
-			setTuileAt(i, 13, new Tuile(true));
+			setTuileAt(i, 0, t = new Tuile(true));
+			t.setType(3);
+			setTuileAt(i, 13, t = new Tuile(true));
+			t.setType(3);
 		}
 
 		// Mettre les escales
@@ -58,9 +63,6 @@ public class Plateau {
 		setTuileAt( PositionEscale[11][0], PositionEscale[11][1], new Escale(12));
 
 		// Mettre les Terminus
-		Tuile t;
-		// /!\ DEAD ZONE ! Le code suivant est extremement moche, 
-		// et sera potentiellement soumis à un REFACTOR OF DOOM
 		
 		// Terminus du Nord
 		for(int i = 0; i<3;i++) {
@@ -191,6 +193,25 @@ public class Plateau {
 
 	public void setTuileAt(int x, int y, Tuile t) {
 		plateau[x][y] = t;
+		Tuile tAdjacente;
+		for (int i = 0; i < 4; i++) {
+			
+			tAdjacente = null;
+			switch (i) {
+			case 0 : if (x != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateau[x+1][y]; break;
+			case 1 : if (x != 0) 										tAdjacente = plateau[x-1][y]; break;
+			case 2 : if (y != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateau[x][y+1]; break;
+			default : if (y != 0) 										tAdjacente = plateau[x][y-1]; break;
+			}
+			if (tAdjacente != null && tAdjacente.getTypeTuile() == 2 && t.getTypeTuile() != 3) {
+				Escale e = (Escale) tAdjacente;
+				if (e.getStop() == null) {
+					e.setStop(new Point(x,y));
+					t.setEscale(e.getNumeroEscale());
+				}
+			}
+			
+		}
 	}
 	
 	public Point getTerminalPosition(int numberLigne, int numberTerminal) {
