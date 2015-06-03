@@ -11,22 +11,27 @@ public class Configuration {
 	private Plateau plateauDuTour;
 	private Pioche piocheDuTour;
 	private int numeroDuTour;
+	private Historique historiqueDuTour;
 	
 	/*
 	 * CONSTRUCTEUR
 	 */
-	public Configuration (Joueur[] referenceTabJoueurs, int currentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour){
+	public Configuration (Joueur[] referenceTabJoueurs, int currentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour, Historique referenceHistorique){
 		tabJoueurs = new Joueur[referenceTabJoueurs.length];
 		instanciationJoueurs(referenceTabJoueurs);
 		joueurCourantDuTour = currentPlayer;
 		plateauDuTour = plateauDeJeu.clone();
 		piocheDuTour = pioche.clone();
 		numeroDuTour = numeroDeTour;
+		historiqueDuTour = referenceHistorique.clone();
 	}
 	
 	/*
 	 * ACCESSEURS
 	 */
+	public int getNombreJoueurs (){
+		return tabJoueurs.length;
+	}
 	public Joueur getJoueurAt (int numeroJoueur){
 		return tabJoueurs[numeroJoueur];
 	}
@@ -41,6 +46,13 @@ public class Configuration {
 	}
 	public int getNumeroTour (){
 		return numeroDuTour;
+	}
+	public Historique getHistorique (){
+		return historiqueDuTour;
+	}
+	
+	public void setHistorique (Historique newHistorique){
+		historiqueDuTour = newHistorique.clone();
 	}
 
 	/*

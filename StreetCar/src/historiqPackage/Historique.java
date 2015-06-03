@@ -3,8 +3,8 @@ package historiqPackage;
 import java.util.ArrayList;
 
 public class Historique extends ArrayList<Configuration>{
-	int nombreConfigsPrecedentes, nombreConfigsSuivantes;
-	int nombreMaxOnglets;
+	private int nombreConfigsPrecedentes, nombreConfigsSuivantes;
+	private int nombreMaxOnglets;
 	/*
 	 * Constructeur
 	 */
@@ -27,6 +27,12 @@ public class Historique extends ArrayList<Configuration>{
 		return nombreConfigsSuivantes;
 	}
 	
+	public void setNbConfigsPrecedentes (int newValue){
+		nombreConfigsPrecedentes = newValue;
+	}
+	public void setNbConfigsSuivantes (int newValue){
+		nombreConfigsSuivantes = newValue;
+	}
 	public void setNbMaxOnglets (int newValue){
 		nombreMaxOnglets = newValue;
 	}
@@ -68,7 +74,7 @@ public class Historique extends ArrayList<Configuration>{
 		}
 	}
 	public void defilementVersBas (){
-		if ( nombreConfigsSuivantes < this.size() ){
+		if ( nombreConfigsSuivantes > 0 ){
 			nombreConfigsPrecedentes++;
 			nombreConfigsSuivantes--;
 		}
@@ -99,5 +105,17 @@ public class Historique extends ArrayList<Configuration>{
 			chaine_resultat += this.get(0).toString() + "\n";
 		}
 		return chaine_resultat;
+	}
+	public Historique clone (){
+		Historique renvoi = new Historique();
+		for (int numeroConfig = 0; numeroConfig < this.size(); numeroConfig++){
+			renvoi.add(this.get(numeroConfig));
+		}
+		renvoi.nombreConfigsPrecedentes = this.nombreConfigsPrecedentes;
+		renvoi.nombreConfigsSuivantes = this.nombreConfigsSuivantes;
+
+//		renvoi.nombreMaxOnglets = this.nombreMaxOnglets;
+		
+		return renvoi;
 	}
 }

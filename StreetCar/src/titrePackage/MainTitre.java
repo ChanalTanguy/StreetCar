@@ -1,5 +1,7 @@
 package titrePackage;
 
+import java.io.File;
+
 public class MainTitre {
 	
 	public static void main(String[] args)

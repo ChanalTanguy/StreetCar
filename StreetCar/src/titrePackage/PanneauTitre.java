@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.Box.Filler;
 
@@ -18,6 +19,9 @@ public class PanneauTitre extends JPanel{
 	Boolean selection = false;
 	int selectionner = -1;
 	public int actif = 0;
+	
+	ChargementTitre chargement = new ChargementTitre();
+	String[] saves = chargement.listerRepertoire();
 
 	
 	BufferedImage background ;
@@ -59,7 +63,8 @@ public class PanneauTitre extends JPanel{
 
 		crayon.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		
-		if(actif == 0) ecranTitre(crayon); 
+		if(actif == 0) ecranTitre(crayon);
+		if(actif == 2) chargerPartie(crayon);
 		if(actif == 3) defis(crayon);
 		if(actif == 4) options(crayon);
 		if(actif == 5) credits(crayon);
@@ -89,9 +94,27 @@ public class PanneauTitre extends JPanel{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private void chargerPartie(Graphics2D crayon) {
+		//TODO affichage plus graphique
+		crayon.setColor(Color.white);
+		if(saves != null)
+		{
+			crayon.drawString("Choisissez la sauvegarde", getWidth()/3, getHeight()/4);
+		
+			for(int i = 0; i<saves.length; i++)
+			{
+				crayon.drawString(saves[i], getWidth()/3, getHeight()/4+(i+1)*50);
+			}
+		}
+		
+		else crayon.drawString("Pas de sauvegarde", getWidth()/3, getHeight()/4);
+	
+	}
 
 	//Pas encore complet
 	public void credits(Graphics2D crayon) {
+		//TODO inclure le bouton de retour
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
 		crayon.setColor(Color.white);
 		crayon.drawRect(getWidth()-300, getHeight()-175, 175, 55);

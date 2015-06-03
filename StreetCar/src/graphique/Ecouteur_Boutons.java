@@ -32,25 +32,20 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		
 		if ( estSurUndo(x, y, rayon) ){
 			panneauDeBoutons.changeImageUndo("bouton_undo_a.png");
-			System.out.println("clic sur le bouton Annuler");
 			panneauDeJeu.getMoteur().annulerTour();
 		}
 		else if ( estSurConseils(x, y, rayon) ){
 			panneauDeBoutons.changeImageConseil("bouton_conseil_a.png");
-			System.out.println("clic sur le bouton Conseils");
 		}
 		else if ( estSurAssistance(x, y, rayon) ){
 			panneauDeBoutons.changeImageAssistance("bouton_aide_a.png");
-			System.out.println("clic sur le bouton Assistance");
 		}
 		else if ( estSurMenu(x, y, rayon) ){
 			panneauDeBoutons.changeImageMenu("bouton_menu_a.png");
-			System.out.println("clic sur le bouton Menu");
 			MenuWindow menu = new MenuWindow();
 			menu.openWindow();
 			panneauDeBoutons.changeImageMenu("bouton_menu.png");
 		}
-		else { System.out.println("clic vide"); }
 		panneauDeBoutons.repaint();
 	}
 	
@@ -65,21 +60,11 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		int x = e.getX();
 		int y = e.getY();
 		
-		if ( estSurUndo(x, y, rayon) ){
-			System.out.println("passage sur le bouton Annuler");
-		}
-		else if ( estSurConseils(x, y, rayon) ){
-			System.out.println("passage sur le bouton Conseils");
-		}
-		else if ( estSurAssistance(x, y, rayon) ){
-			System.out.println("passage sur le bouton Assistance");
-		}
-		else if ( estSurMenu(x, y, rayon) ){
-			System.out.println("passage sur le bouton Menu");
-		}
-		else { 
-			System.out.println("passage vide");
-		}
+		if ( estSurUndo(x, y, rayon) ){}
+		else if ( estSurConseils(x, y, rayon) ){}
+		else if ( estSurAssistance(x, y, rayon) ){}
+		else if ( estSurMenu(x, y, rayon) ){}
+		else {}
 	}
 	
 	public void mouseDragged(MouseEvent e) {}
