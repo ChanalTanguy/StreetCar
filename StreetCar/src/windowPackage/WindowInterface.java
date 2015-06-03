@@ -27,7 +27,7 @@ public class WindowInterface extends JDialog {
 		win.setSize((int)newWidth, (int)newHeight);
 	}
 	
-	protected void setMainWindow(Fenetre f){
+	public void setMainWindow(Fenetre f){
 		mainWindow = f;
 	}
 

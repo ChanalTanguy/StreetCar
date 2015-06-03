@@ -94,7 +94,7 @@ public class PanelInterface extends JPanel {
 		this.setCursor(monCurseur);
 	}
 	
-	protected void setMainWindow(Fenetre f){
+	public void setMainWindow(Fenetre f){
 		mainWindow = f;
 	}
 
