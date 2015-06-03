@@ -4,8 +4,11 @@ import graphique.Fenetre;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +85,13 @@ public class PanelInterface extends JPanel {
 		Image sizedSrc = src.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);  
 		ImageIcon sizedImg = new ImageIcon(sizedSrc);
 		return sizedImg;
+	}
+	
+	protected void setCursor(){
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
+		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
+		this.setCursor(monCurseur);
 	}
 	
 	protected void setMainGameWindow(Fenetre f){

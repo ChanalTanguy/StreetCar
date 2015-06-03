@@ -30,12 +30,14 @@ public class CreditsPanel extends PanelInterface {
 
 	public CreditsPanel(JDialog parent){
 		parentDialog = parent;
+		this.setCursor();
 		this.buildSettingsPanel();
 	}
 	
 	public CreditsPanel(JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		this.setCursor();
 		this.buildSettingsPanel();
 	}
 

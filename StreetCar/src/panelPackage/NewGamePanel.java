@@ -39,12 +39,14 @@ public class NewGamePanel extends PanelInterface {
 
 	public NewGamePanel(JDialog parent){
 		parentDialog = parent;
+		this.setCursor();
 		this.buildNewGamePanel();
 	}
 
 	public NewGamePanel(JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		this.setCursor();
 		this.buildNewGamePanel();
 	}
 
@@ -69,12 +71,6 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
 		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainGame), null);
-
-		//changement du pointeur
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
-		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
-		this.setCursor(monCurseur);
 
 		if (openMenu){
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);

@@ -29,6 +29,7 @@ public class MenuPanel extends PanelInterface {
 
 	public MenuPanel(JDialog parent){
 		parentDialog = parent;
+		this.setCursor();
 		this.buildMenuPanel();
 	}
 
@@ -48,13 +49,6 @@ public class MenuPanel extends PanelInterface {
 		addNewButton(zone2, buttonSize, null, listener.new CreditsButtonListener(parentDialog, true), loadImage("credits_menu.png"));
 		
 		addNewButton(zone3, buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
-		
-		//changement du pointeur
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
-		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
-		this.setCursor(monCurseur);
-
 		
 		this.add(zone1);
 		this.add(zone2);

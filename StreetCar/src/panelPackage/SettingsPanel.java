@@ -29,12 +29,14 @@ public class SettingsPanel extends PanelInterface {
 
 	public SettingsPanel(JDialog parent){
 		parentDialog = parent;
+		this.setCursor();
 		this.buildSettingsPanel();
 	}
 	
 	public SettingsPanel(JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		this.setCursor();
 		this.buildSettingsPanel();
 	}
 
