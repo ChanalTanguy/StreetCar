@@ -5,6 +5,7 @@ import graphique.Fenetre;
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import constantesPackages.Constantes;
 
@@ -13,7 +14,7 @@ public class WindowInterface extends JDialog {
 	double width = Constantes.Resolution.width;
 	double height = Constantes.Resolution.height;
 	
-	Fenetre mainWindow;
+	JFrame mainWindow;
 	
 	protected Dimension setNewDimension(double w, double h) {
 		double newHeight = height/(1024.0/h);
@@ -27,7 +28,7 @@ public class WindowInterface extends JDialog {
 		win.setSize((int)newWidth, (int)newHeight);
 	}
 	
-	public void setMainWindow(Fenetre f){
+	public void setMainWindow(JFrame f){
 		mainWindow = f;
 	}
 

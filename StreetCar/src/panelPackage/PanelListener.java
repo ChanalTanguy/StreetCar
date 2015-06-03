@@ -57,9 +57,9 @@ public class PanelListener {
 		ButtonGroup selectedJ1;
 		ButtonGroup selectedJ2;
 		JDialog parent;
-		Fenetre mainWindow;
+		JFrame mainWindow;
 
-		public StartNewGameButtonListener(ButtonGroup j1, ButtonGroup j2, JDialog parent, Fenetre main){
+		public StartNewGameButtonListener(ButtonGroup j1, ButtonGroup j2, JDialog parent, JFrame main){
 			this.selectedJ1 = j1; this.selectedJ2 = j2;
 			this.parent = parent;
 			this.mainWindow = main;

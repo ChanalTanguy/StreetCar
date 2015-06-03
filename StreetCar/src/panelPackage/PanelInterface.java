@@ -27,7 +27,7 @@ public class PanelInterface extends JPanel {
 	
 	JDialog parentDialog;
 	
-	Fenetre mainWindow;
+	JFrame mainWindow;
 	
 	PanelListener listener = new PanelListener();
 	
@@ -94,7 +94,7 @@ public class PanelInterface extends JPanel {
 		this.setCursor(monCurseur);
 	}
 	
-	public void setMainWindow(Fenetre f){
+	public void setMainWindow(JFrame f){
 		mainWindow = f;
 	}
 
