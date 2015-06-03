@@ -3,6 +3,7 @@ package graphique;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int coordXSelection = -1;
 	private int coordYSelection = -1;
 	private boolean piocheSelectionnee;
+	private Point[] coupsJoues;
+	private Point[] coupsPrecedents;
 	/*
 	 * FIN Details Visuels
 	 */
@@ -39,7 +42,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche;
+	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge, piocheMain;
 	/*
 	 * FIN Images
 	 */
@@ -58,6 +61,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int positionXPioche;
 	private int positionYPioche;
 	private int dimensionPioche;
+	public boolean piocher = false;
 	
 	/*
 	 * FIN Entiers Fixes
@@ -133,6 +137,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setNotifications (String newNotif){
 		notifications = newNotif;
 	}
+	public void setCoupsPrecedents (Point[] referenceCoupsPrecedents){
+		int numeroCoup = 0;
+		while ( numeroCoup < referenceCoupsPrecedents.length && referenceCoupsPrecedents[numeroCoup] != null ){
+			coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup].clone();
+			numeroCoup++;
+		}
+	}
 	/*
 	 * FIN ACCESSEURS
 	 */
@@ -145,7 +156,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mot = referenceMoteur;
 		notifications = "tests d'ecriture";
 		initialiserImages();
-		
+		coupsJoues = new Point[2];
+		coupsPrecedents = new Point[coupsJoues.length];
 		addMouseListener( new Ecouteur_Plateau(this, referenceMoteur) );
 	}
 	/*
@@ -209,17 +221,33 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if ( piocheSelectionnee ){
 			dessinerPiocheSelectionnee(crayon);
 		}
-/*		
-		if (contoursSurlignes){
-			crayon.setColor(Color.red);
-			crayon.drawRect(0, 0, largeur-1, hauteur-1);
-		}
-*/
+
+		dessinerCoupsJoues(crayon);
+		dessinerCoupsPrecedents(crayon);
 	}
 	
 	/*
 	 * Methodes Public de Panneau_Plateau 
 	 */
+	public void ajouterCoup (Point coupChoisi){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsJoues.length && coupsJoues[numeroCoup] != null ){
+			numeroCoup++;
+		}
+		if ( numeroCoup < coupsJoues.length ){
+			coupsJoues[numeroCoup] = coupChoisi;
+		}
+	}
+	public void effacerCoupsJoues (){
+		for (int numeroCoup = 0; numeroCoup < coupsJoues.length; numeroCoup++){
+			coupsJoues[numeroCoup] = null;
+		}
+	}
+	public void afficherCoupsPrecedents (){
+		for (int numeroCoup = 0; numeroCoup < coupsPrecedents.length; numeroCoup++){
+			coupsPrecedents[numeroCoup] = (Point) coupsJoues[numeroCoup].clone();
+		}
+	}
 	
 	/*
 	 * Methodes Private de Panneau_Plateau
@@ -242,7 +270,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	private void dessinerPioche (Graphics2D crayon) {
-		crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
 	private void dessinerMain1 (Graphics2D crayon, MainJoueur main) {
 		for (int numeroTuile = 0; numeroTuile < main.length(); numeroTuile++){
@@ -329,24 +358,27 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	
 	// 3 Methodes de dessin de details visuels
-	private void dessinerMainSelectionnee(Graphics2D crayon) {
+	private void dessinerMainSelectionnee (Graphics2D crayon) {
 		int coordX = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
 		casePlateauSelectionnee = false; //-1;
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
 		case 1 :
-			crayon.drawRect( coordX, mainDuBas, tailleCaseMain, tailleCaseMain);
+			//crayon.drawRect( coordX, mainDuBas, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		case 2 :
-			crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
+			//crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 		}
 	}
-	private void dessinerCaseSelectionnee(Graphics2D crayon) {
+	private void dessinerCaseSelectionnee (Graphics2D crayon) {
 		mainSelectionnee = -1;
-		crayon.setColor(Color.white);
-		crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
+		//crayon.setColor(Color.white);
+		//crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
+		crayon.drawImage(illumination,coordXSelection*tailleCase + depart -tailleCase/4, coordYSelection*tailleCase + depart-tailleCase/4, tailleCase+tailleCase/2, tailleCase+tailleCase/2, this);
 	}
-	private void dessinerPiocheSelectionnee(Graphics2D crayon) {
+	private void dessinerPiocheSelectionnee (Graphics2D crayon) {
 		int coordX = 6*largeur/7 - 1;
 		int coordY = hauteur/2-tailleCase - 1;
 		int dimension = 2*tailleCase + 1;
@@ -355,9 +387,35 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.fillRect(coordX, coordY, dimension, dimension);
 		}
 		else {
-			crayon.drawRect(coordX, coordY, dimension, dimension);
+			//crayon.drawRect(coordX, coordY, dimension, dimension);
+			crayon.drawImage(illumination, coordX-dimension/6, coordY+dimension/6, dimension+1, dimension+1,this);
+			dessinerPioche(crayon);
 			piocheSelectionnee = false;
 		}
+	}
+	private void dessinerCoupsJoues (Graphics2D crayon){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsJoues.length && coupsJoues[numeroCoup] != null ){
+			dessinerSurlignageActif(crayon, coupsJoues[numeroCoup]);
+			numeroCoup++;
+		}
+	}
+	private void dessinerCoupsPrecedents (Graphics2D crayon){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsPrecedents.length && coupsPrecedents[numeroCoup] != null ){
+			dessinerSurlignagePrecedent(crayon, coupsPrecedents[numeroCoup]);
+			numeroCoup++;
+		}
+	}
+	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
+		//crayon.setColor(Color.green);
+		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		crayon.drawImage(illuminationVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+	}
+	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
+		//crayon.setColor(Color.cyan);
+		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		crayon.drawImage(illuminationCyan,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	
 	/*
@@ -367,6 +425,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		piocheMain = Constantes.Images.initBackground("piocheMain.png");
+		illumination = Constantes.Images.initBackground("surbrillance.png");
+		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
+		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
+		illuminationViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
+		illuminationRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
 	}
 
 }

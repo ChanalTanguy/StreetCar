@@ -33,23 +33,30 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		int x = e.getX();
 		int y = e.getY();
 
-		if(pan.actif == 0)
+		switch(pan.actif)
 		{
-			menusAction(x, y);
-			quitterAction(x,y);
+			case 0: //Ecran titre
+				menusAction(x, y);
+				quitterAction(x,y);
+				break;
+			case 2: //Chargement
+				
+				retour(x,y);
+				break;
+			case 3: //Defis
+	
+				retour(x,y);
+				break;
+			case 4: //Options
+				
+				retour(x,y);
+				break;
+			case 5: //Crédits
+				
+				retour(x,y);
+				break;
 		}
-		if(pan.actif == 3) //Defis
-		{
-			retour(x,y);
-		}
-		if(pan.actif == 4) //Options
-		{
-			
-		}
-		if(pan.actif == 5) //Credits
-		{
-			retour(x,y);
-		}
+
 		pan.repaint();
 	}
 	
@@ -64,8 +71,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*50 && y<((10+4)*50+45))
 		{
 			if(pan.selectionner == 10) effectuerAction(pan.selectionner);
-		}
-		
+		}	
 	}
 
 	private void menusAction(int x, int y) {
@@ -113,13 +119,9 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 			case 1 : //Nouvelle partie
 				
 				NewGameWindow g = new NewGameWindow();
-				g.openWindow();
-				/*
-				fen.fermeture();
-				Moteur m = new Moteur(new Plateau());
-				Fenetre f = new Fenetre("Street Car");
-				f.disposition_V2(m, f.getSize());
-				*/
+				g.openWindow(); //voir si on choppe le bonton annuler
+				//fen.fermeture();
+
 				break;
 			case 2 : //Charger partie
 				pan.actif = 2;

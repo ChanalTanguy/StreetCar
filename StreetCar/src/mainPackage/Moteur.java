@@ -29,6 +29,8 @@ public class Moteur {
 	private int numeroDeTour = 0;
 	private Historique historiqueDeTours;
 	
+	private Point[] coupsPrecedents;
+	
 	/*
 	 * Constructeur
 	 */
@@ -36,7 +38,7 @@ public class Moteur {
 		tabPlayers = new Joueur[2];
 		tabPlayers[0] = new JoueurHumain(this,1);
 		tabPlayers[0].setLigne(1);
-		tabPlayers[1] = new JoueurHumain(this,4);
+		tabPlayers[1] = new JoueurIA(this,4);
 		tabPlayers[1].setLigne(4);
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
@@ -46,10 +48,12 @@ public class Moteur {
 		pioche.shuffle();
 		
 		historiqueDeTours = new Historique();
-		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours);
+		coupsPrecedents = new Point[2];
+		
+		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents);
 		historiqueDeTours.add(configurationInitiale);
 		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
-		
+
 	}
 	/*
 	 * FIN Constructeur
@@ -128,21 +132,25 @@ public class Moteur {
 	/**
 	 * Vérifie si un coup est valide puis l'execute si c'est le cas. 
 	 * Change le joueur si besoin puis permet au joueur courant de jouer.
-	 * @param c
+	 * @param coupChoisi
 	 */
-	public void jouerCoup(Coup c) {
+	public void jouerCoup (Coup coupChoisi) {
 		String msg = "";
 		String r;
-		if (coupValide(c)) {
-			if (c.getType().equals(Constantes.Coup.placement)) {
-				tabPlayers[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
+		if (coupValide(coupChoisi)) {
+			if (coupChoisi.getType().equals(Constantes.Coup.placement)) {
+				tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
+				nbActions--;
+				
+				panJeu.ajouterCoup(coupChoisi.getCoordonnee());
+				ajouterCoup(coupChoisi.getCoordonnee());
+				
+				coupSimultane = null;
+			} else if (coupChoisi.getType().equals(Constantes.Coup.vol)) {
+				tabPlayers[currentPlayer].volerTuile(coupChoisi.getTuile(), tabPlayers[(currentPlayer+1)%2]);
 				nbActions--;
 				coupSimultane = null;
-			} else if (c.getType().equals(Constantes.Coup.vol)) {
-				tabPlayers[currentPlayer].volerTuile(c.getTuile(), tabPlayers[(currentPlayer+1)%2]);
-				nbActions--;
-				coupSimultane = null;
-			} else if (c.getType().equals(Constantes.Coup.pioche)) {
+			} else if (coupChoisi.getType().equals(Constantes.Coup.pioche)) {
 				if (!pioche.isEmpty())
 					tabPlayers[currentPlayer].piocher(pioche);
 				nbActions = 0;
@@ -156,9 +164,11 @@ public class Moteur {
 				nbActions = 4;
 				
 				// Mise a Jour de l'historique de tours
-				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours));
+				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents));
 				historiqueDeTours.last().setHistorique(historiqueDeTours);
-				
+
+				panJeu.afficherCoupsPrecedents();
+				panJeu.effacerCoupsJoues();
 				
 				panHistorique.repaint();
 			}
@@ -167,13 +177,13 @@ public class Moteur {
 			else 
 				msg = Constantes.Message.finDeTour(currentPlayer+1);
 		}
-		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()),c)) != null && nbActions == 4)
+		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(coupChoisi.getTuile()),coupChoisi)) != null && nbActions == 4)
 		{
 			if (coupSimultane == null) {
-				coupSimultane = c;
+				coupSimultane = coupChoisi;
 				msg = "Coup simultanée possible";
 			}
-			else if (coupSimultane.getTuile() == c.getTuile()) {
+			else if (coupSimultane.getTuile() == coupChoisi.getTuile()) {
 				// Erreur même tuile selectionné pour la mettre au même endroit
 				msg = Constantes.Message.poseImpossible;;
 				coupSimultane = null;
@@ -181,7 +191,7 @@ public class Moteur {
 			else {
 				boolean b;
 				Point p1 = coupSimultane.getCoordonnee();
-				Point p2 = c.getCoordonnee();
+				Point p2 = coupChoisi.getCoordonnee();
 				
 				switch (r) {
 					case Constantes.Orientation.nord :  b = (p1.x == p2.x && p1.y == p2.y+1); break;
@@ -192,7 +202,7 @@ public class Moteur {
 				}
 						
 				if (b) {
-					tabPlayers[currentPlayer].jouerTuileSurPlateau(c.getTuile(), c.getCoordonnee().x, c.getCoordonnee().y, plateauDeJeu);
+					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupSimultane.getTuile(), coupSimultane.getCoordonnee().x, coupSimultane.getCoordonnee().y, plateauDeJeu);
 					nbActions -= 2;
 					msg = Constantes.Message.finDeTour(currentPlayer+1);
@@ -206,11 +216,11 @@ public class Moteur {
 		else {
 			if (nbActions < 3)
 				msg = Constantes.Message.finDeTour(currentPlayer+1);
-			else if (c.getType().equals(Constantes.Coup.placement))
+			else if (coupChoisi.getType().equals(Constantes.Coup.placement))
 				msg = Constantes.Message.poseImpossible;
-			else if (c.getType().equals(Constantes.Coup.vol))
+			else if (coupChoisi.getType().equals(Constantes.Coup.vol))
 				msg = Constantes.Message.volImpossible;
-			else if (c.getType().equals(Constantes.Coup.pioche))
+			else if (coupChoisi.getType().equals(Constantes.Coup.pioche))
 				msg = Constantes.Message.piocheImpossible;
 			else {
 				msg = Constantes.Message.tramImpossible; // N'EST PAS SENSE ARRIVER !
@@ -226,7 +236,6 @@ public class Moteur {
 	}
 // Methodes de Kévin
 	public void annulerTour (){
-		System.out.println("annulation du tour");
 		Configuration dernierTour = historiqueDeTours.last();
 
 		for (int numeroPlayer = 0; numeroPlayer < tabPlayers.length; numeroPlayer++){
@@ -240,13 +249,7 @@ public class Moteur {
 	public void chargerTour (int numeroTourACharger){
 		int numTourActif = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
 		
-//		System.out.println("vrai tour a charger : " + numTourActif);
-		
 		Configuration configACharger = historiqueDeTours.get(numTourActif);
-/*		
-		System.out.println("numeroTour dans Moteur : " + configACharger.getNumeroTour());
-		System.out.println("configs precedentes : " + configACharger.getHistorique().getNbConfigsPrecedentes());
-*/		
 		plateauDeJeu = configACharger.getPlateauDuTour().clone();
 		pioche = configACharger.getPiocheDuTour().clone();
 		tabPlayers = new Joueur[configACharger.getNombreJoueurs()];
@@ -255,8 +258,12 @@ public class Moteur {
 		}
 		currentPlayer = configACharger.getJoueurCourant();
 		historiqueDeTours = configACharger.getHistorique().clone();
-		
-		System.out.println("historiqueDeTour size :  " + historiqueDeTours.size());
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsPrecedents.length && configACharger.getCoupsPrecedents()[numeroCoup] != null){
+			coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup].clone();
+			numeroCoup++;
+		}
+		panJeu.setCoupsPrecedents(coupsPrecedents);
 		
 		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 		panJeu.repaint();
@@ -266,6 +273,7 @@ public class Moteur {
 
 	}
 	
+	
 	/*
 	 * Methodes Private du Moteur
 	 */
@@ -274,7 +282,7 @@ public class Moteur {
 	 * @param c
 	 * @return
 	 */
-	private boolean coupValide(Coup c) {
+	private boolean coupValide (Coup c) {
 		if (nbActions > 2) {
 			if (c.getType().equals(Constantes.Coup.placement)) {
 					// Vérifie si le joueur prend une tuile existante et vérifie si le placement est valide
@@ -296,5 +304,15 @@ public class Moteur {
 				return false;
 		}
 	}
+	private void ajouterCoup (Point coupJoue){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsPrecedents.length && coupsPrecedents[numeroCoup] != null ){
+			numeroCoup++;
+		}
+		if ( numeroCoup < coupsPrecedents.length ){
+			coupsPrecedents[numeroCoup] = coupJoue;
+		}
+	}
 
+	
 }

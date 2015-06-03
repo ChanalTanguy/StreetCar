@@ -34,10 +34,6 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			int caseX = (x - panneauDeJeu.getDepart() - 8) / panneauDeJeu.getTailleCase();
 			int caseY = (y - panneauDeJeu.getDepart() - 10) / panneauDeJeu.getTailleCase();
 			
-			System.out.println("x/y : " + x + " " + y);
-			System.out.println("decalage de depart : " + panneauDeJeu.getDepart());
-			System.out.println("casesX/Y : " + caseX + " " + caseY);
-			
 			switch (buttonDown){
 			// bouton droit de la souris
 			case MouseEvent.BUTTON3:
