@@ -235,7 +235,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 			numeroCoup++;
 		}
 		if ( numeroCoup < coupsJoues.length ){
-			coupsJoues[numeroCoup] = coupChoisi;
+			coupsJoues[numeroCoup] = (Point) coupChoisi.clone();
 		}
 	}
 	public void effacerCoupsJoues (){
