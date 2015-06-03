@@ -42,7 +42,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan;
+	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge;
 	/*
 	 * FIN Images
 	 */
@@ -407,11 +407,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
 		crayon.setColor(Color.green);
-		crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		crayon.drawImage(illuminationVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
 		crayon.setColor(Color.cyan);
-		crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+		crayon.drawImage(illuminationCyan,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	
 	/*
@@ -424,6 +426,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		illumination = Constantes.Images.initBackground("surbrillance.png");
 		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
 		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
+		illuminationViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
+		illuminationRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
 	}
 
 }
