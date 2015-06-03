@@ -4,8 +4,9 @@ import joueurPackage.Coup;
 
 class CoupEtRotation {
 
-	Coup coup;
-	int nbRotation;
+	private Coup coup;
+	private int nbRotation;
+	private int cout;
 	
 	CoupEtRotation(Coup c, int n) {
 		coup = c;
@@ -16,8 +17,16 @@ class CoupEtRotation {
 		return coup;
 	}
 	
-	int nbRotation() {
+	int getNbRotation() {
 		return nbRotation;
+	}
+	
+	int getCout() {
+		return cout;
+	}
+	
+	void setCout(int c) {
+		cout = c;
 	}
 	
 }
