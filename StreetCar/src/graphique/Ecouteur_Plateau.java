@@ -63,6 +63,7 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				//TODO faire la rotation de la case
 				else if (estSurRotation(piocheX, piocheY) ){
 					joueur.coupTourner(tuileNo(piocheX));
+					panneauDeJeu.repaint();
 				}
 				
 				// si le joueur selectionne une carte dans sa main
@@ -179,21 +180,29 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		int mainSelected = panneauDeJeu.getMainSelectionnee();
 		int tailleCaseM = panneauDeJeu.getTailleCaseMain();
 		int tailleCase = panneauDeJeu.getTailleCase();
+		int depart = panneauDeJeu.getDepart();
 		boolean b = false;
 		
-		if(mainSelected == 0) //Main basse
+		
+		
+		if(mainSelected == 1) //Main basse
 		{
-			int main = panneauDeJeu.getMaintDuBas();
 			
-			if(piocheX<(coordX-tailleCase/3) && piocheX>(coordX-tailleCase/3+tailleCase/2) && piocheY<main-tailleCaseM/3+10 && piocheY<main-tailleCaseM/3+10+tailleCaseM/2)
+			int main = panneauDeJeu.getMaintDuBas();
+			System.out.println(main);
+			
+			if(piocheX>=(coordX-tailleCase/3+10)-depart && piocheX<=(coordX-tailleCase/3+10+tailleCase/2-depart) 
+					&& piocheY>=main-tailleCaseM/3+10 && piocheY<=main-tailleCaseM/3+10+tailleCaseM/2)
 			{
+				System.out.print(b);
 				b = true;
 			}
 		}
 		else
 		{
 			int main = panneauDeJeu.getMainDuHaut();
-			if(piocheX<(coordX-tailleCase/3) && piocheX>(coordX-tailleCase/3+tailleCase/2) && piocheY<main-tailleCaseM/3+10 && piocheY<main-tailleCaseM/3+10+tailleCaseM/2)
+			if(piocheX>=(coordX-tailleCase/3+10)-depart && piocheX<=(coordX-tailleCase/3+10+tailleCase/2-depart) 
+					&& piocheY>=main-tailleCaseM/3+10 && piocheY<=main-tailleCaseM/3+10+tailleCaseM/2)
 			{
 				b = true;
 			}
