@@ -42,7 +42,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge, piocheMain;
+	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge, piocheMain, rotate;
 	/*
 	 * FIN Images
 	 */
@@ -54,6 +54,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int tailleCase; // = 50;
 	private int tailleCaseMain; // = 70;
 	private int ecart = 150;
+	private int coordXTuile;
 	private int petitEcartMain = 30;
 	private int mainDuHaut = 20; // = depart - 10 - tailleCaseMain;
 	private int mainDuBas = 820; // = 820;
@@ -72,6 +73,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	public int getMainSelectionnee (){
 		return mainSelectionnee;
+	}
+	public int getCoordXTuile()
+	{
+		return coordXTuile;
 	}
 	public int getTuileMainSelectionnee (){
 		return tuileMainSelectionnee;
@@ -357,19 +362,21 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.drawString(notifications, 6*largeur/7-20, hauteur/4);
 	}
 	
-	// 3 Methodes de dessin de details visuels
+	// Methodes de dessin de details visuels
 	private void dessinerMainSelectionnee (Graphics2D crayon) {
-		int coordX = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
+		coordXTuile = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
 		casePlateauSelectionnee = false; //-1;
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
 		case 1 :
-			//crayon.drawRect( coordX, mainDuBas, tailleCaseMain, tailleCaseMain);
-			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			//crayon.drawRect( coordXTuile, mainDuBas, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordXTuile-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			if(mot.getcurrentPlayer() == 0) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuBas-tailleCaseMain/3+10, tailleCaseMain/2, tailleCaseMain/2, this);
 			break;
 		case 2 :
-			//crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
-			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			//crayon.drawRect( coordXTuile, mainDuHaut, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordXTuile-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			if(mot.getcurrentPlayer() == 1) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuHaut-tailleCaseMain/2+10, tailleCaseMain/2, tailleCaseMain/2, this);
 		}
 	}
 	private void dessinerCaseSelectionnee (Graphics2D crayon) {
@@ -426,6 +433,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
+		rotate = Constantes.Images.initBouton("tourner.png");
 		illumination = Constantes.Images.initBackground("surbrillance.png");
 		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
 		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");

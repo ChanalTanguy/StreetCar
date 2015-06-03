@@ -119,6 +119,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 			case 1 : //Nouvelle partie
 				
 				NewGameWindow g = new NewGameWindow();
+				g.setMainWindow(fen);
 				g.openWindow(); //voir si on choppe le bonton annuler
 				//fen.fermeture();
 

@@ -59,13 +59,12 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					joueur.coupPiocher();
 					selectionnerPioche();
 				}
-/*
-//TODO faire la rotation de la case
-				else if ( estSurBoutonRotation(piocheX, piocheY) ){
-					System.out.println("Je suis passé par là");
-					j.coupTourner(tuileNo(piocheX));
+
+				//TODO faire la rotation de la case
+				else if (estSurRotation(piocheX, piocheY) ){
+					joueur.coupTourner(tuileNo(piocheX));
 				}
-*/				
+				
 				// si le joueur selectionne une carte dans sa main
 				else if ( estDansMain(piocheX, piocheY) ){
 					System.out.println("clic sur une main de joueur");
@@ -116,14 +115,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		}
 	}
 	
-	public void mouseMoved(MouseEvent e) {
-		
-	}
-	
-	public void mouseReleased(MouseEvent e) {
-		
-	}
-
+	public void mouseMoved(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
@@ -181,7 +174,34 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		}
 		return clicValide;
 	}
-
+	private boolean estSurRotation(int piocheX, int piocheY) {
+		int coordX = panneauDeJeu.getCoordXTuile();
+		int mainSelected = panneauDeJeu.getMainSelectionnee();
+		int tailleCaseM = panneauDeJeu.getTailleCaseMain();
+		int tailleCase = panneauDeJeu.getTailleCase();
+		boolean b = false;
+		
+		if(mainSelected == 0) //Main basse
+		{
+			int main = panneauDeJeu.getMaintDuBas();
+			
+			if(piocheX<(coordX-tailleCase/3) && piocheX>(coordX-tailleCase/3+tailleCase/2) && piocheY<main-tailleCaseM/3+10 && piocheY<main-tailleCaseM/3+10+tailleCaseM/2)
+			{
+				b = true;
+			}
+		}
+		else
+		{
+			int main = panneauDeJeu.getMainDuHaut();
+			if(piocheX<(coordX-tailleCase/3) && piocheX>(coordX-tailleCase/3+tailleCase/2) && piocheY<main-tailleCaseM/3+10 && piocheY<main-tailleCaseM/3+10+tailleCaseM/2)
+			{
+				b = true;
+			}
+		}
+		
+		return b;
+	}
+	
 	private void selectionnerMain (int numeroTuile, int numeroMain){
 		panneauDeJeu.setMainSelectionnee(numeroMain);
 		panneauDeJeu.setTuileSelectionnee(numeroTuile);

@@ -45,7 +45,7 @@ public class FenetreTitre extends JFrame {
 	
 	public void fermeture()
 	{
-		setVisible(false);
+		dispose();
 	}
 
 }
