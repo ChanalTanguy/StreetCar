@@ -3,6 +3,7 @@ package graphique;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int coordXSelection = -1;
 	private int coordYSelection = -1;
 	private boolean piocheSelectionnee;
+	private Point[] coupsJoues;
+	private Point[] coupsPrecedents;
 	/*
 	 * FIN Details Visuels
 	 */
@@ -133,6 +136,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setNotifications (String newNotif){
 		notifications = newNotif;
 	}
+	public void setCoupsPrecedents (Point[] referenceCoupsPrecedents){
+		int numeroCoup = 0;
+		while ( numeroCoup < referenceCoupsPrecedents.length && referenceCoupsPrecedents[numeroCoup] != null ){
+			coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup].clone();
+			numeroCoup++;
+		}
+	}
 	/*
 	 * FIN ACCESSEURS
 	 */
@@ -145,7 +155,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mot = referenceMoteur;
 		notifications = "tests d'ecriture";
 		initialiserImages();
-		
+		coupsJoues = new Point[2];
+		coupsPrecedents = new Point[coupsJoues.length];
 		addMouseListener( new Ecouteur_Plateau(this, referenceMoteur) );
 	}
 	/*
@@ -209,17 +220,33 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if ( piocheSelectionnee ){
 			dessinerPiocheSelectionnee(crayon);
 		}
-/*		
-		if (contoursSurlignes){
-			crayon.setColor(Color.red);
-			crayon.drawRect(0, 0, largeur-1, hauteur-1);
-		}
-*/
+
+		dessinerCoupsJoues(crayon);
+		dessinerCoupsPrecedents(crayon);
 	}
 	
 	/*
 	 * Methodes Public de Panneau_Plateau 
 	 */
+	public void ajouterCoup (Point coupChoisi){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsJoues.length && coupsJoues[numeroCoup] != null ){
+			numeroCoup++;
+		}
+		if ( numeroCoup < coupsJoues.length ){
+			coupsJoues[numeroCoup] = coupChoisi;
+		}
+	}
+	public void effacerCoupsJoues (){
+		for (int numeroCoup = 0; numeroCoup < coupsJoues.length; numeroCoup++){
+			coupsJoues[numeroCoup] = null;
+		}
+	}
+	public void afficherCoupsPrecedents (){
+		for (int numeroCoup = 0; numeroCoup < coupsPrecedents.length; numeroCoup++){
+			coupsPrecedents[numeroCoup] = (Point) coupsJoues[numeroCoup].clone();
+		}
+	}
 	
 	/*
 	 * Methodes Private de Panneau_Plateau
@@ -329,7 +356,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	
 	// 3 Methodes de dessin de details visuels
-	private void dessinerMainSelectionnee(Graphics2D crayon) {
+	private void dessinerMainSelectionnee (Graphics2D crayon) {
 		int coordX = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
 		casePlateauSelectionnee = false; //-1;
 		crayon.setColor(Color.white);
@@ -341,12 +368,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
 		}
 	}
-	private void dessinerCaseSelectionnee(Graphics2D crayon) {
+	private void dessinerCaseSelectionnee (Graphics2D crayon) {
 		mainSelectionnee = -1;
 		crayon.setColor(Color.white);
 		crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
 	}
-	private void dessinerPiocheSelectionnee(Graphics2D crayon) {
+	private void dessinerPiocheSelectionnee (Graphics2D crayon) {
 		int coordX = 6*largeur/7 - 1;
 		int coordY = hauteur/2-tailleCase - 1;
 		int dimension = 2*tailleCase + 1;
@@ -358,6 +385,28 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawRect(coordX, coordY, dimension, dimension);
 			piocheSelectionnee = false;
 		}
+	}
+	private void dessinerCoupsJoues (Graphics2D crayon){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsJoues.length && coupsJoues[numeroCoup] != null ){
+			dessinerSurlignageActif(crayon, coupsJoues[numeroCoup]);
+			numeroCoup++;
+		}
+	}
+	private void dessinerCoupsPrecedents (Graphics2D crayon){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsPrecedents.length && coupsPrecedents[numeroCoup] != null ){
+			dessinerSurlignagePrecedent(crayon, coupsPrecedents[numeroCoup]);
+			numeroCoup++;
+		}
+	}
+	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
+		crayon.setColor(Color.green);
+		crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
+	}
+	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
+		crayon.setColor(Color.cyan);
+		crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
 	}
 	
 	/*
