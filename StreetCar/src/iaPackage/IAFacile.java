@@ -41,10 +41,9 @@ public class IAFacile implements InterfaceIA {
 			
 			nbRot = r.nextInt(3);
 			t = maMain.getTuileAt(coup.getTuile()).clone();
-			for (int i = 0; i < nbRot; i++)
+			for (int i = 0; i < nbRot; i++){
 				t.rotation(Constantes.Rotation.rotationDroite);
-			System.out.println(t+" : "+p.coupValide(t, coup)+" | "+maMain.getTuileAt(coup.getTuile())+" : "+p.coupValide(maMain.getTuileAt(coup.getTuile()), coup));
-			
+			}
 		} while (!p.coupValide(t, coup));
 		
 		for (int i = 0; i < nbRot; i++) {

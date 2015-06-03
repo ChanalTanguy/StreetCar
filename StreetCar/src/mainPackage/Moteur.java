@@ -59,6 +59,25 @@ public class Moteur {
 	 * FIN Constructeur
 	 */
 	
+	/*
+	 * Constructeur 2
+	 */
+	public void setPlayers(Joueur j1, Joueur j2) {
+		tabPlayers[0] = j1;
+		tabPlayers[0].setLigne(1);
+		tabPlayers[1] = j2;
+		tabPlayers[1].setLigne(4);
+		currentPlayer = 0;
+		
+		historiqueDeTours.clear();
+		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents);
+		historiqueDeTours.add(configurationInitiale);
+		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
+	}
+	/*
+	 * FIN Constructeur 2
+	 */
+	
 	/* 
 	 * Accesseurs
 	 */
@@ -145,6 +164,7 @@ public class Moteur {
 				panJeu.ajouterCoup(coupChoisi.getCoordonnee());
 				ajouterCoup(coupChoisi.getCoordonnee());
 				
+				
 				coupSimultane = null;
 			} else if (coupChoisi.getType().equals(Constantes.Coup.vol)) {
 				tabPlayers[currentPlayer].volerTuile(coupChoisi.getTuile(), tabPlayers[(currentPlayer+1)%2]);
@@ -166,9 +186,10 @@ public class Moteur {
 				// Mise a Jour de l'historique de tours
 				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents));
 				historiqueDeTours.last().setHistorique(historiqueDeTours);
-
+				
 				panJeu.afficherCoupsPrecedents();
 				panJeu.effacerCoupsJoues();
+				effacerCoupsPrecedents();
 				
 				panHistorique.repaint();
 			}
@@ -258,12 +279,16 @@ public class Moteur {
 		}
 		currentPlayer = configACharger.getJoueurCourant();
 		historiqueDeTours = configACharger.getHistorique().clone();
+		
 		int numeroCoup = 0;
 		while ( numeroCoup < coupsPrecedents.length && configACharger.getCoupsPrecedents()[numeroCoup] != null){
 			coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup].clone();
 			numeroCoup++;
 		}
+		
 		panJeu.setCoupsPrecedents(coupsPrecedents);
+		
+		effacerCoupsPrecedents();
 		
 		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 		panJeu.repaint();
@@ -313,6 +338,10 @@ public class Moteur {
 			coupsPrecedents[numeroCoup] = coupJoue;
 		}
 	}
-
+	private void effacerCoupsPrecedents (){
+		for (int numeroCoup = 0; numeroCoup < coupsPrecedents.length; numeroCoup++){
+			coupsPrecedents[numeroCoup] = null;
+		}
+	}
 	
 }

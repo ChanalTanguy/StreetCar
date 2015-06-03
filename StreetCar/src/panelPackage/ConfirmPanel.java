@@ -31,11 +31,8 @@ public class ConfirmPanel extends PanelInterface {
 		this.actionNO = actionNO;
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.getColor("gris_tram", 4607576));
+		this.setCursor();
 		this.buildConfirmPanel();
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
-		Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
-		this.setCursor(monCurseur);
 	}
 	
 	protected void buildConfirmPanel(){

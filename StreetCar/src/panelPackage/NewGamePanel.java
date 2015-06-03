@@ -7,7 +7,9 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -17,6 +19,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import mainPackage.Moteur;
+import joueurPackage.Joueur;
+import joueurPackage.JoueurHumain;
+import joueurPackage.JoueurIA;
 import constantesPackages.Constantes;
 import panelPackage.PanelListener.ReturnButtonListener;
 import windowPackage.WindowInterface;
@@ -26,19 +32,21 @@ public class NewGamePanel extends PanelInterface {
 
 	String selected1 = "Humain";
 	String selected2 = "Facile";
-	
+
 	boolean openMenu = false;
 
 	Dimension buttonSize = setNewDimension(175,60);
 
 	public NewGamePanel(JDialog parent){
 		parentDialog = parent;
+		this.setCursor();
 		this.buildNewGamePanel();
 	}
-	
+
 	public NewGamePanel(JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		this.setCursor();
 		this.buildNewGamePanel();
 	}
 
@@ -62,20 +70,14 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
-		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(parentDialog, mainGame), null);
-		
-		//changement du pointeur
-				Toolkit tk = Toolkit.getDefaultToolkit();
-				Image img=Toolkit.getDefaultToolkit().getImage("images/background/pointeur.png");
-				Cursor monCurseur = tk.createCustomCursor(img, new Point(8, 8),"images/background/pointeur.png");
-				this.setCursor(monCurseur);
-		
+		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), null);
+
 		if (openMenu){
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
 		} else {
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}
-		
+
 		this.add(zone1);
 		this.add(zone2);
 		this.add(zone3);
@@ -96,5 +98,5 @@ public class NewGamePanel extends PanelInterface {
 		if (text == selected){ rbutton.setSelected(true); };
 		rbutton.addActionListener(action);
 	}
-
+	
 }
