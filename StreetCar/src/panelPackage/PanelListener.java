@@ -57,17 +57,17 @@ public class PanelListener {
 		ButtonGroup selectedJ1;
 		ButtonGroup selectedJ2;
 		JDialog parent;
-		Fenetre mainGame;
+		Fenetre mainWindow;
 
 		public StartNewGameButtonListener(ButtonGroup j1, ButtonGroup j2, JDialog parent, Fenetre main){
 			this.selectedJ1 = j1; this.selectedJ2 = j2;
 			this.parent = parent;
-			this.mainGame = main;
+			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
-			if(mainGame != null){mainGame.dispose();}
+			if(mainWindow != null){mainWindow.dispose();}
 			Moteur m = new Moteur(new Plateau());
 			Joueur joueur1 = createPlayer(selectedJ1, m, 1);
 			Joueur joueur2 = createPlayer(selectedJ2, m, 1);

@@ -70,7 +70,7 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
 
-		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainGame), null);
+		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), null);
 
 		if (openMenu){
 			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
