@@ -37,15 +37,17 @@ public class NewGamePanel extends PanelInterface {
 
 	Dimension buttonSize = setNewDimension(175,60);
 
-	public NewGamePanel(JDialog parent){
+	public NewGamePanel(JFrame main, JDialog parent){
 		parentDialog = parent;
+		mainWindow = main;
 		this.setCursor();
 		this.buildNewGamePanel();
 	}
 
-	public NewGamePanel(JDialog parent, boolean b){
+	public NewGamePanel(JFrame main, JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		mainWindow = main;
 		this.setCursor();
 		this.buildNewGamePanel();
 	}

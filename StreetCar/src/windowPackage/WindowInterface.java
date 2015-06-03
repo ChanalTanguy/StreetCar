@@ -29,7 +29,7 @@ public class WindowInterface extends JDialog {
 	}
 	
 	public void setMainWindow(JFrame f){
-		mainWindow = f;
+		this.mainWindow = f;
 	}
 
 }

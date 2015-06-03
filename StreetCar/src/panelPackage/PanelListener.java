@@ -88,7 +88,6 @@ public class PanelListener {
 		
 		private Joueur createPlayer(ButtonGroup group, Moteur m, int terminus){
 			String text = getSelectedButtonText(group);
-			System.out.println(text);
 			switch (text){
 			case "Humain" : { return new JoueurHumain(m, terminus); } 
 			case "Facile" : { return new JoueurIA(m, terminus); } 

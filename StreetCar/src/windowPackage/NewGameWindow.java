@@ -14,7 +14,7 @@ public class NewGameWindow extends WindowInterface {
 	
 	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		NewGamePanel menu = new NewGamePanel(win);
+		NewGamePanel menu = new NewGamePanel(mainWindow, win);
 		setNewSize(win,500,230);
 		win.add(menu);
 		win.setResizable(false);
@@ -26,7 +26,7 @@ public class NewGameWindow extends WindowInterface {
 	
 	public void openWindow(boolean b){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		NewGamePanel menu = new NewGamePanel(win, b);
+		NewGamePanel menu = new NewGamePanel(mainWindow, win, b);
 		setNewSize(win,500,230);
 		win.add(menu);
 		win.setResizable(false);
