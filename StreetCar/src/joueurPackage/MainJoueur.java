@@ -113,7 +113,10 @@ public class MainJoueur {
 	public MainJoueur clone() {
 		MainJoueur m = new MainJoueur();
 		for (int i = 0; i < 5; i++) {
-			m.setTuileAt(i, cartesJoueur[i].clone());
+			if (cartesJoueur[i] != null)
+				m.setTuileAt(i, cartesJoueur[i].clone());
+			else 
+				m.setTuileAt(i, null);
 		}
 		return m;
 	}
