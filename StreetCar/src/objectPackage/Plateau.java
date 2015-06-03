@@ -200,25 +200,6 @@ public class Plateau {
 
 	public void setTuileAt(int x, int y, Tuile t) {
 		plateau[x][y] = t;
-		Tuile tAdjacente;
-		for (int i = 0; i < 4; i++) {
-
-			tAdjacente = null;
-			switch (i) {
-			case 0 : if (x != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateau[x+1][y]; break;
-			case 1 : if (x != 0) 										tAdjacente = plateau[x-1][y]; break;
-			case 2 : if (y != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateau[x][y+1]; break;
-			default : if (y != 0) 										tAdjacente = plateau[x][y-1]; break;
-			}
-			if (tAdjacente != null && tAdjacente.getTypeTuile() == 2 && t.getTypeTuile() != 3) {
-				Escale e = (Escale) tAdjacente;
-				if (e.getStop() == null) {
-					e.setStop(new Point(x,y));
-					t.setEscale(e.getNumeroEscale());
-				}
-			}
-
-		}
 	}
 
 	public Point getTerminalPosition(int numberLigne, int numberTerminal) {

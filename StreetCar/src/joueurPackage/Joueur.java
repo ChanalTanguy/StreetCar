@@ -1,7 +1,11 @@
 package joueurPackage;
 
+import java.awt.Point;
+
+import constantesPackages.Constantes;
 import objectPackage.Pioche;
 import objectPackage.Plateau;
+import objectPackage.tuilePackage.Escale;
 import objectPackage.tuilePackage.Tuile;
 
 public abstract class Joueur {
@@ -81,6 +85,28 @@ public abstract class Joueur {
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 			main.setTuileAt(tuileDansMain, t);
 		}
+		
+		t = plateauDeJeu.getTuileAt(x, y);
+		Tuile tAdjacente;
+		for (int i = 0; i < 4; i++) {
+
+			tAdjacente = null;
+			switch (i) {
+			case 0 : if (x != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateauDeJeu.getPlateau()[x+1][y]; break;
+			case 1 : if (x != 0) 										tAdjacente = plateauDeJeu.getPlateau()[x-1][y]; break;
+			case 2 : if (y != Constantes.Dimensions.dimensionPlateau-1) tAdjacente = plateauDeJeu.getPlateau()[x][y+1]; break;
+			default : if (y != 0) 										tAdjacente = plateauDeJeu.getPlateau()[x][y-1]; break;
+			}
+			if (tAdjacente != null && tAdjacente.getTypeTuile() == 2 && t.getTypeTuile() != 3) {
+				Escale e = (Escale) tAdjacente;
+				if (e.getStop() == null) {
+					e.setStop(new Point(x,y));
+					t.setEscale(e.getNumeroEscale());
+				}
+			}
+
+		}
+		
 	}	/**
 	 * Tourne la p ième tuile de la main du joueur
 	 * @param tuile
