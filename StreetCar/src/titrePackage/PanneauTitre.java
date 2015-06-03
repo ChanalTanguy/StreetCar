@@ -1,5 +1,6 @@
 package titrePackage;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -22,7 +23,6 @@ public class PanneauTitre extends JPanel{
 	
 	ChargementTitre chargement = new ChargementTitre();
 	String[] saves = chargement.listerRepertoire();
-
 	
 	BufferedImage background ;
 	BufferedImage backgroundCredits;
@@ -35,7 +35,6 @@ public class PanneauTitre extends JPanel{
 	BufferedImage titre ;
 	BufferedImage fleche ;
 	
-	
 	PanneauTitre(FenetreTitre fen)
 	{
 		super();
@@ -44,7 +43,7 @@ public class PanneauTitre extends JPanel{
 		this.addMouseMotionListener(ecoute);
 		initImage();
 	}
-	
+
 	private void initImage() {
 		background = Constantes.Images.initBackground("tram.png");
 		nouvellePartie = Constantes.Images.initBackground("nouvellePartie.png");
@@ -96,16 +95,16 @@ public class PanneauTitre extends JPanel{
 	}
 	
 	private void chargerPartie(Graphics2D crayon) {
-		//TODO affichage plus graphique
 		crayon.setColor(Color.white);
 		if(saves != null)
 		{
-			crayon.drawString("Choisissez la sauvegarde", getWidth()/3, getHeight()/4);
+			crayon.drawString("Choisissez une sauvegarde", getWidth()/3, getHeight()/4);
 		
-			for(int i = 0; i<saves.length; i++)
+			for(int i = 0; i<saves.length && i<10; i++)
 			{
 				crayon.drawString(saves[i], getWidth()/3, getHeight()/4+(i+1)*50);
 			}
+	
 		}
 		
 		else crayon.drawString("Pas de sauvegarde", getWidth()/3, getHeight()/4);

@@ -42,7 +42,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche;
+	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan;
 	/*
 	 * FIN Images
 	 */
@@ -362,16 +362,19 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
 		case 1 :
-			crayon.drawRect( coordX, mainDuBas, tailleCaseMain, tailleCaseMain);
+			//crayon.drawRect( coordX, mainDuBas, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		case 2 :
-			crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
+			//crayon.drawRect( coordX, mainDuHaut, tailleCaseMain, tailleCaseMain);
+			crayon.drawImage(illumination, coordX-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 		}
 	}
 	private void dessinerCaseSelectionnee (Graphics2D crayon) {
 		mainSelectionnee = -1;
 		crayon.setColor(Color.white);
-		crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
+		//crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
+		crayon.drawImage(illumination,coordXSelection*tailleCase + depart -tailleCase/4, coordYSelection*tailleCase + depart-tailleCase/4, tailleCase+tailleCase/2, tailleCase+tailleCase/2, this);
 	}
 	private void dessinerPiocheSelectionnee (Graphics2D crayon) {
 		int coordX = 6*largeur/7 - 1;
@@ -382,7 +385,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.fillRect(coordX, coordY, dimension, dimension);
 		}
 		else {
-			crayon.drawRect(coordX, coordY, dimension, dimension);
+			//crayon.drawRect(coordX, coordY, dimension, dimension);
+			crayon.drawImage(illumination, coordX-dimension/6, coordY+dimension/6, dimension+1, dimension+1,this);
+			dessinerPioche(crayon);
 			piocheSelectionnee = false;
 		}
 	}
@@ -416,6 +421,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		illumination = Constantes.Images.initBackground("surbrillance.png");
+		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
+		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
 	}
 
 }
