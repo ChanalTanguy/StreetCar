@@ -144,8 +144,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public void setCoupsPrecedents (Point[] referenceCoupsPrecedents){
 		int numeroCoup = 0;
-		while ( numeroCoup < referenceCoupsPrecedents.length && referenceCoupsPrecedents[numeroCoup] != null ){
-			coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup].clone();
+		while ( numeroCoup < referenceCoupsPrecedents.length ){
+			coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup];
 			numeroCoup++;
 		}
 	}

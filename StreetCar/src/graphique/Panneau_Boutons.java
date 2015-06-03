@@ -77,22 +77,18 @@ public class Panneau_Boutons extends Pan_Abstract{
 	//change le bouton undo
 	public void changeImageUndo(String nomImage){
 		undo = Constantes.Images.initBouton(nomImage);
-		repaint();
 	}
 	//change le bouton conseil
 	public void changeImageConseil(String nomImage){
 		conseils = Constantes.Images.initBouton(nomImage);
-		repaint();
 	}
 	//change le bouton aide
 	public void changeImageAssistance(String nomImage){
 		assistance = Constantes.Images.initBouton(nomImage);
-		repaint();
 	}
 	//change le bouton menu
 	public void changeImageMenu(String nomImage){
 		menu = Constantes.Images.initBouton(nomImage);
-		repaint();
 	}
 	
 	/*

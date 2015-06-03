@@ -55,6 +55,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		panneauDeBoutons.changeImageMenu("bouton_menu.png");
 		panneauDeBoutons.changeImageAssistance("bouton_aide.png");
 		panneauDeBoutons.changeImageConseil("bouton_conseil.png");
+		panneauDeBoutons.repaint();
 	}
 	
 	public void mouseMoved(MouseEvent e) {
@@ -66,6 +67,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		else if ( estSurAssistance(x, y, rayon) ){}
 		else if ( estSurMenu(x, y, rayon) ){}
 		else {}
+		panneauDeBoutons.repaint();
 	}
 	
 	public void mouseDragged(MouseEvent e) {}

@@ -9,7 +9,7 @@ import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
 public class Panneau_Historique extends Pan_Abstract{
-	private BufferedImage boutonHaut, boutonBas, historiqueCentral;
+	private BufferedImage defilementHaut, defilementBas, historiqueCentral, ongletHistorique;
 	
 	// Variable permettant de separer le Panneau en 3 parties pour les 3 images;
 	private int diviseurDeDimension;
@@ -161,6 +161,12 @@ public class Panneau_Historique extends Pan_Abstract{
 	public void demandeConfirmation (){
 		
 	}
+	public void changeImageDefilementHaut (String nomImage){
+		defilementHaut = Constantes.Images.initBackground(nomImage);
+	}
+	public void changeImageDefilementBas (String nomImage){
+		defilementBas = Constantes.Images.initBackground(nomImage);
+	}
 	
 	/*
 	 * Methodes Private de Panneau_Historique
@@ -168,7 +174,7 @@ public class Panneau_Historique extends Pan_Abstract{
 	private void dessinerPartieHaute (Graphics2D crayon){
 		coordY = 0;
 		hauteurImage = hauteur/diviseurDeDimension;
-		crayon.drawImage(boutonHaut, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
+		crayon.drawImage(defilementHaut, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 		
 		if ( encadrerZone == 1){
 			crayon.setColor(Color.white);
@@ -199,7 +205,7 @@ public class Panneau_Historique extends Pan_Abstract{
 	private void dessinerPartieBasse (Graphics2D crayon){
 		coordY = (diviseurDeDimension-1)*hauteur/diviseurDeDimension;
 		hauteurImage = hauteur/diviseurDeDimension;
-		crayon.drawImage(boutonBas, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
+		crayon.drawImage(defilementBas, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 		
 		if ( encadrerZone == 2){
 			crayon.setColor(Color.white);
@@ -214,17 +220,18 @@ public class Panneau_Historique extends Pan_Abstract{
 		int coordYOnglet = borneHaute_Onglet;
 		for (int numTour = 0; numTour < nombreMaxTour; numTour++){
 			
-			crayon.setColor(Color.white);
-			crayon.fillRect(borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet);
+//			crayon.setColor(Color.white);
+//			crayon.fillRect(borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet);
+			crayon.drawImage(ongletHistorique, borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet, this);
 			
-			int posXString = borneGauche_Onglet + 2*dimensionOnglet/5;
-			int posYString = coordYOnglet + 2*dimensionOnglet/3;
+			int posXString = borneGauche_Onglet + 2*dimensionOnglet/5+1;
+			int posYString = coordYOnglet + 3*dimensionOnglet/5;
 			
 			int numTourActif = numTour + moteur.getHistorique().getNbConfigsPrecedentes();
 
 			String chaineTour = "" + numTourActif;
 			
-			crayon.setColor(Color.black);
+			crayon.setColor(Color.white);
 			crayon.drawString(chaineTour , posXString, posYString);
 			
 			coordYOnglet += dimensionOnglet + ecart;
@@ -234,9 +241,10 @@ public class Panneau_Historique extends Pan_Abstract{
 	}
 	
 	protected void initialiserImages (){
-		boutonHaut = Constantes.Images.initBackground("histo_haut.png");
+		defilementHaut = Constantes.Images.initBackground("histo_haut.png");
 		historiqueCentral = Constantes.Images.initBackground("histo_centre.png");
-		boutonBas = Constantes.Images.initBackground("histo_bas.png");
+		ongletHistorique = Constantes.Images.initBackground("histo_case.png");
+		defilementBas = Constantes.Images.initBackground("histo_bas.png");
 		
 	}
 }

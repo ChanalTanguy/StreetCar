@@ -34,7 +34,7 @@ public class GestionSouris implements MouseListener{
 
 	public void mouseEntered(MouseEvent event) {
 		if (pan_secondaire != null){
-			pan_secondaire.activerContours();
+//			pan_secondaire.activerContours();
 		}
 	}
 
@@ -45,7 +45,7 @@ public class GestionSouris implements MouseListener{
 		}
 */		
 		if (pan_secondaire != null){
-			pan_secondaire.desactiverContours();
+//			pan_secondaire.desactiverContours();
 		}
 	}
 

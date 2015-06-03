@@ -30,10 +30,12 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		}
 		else if ( estSurDefilementHaut(coordX, coordY) ){
 			moteur.getHistorique().defilementVersHaut();
+			panneauHistorique.changeImageDefilementHaut("histo_haut_a.png");
 			panneauHistorique.repaint();
 		}
 		else if ( estSurDefilementBas(coordX, coordY) ){
 			moteur.getHistorique().defilementVersBas();
+			panneauHistorique.changeImageDefilementBas("histo_bas_a.png");
 			panneauHistorique.repaint();
 		}
 		else {}
@@ -41,22 +43,26 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();
 		int coordY = e.getY();
-		if ( estSurDefilementHaut(coordX, coordY) && panneauHistorique.getZoneEncadree() != 1 ){
-			panneauHistorique.setEncadrer(1);
+		if ( estSurDefilementHaut(coordX, coordY) ){
+			panneauHistorique.changeImageDefilementHaut("histo_haut_s.png");
 		}
-		else if ( estSurDefilementBas(coordX, coordY) && panneauHistorique.getZoneEncadree() != 2 ){
-			panneauHistorique.setEncadrer(2);
+		else if ( estSurDefilementBas(coordX, coordY) ){
+			moteur.getHistorique().defilementVersBas();
+			panneauHistorique.changeImageDefilementBas("histo_bas_s.png");
 		}
-		else if ( panneauHistorique.getZoneEncadree() != -1){
-			panneauHistorique.setEncadrer(-1);
+		else {
+			panneauHistorique.changeImageDefilementHaut("histo_haut.png");
+			panneauHistorique.changeImageDefilementBas("histo_bas.png");
 		}
-//		panneauHistorique.repaint();
+		panneauHistorique.repaint();
 	}
-	public void mouseExited(MouseEvent e) {
-		panneauHistorique.setEncadrer(-1);
+	public void mouseReleased(MouseEvent e) {
+		panneauHistorique.changeImageDefilementHaut("histo_haut.png");
+		panneauHistorique.changeImageDefilementBas("histo_bas.png");
+		panneauHistorique.repaint();
 	}
-
-	public void mouseReleased(MouseEvent e) {}
+	
+	public void mouseExited(MouseEvent e) {}
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}

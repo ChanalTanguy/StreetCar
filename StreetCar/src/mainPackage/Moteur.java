@@ -281,8 +281,13 @@ public class Moteur {
 		historiqueDeTours = configACharger.getHistorique().clone();
 		
 		int numeroCoup = 0;
-		while ( numeroCoup < coupsPrecedents.length && configACharger.getCoupsPrecedents()[numeroCoup] != null){
-			coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup].clone();
+		while ( numeroCoup < coupsPrecedents.length ){
+			if ( configACharger.getCoupsPrecedents()[numeroCoup] != null ){
+				coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup].clone();
+			}
+			else {
+				coupsPrecedents[numeroCoup] = (Point) configACharger.getCoupsPrecedents()[numeroCoup];
+			}
 			numeroCoup++;
 		}
 		
