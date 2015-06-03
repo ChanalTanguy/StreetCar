@@ -28,7 +28,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs pour Details Visuels
 	 */
 	private int mainSelectionnee = -1;
-	private boolean casePlateauSelectionnee = false; // -1;
+	private boolean casePlateauSelectionnee = false;
 	private int tuileMainSelectionnee = -1;
 	private int coordXSelection = -1;
 	private int coordYSelection = -1;
@@ -51,13 +51,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs d'Entiers de Positionnement
 	 */
 	private int depart = 100;
-	private int tailleCase; // = 50;
-	private int tailleCaseMain; // = 70;
+	private int tailleCase;
+	private int tailleCaseMain;
 	private int ecart = 150;
 	private int coordXTuile;
 	private int petitEcartMain = 30;
-	private int mainDuHaut = 20; // = depart - 10 - tailleCaseMain;
-	private int mainDuBas = 820; // = 820;
+	private int mainDuHaut = 20;
+	private int mainDuBas = 820;
 	private int decalageMain;
 	private int positionXPioche;
 	private int positionYPioche;
@@ -163,11 +163,14 @@ public class Panneau_Plateau extends Pan_Abstract{
 		initialiserImages();
 		coupsJoues = new Point[2];
 		coupsPrecedents = new Point[coupsJoues.length];
-		addMouseListener( new Ecouteur_Plateau(this, referenceMoteur) );
+		Ecouteur_Plateau ecouteur = new Ecouteur_Plateau(this, referenceMoteur);
+		addMouseListener(ecouteur);
+//		addMouseMotionListener (ecouteur);
 	}
 	/*
 	 * FIN Constructeur
 	 */
+	
 	
 	/*
 	 * Methode paintComponent de Panneau_Plateau
@@ -219,7 +222,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if ( mainSelectionnee != -1 ){
 			dessinerMainSelectionnee(crayon);
 		}
-		if ( casePlateauSelectionnee /*!= -1*/ ){
+		if ( casePlateauSelectionnee ){
 			System.out.println("case selectionnee");
 			dessinerCaseSelectionnee(crayon);
 		}
@@ -230,6 +233,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerCoupsJoues(crayon);
 		dessinerCoupsPrecedents(crayon);
 	}
+	
 	
 	/*
 	 * Methodes Public de Panneau_Plateau 
@@ -254,9 +258,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	
+	
 	/*
 	 * Methodes Private de Panneau_Plateau
 	 */
+	// Methodes de dessin principales
 	// Methodes de dessin principales
 	private void dessinerFond (Graphics2D crayon) {
 		crayon.drawImage(fond, 0, 0, largeur, hauteur, this);
@@ -362,10 +368,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.drawString(notifications, 6*largeur/7-20, hauteur/4);
 	}
 	
+	
 	// Methodes de dessin de details visuels
 	private void dessinerMainSelectionnee (Graphics2D crayon) {
 		coordXTuile = decalageMain + (tuileMainSelectionnee) * (tailleCaseMain + petitEcartMain);
-		casePlateauSelectionnee = false; //-1;
+		casePlateauSelectionnee = false;
 		crayon.setColor(Color.white);
 		switch (mainSelectionnee){
 		case 1 :
@@ -376,7 +383,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		case 2 :
 			//crayon.drawRect( coordXTuile, mainDuHaut, tailleCaseMain, tailleCaseMain);
 			crayon.drawImage(illumination, coordXTuile-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
-			if(mot.getcurrentPlayer() == 1) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuHaut-tailleCaseMain/2+10, tailleCaseMain/2, tailleCaseMain/2, this);
+			if(mot.getcurrentPlayer() == 1) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuHaut-tailleCaseMain/3+10, tailleCaseMain/2, tailleCaseMain/2, this);
 		}
 	}
 	private void dessinerCaseSelectionnee (Graphics2D crayon) {

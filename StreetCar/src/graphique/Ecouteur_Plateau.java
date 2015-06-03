@@ -115,8 +115,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			}
 		}
 	}
-	
 	public void mouseMoved(MouseEvent e) {}
+	
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
@@ -183,26 +183,23 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		int depart = panneauDeJeu.getDepart();
 		boolean b = false;
 		
-		
-		
 		if(mainSelected == 1) //Main basse
 		{
 			
 			int main = panneauDeJeu.getMaintDuBas();
 			System.out.println(main);
 			
-			if(piocheX>=(coordX-tailleCase/3+10)-depart && piocheX<=(coordX-tailleCase/3+10+tailleCase/2-depart) 
-					&& piocheY>=main-tailleCaseM/3+10 && piocheY<=main-tailleCaseM/3+10+tailleCaseM/2)
+			if ( piocheX >= (coordX - tailleCase/3 + 10) - depart && piocheX <= (coordX-tailleCase/3 + 10 + tailleCase/2 - depart) 
+			  && piocheY >= main - tailleCaseM/3 + 10 && piocheY <= main - tailleCaseM/3 + 10 + tailleCaseM/2 )
 			{
-				System.out.print(b);
 				b = true;
 			}
 		}
 		else
 		{
 			int main = panneauDeJeu.getMainDuHaut();
-			if(piocheX>=(coordX-tailleCase/3+10)-depart && piocheX<=(coordX-tailleCase/3+10+tailleCase/2-depart) 
-					&& piocheY>=main-tailleCaseM/3+10 && piocheY<=main-tailleCaseM/3+10+tailleCaseM/2)
+			if ( piocheX >= (coordX - tailleCase/3 + 10) - depart && piocheX <= ( coordX - tailleCase/3 + 10 + tailleCase/2 - depart) 
+			  && piocheY >= main - tailleCaseM/3 + 10 && piocheY <= main - tailleCaseM/3 + 10 + tailleCaseM/2 )
 			{
 				b = true;
 			}
@@ -225,7 +222,7 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		panneauDeJeu.setCoordYSelection(caseY);
 		panneauDeJeu.repaint();
 	}
-
+	
 	private int mainNo(int piocheY) {
 		int numeroMain;
 		if ( piocheY >= panneauDeJeu.getMaintDuBas() && piocheY <= panneauDeJeu.getMaintDuBas() + panneauDeJeu.getTailleCaseMain() ){
