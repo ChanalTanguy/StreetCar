@@ -12,6 +12,7 @@ public class Tuile implements ActionsToken{
 	private ArrayList<Connection> listeConnections;
 	BufferedImage imageTuile;
 	int typeTuile;
+	int escale;
 	
 	/*
 	 * 2 Constructeurs
@@ -21,6 +22,7 @@ public class Tuile implements ActionsToken{
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
+		escale = 0;
 	}
 	
 	public Tuile (boolean presenceArbres){
@@ -28,6 +30,7 @@ public class Tuile implements ActionsToken{
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
+		escale = 0;
 	}
 	
 	/*
@@ -188,6 +191,9 @@ public class Tuile implements ActionsToken{
 		typeTuile = i;
 	}
 	
+	public void setEscale(int i) {
+		escale = i;
+	}
 	
 	
 	/*
