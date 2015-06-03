@@ -42,7 +42,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge;
+	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge, piocheMain;
 	/*
 	 * FIN Images
 	 */
@@ -61,6 +61,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int positionXPioche;
 	private int positionYPioche;
 	private int dimensionPioche;
+	public boolean piocher = false;
 	
 	/*
 	 * FIN Entiers Fixes
@@ -269,7 +270,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	private void dessinerPioche (Graphics2D crayon) {
-		crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
 	private void dessinerMain1 (Graphics2D crayon, MainJoueur main) {
 		for (int numeroTuile = 0; numeroTuile < main.length(); numeroTuile++){
@@ -372,7 +374,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	private void dessinerCaseSelectionnee (Graphics2D crayon) {
 		mainSelectionnee = -1;
-		crayon.setColor(Color.white);
+		//crayon.setColor(Color.white);
 		//crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
 		crayon.drawImage(illumination,coordXSelection*tailleCase + depart -tailleCase/4, coordYSelection*tailleCase + depart-tailleCase/4, tailleCase+tailleCase/2, tailleCase+tailleCase/2, this);
 	}
@@ -406,12 +408,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
-		crayon.setColor(Color.green);
+		//crayon.setColor(Color.green);
 		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
 		crayon.drawImage(illuminationVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
-		crayon.setColor(Color.cyan);
+		//crayon.setColor(Color.cyan);
 		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
 		crayon.drawImage(illuminationCyan,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
@@ -423,6 +425,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		piocheMain = Constantes.Images.initBackground("piocheMain.png");
 		illumination = Constantes.Images.initBackground("surbrillance.png");
 		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
 		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
