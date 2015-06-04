@@ -8,6 +8,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+import joueurPackage.Coup;
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
@@ -33,9 +34,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int coordXSelection = -1;
 	private int coordYSelection = -1;
 	private boolean piocheSelectionnee;
+	
 	private Point[] coupsJoues;
 	private Point[] coupsPrecedents;
 	private Point[] coupsHistorique;
+	private Coup coupSimultaneEnAction;
+	private int numeroTuileCoupSimultane;
 	/*
 	 * FIN Details Visuels
 	 */
@@ -45,6 +49,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	private BufferedImage fond, plateau, pioche, piocheMain, rotate;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
+	private BufferedImage imageCoupSimultane;
 	/*
 	 * FIN Images
 	 */
@@ -103,9 +108,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public int getTailleCaseMain (){
 		return tailleCaseMain;
 	}
-	public String getNotifications (){
-		return notifications;
-	}
 	public int getDecalageMain (){
 		return decalageMain;
 	}
@@ -120,6 +122,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public Moteur getMoteur (){
 		return mot;
+	}
+	public String getNotifications (){
+		return notifications;
+	}
+	public int getNumeroTuileCoupSimultane (){
+		return numeroTuileCoupSimultane;
 	}
 	
 	public void setMainSelectionnee (int numeroMain) {
@@ -150,6 +158,16 @@ public class Panneau_Plateau extends Pan_Abstract{
 			numeroCoup++;
 		}
 	}
+	public void setCoupSimultaneEnAction (Coup referenceCoup){
+		coupSimultaneEnAction = referenceCoup;
+	}
+	public void setImageCoupSimultane (BufferedImage imageTuile){
+		imageCoupSimultane = imageTuile;
+	}
+	public void setNumeroTuileCoupSimultane (int newNumeroTuile){
+		numeroTuileCoupSimultane = newNumeroTuile;
+	}
+	
 	/*
 	 * FIN ACCESSEURS
 	 */
@@ -232,7 +250,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if ( piocheSelectionnee ){
 			dessinerPiocheSelectionnee(crayon);
 		}
-
+		
 		dessinerCoupsPrecedents(crayon);
 		dessinerCoupsJoues(crayon);
 		dessinerCoupsHistorique(crayon);
@@ -274,7 +292,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 			else {
 				coupsHistorique[numeroCoup] = referenceCoupsHistorique[numeroCoup];
 			}
-			numeroCoup++;
 		}
 		repaint();
 	}
@@ -328,8 +345,22 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerContenuPlateau (Graphics2D crayon, Plateau plateau){
 		for (int ligne = 1; ligne < plateau.length()-1; ligne++){
 			for (int colonne = 1; colonne < plateau.length()-1; colonne++){
-				if (plateau.getTuileAt(ligne, colonne) != null){
-					dessinerTuile(crayon, plateau.getTuileAt(ligne, colonne), ligne-1, colonne);
+				Point positionDeComparaison = new Point(colonne, ligne);
+				if ( coupSimultaneEnAction != null && positionDeComparaison.equals(coupSimultaneEnAction.getCoordonnee()) ){
+					System.out.println("\n ===== Dessin Contenu Plateau ===== ");
+					
+					System.out.println("pointComparaison : " + positionDeComparaison.toString() );
+					System.out.println("ligne/colonne : " + ligne + " " + colonne);
+					System.out.println("position identique !");
+//					dessinerTuile(crayon, mot.getTabPlayers()[mot.getcurrentPlayer()].getMain().getTuileAt(coupSimultaneEnAction.getTuile()), colonne-1, ligne);
+					crayon.drawImage(imageCoupSimultane, depart + colonne*tailleCase, depart + ligne*tailleCase, tailleCase-1, tailleCase-1, this);
+					
+					System.out.println("\n ===== FIN Dessin Contenu Plateau ===== ");
+				}
+				else {
+					if (plateau.getTuileAt(ligne, colonne) != null){
+						dessinerTuile(crayon, plateau.getTuileAt(ligne, colonne), ligne-1, colonne);
+					}
 				}
 			}
 		}

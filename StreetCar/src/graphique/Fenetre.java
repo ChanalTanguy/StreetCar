@@ -19,6 +19,8 @@ import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
 public class Fenetre extends JFrame{
+	
+	public Moteur moteurParent;
 			
 	public Fenetre (String title){
 		super(title);
@@ -94,6 +96,7 @@ public class Fenetre extends JFrame{
 		add(regroupementLateral, BorderLayout.EAST);
 		
 		pack();
+		this.moteurParent = referenceMoteur;
 		referenceMoteur.start();
 	}
 	

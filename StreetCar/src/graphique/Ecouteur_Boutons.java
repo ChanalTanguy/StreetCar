@@ -38,6 +38,8 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 			panneauDeBoutons.changeImageUndo("bouton_undo_a.png");
 			panneauDeJeu.getMoteur().annulerTour();
 			panneauDeJeu.effacerCoupsJoues();
+			panneauDeJeu.setCoupSimultaneEnAction(null);
+			panneauDeJeu.setImageCoupSimultane(null);
 		}
 		else if ( estSurConseils(x, y, rayon) ){
 			panneauDeBoutons.changeImageConseil("bouton_conseil_a.png");
@@ -48,6 +50,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		else if ( estSurMenu(x, y, rayon) ){
 			panneauDeBoutons.changeImageMenu("bouton_menu_a.png");
 			MenuWindow menu = new MenuWindow();
+			((Fenetre)mainWindow).moteurParent.stop();
 			menu.setMainWindow(mainWindow);
 			menu.openWindow();
 			panneauDeBoutons.changeImageMenu("bouton_menu.png");

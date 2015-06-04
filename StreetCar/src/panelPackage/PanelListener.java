@@ -75,6 +75,7 @@ public class PanelListener {
 			m.setPlayers(joueur1, joueur2);
 			parent.dispose();
 			if(mainWindow != null){mainWindow.dispose();}
+			if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
 			Fenetre f = new Fenetre("Street Car");
 			f.disposition_V2(m, f.getSize());
 		}
@@ -185,15 +186,23 @@ public class PanelListener {
 
 		JDialog parentDialog;
 		MenuWindow window;
+		JFrame mainWindow;
 
 		public ReturnButtonListener(JDialog parent, MenuWindow window){
 			parentDialog = parent;
 			this.window = window;
 		}
+		
+		public ReturnButtonListener(JDialog parent, MenuWindow window, JFrame mainWindow){
+			parentDialog = parent;
+			this.window = window;
+			this.mainWindow = mainWindow;
+		}
 
 		public void actionPerformed(ActionEvent e) {
 			parentDialog.dispose();
 			if (window != null) { window.openWindow(); }
+			if(mainWindow != null && mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.start();}
 		}
 
 	}
