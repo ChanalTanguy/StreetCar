@@ -66,12 +66,12 @@ public class PanelListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			parent.dispose();
-			if(mainWindow != null){mainWindow.dispose();}
 			Moteur m = new Moteur(new Plateau());
 			Joueur joueur1 = createPlayer(selectedJ1, m, 1);
 			Joueur joueur2 = createPlayer(selectedJ2, m, 1);
 			m.setPlayers(joueur1, joueur2);
+			parent.dispose();
+			if(mainWindow != null){mainWindow.dispose();}
 			Fenetre f = new Fenetre("Street Car");
 			f.disposition_V2(m, f.getSize());
 		}
