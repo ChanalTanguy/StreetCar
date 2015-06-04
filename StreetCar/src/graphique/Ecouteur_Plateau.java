@@ -37,7 +37,8 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			switch (buttonDown){
 			// bouton droit de la souris
 			case MouseEvent.BUTTON3:
-				if ( estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY) - 1) ){
+				if ( estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY) - 1) 
+				  && panneauDeJeu.getNumeroTuileCoupSimultane() != tuileNo(piocheX) ){
 					panneauDeJeu.setPiocheSelectionnee(false);
 					panneauDeJeu.setCaseSelectionnee(false);
 					int numeroTuile = tuileNo(piocheX);
@@ -139,9 +140,9 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurPioche(int piocheX, int piocheY) {
 		boolean clicValideSurPioche = false;
-		int borneGauche = panneauDeJeu.getPositionXPioche();
+		int borneGauche = panneauDeJeu.getPositionXPioche() +10;
 		int borneDroite = borneGauche + panneauDeJeu.getDimensionPioche();
-		int borneHaute = panneauDeJeu.getPositionYPioche();
+		int borneHaute = panneauDeJeu.getPositionYPioche() +10;
 		int borneBasse = borneHaute + panneauDeJeu.getDimensionPioche();
 		
 		if ( piocheX >= borneGauche && piocheX <= borneDroite

@@ -159,6 +159,11 @@ public class Moteur {
 		String msg = "";
 		String r;
 		if (coupValide(coupChoisi)) {
+			if ( coupSimultane != null ){
+				coupSimultane = null;
+				panJeu.setCoupSimultaneEnAction(null);
+				panJeu.effacerCoupsJoues();
+			}
 			if (coupChoisi.getType().equals(Constantes.Coup.placement)) {
 				tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 				nbActions--;
@@ -200,34 +205,48 @@ public class Moteur {
 			else 
 				msg = Constantes.Message.finDeTour(currentPlayer+1);
 		}
-		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(coupChoisi.getTuile()),coupChoisi)) != null && nbActions == 4)
+		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(coupChoisi.getTuile()), coupChoisi)) != null && nbActions == 4)
 		{
 			if (coupSimultane == null) {
 				coupSimultane = coupChoisi;
 				msg = "Coup simultanée possible";
+				panJeu.ajouterCoup(coupSimultane.getCoordonnee());
+				
+				panJeu.setImageCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()).deepCopy());
+				panJeu.setCoupSimultaneEnAction(coupSimultane);
+				panJeu.setNumeroTuileCoupSimultane(coupSimultane.getTuile());
+				
 			}
 			else if (coupSimultane.getTuile() == coupChoisi.getTuile()) {
 				// Erreur même tuile selectionné pour la mettre au même endroit
-				msg = Constantes.Message.poseImpossible;;
+				msg = Constantes.Message.poseImpossible;
 				coupSimultane = null;
 			}
 			else {
-				boolean b;
+				boolean coupSimultaneValide;
 				Point p1 = coupSimultane.getCoordonnee();
 				Point p2 = coupChoisi.getCoordonnee();
 				
 				switch (r) {
-					case Constantes.Orientation.nord :  b = (p1.x == p2.x && p1.y == p2.y+1); break;
-					case Constantes.Orientation.sud :   b = (p1.x == p2.x && p1.y == p2.y-1); break;
-					case Constantes.Orientation.est :	b = (p1.x == p2.x-1 && p1.y == p2.y); break;
-					case Constantes.Orientation.ouest : b = (p1.x == p2.x+1 && p1.y == p2.y); break;
-					default : b = false;
+					case Constantes.Orientation.nord :  coupSimultaneValide = (p1.x == p2.x && p1.y == p2.y+1); break;
+					case Constantes.Orientation.sud :   coupSimultaneValide = (p1.x == p2.x && p1.y == p2.y-1); break;
+					case Constantes.Orientation.est :	coupSimultaneValide = (p1.x == p2.x-1 && p1.y == p2.y); break;
+					case Constantes.Orientation.ouest : coupSimultaneValide = (p1.x == p2.x+1 && p1.y == p2.y); break;
+					default : coupSimultaneValide = false;
 				}
 						
-				if (b) {
+				if (coupSimultaneValide) {
 					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupSimultane.getTuile(), coupSimultane.getCoordonnee().x, coupSimultane.getCoordonnee().y, plateauDeJeu);
 					nbActions -= 2;
+					
+					ajouterCoup(coupChoisi.getCoordonnee());
+					ajouterCoup(coupSimultane.getCoordonnee());
+					panJeu.ajouterCoup(coupChoisi.getCoordonnee());
+					panJeu.ajouterCoup(coupSimultane.getCoordonnee());
+					
+					panJeu.setImageCoupSimultane(null);
+					
 					msg = Constantes.Message.finDeTour(currentPlayer+1);
 				} else {
 					// Erreur même tuile selectionné pour la mettre au même endroit
@@ -309,7 +328,6 @@ public class Moteur {
 		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
 		
 		panJeu.chargerCoupsHistoriques(configARecuperer.getCoupsPrecedents());
-		
 	}
 	public void effacerCoupsJoues (){
 		panJeu.effacerCoupsHistoriques();
@@ -359,4 +377,5 @@ public class Moteur {
 		}
 	}
 	
+
 }
