@@ -41,6 +41,9 @@ public class Panneau_Boutons extends Pan_Abstract{
 	public int getDimBouton (){
 		return dimBouton;
 	}
+	public int getPetitDecalage (){
+		return petitDecalage;
+	}
 	
 	public void paintComponent (Graphics g){
 		crayon = (Graphics2D) g;
@@ -63,11 +66,6 @@ public class Panneau_Boutons extends Pan_Abstract{
 		dessinerConseils(crayon, rayon);
 		dessinerAssistance(crayon, rayon);
 		dessinerMenu(crayon, rayon);
-		
-		if (contoursSurlignes){
-			crayon.setColor(Color.red);
-			crayon.drawRect(0, 0, largeur-1, hauteur-1);
-		}
 		
 	}
 	

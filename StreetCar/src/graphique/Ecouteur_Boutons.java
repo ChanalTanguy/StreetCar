@@ -80,8 +80,8 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	 */
 	private boolean estSurUndo (int x, int y, int rayon){
 		boolean resultat;
-		int diffX = x - panneauDeBoutons.getCentreUndo().x;
-		int diffY = y - panneauDeBoutons.getCentreUndo().y;
+		int diffX = x - panneauDeBoutons.getCentreUndo().x - panneauDeBoutons.getPetitDecalage();
+		int diffY = y - panneauDeBoutons.getCentreUndo().y - panneauDeBoutons.getPetitDecalage();;
 		
 		// "Redimensionner" le rayon car l'image a ete 1.5 fois celle de base.
 		double valeurExacteRayon = 2*rayon/3;
@@ -98,8 +98,8 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurConseils(int x, int y, int rayon) {
 		boolean resultat;
-		int diffX = x - panneauDeBoutons.getCentreConseils().x;
-		int diffY = y - panneauDeBoutons.getCentreConseils().y;
+		int diffX = x - panneauDeBoutons.getCentreConseils().x - panneauDeBoutons.getPetitDecalage();
+		int diffY = y - panneauDeBoutons.getCentreConseils().y - panneauDeBoutons.getPetitDecalage();
 
 		// "Redimensionner" le rayon car l'image a ete 1.5 fois celle de base.
 		double valeurExacteRayon = 2*rayon/3;
@@ -115,8 +115,8 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurAssistance(int x, int y, int rayon) {
 		boolean resultat;
-		int diffX = x - panneauDeBoutons.getCentreAssistance().x;
-		int diffY = y - panneauDeBoutons.getCentreAssistance().y;
+		int diffX = x - panneauDeBoutons.getCentreAssistance().x - panneauDeBoutons.getPetitDecalage();
+		int diffY = y - panneauDeBoutons.getCentreAssistance().y - panneauDeBoutons.getPetitDecalage();
 
 		// "Redimensionner" le rayon car l'image a ete 1.5 fois celle de base.
 		double valeurExacteRayon = 2*rayon/3;
@@ -132,8 +132,8 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	}
 	private boolean estSurMenu(int x, int y, int rayon) {
 		boolean resultat;
-		int diffX = x - panneauDeBoutons.getCentreMenu().x;
-		int diffY = y - panneauDeBoutons.getCentreMenu().y;
+		int diffX = x - panneauDeBoutons.getCentreMenu().x - panneauDeBoutons.getPetitDecalage();
+		int diffY = y - panneauDeBoutons.getCentreMenu().y - panneauDeBoutons.getPetitDecalage();
 
 		// "Redimensionner" le rayon car l'image a ete 1.5 fois celle de base.
 		double valeurExacteRayon = 2*rayon/3;
