@@ -76,7 +76,7 @@ public class Fenetre extends JFrame{
 		// Panneau de navigations via l'historique
 		Panneau_Historique zoneHistorique = new Panneau_Historique (Color.gray, referenceMoteur);
 		// Liaison Moteur <-> Panneau_Historique
-		referenceMoteur.setPanHistorique(zoneHistorique);
+		referenceMoteur.setPanneau_Historique(zoneHistorique);
 		
 		// Panneau de menus des boutons
 		Panneau_Boutons zoneBoutons = new Panneau_Boutons (this, Color.DARK_GRAY, zonePlateau);
