@@ -35,6 +35,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private boolean piocheSelectionnee;
 	private Point[] coupsJoues;
 	private Point[] coupsPrecedents;
+	private Point[] coupsHistorique;
 	/*
 	 * FIN Details Visuels
 	 */
@@ -42,7 +43,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, illumination, illuminationVerte, illuminationCyan, illuminationViolet, illuminationRouge, piocheMain, rotate;
+	private BufferedImage fond, plateau, pioche, piocheMain, rotate;
+	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	/*
 	 * FIN Images
 	 */
@@ -63,7 +65,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int positionYPioche;
 	private int dimensionPioche;
 	public boolean piocher = false;
-	
 	/*
 	 * FIN Entiers Fixes
 	 */
@@ -161,8 +162,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mot = referenceMoteur;
 		notifications = "tests d'ecriture";
 		initialiserImages();
-		coupsJoues = new Point[2];
-		coupsPrecedents = new Point[coupsJoues.length];
+		coupsJoues = new Point[Constantes.Coup.nbMaxPlacements];
+		coupsPrecedents = new Point[Constantes.Coup.nbMaxPlacements];
+		coupsHistorique = new Point[Constantes.Coup.nbMaxPlacements];
+		
 		Ecouteur_Plateau ecouteur = new Ecouteur_Plateau(this, referenceMoteur);
 		addMouseListener(ecouteur);
 //		addMouseMotionListener (ecouteur);
@@ -230,8 +233,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 			dessinerPiocheSelectionnee(crayon);
 		}
 
-		dessinerCoupsJoues(crayon);
 		dessinerCoupsPrecedents(crayon);
+		dessinerCoupsJoues(crayon);
+		dessinerCoupsHistorique(crayon);
 	}
 	
 	
@@ -257,12 +261,29 @@ public class Panneau_Plateau extends Pan_Abstract{
 			coupsPrecedents[numeroCoup] = (Point) coupsJoues[numeroCoup].clone();
 		}
 	}
-	
+	public void chargerCoupsHistoriques (Point[] referenceCoupsHistorique){
+		int numeroCoup = 0;
+		while ( numeroCoup < referenceCoupsHistorique.length ){
+			if ( referenceCoupsHistorique[numeroCoup] != null ){
+				coupsHistorique[numeroCoup] = (Point)referenceCoupsHistorique[numeroCoup].clone();
+			}
+			else {
+				coupsHistorique[numeroCoup] = (Point) referenceCoupsHistorique[numeroCoup];
+			}
+			numeroCoup++;
+		}
+		repaint();
+	}
+	public void effacerCoupsHistoriques (){
+		for (int numeroCoup = 0; numeroCoup < coupsHistorique.length; numeroCoup++){
+			coupsHistorique[numeroCoup] = null;
+		}
+		repaint();
+	}
 	
 	/*
 	 * Methodes Private de Panneau_Plateau
 	 */
-	// Methodes de dessin principales
 	// Methodes de dessin principales
 	private void dessinerFond (Graphics2D crayon) {
 		crayon.drawImage(fond, 0, 0, largeur, hauteur, this);
@@ -377,12 +398,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		switch (mainSelectionnee){
 		case 1 :
 			//crayon.drawRect( coordXTuile, mainDuBas, tailleCaseMain, tailleCaseMain);
-			crayon.drawImage(illumination, coordXTuile-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillance, coordXTuile-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			if(mot.getcurrentPlayer() == 0) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuBas-tailleCaseMain/3+10, tailleCaseMain/2, tailleCaseMain/2, this);
 			break;
 		case 2 :
 			//crayon.drawRect( coordXTuile, mainDuHaut, tailleCaseMain, tailleCaseMain);
-			crayon.drawImage(illumination, coordXTuile-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillance, coordXTuile-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			if(mot.getcurrentPlayer() == 1) crayon.drawImage(rotate, coordXTuile-tailleCaseMain/3+10, mainDuHaut-tailleCaseMain/3+10, tailleCaseMain/2, tailleCaseMain/2, this);
 		}
 	}
@@ -390,7 +411,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mainSelectionnee = -1;
 		//crayon.setColor(Color.white);
 		//crayon.drawRect(coordXSelection*tailleCase + depart, coordYSelection*tailleCase + depart, tailleCase, tailleCase);
-		crayon.drawImage(illumination,coordXSelection*tailleCase + depart -tailleCase/4, coordYSelection*tailleCase + depart-tailleCase/4, tailleCase+tailleCase/2, tailleCase+tailleCase/2, this);
+		crayon.drawImage(surbrillance,coordXSelection*tailleCase + depart -tailleCase/4, coordYSelection*tailleCase + depart-tailleCase/4, tailleCase+tailleCase/2, tailleCase+tailleCase/2, this);
 	}
 	private void dessinerPiocheSelectionnee (Graphics2D crayon) {
 		int coordX = 6*largeur/7 - 1;
@@ -402,7 +423,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 		else {
 			//crayon.drawRect(coordX, coordY, dimension, dimension);
-			crayon.drawImage(illumination, coordX-dimension/6, coordY+dimension/6, dimension+1, dimension+1,this);
+			crayon.drawImage(surbrillance, coordX-dimension/6, coordY+dimension/6, dimension+1, dimension+1,this);
 			dessinerPioche(crayon);
 			piocheSelectionnee = false;
 		}
@@ -421,15 +442,25 @@ public class Panneau_Plateau extends Pan_Abstract{
 			numeroCoup++;
 		}
 	}
+	private void dessinerCoupsHistorique (Graphics2D crayon){
+		int numeroCoup = 0;
+		while ( numeroCoup < coupsHistorique.length && coupsHistorique[numeroCoup] != null ){
+			dessinerSurlignageHistorique(crayon, coupsHistorique[numeroCoup]);
+			numeroCoup++;
+		}
+	}
 	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
 		//crayon.setColor(Color.green);
 		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(illuminationVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+		crayon.drawImage(surbrillanceVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
 		//crayon.setColor(Color.cyan);
 		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(illuminationCyan,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+		crayon.drawImage(surbrillanceCyan,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+	}
+	private void dessinerSurlignageHistorique (Graphics2D crayon, Point caseASurligner){
+		crayon.drawImage(surbrillanceJaune, depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	
 	/*
@@ -441,11 +472,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		pioche = Constantes.Images.initBackground("pioche.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
 		rotate = Constantes.Images.initBouton("tourner.png");
-		illumination = Constantes.Images.initBackground("surbrillance.png");
-		illuminationVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
-		illuminationCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
-		illuminationViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
-		illuminationRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
+		surbrillance = Constantes.Images.initBackground("surbrillance.png");
+		surbrillanceVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
+		surbrillanceCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
+		surbrillanceViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
+		surbrillanceRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
+		surbrillanceJaune = Constantes.Images.initBackground("surbrillanceJaune.png");
 	}
 
 }

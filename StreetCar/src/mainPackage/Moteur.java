@@ -40,15 +40,17 @@ public class Moteur {
 		tabPlayers[0].setLigne(1);
 		tabPlayers[1] = new JoueurIA(this,4);
 		tabPlayers[1].setLigne(4);
+		
 		currentPlayer = 0;
 		plateauDeJeu = referencePlateau;
 		nbActions = 4;
+		
 		pioche = new Pioche();
 		pioche.initialisation();
 		pioche.shuffle();
 		
 		historiqueDeTours = new Historique();
-		coupsPrecedents = new Point[2];
+		coupsPrecedents = new Point[Constantes.Coup.nbMaxPlacements];
 		
 		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents);
 		historiqueDeTours.add(configurationInitiale);
@@ -302,8 +304,16 @@ public class Moteur {
 		tabPlayers[currentPlayer].attendCoup();
 
 	}
-	
-	
+	public void montrerCoupsJoues (int numeroTourAMontrer){
+		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
+		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
+		
+		panJeu.chargerCoupsHistoriques(configARecuperer.getCoupsPrecedents());
+		
+	}
+	public void effacerCoupsJoues (){
+		panJeu.effacerCoupsHistoriques();
+	}
 	/*
 	 * Methodes Private du Moteur
 	 */

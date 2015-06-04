@@ -8,8 +8,10 @@ import java.awt.geom.Point2D;
 import mainPackage.Moteur;
 
 public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
-	Panneau_Historique panneauHistorique;
-	Moteur moteur;
+	private Panneau_Historique panneauHistorique;
+	private Moteur moteur;
+	
+	private int aucunTour = -1;
 	
 	public Ecouteur_Historique (Panneau_Historique referencePan, Moteur referenceMoteur){
 		panneauHistorique = referencePan;
@@ -21,7 +23,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		int coordY = e.getY();
 		int tourSelectionne;
 		
-		if ( (tourSelectionne = estSurOnglets(coordX, coordY)) != -1){
+		if ( (tourSelectionne = estSurOnglets(coordX, coordY)) != aucunTour){
 			
 //			panneauHistorique.demandeConfirmation();
 //			if ( panneauHistorique.getRetourConfirme() ){
@@ -43,16 +45,20 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();
 		int coordY = e.getY();
+		int tourSurligne;
 		if ( estSurDefilementHaut(coordX, coordY) ){
 			panneauHistorique.changeImageDefilementHaut("histo_haut_s.png");
 		}
 		else if ( estSurDefilementBas(coordX, coordY) ){
-			moteur.getHistorique().defilementVersBas();
 			panneauHistorique.changeImageDefilementBas("histo_bas_s.png");
+		}
+		else if ( (tourSurligne = estSurOnglets(coordX, coordY)) != aucunTour ){
+			moteur.montrerCoupsJoues(tourSurligne);
 		}
 		else {
 			panneauHistorique.changeImageDefilementHaut("histo_haut.png");
 			panneauHistorique.changeImageDefilementBas("histo_bas.png");
+			moteur.effacerCoupsJoues();
 		}
 		panneauHistorique.repaint();
 	}
@@ -61,8 +67,13 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		panneauHistorique.changeImageDefilementBas("histo_bas.png");
 		panneauHistorique.repaint();
 	}
+	public void mouseExited(MouseEvent e) {
+		panneauHistorique.changeImageDefilementHaut("histo_haut.png");
+		panneauHistorique.changeImageDefilementBas("histo_bas.png");
+		moteur.effacerCoupsJoues();
+		panneauHistorique.repaint();
+	}
 	
-	public void mouseExited(MouseEvent e) {}
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
@@ -73,27 +84,27 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	private boolean estSurDefilementHaut (int coordX, int coordY){
 		boolean clicValide;
 		
-		clicValide = coordX > panneauHistorique.getBorneGauche_Bouton() && coordX < panneauHistorique.getBorneDroite_Bouton()
-				&&	 coordY > panneauHistorique.getBorneHaute_BoutonSuperieur() && coordY < panneauHistorique.getBorneBasse_BoutonSuperieur();
+		clicValide = coordX > panneauHistorique.getBorneGauche_Bouton()+10 && coordX < panneauHistorique.getBorneDroite_Bouton()+4
+				&&	 coordY > panneauHistorique.getBorneHaute_BoutonSuperieur()+15 && coordY < panneauHistorique.getBorneBasse_BoutonSuperieur();
 		
 		return clicValide;
 	}
 	private boolean estSurDefilementBas (int coordX, int coordY){
 		boolean clicValide;
 		
-		clicValide = coordX > panneauHistorique.getBorneGauche_Bouton() && coordX < panneauHistorique.getBorneDroite_Bouton()
-				&&	 coordY > panneauHistorique.getBorneHaute_BoutonInferieur() && coordY < panneauHistorique.getBorneBasse_BoutonInferieur();
+		clicValide = coordX > panneauHistorique.getBorneGauche_Bouton()+10 && coordX < panneauHistorique.getBorneDroite_Bouton()+4
+				&&	 coordY > panneauHistorique.getBorneHaute_BoutonInferieur()+12 && coordY < panneauHistorique.getBorneBasse_BoutonInferieur()-1;
 		
 		return clicValide;
 	}
 	private int estSurOnglets (int coordX, int coordY){
-		int numeroTour = -1;
+		int numeroTour = aucunTour;
 		boolean clicValide = false;
-		
-		if ( coordX >= panneauHistorique.getBorneGauche_Onglet() 
-		  && coordX <= panneauHistorique.getBorneGauche_Onglet() + panneauHistorique.getDimensionOnglet()){
+		int limiteGauche = panneauHistorique.getBorneGauche_Onglet() + 7;
+		if ( coordX >= limiteGauche
+		  && coordX <= limiteGauche + panneauHistorique.getDimensionOnglet() ){
 			int compteur = 0;
-			int limiteHaute = panneauHistorique.getBorneHaute_Onglet();
+			int limiteHaute = panneauHistorique.getBorneHaute_Onglet() + 10;
 			while ( compteur < panneauHistorique.getNbOngletsActifs() && !clicValide ){
 				clicValide = coordY >= limiteHaute && coordY <= limiteHaute + panneauHistorique.getDimensionOnglet();
 				if ( !clicValide ){
