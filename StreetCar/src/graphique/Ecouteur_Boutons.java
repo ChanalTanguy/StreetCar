@@ -48,6 +48,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		else if ( estSurMenu(x, y, rayon) ){
 			panneauDeBoutons.changeImageMenu("bouton_menu_a.png");
 			MenuWindow menu = new MenuWindow();
+			((Fenetre)mainWindow).moteurParent.stop();
 			menu.setMainWindow(mainWindow);
 			menu.openWindow();
 			panneauDeBoutons.changeImageMenu("bouton_menu.png");

@@ -46,7 +46,7 @@ public class MenuPanel extends PanelInterface {
 		JPanel zone2 = newZone(6);
 		JPanel zone3 = newZone(1);
 		
-		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), loadImage("reprendre_menu.png"));
+		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null, this.mainWindow), loadImage("reprendre_menu.png"));
 		
 		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, this.mainWindow, true), loadImage("nouvellePartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
