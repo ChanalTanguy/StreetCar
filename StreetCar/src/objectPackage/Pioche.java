@@ -57,7 +57,7 @@ public class Pioche extends ArrayList<Tuile>{
 	 */
 		
 	public void shuffle (){
-		Random generateur = new Random();
+		Random generateur = new Random(24);
 		Pioche tampon = new Pioche();
 		
 		while (!this.isEmpty()){
