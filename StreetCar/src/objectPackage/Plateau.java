@@ -267,6 +267,21 @@ public class Plateau {
 		}
 		return p;
 	}
+	
+	public int aCoterDUneEscaleNonAssignee(Point p) {
+		int x = p.x;
+		int y = p.y;
+		if (x != 0 											&& plateau[x-1][y] != null && plateau[x-1][y].getTypeTuile() == 2 && ((Escale)(plateau[x-1][y])).getStop() == null)
+			return ((Escale)(plateau[x-1][y])).getNumeroEscale();
+		if (x != Constantes.Dimensions.dimensionPlateau-1 	&& plateau[x+1][y] != null && plateau[x+1][y].getTypeTuile() == 2 && ((Escale)(plateau[x+1][y])).getStop() == null)
+			return ((Escale)(plateau[x+1][y])).getNumeroEscale();
+		if (y != 0 											&& plateau[x][y-1] != null && plateau[x][y-1].getTypeTuile() == 2 && ((Escale)(plateau[x][y-1])).getStop() == null)
+			return ((Escale)(plateau[x][y-1])).getNumeroEscale();
+		if (y != Constantes.Dimensions.dimensionPlateau-1 	&& plateau[x][y+1] != null && plateau[x][y+1].getTypeTuile() == 2 && ((Escale)(plateau[x][y+1])).getStop() == null)
+			return ((Escale)(plateau[x][y+1])).getNumeroEscale();
+			
+		return 0;
+	}
 
 	public boolean ObjectifComplet(Objectifs objectifs) {
 
