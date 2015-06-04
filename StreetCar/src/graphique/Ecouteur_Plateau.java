@@ -61,13 +61,14 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				}
 
 				//TODO faire la rotation de la case
-				else if (estSurRotation(piocheX, piocheY) ){
+				else if ( estSurRotation(piocheX, piocheY) && joueur.getMain().getTuileAt(tuileNo(piocheX)) != null){
 					joueur.coupTourner(tuileNo(piocheX));
 					panneauDeJeu.repaint();
 				}
 				
 				// si le joueur selectionne une carte dans sa main
-				else if ( estDansMain(piocheX, piocheY) ){
+				else if ( estDansMain(piocheX, piocheY) 
+					   && mot.getTabPlayers()[mainNo(piocheY)-1].getMain().getTuileAt(tuileNo(piocheX)) != null ){
 					System.out.println("clic sur une main de joueur");
 					
 					int numeroTuile = tuileNo(piocheX);
