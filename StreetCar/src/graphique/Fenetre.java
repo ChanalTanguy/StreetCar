@@ -68,7 +68,7 @@ public class Fenetre extends JFrame{
 		// Panneau de jeu principal
 		Panneau_Plateau zonePlateau = new Panneau_Plateau (Color.orange, referenceMoteur);
 		// Liaison Moteur <-> Panneau_Plateau
-		referenceMoteur.setPanJeu(zonePlateau);
+		referenceMoteur.setPanneau_Jeu(zonePlateau);
 		
 		// JPanel Lateral
 		JPanel regroupementLateral = new JPanel();
