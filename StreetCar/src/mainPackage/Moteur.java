@@ -235,12 +235,17 @@ public class Moteur {
 					default : coupSimultaneValide = false;
 				}
 						
-				if (coupSimultaneValide) {
+				if ( coupSimultaneValide ) {
 					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 					tabPlayers[currentPlayer].jouerTuileSurPlateau(coupSimultane.getTuile(), coupSimultane.getCoordonnee().x, coupSimultane.getCoordonnee().y, plateauDeJeu);
 					nbActions -= 2;
 					
+					// les 2 coups sont valides, on les considere alors comme 2 coups actifs 
+					// => on supprime le coup simultane enregistre dans le panneau_plateau
+					panJeu.setCoupSimultaneEnAction(null);
+					// => on ajoute le coup courant dans le tableau de coups precedents
 					ajouterCoup(coupChoisi.getCoordonnee());
+					// => on ajoute aussi le coup simultane precedemment joue
 					ajouterCoup(coupSimultane.getCoordonnee());
 					panJeu.ajouterCoup(coupChoisi.getCoordonnee());
 					panJeu.ajouterCoup(coupSimultane.getCoordonnee());
@@ -276,7 +281,8 @@ public class Moteur {
 		tabPlayers[currentPlayer].attendCoup();
 		
 	}
-// Methodes de Kévin
+
+	// Methodes de Kévin
 	public void annulerTour (){
 		Configuration dernierTour = historiqueDeTours.last();
 
@@ -332,6 +338,7 @@ public class Moteur {
 	public void effacerCoupsJoues (){
 		panJeu.effacerCoupsHistoriques();
 	}
+	
 	/*
 	 * Methodes Private du Moteur
 	 */

@@ -129,6 +129,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public int getNumeroTuileCoupSimultane (){
 		return numeroTuileCoupSimultane;
 	}
+	public Coup getCoupSimultaneActif (){
+		return coupSimultaneEnAction;
+	}
 	
 	public void setMainSelectionnee (int numeroMain) {
 		mainSelectionnee = numeroMain;
@@ -152,12 +155,20 @@ public class Panneau_Plateau extends Pan_Abstract{
 		notifications = newNotif;
 	}
 	public void setCoupsPrecedents (Point[] referenceCoupsPrecedents){
-		int numeroCoup = 0;
+		for (int numeroCoup = 0; numeroCoup < referenceCoupsPrecedents.length; numeroCoup++){
+			if ( referenceCoupsPrecedents[numeroCoup] != null ){
+				coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup].clone();
+			}
+			else {
+				coupsPrecedents[numeroCoup] = referenceCoupsPrecedents[numeroCoup];
+			}
+		}
+/*		int numeroCoup = 0;
 		while ( numeroCoup < referenceCoupsPrecedents.length ){
 			coupsPrecedents[numeroCoup] = (Point) referenceCoupsPrecedents[numeroCoup];
 			numeroCoup++;
 		}
-	}
+*/	}
 	public void setCoupSimultaneEnAction (Coup referenceCoup){
 		coupSimultaneEnAction = referenceCoup;
 	}
@@ -252,7 +263,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 		
 		dessinerCoupsPrecedents(crayon);
-		dessinerCoupsJoues(crayon);
+		if ( !coupSimultaneActive() ){
+			dessinerCoupsJoues(crayon);
+		}
+		else {
+			dessinerCoupSimultane(crayon);
+		}
 		dessinerCoupsHistorique(crayon);
 	}
 	
@@ -302,6 +318,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		repaint();
 	}
 	
+	
 	/*
 	 * Methodes Private de Panneau_Plateau
 	 */
@@ -347,15 +364,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 			for (int colonne = 1; colonne < plateau.length()-1; colonne++){
 				Point positionDeComparaison = new Point(colonne, ligne);
 				if ( coupSimultaneEnAction != null && positionDeComparaison.equals(coupSimultaneEnAction.getCoordonnee()) ){
-					System.out.println("\n ===== Dessin Contenu Plateau ===== ");
-					
-					System.out.println("pointComparaison : " + positionDeComparaison.toString() );
-					System.out.println("ligne/colonne : " + ligne + " " + colonne);
-					System.out.println("position identique !");
-//					dessinerTuile(crayon, mot.getTabPlayers()[mot.getcurrentPlayer()].getMain().getTuileAt(coupSimultaneEnAction.getTuile()), colonne-1, ligne);
 					crayon.drawImage(imageCoupSimultane, depart + colonne*tailleCase, depart + ligne*tailleCase, tailleCase-1, tailleCase-1, this);
-					
-					System.out.println("\n ===== FIN Dessin Contenu Plateau ===== ");
 				}
 				else {
 					if (plateau.getTuileAt(ligne, colonne) != null){
@@ -487,7 +496,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerSurlignageActif (Graphics2D crayon, Point caseASurligner){
 		//crayon.setColor(Color.green);
 		//crayon.drawRect(depart + caseASurligner.x*tailleCase + 2 , depart + caseASurligner.y*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(surbrillanceVerte,depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+		crayon.drawImage(surbrillanceVerte, depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	private void dessinerSurlignagePrecedent (Graphics2D crayon, Point caseASurligner){
 		//crayon.setColor(Color.cyan);
@@ -496,6 +505,26 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	private void dessinerSurlignageHistorique (Graphics2D crayon, Point caseASurligner){
 		crayon.drawImage(surbrillanceJaune, depart + caseASurligner.x*tailleCase - tailleCase/4+5 , depart + caseASurligner.y*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+	}
+	private void dessinerCoupSimultane (Graphics2D crayon){
+		int coordXPlateau = coupSimultaneEnAction.getCoordonnee().x;
+		int coordYPlateau = coupSimultaneEnAction.getCoordonnee().y;
+		crayon.drawImage(surbrillanceViolet, depart + coordXPlateau*tailleCase - tailleCase/4+5, depart + coordYPlateau*tailleCase - tailleCase/4+5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+		
+		int coordXMain = decalageMain + numeroTuileCoupSimultane * (tailleCaseMain + petitEcartMain);
+		switch (mot.getcurrentPlayer()){
+		case 0:
+			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			break;
+		case 1:
+			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			break;
+		}
+	}
+	
+	// Methodes "generales" de verification
+	private boolean coupSimultaneActive (){
+		return coupSimultaneEnAction != null;
 	}
 	
 	/*
