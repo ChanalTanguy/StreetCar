@@ -143,13 +143,6 @@ public class Panneau_Historique extends Pan_Abstract{
 		dessinerPartieCentrale(crayon);
 		dessinerPartieBasse(crayon);
 		
-		if (contoursSurlignes){
-			crayon.setColor(Color.red);
-			crayon.drawRect(0, 0, largeur-1, hauteur-1);
-		}
-		if (encadrerZone > 0){
-			
-		}
 	}
 	
 	/*

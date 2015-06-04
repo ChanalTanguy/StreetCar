@@ -32,10 +32,6 @@ public class Panneau_Notifications extends Pan_Abstract{
 		
 //		System.out.println("message : " + message.getText());
 		
-		if (contoursSurlignes){
-			crayon.setColor(Color.red);
-			crayon.drawRect(0, 0, largeur-1, hauteur-1);
-		}
 	}
 	
 	public void updateMessage (String newNotif){

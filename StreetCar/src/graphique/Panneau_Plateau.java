@@ -258,17 +258,21 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public void afficherCoupsPrecedents (){
 		for (int numeroCoup = 0; numeroCoup < coupsPrecedents.length; numeroCoup++){
-			coupsPrecedents[numeroCoup] = (Point) coupsJoues[numeroCoup].clone();
+			if ( coupsJoues[numeroCoup] != null ){
+				coupsPrecedents[numeroCoup] = (Point) coupsJoues[numeroCoup].clone();
+			}
+			else {
+				coupsPrecedents[numeroCoup] = coupsJoues[numeroCoup];
+			}
 		}
 	}
 	public void chargerCoupsHistoriques (Point[] referenceCoupsHistorique){
-		int numeroCoup = 0;
-		while ( numeroCoup < referenceCoupsHistorique.length ){
+		for (int numeroCoup = 0; numeroCoup < referenceCoupsHistorique.length; numeroCoup++){
 			if ( referenceCoupsHistorique[numeroCoup] != null ){
 				coupsHistorique[numeroCoup] = (Point)referenceCoupsHistorique[numeroCoup].clone();
 			}
 			else {
-				coupsHistorique[numeroCoup] = (Point) referenceCoupsHistorique[numeroCoup];
+				coupsHistorique[numeroCoup] = referenceCoupsHistorique[numeroCoup];
 			}
 			numeroCoup++;
 		}
