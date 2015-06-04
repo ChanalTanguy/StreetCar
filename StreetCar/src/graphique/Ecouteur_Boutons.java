@@ -4,16 +4,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JFrame;
+
 import windowPackage.MenuWindow;
 
 public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	Panneau_Boutons panneauDeBoutons;
 	Panneau_Plateau panneauDeJeu;
+	JFrame mainWindow;
 	int rayon;
 	
-	public Ecouteur_Boutons (Panneau_Boutons referencePanneauBoutons, Panneau_Plateau referencePanneauDeJeu){
+	public Ecouteur_Boutons (Panneau_Boutons referencePanneauBoutons, JFrame mainWindow, Panneau_Plateau referencePanneauDeJeu){
 		panneauDeBoutons = referencePanneauBoutons;
 		panneauDeJeu = referencePanneauDeJeu;
+		this.mainWindow = mainWindow;
 	}
 	
 	/*
@@ -44,6 +48,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		else if ( estSurMenu(x, y, rayon) ){
 			panneauDeBoutons.changeImageMenu("bouton_menu_a.png");
 			MenuWindow menu = new MenuWindow();
+			menu.setMainWindow(mainWindow);
 			menu.openWindow();
 			panneauDeBoutons.changeImageMenu("bouton_menu.png");
 		}

@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JFrame;
+
 import constantesPackages.Constantes;
 
 public class Panneau_Boutons extends Pan_Abstract{
@@ -15,12 +17,14 @@ public class Panneau_Boutons extends Pan_Abstract{
 	private int dimBouton;
 	private int axeHorizontalHaut, axeHorizontalBas;
 	private int petitDecalage = 10;
+	private JFrame mainWindow;
 	
 	Ecouteur_Boutons ecouteur;
 	
-	public Panneau_Boutons (Color newCouleur, Panneau_Plateau referencePanneauDeJeu){
+	public Panneau_Boutons (JFrame mainWindow, Color newCouleur, Panneau_Plateau referencePanneauDeJeu){
 		super(newCouleur); 
-		ecouteur = new Ecouteur_Boutons(this, referencePanneauDeJeu);
+		this.mainWindow = mainWindow;
+		ecouteur = new Ecouteur_Boutons(this, this.mainWindow, referencePanneauDeJeu);
 		addMouseListener(ecouteur);
 		addMouseMotionListener(ecouteur);
 		initialiserImages();

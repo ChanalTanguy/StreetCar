@@ -36,15 +36,18 @@ public class PanelListener {
 
 		JDialog parent;
 		boolean openWindow;
+		JFrame mainWindow;
 
-		public ConfigureNewGameButtonListener(JDialog parent, boolean b){
+		public ConfigureNewGameButtonListener(JDialog parent, JFrame main, boolean b){
 			this.parent = parent;
 			this.openWindow = b;
+			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
 			NewGameWindow win = new NewGameWindow();
+			win.setMainWindow(mainWindow);
 			win.openWindow(openWindow);
 		}
 

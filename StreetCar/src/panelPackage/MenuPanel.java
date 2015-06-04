@@ -32,6 +32,13 @@ public class MenuPanel extends PanelInterface {
 		this.setCursor();
 		this.buildMenuPanel();
 	}
+	
+	public MenuPanel(JFrame main, JDialog parent){
+		parentDialog = parent;
+		mainWindow = main;
+		this.setCursor();
+		this.buildMenuPanel();
+	}
 
 	private void buildMenuPanel(){
 
@@ -41,7 +48,7 @@ public class MenuPanel extends PanelInterface {
 		
 		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null), loadImage("reprendre_menu.png"));
 		
-		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, true), loadImage("nouvellePartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, this.mainWindow, true), loadImage("nouvellePartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("chargerPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("defis_menu.png"));

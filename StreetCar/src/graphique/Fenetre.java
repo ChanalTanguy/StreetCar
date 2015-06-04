@@ -77,7 +77,7 @@ public class Fenetre extends JFrame{
 		referenceMoteur.setPanHistorique(zoneHistorique);
 		
 		// Panneau de menus des boutons
-		Panneau_Boutons zoneBoutons = new Panneau_Boutons (Color.pink, zonePlateau);
+		Panneau_Boutons zoneBoutons = new Panneau_Boutons (this, Color.DARK_GRAY, zonePlateau);
 		
 		// Redimensionnement des differents Panneaux
 		zonePlateau.setPreferredSize( new Dimension( largeurPanneauPrincipal, hauteur) );

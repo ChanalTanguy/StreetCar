@@ -23,7 +23,7 @@ public class MenuWindow extends WindowInterface {
 	
 	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		MenuPanel menu = new MenuPanel(win);
+		MenuPanel menu = new MenuPanel(mainWindow, win);
 		setNewSize(win,425,690);
 		win.add(menu);
 		win.setResizable(false);
