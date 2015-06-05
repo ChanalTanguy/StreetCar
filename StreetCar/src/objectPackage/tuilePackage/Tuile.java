@@ -222,36 +222,6 @@ public class Tuile implements ActionsToken{
 			break;
 		}
 	}
-	public String toString (){
-		String resultat = "{";
-		
-		resultat = resultat + orientation + ":";
-		resultat = resultat + listeConnections.toString()+ "}";
-		
-		return resultat;
-	}
-	public boolean equals (Tuile autreTuile){
-		boolean resultat = false;
-		
-		resultat = ( immuable == autreTuile.getPresenceArbres() );
-		System.out.println("comparateur de immuable : " + resultat);
-		
-		resultat = resultat && listesIdentiques(autreTuile.getListeConnections()) ;
-		System.out.println("comparateur de liste de connection : " + resultat);
-		
-		return resultat;
-	}
-	public Tuile clone (){
-		Tuile newTuile = new Tuile(immuable);
-		
-		newTuile.setListeConnections(listeConnections);
-		newTuile.setImage(imageTuile);
-		newTuile.setOrientation(orientation);
-		newTuile.setType(typeTuile);
-		newTuile.setEscale(escale);
-		
-		return newTuile;
-	}
 	/**
 	 * retourne vrai si la tuile appelante possede au moins une connexion avec l'une de ses extremites
 	 * sur le cote indique
@@ -334,6 +304,35 @@ public class Tuile implements ActionsToken{
 		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
 	}
 	
+	public String toString (){
+		String resultat = "{";
+		resultat = resultat + orientation + ":";
+		resultat = resultat + listeConnections.toString()+ "}";
+		return resultat;
+	}
+	public boolean equals (Tuile autreTuile){
+		boolean resultat = false;
+		
+		resultat = ( immuable == autreTuile.getPresenceArbres() );
+		System.out.println("comparateur de immuable : " + resultat);
+		
+		resultat = resultat && listesIdentiques(autreTuile.getListeConnections()) ;
+		System.out.println("comparateur de liste de connection : " + resultat);
+		
+		return resultat;
+	}
+	public Tuile clone (){
+		Tuile newTuile = new Tuile(immuable);
+		
+		newTuile.setListeConnections(listeConnections);
+		newTuile.setImage(imageTuile);
+		newTuile.setOrientation(orientation);
+		newTuile.setType(typeTuile);
+		newTuile.setEscale(escale);
+		
+		return newTuile;
+	}
+	
 	/*
 	 * Methodes privees de la classe
 	 */
@@ -353,21 +352,14 @@ public class Tuile implements ActionsToken{
 		boolean estContenu = false;
 		
 		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
-		while ( iterateurConnections.hasNext() && !estContenu ){
+		while ( iterateurConnections.hasNext() ){
 			ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
 			Connection connection1 = iterateurConnections.next();
-			while ( iterateurAutresConnections.hasNext() && !estContenu){
-				estContenu = estContenu || connection1.equals(iterateurAutresConnections.next());
+			while ( iterateurAutresConnections.hasNext() ){
+				Connection connection2 = iterateurAutresConnections.next();
+				estContenu = estContenu && connection1.equals(connection2);
 			}
-/*			if (estContenu){
-//				System.out.println("connection " + connection1.toString() + " ou une identique se trouve dans la liste donnee en parametre");
-				estContenu = false;
-			}
-			else {
-//				System.out.println("aucune connection identique a " + connection1.toString() + " dans la liste donnee en parametre");
-			}
-*/		}
-		
+		}
 		return estContenu;
 	}
 	
