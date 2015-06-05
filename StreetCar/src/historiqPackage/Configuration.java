@@ -64,6 +64,13 @@ public class Configuration {
 	/*
 	 * Methodes Public de Configuration
 	 */
+	public boolean equals (Configuration autreConfig){
+		boolean configurationIdentique = false;
+		
+		
+		
+		return configurationIdentique;
+	}
 	public String toString (){
 		String chaine_resultat = "";
 		chaine_resultat += joueurCourantDuTour + "\n";
