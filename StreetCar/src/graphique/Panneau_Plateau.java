@@ -48,7 +48,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, piocheMain, rotate;
+	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceVioletExt, surbrillanceViolet, surbrillanceJaune;
 	private BufferedImage opaciteGris;
 	/*
@@ -413,6 +413,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 					break;
 			}
 			dessinerRotation(crayon, tuileAt.getImage(), angle, depart + coordX*tailleCase + 1, depart + coordY*tailleCase + 1, tailleCase-1);
+			//si cette tuiles est un stop
+			if(tuileAt.getEscaleLiee()!=0){
+				crayon.drawImage(stop, depart + coordX*tailleCase + 1 + 28, depart + coordY*tailleCase + 1, 20, 20, this);
+			}
 		}
 	}
 	private void dessinerTuileMain (Graphics2D crayon, Tuile tuileAt, int numeroTuile, int coordY){
@@ -578,6 +582,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	protected void initialiserImages (){
 		fond = Constantes.Images.initBackground("tramOui.png");
+		stop = Constantes.Images.initTuile("stop.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
