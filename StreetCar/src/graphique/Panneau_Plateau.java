@@ -49,7 +49,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs d'Images
 	 */
 	private BufferedImage fond, plateau, pioche, piocheMain, rotate;
-	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceJaune;
+	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceVioletExt, surbrillanceViolet, surbrillanceJaune;
 	private BufferedImage opaciteGris;
 	/*
 	 * FIN Images
@@ -532,10 +532,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		int coordXMain = decalageMain + coupSimultaneEnAction.getTuile()*(tailleCaseMain + petitEcartMain);
 		switch (mot.getcurrentPlayer()){
 		case 0:
-			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillanceVioletExt, coordXMain-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		case 1:
-			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillanceVioletExt, coordXMain-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		}
 	}
@@ -586,6 +586,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		surbrillanceVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
 		surbrillanceCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
 		surbrillanceViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
+		surbrillanceVioletExt = Constantes.Images.initBackground("surbrillanceVioletExt.png");		
 		opaciteGris = Constantes.Images.initBackground("opaciteGris.png");
 		surbrillanceJaune = Constantes.Images.initBackground("surbrillanceJaune.png");
 	}
