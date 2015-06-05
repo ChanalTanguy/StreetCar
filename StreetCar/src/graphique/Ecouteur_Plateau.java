@@ -38,8 +38,9 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			// bouton droit de la souris
 			case MouseEvent.BUTTON3:
 				if ( estDansMain(piocheX, piocheY) && (mot.getcurrentPlayer() == mainNo(piocheY) - 1) 
-					&& panneauDeJeu.getNumeroTuileCoupSimultane() != tuileNo(piocheX) 
-					&& joueur.getMain().getTuileAt(tuileNo(piocheX)) != null ){
+					&& joueur.getMain().getTuileAt(tuileNo(piocheX)) != null
+					&&  (panneauDeJeu.getCoupSimultaneActif() == null 
+					|| panneauDeJeu.getCoupSimultaneActif() != null && panneauDeJeu.getCoupSimultaneActif().getTuile() != tuileNo(piocheX)) ){
 					
 					panneauDeJeu.setPiocheSelectionnee(false);
 					panneauDeJeu.setCaseSelectionnee(false);
