@@ -108,7 +108,7 @@ public class Moteur {
 	
 	public void setPanneau_Jeu (Panneau_Plateau referencePanJeu){
 		panneau_Jeu = referencePanJeu;
-		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
+		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer));
 	}
 	public void setPanneau_Historique (Panneau_Historique referencePanHistorique){
 		panneau_Historique = referencePanHistorique;
@@ -197,14 +197,14 @@ public class Moteur {
 				panneau_Jeu.afficherCoupsPrecedents();
 				panneau_Jeu.effacerCoupsJoues();
 				effacerCoupsPrecedents();
-				panneau_Jeu.setNumeroTuileCoupSimultane(-1);
+				panneau_Jeu.setCoupSimultaneEnAction(null);
 				
 				panneau_Historique.repaint();
 			}
 			if (nbActions > 2)
-				msg = Constantes.Message.auTourDe(currentPlayer+1);
+				msg = Constantes.Message.auTourDe(currentPlayer);
 			else 
-				msg = Constantes.Message.finDeTour(currentPlayer+1);
+				msg = Constantes.Message.finDeTour(currentPlayer);
 		}
 		else if ((r = plateauDeJeu.coupSimultaneValide(tabPlayers[currentPlayer].getMain().getTuileAt(coupChoisi.getTuile()), coupChoisi)) != null && nbActions == 4)
 		{
@@ -213,9 +213,9 @@ public class Moteur {
 				msg = "Coup simultanée possible";
 				panneau_Jeu.ajouterCoup(coupSimultane.getCoordonnee());
 				
-				panneau_Jeu.setImageCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()).deepCopy());
+				panneau_Jeu.setTuilePourCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()));
+				
 				panneau_Jeu.setCoupSimultaneEnAction(coupSimultane);
-				panneau_Jeu.setNumeroTuileCoupSimultane(coupSimultane.getTuile());
 				
 			}
 			else if (coupSimultane.getTuile() == coupChoisi.getTuile()) {
@@ -251,9 +251,7 @@ public class Moteur {
 					panneau_Jeu.ajouterCoup(coupChoisi.getCoordonnee());
 					panneau_Jeu.ajouterCoup(coupSimultane.getCoordonnee());
 					
-					panneau_Jeu.setImageCoupSimultane(null);
-					
-					msg = Constantes.Message.finDeTour(currentPlayer+1);
+					msg = Constantes.Message.finDeTour(currentPlayer);
 				} else {
 					// Erreur même tuile selectionné pour la mettre au même endroit
 					msg = Constantes.Message.poseImpossible;
@@ -263,7 +261,7 @@ public class Moteur {
 		}
 		else {
 			if (nbActions < 3)
-				msg = Constantes.Message.finDeTour(currentPlayer+1);
+				msg = Constantes.Message.finDeTour(currentPlayer);
 			else if (coupChoisi.getType().equals(Constantes.Coup.placement))
 				msg = Constantes.Message.poseImpossible;
 			else if (coupChoisi.getType().equals(Constantes.Coup.vol))
@@ -323,7 +321,7 @@ public class Moteur {
 		
 		effacerCoupsPrecedents();
 		
-		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
+		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer));
 		panneau_Jeu.repaint();
 		panneau_Historique.repaint();
 
