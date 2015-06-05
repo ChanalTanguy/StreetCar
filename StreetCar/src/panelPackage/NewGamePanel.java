@@ -19,6 +19,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.border.TitledBorder;
 
 import mainPackage.Moteur;
 import joueurPackage.Joueur;
@@ -94,7 +95,9 @@ public class NewGamePanel extends PanelInterface {
 
 	private JPanel newRadioButtonZone(String title){
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(title));
+		TitledBorder border = BorderFactory.createTitledBorder(title);
+		border.setTitleColor(Color.white);
+		panel.setBorder(border);
 		panel.setPreferredSize(setNewDimension(400,60));
 		panel.setBackground(Color.getColor("gris_tram", 4607576));
 		return panel;
@@ -104,7 +107,8 @@ public class NewGamePanel extends PanelInterface {
 		JRadioButton rbutton = new JRadioButton(text);
 		panel.add(rbutton);
 		group.add(rbutton);
-		this.setBackground(Color.getColor("gris_tram", 4607576));
+		rbutton.setBackground(Color.getColor("gris_tram", 4607576));
+		rbutton.setForeground(Color.white);
 		if (text == selected){ rbutton.setSelected(true); };
 		rbutton.addActionListener(action);
 	}
