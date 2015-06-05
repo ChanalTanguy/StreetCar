@@ -82,6 +82,9 @@ public abstract class Joueur {
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 			main.setTuileAt(tuileDansMain, null);
 		} else {
+			int escaleLieeTuile = main.getTuileAt(tuileDansMain).getEscaleLiee();
+			main.getTuileAt(tuileDansMain).setEscaleLiee(t.getEscaleLiee());
+			t.setEscaleLiee(escaleLieeTuile);
 			plateauDeJeu.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 			main.setTuileAt(tuileDansMain, t);
 		}
@@ -137,6 +140,6 @@ public abstract class Joueur {
 	 */
 	private void initBidonObjectifs (){
 		objectif.ajouterEscales(1);
-		objectif.ajouterEscales(5);
+		objectif.ajouterEscales(12);
 	}
 }
