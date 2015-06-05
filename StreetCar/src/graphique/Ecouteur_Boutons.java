@@ -40,6 +40,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 			panneauDeJeu.effacerCoupsJoues();
 			panneauDeJeu.setCoupSimultaneEnAction(null);
 			panneauDeJeu.setImageCoupSimultane(null);
+			panneauDeJeu.setNumeroTuileCoupSimultane(-1);
 		}
 		else if ( estSurConseils(x, y, rayon) ){
 			panneauDeBoutons.changeImageConseil("bouton_conseil_a.png");
