@@ -228,10 +228,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		int hauteurPossible = hauteur - 2*depart;
 		
 		if (largeurPossible < hauteurPossible) {
-			tailleCase = largeurPossible/mot.getPlateau().length();
+			tailleCase = largeurPossible / mot.getPlateau().length();
 		}
 		else {
-			tailleCase = hauteurPossible/mot.getPlateau().length();
+			tailleCase = hauteurPossible / mot.getPlateau().length();
 		}
 		
 		decalageMain = depart + 2*tailleCase;
@@ -572,7 +572,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerTuileGrisee (Graphics2D crayon, int coordX, int coordY){
 //		crayon.setColor(Color.red);
 //		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5 +20, depart + coordY*tailleCase - tailleCase/4 + 5 +20, tailleCase-4+tailleCase/2-5 -40 , tailleCase-4+tailleCase/2-5 -40, this);
+		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5 + tailleCase/5, depart + coordY*tailleCase - tailleCase/4 + 5 + tailleCase/5, tailleCase-4+tailleCase/2-5 - 2*tailleCase/5 , tailleCase-4+tailleCase/2-5  - 2*tailleCase/5, this);
 	}
 	
 	// Methodes "generales" de verification
