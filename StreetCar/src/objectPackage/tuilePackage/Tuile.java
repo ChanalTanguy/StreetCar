@@ -288,7 +288,7 @@ public class Tuile {
 	}
 	
 	/**
-	 * 
+	 * Affecte une image a une tuile creee depuis la sauvegarde d'une partie
 	 */
 	public void rechercheImage (){
 		String orientationDeBase = this.getOrientation();
@@ -319,8 +319,97 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals(Tuile.newVirage())){
-			
+		else if ( this.equals( (tuileDeComparaison = Tuile.newVirage()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = Tuile.newBifurcationDroite()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newBifurcationGauche()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newSeparation()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newDoubleVirage()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newDoubleBifurcation()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newCroisement()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newBifurcationsSeparesGauche()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newBifurcationsSeparesDroite()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newQuadrupleVirages()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals( (tuileDeComparaison = newBifurcationsEmbrassees()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		
+		for (int compteurRotation = 0; compteurRotation < nombreDeRotationsApres; compteurRotation++){
+			this.rotation();
 		}
 	}
 	
