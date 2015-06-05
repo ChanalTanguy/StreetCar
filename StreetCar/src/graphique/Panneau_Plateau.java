@@ -399,8 +399,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 			for (int colonne = 1; colonne < plateau.length()-1; colonne++){
 				Point positionDeComparaison = new Point(colonne, ligne);
 				if ( coupSimultaneEnAction != null && positionDeComparaison.equals(coupSimultaneEnAction.getCoordonnee()) ){
-//					dessinerTuile(crayon, )
-					crayon.drawImage(imageCoupSimultane, depart + colonne*tailleCase, depart + ligne*tailleCase, tailleCase-1, tailleCase-1, this);
+					dessinerTuile(crayon, tuilePourCoupSimultane, ligne, colonne);
+//					crayon.drawImage(imageCoupSimultane, depart + colonne*tailleCase, depart + ligne*tailleCase, tailleCase-1, tailleCase-1, this);
 				}
 				else {
 					if (plateau.getTuileAt(ligne, colonne) != null){
@@ -572,7 +572,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerTuileGrisee (Graphics2D crayon, int coordX, int coordY){
 //		crayon.setColor(Color.red);
 //		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5 + tailleCase/5, depart + coordY*tailleCase - tailleCase/4 + 5 + tailleCase/5, tailleCase-4+tailleCase/2-5 - 2*tailleCase/5 , tailleCase-4+tailleCase/2-5  - 2*tailleCase/5, this);
+		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase + 1, depart + coordY*tailleCase + 1, tailleCase - 1, tailleCase - 1, this);
 	}
 	
 	// Methodes "generales" de verification
