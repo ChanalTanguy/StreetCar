@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
+import constantesPackages.Constantes;
 import windowPackage.MenuWindow;
 
 public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
@@ -39,8 +40,7 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 			panneauDeJeu.getMoteur().annulerTour();
 			panneauDeJeu.effacerCoupsJoues();
 			panneauDeJeu.setCoupSimultaneEnAction(null);
-			panneauDeJeu.setImageCoupSimultane(null);
-			panneauDeJeu.setNumeroTuileCoupSimultane(-1);
+			panneauDeJeu.setNotifications(Constantes.Message.auTourDe(panneauDeJeu.getMoteur().getcurrentPlayer()));
 		}
 		else if ( estSurConseils(x, y, rayon) ){
 			panneauDeBoutons.changeImageConseil("bouton_conseil_a.png");
