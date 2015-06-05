@@ -114,7 +114,7 @@ public class Constantes {
 	public static class Message {
 		public static String auTourDe (int numeroJoueur){
 			String notif = "C'est au tour du joueur ";
-			notif = notif + numeroJoueur;
+			notif = notif + (numeroJoueur+1);
 			return notif;
 		}
 		
@@ -125,7 +125,7 @@ public class Constantes {
 		}
 		
 		public static String finDeTour (int numeroJoueur){
-			String notif = "Joueur " + numeroJoueur;
+			String notif = "Joueur " + (numeroJoueur+1);
 			notif = notif + " piochez pour valide votre tour\n";
 			notif = notif + "(Vous pouvez éventuellement en voler à l'adversaire \n";
 			notif = notif + "s'il a terminé sa ligne";
