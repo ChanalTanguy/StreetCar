@@ -144,9 +144,10 @@ public class Tuile {
 	public int getTypeTuile (){
 		return typeTuile;
 	}
-	public int getEscale() {
+	public int getEscaleLiee() {
 		return escaleLiee;
 	}
+	
 	public void setImage (BufferedImage newImage){
 		imageTuile = newImage;
 	}
@@ -165,8 +166,8 @@ public class Tuile {
 	public void setType(int newTypeTuile) {
 		typeTuile = newTypeTuile;
 	}
-	public void setEscale(int numerEscale) {
-		escaleLiee = numerEscale;
+	public void setEscaleLiee(int numeroEscale) {
+		escaleLiee = numeroEscale;
 	}
 	
 	/*
@@ -278,14 +279,50 @@ public class Tuile {
 	 * @param
 	 * @return
 	 */
-	static BufferedImage deepCopy(BufferedImage bi) {
-		 ColorModel cm = bi.getColorModel();
-		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-		 WritableRaster raster = bi.copyData(null);
-		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	public BufferedImage deepCopy() {
+		BufferedImage imageACopier = this.getImage();
+		ColorModel cm = imageACopier.getColorModel();
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		WritableRaster raster = imageACopier.copyData(null);
+		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	}
+	
+	/**
+	 * 
+	 */
+	public void rechercheImage (){
+		String orientationDeBase = this.getOrientation();
+		int nombreDeRotationsAvant = 0, nombreDeRotationsApres = 0;
+		switch (orientationDeBase){
+		case Constantes.Orientation.est:
+			nombreDeRotationsAvant = 3;
+			nombreDeRotationsApres = 1;
+			break;
+		case Constantes.Orientation.sud:
+			nombreDeRotationsAvant = 2;
+			nombreDeRotationsApres = 2;
+			break;
+		case Constantes.Orientation.ouest:
+			nombreDeRotationsAvant = 1;
+			nombreDeRotationsApres = 3;
+			break;
 		}
-	
-	
+		for (int compteurRotation = 0; compteurRotation < nombreDeRotationsAvant; compteurRotation++){
+			this.rotation();
+		}
+		Tuile tuileDeComparaison;
+		if ( this.equals( (tuileDeComparaison = Tuile.newLigneDroite()) ) ){
+			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
+			this.setOrientation(tuileDeComparaison.getOrientation());
+			this.setListeConnections(tuileDeComparaison.getListeConnections());
+			this.setEscaleLiee(tuileDeComparaison.getEscaleLiee());
+			this.setType(tuileDeComparaison.getTypeTuile());
+			this.setImage(tuileDeComparaison.deepCopy());
+		}
+		else if ( this.equals(Tuile.newVirage())){
+			
+		}
+	}
 	
 	public String toString (){
 		String resultat = "{";
@@ -308,7 +345,7 @@ public class Tuile {
 		newTuile.setImage(imageTuile);
 		newTuile.setOrientation(orientation);
 		newTuile.setType(typeTuile);
-		newTuile.setEscale(escaleLiee);
+		newTuile.setEscaleLiee(escaleLiee);
 		
 		return newTuile;
 	}
