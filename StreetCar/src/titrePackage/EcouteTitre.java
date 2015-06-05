@@ -40,7 +40,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 				quitterAction(x,y);
 				break;
 			case 2: //Chargement
-				
+				charger(x,y);
 				retour(x,y);
 				break;
 			case 3: //Defis
@@ -60,6 +60,21 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		pan.repaint();
 	}
 	
+	private void charger(int x, int y) {
+		// TODO Auto-generated method stub
+		int borneX = pan.getWidth()/3;
+		int borneY =  pan.getHeight()/4 ;
+		
+		for(int i = 0; i<10; i++)
+		{
+			// getWidth()/3, getHeight()/4+i*50);
+			if(x>borneX && x<borneX+100 && y>borneY+i*50 && y<borneY+(i+1)*50)
+			{
+				pan.chargementPartie = i;
+			}
+		}
+	}
+
 	private void retour(int x, int y) {
 		// TODO Auto-generated method stub
 		System.out.println("X " + x + " Y " + y);

@@ -29,10 +29,15 @@ public class Chargement {
 	Plateau plat = new Plateau();
 	Tuile tuile;
 	
-	void charger(Moteur mot, String name)
+	public void charger(Moteur mot, String name)
 	{
 		try 
 		{
+			if(!name.contains(".txt"))
+			{
+				name = name+".txt";
+				name = "save/"+name;
+			}
 			FileReader f = new FileReader(new File(name));
 			BufferedReader br = new BufferedReader(f);
 			
@@ -77,7 +82,6 @@ public class Chargement {
 				pio.add(creerTuile(tabPioche[i]+"}"));
 			}
 			
-			//TODO spliter et rentrer les tuiles du plateau, exemple de split avec rajout en brut du "}"
 			for(int i = 0; i<12; i++)
 			{
 				lignePlateau = br.readLine();

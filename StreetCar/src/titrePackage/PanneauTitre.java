@@ -12,6 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.Box.Filler;
 
+import objectPackage.Plateau;
+import mainPackage.Moteur;
+import sauvegardePackage.Chargement;
 import constantesPackages.Constantes;
 
 
@@ -20,6 +23,7 @@ public class PanneauTitre extends JPanel{
 	Boolean selection = false;
 	int selectionner = -1;
 	public int actif = 0;
+	public int chargementPartie = -1;
 	
 	ChargementTitre chargement = new ChargementTitre();
 	String[] saves = chargement.listerRepertoire();
@@ -96,15 +100,24 @@ public class PanneauTitre extends JPanel{
 	
 	private void chargerPartie(Graphics2D crayon) {
 		crayon.setColor(Color.white);
+		
 		if(saves != null)
 		{
-			crayon.drawString("Choisissez une sauvegarde", getWidth()/3, getHeight()/4);
-		
+
+			crayon.drawString("Choisissez une sauvegarde", getWidth()/3, getHeight()/4-50);
+			
 			for(int i = 0; i<saves.length && i<10; i++)
 			{
-				crayon.drawString(saves[i], getWidth()/3, getHeight()/4+(i+1)*50);
+				crayon.drawString(saves[i], getWidth()/3, getHeight()/4+i*50);
 			}
-	
+			
+			if(chargementPartie != -1)
+			{
+				//Chargement c = new Chargement();
+				//c.charger(new Moteur(new Plateau()), saves[chargementPartie]);
+				crayon.drawRect(getWidth()/3,getHeight()/4+chargementPartie*50-25 , 200, 25);
+			}
+			
 		}
 		
 		else crayon.drawString("Pas de sauvegarde", getWidth()/3, getHeight()/4);
@@ -115,8 +128,8 @@ public class PanneauTitre extends JPanel{
 	public void credits(Graphics2D crayon) {
 		//TODO inclure le bouton de retour
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
-		crayon.setColor(Color.white);
-		crayon.drawRect(getWidth()-300, getHeight()-175, 175, 55);
+		//crayon.setColor(Color.white);
+		//crayon.drawRect(getWidth()-300, getHeight()-175, 175, 55);
 	
 	}
 	
