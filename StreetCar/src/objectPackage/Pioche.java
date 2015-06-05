@@ -8,11 +8,19 @@ import objectPackage.tuilePackage.Tuile;
 
 public class Pioche extends ArrayList<Tuile>{
 	
+	/*
+	 * Constructeur
+	 */
 	public Pioche (){
 		super();
 	}
+	/*
+	 * FIN Constructeur
+	 */
 	
-	// A TERMINER <= En attente de l'initialisation des differentes tuiles existantes.
+	/*
+	 * Methode Public de Pioche
+	 */
 	public void initialisation (){
 		for (int i = 0; i < 30; i++){
 			add(Tuile.newLigneDroite());
@@ -51,13 +59,11 @@ public class Pioche extends ArrayList<Tuile>{
 			add(Tuile.newBifurcationsEmbrassees());
 		}
 	}
-	
 	/**
 	 * Melange les tuiles de la pioche appelante
 	 */
-		
 	public void shuffle (){
-		Random generateur = new Random(24);
+		Random generateur = new Random(0);
 		Pioche tampon = new Pioche();
 		
 		while (!this.isEmpty()){
@@ -68,7 +74,6 @@ public class Pioche extends ArrayList<Tuile>{
 		this.addAll(tampon);
 	}
 	
-	
 	public String toString (){
 		String resultat = "";
 		ListIterator<Tuile> iterateurPioche = this.listIterator();
@@ -77,9 +82,7 @@ public class Pioche extends ArrayList<Tuile>{
 			resultat = resultat + iterateurPioche.next().toString() + " ";
 		}
 		return resultat;
-	}
-
-	
+	}	
 	public Pioche clone (){
 		Pioche renvoi = new Pioche();
 		for (int indexTuile = 0; indexTuile < this.size(); indexTuile++){
