@@ -22,8 +22,8 @@ public class Moteur {
 	private Plateau plateauDeJeu;
 	private int nbActions;
 	private Pioche pioche;
-	private Panneau_Plateau panJeu;
-	private Panneau_Historique panHistorique;
+	private Panneau_Plateau panneau_Jeu;
+	private Panneau_Historique panneau_Historique;
 	private Coup coupSimultane;
 	
 	private int numeroDeTour = 0;
@@ -106,12 +106,12 @@ public class Moteur {
 		return historiqueDeTours;
 	}
 	
-	public void setPanJeu (Panneau_Plateau referencePanJeu){
-		panJeu = referencePanJeu;
-		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
+	public void setPanneau_Jeu (Panneau_Plateau referencePanJeu){
+		panneau_Jeu = referencePanJeu;
+		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
 	}
-	public void setPanHistorique (Panneau_Historique referencePanHistorique){
-		panHistorique = referencePanHistorique;
+	public void setPanneau_Historique (Panneau_Historique referencePanHistorique){
+		panneau_Historique = referencePanHistorique;
 	}
 	
 	public void setcurrentPlayer (int referenceCurrentPlayer){
@@ -161,14 +161,14 @@ public class Moteur {
 		if (coupValide(coupChoisi)) {
 			if ( coupSimultane != null ){
 				coupSimultane = null;
-				panJeu.setCoupSimultaneEnAction(null);
-				panJeu.effacerCoupsJoues();
+				panneau_Jeu.setCoupSimultaneEnAction(null);
+				panneau_Jeu.effacerCoupsJoues();
 			}
 			if (coupChoisi.getType().equals(Constantes.Coup.placement)) {
 				tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 				nbActions--;
 				
-				panJeu.ajouterCoup(coupChoisi.getCoordonnee());
+				panneau_Jeu.ajouterCoup(coupChoisi.getCoordonnee());
 				ajouterCoup(coupChoisi.getCoordonnee());
 				
 				
@@ -194,11 +194,12 @@ public class Moteur {
 				historiqueDeTours.ajouter(new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents));
 				historiqueDeTours.last().setHistorique(historiqueDeTours);
 				
-				panJeu.afficherCoupsPrecedents();
-				panJeu.effacerCoupsJoues();
+				panneau_Jeu.afficherCoupsPrecedents();
+				panneau_Jeu.effacerCoupsJoues();
 				effacerCoupsPrecedents();
+				panneau_Jeu.setNumeroTuileCoupSimultane(-1);
 				
-				panHistorique.repaint();
+				panneau_Historique.repaint();
 			}
 			if (nbActions > 2)
 				msg = Constantes.Message.auTourDe(currentPlayer+1);
@@ -210,11 +211,11 @@ public class Moteur {
 			if (coupSimultane == null) {
 				coupSimultane = coupChoisi;
 				msg = "Coup simultanée possible";
-				panJeu.ajouterCoup(coupSimultane.getCoordonnee());
+				panneau_Jeu.ajouterCoup(coupSimultane.getCoordonnee());
 				
-				panJeu.setImageCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()).deepCopy());
-				panJeu.setCoupSimultaneEnAction(coupSimultane);
-				panJeu.setNumeroTuileCoupSimultane(coupSimultane.getTuile());
+				panneau_Jeu.setImageCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()).deepCopy());
+				panneau_Jeu.setCoupSimultaneEnAction(coupSimultane);
+				panneau_Jeu.setNumeroTuileCoupSimultane(coupSimultane.getTuile());
 				
 			}
 			else if (coupSimultane.getTuile() == coupChoisi.getTuile()) {
@@ -242,15 +243,15 @@ public class Moteur {
 					
 					// les 2 coups sont valides, on les considere alors comme 2 coups actifs 
 					// => on supprime le coup simultane enregistre dans le panneau_plateau
-					panJeu.setCoupSimultaneEnAction(null);
+					panneau_Jeu.setCoupSimultaneEnAction(null);
 					// => on ajoute le coup courant dans le tableau de coups precedents
 					ajouterCoup(coupChoisi.getCoordonnee());
 					// => on ajoute aussi le coup simultane precedemment joue
 					ajouterCoup(coupSimultane.getCoordonnee());
-					panJeu.ajouterCoup(coupChoisi.getCoordonnee());
-					panJeu.ajouterCoup(coupSimultane.getCoordonnee());
+					panneau_Jeu.ajouterCoup(coupChoisi.getCoordonnee());
+					panneau_Jeu.ajouterCoup(coupSimultane.getCoordonnee());
 					
-					panJeu.setImageCoupSimultane(null);
+					panneau_Jeu.setImageCoupSimultane(null);
 					
 					msg = Constantes.Message.finDeTour(currentPlayer+1);
 				} else {
@@ -275,8 +276,8 @@ public class Moteur {
 			System.out.println("Mauvais coup");
 			coupSimultane = null;
 		}
-		panJeu.setNotifications(msg);
-		panJeu.repaint();
+		panneau_Jeu.setNotifications(msg);
+		panneau_Jeu.repaint();
 		
 		tabPlayers[currentPlayer].attendCoup();
 		
@@ -291,7 +292,7 @@ public class Moteur {
 		}
 		plateauDeJeu = dernierTour.getPlateauDuTour().clone();
 		nbActions = 4;
-		panJeu.repaint();
+		panneau_Jeu.repaint();
 		tabPlayers[currentPlayer].attendCoup();
 	}
 	public void chargerTour (int numeroTourACharger){
@@ -318,13 +319,13 @@ public class Moteur {
 			numeroCoup++;
 		}
 		
-		panJeu.setCoupsPrecedents(coupsPrecedents);
+		panneau_Jeu.setCoupsPrecedents(coupsPrecedents);
 		
 		effacerCoupsPrecedents();
 		
-		panJeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
-		panJeu.repaint();
-		panHistorique.repaint();
+		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer+1));
+		panneau_Jeu.repaint();
+		panneau_Historique.repaint();
 
 		tabPlayers[currentPlayer].attendCoup();
 
@@ -333,10 +334,13 @@ public class Moteur {
 		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
 		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
 		
-		panJeu.chargerCoupsHistoriques(configARecuperer.getCoupsPrecedents());
+		panneau_Jeu.comparateurDePlateau(configARecuperer.getPlateauDuTour());
+		
+		panneau_Jeu.chargerCoupsHistoriques(configARecuperer.getCoupsPrecedents());
 	}
 	public void effacerCoupsJoues (){
-		panJeu.effacerCoupsHistoriques();
+		panneau_Jeu.comparateurDePlateau(null);
+		panneau_Jeu.effacerCoupsHistoriques();
 	}
 	
 	/*
@@ -384,5 +388,4 @@ public class Moteur {
 		}
 	}
 	
-
 }
