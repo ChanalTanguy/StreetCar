@@ -16,7 +16,7 @@ public class CreditsWindow extends WindowInterface {
 	
 	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		CreditsPanel menu = new CreditsPanel(win);
+		CreditsPanel menu = new CreditsPanel(mainWindow, win);
 		setNewSize(win,750,630);
 		win.add(menu);
 		win.setResizable(false);
@@ -28,7 +28,7 @@ public class CreditsWindow extends WindowInterface {
 	
 	public void openWindow(boolean b){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		CreditsPanel menu = new CreditsPanel(win, b);
+		CreditsPanel menu = new CreditsPanel(mainWindow, win, b);
 		setNewSize(win,750,630);
 		win.add(menu);
 		win.setResizable(false);

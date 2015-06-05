@@ -52,8 +52,8 @@ public class MenuPanel extends PanelInterface {
 		addNewButton(zone2, buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, listener.new LoadGameButtonListener(parentDialog, this.mainWindow, true), loadImage("chargerPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("defis_menu.png"));
-		addNewButton(zone2, buttonSize, null, listener.new SettingsButtonListener(parentDialog, true), loadImage("options_menu.png"));
-		addNewButton(zone2, buttonSize, null, listener.new CreditsButtonListener(parentDialog, true), loadImage("credits_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new SettingsButtonListener(parentDialog, true, this.mainWindow), loadImage("options_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new CreditsButtonListener(parentDialog, true, this.mainWindow), loadImage("credits_menu.png"));
 		
 		addNewButton(zone3, buttonSize, null, listener.new QuitButtonListener(), loadImage("quitter_menu.png"));
 		
