@@ -126,7 +126,7 @@ public class Constantes {
 		
 		public static String finDeTour (int numeroJoueur){
 			String notif = "Joueur " + numeroJoueur;
-			notif = notif + " piochez pour avoir 5 cartes en main;\n";
+			notif = notif + " piochez pour valide votre tour\n";
 			notif = notif + "(Vous pouvez éventuellement en voler à l'adversaire \n";
 			notif = notif + "s'il a terminé sa ligne";
 			return notif;
