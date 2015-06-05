@@ -9,6 +9,7 @@ import java.util.Date;
 
 import constantesPackages.Constantes;
 import joueurPackage.MainJoueur;
+import joueurPackage.Objectifs;
 import mainPackage.Moteur;
 import objectPackage.Pioche;
 import objectPackage.Plateau;
@@ -18,9 +19,14 @@ import objectPackage.tuilePackage.Tuile;
 public class Chargement {
 
 	int joueur;
+	int joueurInactif;
 	int nbCartes;
 	int numTour;
 	int nbPioche;
+	int ligne;
+	int[] objectifs = new int[3];
+	String[] objectif1;
+	String[] objectif2;
 	String tuileS;
 	String pioche;
 	String lignePlateau;
@@ -42,13 +48,24 @@ public class Chargement {
 			FileReader f = new FileReader(new File(name));
 			BufferedReader br = new BufferedReader(f);
 			
+			//Num tour
+			numTour = Character.getNumericValue((br.readLine().charAt(0)));
+			mot.setNumTour(numTour);
+			
 			//Joueur actif
 			joueur = Character.getNumericValue((br.readLine().charAt(0)));
 			mot.setcurrentPlayer(joueur);
 			
-			//Num tour
-			numTour = Character.getNumericValue((br.readLine().charAt(0)));
-			mot.setNumTour(numTour);
+			//Ligne joueur actif
+			ligne = Character.getNumericValue((br.readLine().charAt(0)));
+			mot.getTabPlayers()[joueur].setLigne(ligne);
+			
+			//Objectifs joueur actif
+			objectif1 = br.readLine().split(" ");
+			objectifs[0] = Integer.parseInt(objectif1[0]);
+			objectifs[1] = Integer.parseInt(objectif1[1]);
+			objectifs[2] = Integer.parseInt(objectif1[2]);
+			mot.getTabPlayers()[joueur].setObjectifs(new Objectifs(ligne, objectifs));
 			
 			//Nb cartes dans main joueur actif
 			nbCartes = Character.getNumericValue((br.readLine().charAt(0)));
@@ -61,6 +78,20 @@ public class Chargement {
 				mot.setMainPlayers(main.clone(), joueur);		
 			}
 
+			//Joueur inactif
+			joueurInactif = Character.getNumericValue((br.readLine().charAt(0)));
+			
+			//Ligne joueur inactif
+			ligne = Character.getNumericValue((br.readLine().charAt(0)));
+			mot.getTabPlayers()[joueurInactif].setLigne(ligne);
+			
+			//Objectifs joueur inactif
+			objectif2 = br.readLine().split(" ");
+			objectifs[0] = Integer.parseInt(objectif2[0]);
+			objectifs[1] = Integer.parseInt(objectif2[1]);
+			objectifs[2] = Integer.parseInt(objectif2[2]);
+			mot.getTabPlayers()[joueurInactif].setObjectifs(new Objectifs(ligne, objectifs));
+			
 			//Nb cartes dans main joueur inactif
 			nbCartes =  Character.getNumericValue((br.readLine().charAt(0)));
 

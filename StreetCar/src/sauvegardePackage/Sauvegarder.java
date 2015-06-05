@@ -17,7 +17,7 @@ public class Sauvegarder {
 	Pioche pio;
 	Tuile[][] plat;
 	MainJoueur mainJactif, mainJinact;
-	String name;
+	String name, objectif1, objectif2;
 	Date dateCourante;
 	
 	Sauvegarder(Moteur moteur)
@@ -38,6 +38,8 @@ public class Sauvegarder {
 	private void save(Sauvegarder s)
 	{
 		joueur = mot.getcurrentPlayer();
+		objectif1 = mot.getTabPlayers()[joueur].getObjectifs().toString();
+		objectif2 =  mot.getTabPlayers()[1-joueur].getObjectifs().toString();
 		mainJactif = mot.getTabPlayers()[joueur].getMain();
 		mainJinact =  mot.getTabPlayers()[1-joueur].getMain();
 		pio = mot.getPioche();
@@ -49,17 +51,38 @@ public class Sauvegarder {
 		try 
 		{
 			FileWriter f = new FileWriter(new File(name));
-			f.write(new String(""+joueur));
-			f.write(System.getProperty("line.separator"));
+			
+			//Tour
 			f.write(new String(""+numTour));
 			f.write(System.getProperty("line.separator"));
 			
+			//Joueur actif
+			f.write(new String(""+joueur));
+			f.write(System.getProperty("line.separator"));
+			
+			//Objectif joueur actif
+			f.write("" +objectif1); //A MODIFIER DANS CHARGEMENT
+			f.write(System.getProperty("line.separator"));
+			
+			//Main joueur actif
 			f.write(mainJactif.toString());
+			
+			//Joueur inactif
+			f.write(new String(""+(1-joueur)));	
+			f.write(System.getProperty("line.separator"));
+			
+			//Objectif joueur inactif
+			f.write("" +objectif2); //A MODIFIER DANS CHARGEMENT
+			f.write(System.getProperty("line.separator"));
+			
+			//Main joueur inactif
 			f.write(mainJinact.toString());
-					
+			
+			//Pioche
 			f.write(pio.toString());
 			f.write(System.getProperty("line.separator"));		
 			
+			//Plateau
 			for(int i=1; i<13; i++)
 			{
 				for(int j=1; j<13; j++)

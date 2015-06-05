@@ -59,6 +59,11 @@ public abstract class Joueur {
 		main = referenceMain;
 	}
 	
+	public void setObjectifs(Objectifs referenceObjectif)
+	{
+		objectif = referenceObjectif;
+	}
+	
 	
 	/*
 	 * FIN Accesseurs
