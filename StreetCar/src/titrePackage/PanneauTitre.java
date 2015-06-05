@@ -1,4 +1,7 @@
 package titrePackage;
+import graphique.Fenetre;
+import graphique.Panneau_Plateau;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.Box.Filler;
 
 import objectPackage.Plateau;
+import panelPackage.PanelListener;
 import mainPackage.Moteur;
 import sauvegardePackage.Chargement;
 import constantesPackages.Constantes;
@@ -113,8 +117,19 @@ public class PanneauTitre extends JPanel{
 			
 			if(chargementPartie != -1)
 			{
-				//Chargement c = new Chargement();
-				//c.charger(new Moteur(new Plateau()), saves[chargementPartie]);
+				Chargement c = new Chargement();
+				Moteur m = new Moteur(new Plateau());
+				
+				c.charger(m, saves[chargementPartie]);
+				
+				//Fenetre f = new Fenetre("Street Car"); 
+				//f.disposition_V2(m, f.getSize());
+				/*
+				PanelListener pn = new PanelListener();
+				
+				pn.new LoadGameListener(m, null, fenetre);
+				*/
+				
 				crayon.drawRect(getWidth()/3,getHeight()/4+chargementPartie*50-25 , 200, 25);
 			}
 			
