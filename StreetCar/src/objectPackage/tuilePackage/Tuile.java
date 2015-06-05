@@ -8,13 +8,13 @@ import java.util.ListIterator;
 
 import constantesPackages.Constantes;
 
-public class Tuile implements ActionsToken{
+public class Tuile {
 	private boolean immuable;
 	private String orientation;
 	private ArrayList<Connection> listeConnections;
 	private BufferedImage imageTuile;
 	private int typeTuile; // 0 : classique, 1 : terminus, 2 : Escale, 3 : Bord
-	private int escale;
+	private int escaleLiee;
 	
 	/*
 	 * 2 Constructeurs
@@ -24,14 +24,14 @@ public class Tuile implements ActionsToken{
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
-		escale = 0;
+		escaleLiee = 0;
 	}
 	public Tuile (boolean presenceArbres){
 		immuable = presenceArbres;
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
-		escale = 0;
+		escaleLiee = 0;
 	}
 	
 	/*
@@ -145,38 +145,29 @@ public class Tuile implements ActionsToken{
 		return typeTuile;
 	}
 	public int getEscale() {
-		return escale;
+		return escaleLiee;
 	}
-	public void setImage (BufferedImage i){
-		imageTuile = i;
+	public void setImage (BufferedImage newImage){
+		imageTuile = newImage;
 	}
 	public void setPresenceArbres (boolean newPresence){
 		immuable = newPresence;
 	}
 	public void setListeConnections (ArrayList<Connection> newListe){
 		listeConnections = new ArrayList<Connection>();
-		for (Connection c : newListe) {
-			listeConnections.add(c.clone());
+		for (Connection connec : newListe) {
+			listeConnections.add(connec.clone());
 		}
 	}
 	public void setOrientation (String newOrientation){
 		orientation = new String(newOrientation);
 	}
-	public void setImage (String nomImage, boolean backGround){
-		if (backGround){
-			imageTuile = Constantes.Images.initBackground(nomImage);
-		}
-		else {
-			imageTuile = Constantes.Images.initTuile(nomImage);
-		}
+	public void setType(int newTypeTuile) {
+		typeTuile = newTypeTuile;
 	}
-	public void setType(int i) {
-		typeTuile = i;
+	public void setEscale(int numerEscale) {
+		escaleLiee = numerEscale;
 	}
-	public void setEscale(int i) {
-		escale = i;
-	}
-	
 	
 	/*
 	 * Methodes Public de Tuile
@@ -206,21 +197,42 @@ public class Tuile implements ActionsToken{
 		default:
 			throw new RuntimeException("cote non indique pour adjacence des Tuiles");
 		}
-		
-		
 		return connectionTrouvee;
 	}
-	public void rotation(String sensRotation) {
-		switch (sensRotation){
-		case Constantes.Rotation.rotationDroite:
-			effectuerRotationDroite();
-			break;
-		case Constantes.Rotation.rotationGauche:
-			effectuerRotationGauche();
-			break;
-		default:
-			break;
+	public void rotation() {
+		effectuerRotationDroite();
+	}
+	@SuppressWarnings("unchecked")
+	public boolean canReplace(Tuile ancTuile) {
+		boolean yesItCan = true;
+		ArrayList<Connection> listeConnections = (ArrayList<Connection>) this.listeConnections.clone();
+		
+		for (Connection connec1 : ancTuile.getListeConnections()) {
+			boolean thisOneIsHere = false;
+			ListIterator<Connection> i = (ListIterator<Connection>) listeConnections.listIterator();
+			Connection connec2;
+			while ((i.hasNext()) && !thisOneIsHere) {
+				if ((connec2 = i.next()).equals(connec1)) {
+					thisOneIsHere = true;
+					listeConnections.remove(connec2);
+				}
+			}
+			yesItCan &= thisOneIsHere;
 		}
+		yesItCan &= !listeConnections.isEmpty();
+		return yesItCan;
+	}
+	public ArrayList<String> getDirectionConnectedTo(String direction) {
+		ArrayList<String> listDirection = new ArrayList<String>();
+		
+		for (Connection cconnec : listeConnections) {
+			if (cconnec.getPointA().equals(direction))
+				listDirection.add(cconnec.getPointB());
+			if (cconnec.getPointB().equals(direction))
+				listDirection.add(cconnec.getPointA());
+		}
+		
+		return listDirection;
 	}
 	/**
 	 * retourne vrai si la tuile appelante possede au moins une connexion avec l'une de ses extremites
@@ -260,49 +272,20 @@ public class Tuile implements ActionsToken{
 		
 		return connectionTrouvee;
 	}
-	@SuppressWarnings("unchecked")
-	public boolean canReplace(Tuile ancTuile) {
-		boolean yesItCan = true;
-		ArrayList<Connection> listeConnections = (ArrayList<Connection>) this.listeConnections.clone();
-		
-		for (Connection c : ancTuile.getListeConnections()) {
-			boolean thisOneIsHere = false;
-			ListIterator<Connection> i = (ListIterator<Connection>) listeConnections.listIterator();
-			Connection c2;
-			while ((i.hasNext()) && !thisOneIsHere) {
-				if ((c2 = i.next()).equals(c)) {
-					thisOneIsHere = true;
-					listeConnections.remove(c2);
-				}
-			}
-			yesItCan &= thisOneIsHere;
-		}
-		yesItCan &= !listeConnections.isEmpty();
-		return yesItCan;
-	}
-	public ArrayList<String> getDirectionConnectedTo(String direction) {
-		ArrayList<String> listDirection = new ArrayList<String>();
-		
-		for (Connection c : listeConnections) {
-			if (c.getPointA().equals(direction))
-				listDirection.add(c.getPointB());
-			if (c.getPointB().equals(direction))
-				listDirection.add(c.getPointA());
-		}
-		
-		return listDirection;
-	}
+	
 	/**
 	 * Methode pour cloner la BufferedImage de la tuile appelante
 	 * @param
 	 * @return
 	 */
-	public BufferedImage deepCopy() {
-		ColorModel cm = imageTuile.getColorModel();
-		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-		WritableRaster raster = imageTuile.copyData(null);
-		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-	}
+	static BufferedImage deepCopy(BufferedImage bi) {
+		 ColorModel cm = bi.getColorModel();
+		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		 WritableRaster raster = bi.copyData(null);
+		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+		}
+	
+	
 	
 	public String toString (){
 		String resultat = "{";
@@ -314,10 +297,7 @@ public class Tuile implements ActionsToken{
 		boolean resultat = false;
 		
 		resultat = ( immuable == autreTuile.getPresenceArbres() );
-		System.out.println("comparateur de immuable : " + resultat);
-		
-		resultat = resultat && listesIdentiques(autreTuile.getListeConnections()) ;
-		System.out.println("comparateur de liste de connection : " + resultat);
+		resultat = resultat && listesIdentiques(autreTuile.getListeConnections());
 		
 		return resultat;
 	}
@@ -328,38 +308,38 @@ public class Tuile implements ActionsToken{
 		newTuile.setImage(imageTuile);
 		newTuile.setOrientation(orientation);
 		newTuile.setType(typeTuile);
-		newTuile.setEscale(escale);
+		newTuile.setEscale(escaleLiee);
 		
 		return newTuile;
 	}
 	
+	
 	/*
 	 * Methodes privees de la classe
 	 */
-	
 	/**
 	 * retourne vrai si la liste appelante et celle en parametre sont identiques
 	 * @param autreListe : liste de connections qui sera comparee avec la liste de la tuile appelante
 	 * @return true : les 2 listes sont identiques
 	 */
-	/* /!\ ATTENTION /!\ CORRIGEE MAIS A REVERIFIER
-	 * sous quelles conditions 2 tuiles sont elles identiques ???
-	 * 		=> sous quelles conditions 2 listes de connections sont identiques ???
-	 * 
-	 * 
-	 */
 	private boolean listesIdentiques (ArrayList<Connection> autreListe){
 		boolean estContenu = false;
 		
-		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
-		while ( iterateurConnections.hasNext() ){
-			ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
-			Connection connection1 = iterateurConnections.next();
-			while ( iterateurAutresConnections.hasNext() ){
-				Connection connection2 = iterateurAutresConnections.next();
-				estContenu = estContenu && connection1.equals(connection2);
+		if ( listeConnections.isEmpty() && autreListe.isEmpty() ){
+			estContenu = true;
+		}
+		else {
+			ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+			while ( iterateurConnections.hasNext() ){
+				ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
+				Connection connection1 = iterateurConnections.next();
+				while ( iterateurAutresConnections.hasNext() ){
+					Connection connection2 = iterateurAutresConnections.next();
+					estContenu = estContenu && connection1.equals(connection2);
+				}
 			}
 		}
+		
 		return estContenu;
 	}
 	
@@ -385,30 +365,6 @@ public class Tuile implements ActionsToken{
 		}
 		rotationDroiteConnections();
 	}
-	
-	/**
-	 * modifie l'orientation de la tuile appelante d'un cran dans le sens anti-horaire
-	 */
-	private void effectuerRotationGauche (){
-		switch (orientation){
-		case Constantes.Orientation.nord:
-			orientation = Constantes.Orientation.ouest;
-			break;
-		case Constantes.Orientation.sud:
-			orientation = Constantes.Orientation.est;
-			break;
-		case Constantes.Orientation.est:
-			orientation = Constantes.Orientation.nord;
-			break;
-		case Constantes.Orientation.ouest:
-			orientation = Constantes.Orientation.sud;
-			break;
-		default:
-			break;
-		}
-		rotationGaucheConnections();
-	}
-	
 	/**
 	 * tourne toutes les connections de la tuile appelante d'un cran dans le sens horaire 
 	 */
@@ -416,16 +372,6 @@ public class Tuile implements ActionsToken{
 		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
 		while ( iterateurConnections.hasNext() ){
 			iterateurConnections.next().rotationDroite();
-		}
-	}
-	
-	/**
-	 * tourne toutes les connections de la tuile appelante d'un cran dans le sens anti-horaire
-	 */
-	private void rotationGaucheConnections (){
-		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
-		while ( iterateurConnections.hasNext() ){
-			iterateurConnections.next().rotationGauche();
 		}
 	}
 	

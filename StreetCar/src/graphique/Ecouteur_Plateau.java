@@ -191,9 +191,7 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		
 		if(mainSelected == 1) //Main basse
 		{
-			
 			int main = panneauDeJeu.getMaintDuBas();
-			System.out.println(main);
 			
 			if ( piocheX >= (coordX - tailleCase/3 + 10) - depart && piocheX <= (coordX-tailleCase/3 + 10 + tailleCase/2 - depart) 
 			  && piocheY >= main - tailleCaseM/3 + 10 && piocheY <= main - tailleCaseM/3 + 10 + tailleCaseM/2 )

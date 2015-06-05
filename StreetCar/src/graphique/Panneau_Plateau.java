@@ -541,19 +541,29 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	private void dessinerComparaison (Graphics2D crayon, Plateau plateauCourant, Plateau plateauAComparer){
 		for (int ligne = 1; ligne < plateauCourant.length()-1; ligne++){
-			for (int colonne = 1; colonne < plateauCourant.length()-1; colonne++){				
-				if ( plateauCourant.getTuileAt(ligne, colonne) != null){
+			for (int colonne = 1; colonne < plateauCourant.length()-1; colonne++){
+				if ( plateauCourant.getTuileAt(ligne, colonne) != null 
+						&& plateauAComparer.getTuileAt(ligne, colonne) != null){
+					if ( plateauCourant.getTuileAt(ligne, colonne).equals(plateauAComparer.getTuileAt(ligne, colonne)) ){
+						dessinerTuile(crayon, plateauCourant.getTuileAt(ligne, colonne), ligne, colonne);
+					}
+					else {
+						dessinerTuile(crayon, plateauAComparer.getTuileAt(ligne, colonne), ligne, colonne);
+					}
+				}
+				else if ( plateauCourant.getTuileAt(ligne, colonne) != null
+						&& plateauAComparer.getTuileAt(ligne, colonne) == null){
 					dessinerTuile(crayon, plateauCourant.getTuileAt(ligne, colonne), ligne, colonne);
 				}
-				if ( plateauCourant.getTuileAt(ligne,  colonne) != null && plateauAComparer.getTuileAt(ligne, colonne) == null ){
-					dessinerTuileGrisee(crayon, ligne, colonne);
+				
+				if ( plateauCourant.getTuileAt(ligne, colonne) != null && plateauAComparer.getTuileAt(ligne, colonne) == null ){
+					dessinerOpacitePasse(crayon, ligne, colonne);
 				}
+
 			}
 		}
 	}
-	private void dessinerTuileGrisee (Graphics2D crayon, int coordX, int coordY){
-//		crayon.setColor(Color.red);
-//		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
+	private void dessinerOpacitePasse (Graphics2D crayon, int coordX, int coordY){
 		crayon.drawImage(opaciteGris, depart+coordX*tailleCase + 1, depart + coordY*tailleCase + 1, tailleCase - 1, tailleCase - 1, this);
 	}
 	
