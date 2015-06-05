@@ -1,5 +1,6 @@
 package joueurPackage;
 
+import iaPackage.IADifficile;
 import iaPackage.InterfaceIA;
 
 import java.awt.event.ActionEvent;
@@ -39,6 +40,11 @@ public class EcouteurBoucle implements ActionListener {
 						   // Si le joueur va dans le menu entre temps.
 				enabled = false;
 				moteur.jouerCoup(c);
+			} else {
+				if (ia instanceof IADifficile) {
+					IADifficile iad = (IADifficile) ia;
+					iad.setCoupEnAttente(c);
+				}
 			}
 		}
 	}

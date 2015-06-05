@@ -17,18 +17,24 @@ import constantesPackages.Constantes;
 @SuppressWarnings("unused")
 public class IADifficile implements InterfaceIA {
 
-	Moteur moteur;
-	JoueurIA joueur;
-	Random r;
-	CoupEtRotation coupEnAttente;
+	private Moteur moteur;
+	private JoueurIA joueur;
+	private Random r;
+	private CoupEtRotation coupEnAttente;
 
 	private final static boolean trace = true;
+	private final static int nbTourAvantIAPlusDevellope = 100;
 
 	public IADifficile(Moteur moteur, JoueurIA joueurIA) {
 		this.moteur = moteur;
 		joueur = joueurIA;
 		r = new Random();
 		coupEnAttente = null;
+	}
+
+	public void setCoupEnAttente(Coup c) {
+		if (coupEnAttente != null)
+			coupEnAttente = new CoupEtRotation(c, 0);
 	}
 
 	public Coup getCoup() {
@@ -89,22 +95,23 @@ public class IADifficile implements InterfaceIA {
 								else if (coutSolo == coutActuel) {
 									coupsSoloRetenu.add(coupSoloActuel);
 								}
-								/*
-								coupDuoActuel = secondCoupAdjacent(plateau, coupSoloActuel, nbRotation);
-								if (coupDuoActuel.getCoup() != null) {
 
-									if (coutDuo >= coupDuoActuel.getCout()) {
-										if (coutDuo > coupDuoActuel.getCout()) {
-											coupsDuoRetenu.clear();
-											coutDuo = coupDuoActuel.getCout();
+								if (moteur.getNumTour() > nbTourAvantIAPlusDevellope) {
+									coupDuoActuel = secondCoupAdjacent(plateau, coupSoloActuel, nbRotation);
+									if (coupDuoActuel.getCoup() != null) {
+
+										if (coutDuo >= coupDuoActuel.getCout()) {
+											if (coutDuo > coupDuoActuel.getCout()) {
+												coupsDuoRetenu.clear();
+												coutDuo = coupDuoActuel.getCout();
+											}
+											CoupEtRotation[] crs = new CoupEtRotation[2];
+											crs[0] = coupSoloActuel;
+											crs[1] = coupDuoActuel;
+											coupsDuoRetenu.add(crs);
 										}
-										CoupEtRotation[] crs = new CoupEtRotation[2];
-										crs[0] = coupSoloActuel;
-										crs[1] = coupDuoActuel;
-										coupsDuoRetenu.add(crs);
 									}
-								}*/
-
+								}
 								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 							}
 							joueur.tournerTuileMain(numTuile);
@@ -117,7 +124,7 @@ public class IADifficile implements InterfaceIA {
 		CoupEtRotation coupSoloChoisi = coupsSoloRetenu.get(r.nextInt(coupsSoloRetenu.size()));
 
 		if (trace == true)
-			System.out.println("Temps d'execution prémière partie (ms) : "+(System.currentTimeMillis()-t));
+			System.out.println("Temps d'execution première partie (ms) : "+(System.currentTimeMillis()-t));
 
 		// PARTIE 2 : SIMULER LE PREMIER COUP, ET TROUVER LE MEILLEUR DEUXIEME COUP ASSOCIE AU PREMIER.
 		// PUIS COMPARER AVEC LE MEILLEUR DUO DE COUP ADJACENT DE LA PREMIERE PHASE
@@ -128,7 +135,6 @@ public class IADifficile implements InterfaceIA {
 			for (int y = 1; y < Constantes.Dimensions.dimensionPlateau-1; y++) { 	// position...
 				for (int numTuile = 0; numTuile < 5; numTuile++) { 					// Pour chaque Tuile non null dans la main...
 					if (main.getTuileAt(numTuile) != null){
-
 						for (int nbRotation = 0; nbRotation < 4; nbRotation++) { 	// Et pour chaque orientation...
 
 							coupDuoActuel = new CoupEtRotation(new Coup(Constantes.Coup.placement, numTuile, new Point(x,y)), nbRotation);
@@ -138,7 +144,7 @@ public class IADifficile implements InterfaceIA {
 								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 								coupDuoActuel.setCout(evaluationPlateau(plateau));
 
-								if (duoValideEtMeilleur(coupDuoActuel, coupSoloChoisi, 0)) {
+								if (duoValideEtMeilleur(coupDuoActuel, coupSoloChoisi, coutDuo)) {
 									if (coutDuo > coupDuoActuel.getCout()) {
 										coupsDuoRetenu.clear();
 										coutDuo = coupDuoActuel.getCout();
@@ -173,14 +179,14 @@ public class IADifficile implements InterfaceIA {
 
 		for (int i = 0; i < coupChoisi[0].getNbRotation(); i++)
 			joueur.tournerTuileMain(coupChoisi[0].getCoup().getTuile());
-			
+
 
 		return coupChoisi[0].getCoup();
 
 	}
-	private boolean duoValideEtMeilleur(CoupEtRotation cr1, CoupEtRotation cr2, int coutActuel) {
+	private boolean duoValideEtMeilleur(CoupEtRotation cr1, CoupEtRotation cr2, int coutDuo) {
 		return (cr1.getCoup().getTuile() != cr2.getCoup().getTuile() 
-				&& cr1.getCout() <= coutActuel
+				&& cr1.getCout() <= coutDuo
 				&& !(cr1.getCoup().getCoordonnee().x <= cr2.getCoup().getCoordonnee().x+1 && cr1.getCoup().getCoordonnee().x >= cr2.getCoup().getCoordonnee().x-1 && cr1.getCoup().getCoordonnee().y == cr2.getCoup().getCoordonnee().y)
 				&& !(cr1.getCoup().getCoordonnee().y <= cr2.getCoup().getCoordonnee().y+1 && cr1.getCoup().getCoordonnee().y >= cr2.getCoup().getCoordonnee().y-1 && cr1.getCoup().getCoordonnee().x == cr2.getCoup().getCoordonnee().x));
 	}
@@ -233,6 +239,7 @@ public class IADifficile implements InterfaceIA {
 		int c1 = coutCheminBis(joueur.getObjectifs().getLigne(),joueur.getObjectifs().getEscalesCibles(),p);
 		int c2 = coutCheminBis(moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getObjectifs().getLigne(),moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getObjectifs().getEscalesCibles(),p);
 
+
 		//if (trace == true) 
 		//	System.out.println("Temps d'execution 2 recherche (µs) : "+(System.nanoTime()/1000-t));
 		if (c1 == 0) {
@@ -251,16 +258,16 @@ public class IADifficile implements InterfaceIA {
 		for (int i = 0; i< 3; i++)
 			escalesBis[i] = escales[i];
 
-		int x = rechercheChemin(p.getTerminalPosition(ligne,1),Constantes.Orientation.ouest,p.getTerminalPosition(ligne,2), escales, p);
+		int x = rechercheChemin(p.getTerminalPosition(ligne,1),Constantes.Orientation.ouest,p.getTerminalPosition(ligne,2), escales, p, 0);
 		return x;
 	}
 
-	private int rechercheChemin(Point depart, String directionDepart, Point arrivee, int[] escales, Plateau plateau) {
+	private int rechercheChemin(Point depart, String directionDepart, Point arrivee, int[] escales, Plateau plateau, int coutInitial) {
 
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
 		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
 		Point po = depart;
-		TuileChemin tuileCheminCourant = new TuileChemin(po,directionDepart,0,0, null);
+		TuileChemin tuileCheminCourant = new TuileChemin(po,directionDepart,coutInitial,0, null);
 		file.add(tuileCheminCourant);
 		po = new Point();
 		RejectList seens = new RejectList();
@@ -285,61 +292,61 @@ public class IADifficile implements InterfaceIA {
 				if (t == null) {
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
-						file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee, plusDEscale), tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.ouest)){
 						po.x = pCourant.x-1; po.y = pCourant.y;
-						file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileNull,0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.sud)) {
 						po.x = pCourant.x; po.y = pCourant.y+1;
-						file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileNull,0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.nord)) {
 						po.x = pCourant.x; po.y = pCourant.y-1;
-						file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileNull,0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 				}
 
-				// Cas de la tuile d'escale de d�but;
+				// Cas de la tuile d'escale de début;
 				else if (t.getTypeTuile() == 1 && pCourant.equals(depart)) {
 					if (t.connectionsExistantes(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
-						file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority(),0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority(),calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (t.connectionsExistantes(Constantes.Orientation.ouest)) {
 						po.x = pCourant.x-1; po.y = pCourant.y;
-						file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority(),0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority(),calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (t.connectionsExistantes(Constantes.Orientation.sud)) {
 						po.x = pCourant.x; po.y = pCourant.y+1;
-						file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority(),0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority(),calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (t.connectionsExistantes(Constantes.Orientation.nord)) {
 						po.x = pCourant.x; po.y = pCourant.y-1;
-						file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority(),0, tuileCheminCourant));
+						file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority(),calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 				}
 
-				// Casdes tuiles avec pr�sence d'arbre.
+				// Cas des tuiles avec présence d'arbre.
 				else if (t.getPresenceArbres()) {
 					for (String s : t.getDirectionConnectedTo(tuileCheminCourant.getDirection())) {
 						switch (s) {
 						case Constantes.Orientation.est : 
 							po.x = pCourant.x+1; po.y = pCourant.y;
-							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 							break;
 						case Constantes.Orientation.ouest : 
 							po.x = pCourant.x-1; po.y = pCourant.y;
-							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 							break;
 						case Constantes.Orientation.sud : 
 							po.x = pCourant.x; po.y = pCourant.y+1;
-							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 							break;
 						case Constantes.Orientation.nord: 
 							po.x = pCourant.x; po.y = pCourant.y-1;
-							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 							break;
 						}
 					}
@@ -351,34 +358,34 @@ public class IADifficile implements InterfaceIA {
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
 						if (listeDirectionPossible.contains(Constantes.Orientation.est))
-							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 						else
-							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuilePossible,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuilePossible,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.ouest)) {
 						po.x = pCourant.x-1; po.y = pCourant.y;
 						if (listeDirectionPossible.contains(Constantes.Orientation.ouest))
-							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 						else
-							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuilePossible,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.est,tuileCheminCourant.getPriority()+coutTuilePossible,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.sud)) {
 						po.x = pCourant.x; po.y = pCourant.y+1;
 						if (listeDirectionPossible.contains(Constantes.Orientation.sud))
-							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 						else
-							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuilePossible,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.nord,tuileCheminCourant.getPriority()+coutTuilePossible,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.nord)) {
 						po.x = pCourant.x; po.y = pCourant.y-1;
 						if (listeDirectionPossible.contains(Constantes.Orientation.nord))
-							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileFixe,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuileFixe,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 						else
-							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuilePossible,0, tuileCheminCourant));
+							file.add(new TuileChemin(po,Constantes.Orientation.sud,tuileCheminCourant.getPriority()+coutTuilePossible,calculHeuristique(po, arrivee, !plusDEscale), tuileCheminCourant));
 					}
 				}
 
-				// La tuile qu'on regarde est li� � une escale : 
+				// La tuile qu'on regarde est lié à une escale : 
 				if ((escaleAdjacente != 0 || (t != null && t.getEscale() != 0)) && !plusDEscale) {
 					int e;
 					if (t != null && t.getEscale() != 0) {
@@ -390,7 +397,7 @@ public class IADifficile implements InterfaceIA {
 					for (int i = 0; i < 3; i++) {
 						if (escales[i] == e) {
 							escales[i] = -1;
-							coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), arrivee, escales, plateau);
+							coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), arrivee, escales, plateau, tuileCheminCourant.getPriority());
 							found = true;
 							escales[i] = e;
 						}
@@ -405,6 +412,13 @@ public class IADifficile implements InterfaceIA {
 			}
 
 		} while(!found && !file.isEmpty());
+
+		/*TuileChemin lastOne = tuileCheminCourant;
+		while(lastOne != null) {
+			System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
+			lastOne = lastOne.getPrevious();
+		}
+		System.out.println("---------");*/
 
 		return coutFinal;
 	}

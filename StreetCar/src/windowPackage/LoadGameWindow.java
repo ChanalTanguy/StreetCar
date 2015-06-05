@@ -18,8 +18,8 @@ public class LoadGameWindow extends WindowInterface {
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);
+		win.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		win.setVisible(true);
-		win.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	
@@ -30,8 +30,8 @@ public class LoadGameWindow extends WindowInterface {
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);
+		win.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		win.setVisible(true);
-		win.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		win.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 

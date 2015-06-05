@@ -40,8 +40,8 @@ public class ConfirmWindow extends WindowInterface {
 		this.setTitle("Allan please add title");
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
+		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 
