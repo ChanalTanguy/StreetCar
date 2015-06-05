@@ -314,10 +314,10 @@ public class Tuile implements ActionsToken{
 		boolean resultat = false;
 		
 		resultat = ( immuable == autreTuile.getPresenceArbres() );
-		System.out.println("comparateur de immuable : " + resultat);
 		
-		resultat = resultat && listesIdentiques(autreTuile.getListeConnections()) ;
-		System.out.println("comparateur de liste de connection : " + resultat);
+		resultat = resultat && 
+				( listesIdentiques(autreTuile.getListeConnections()) 
+				|| (listeConnections.isEmpty() && autreTuile.getListeConnections().isEmpty()) ) ;
 		
 		return resultat;
 	}
