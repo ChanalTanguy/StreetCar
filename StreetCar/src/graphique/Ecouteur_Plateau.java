@@ -56,7 +56,6 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 			case MouseEvent.BUTTON1:
 				// si le joueur tente de cliquer
 				if ( estSurPioche(x, y) ){
-					System.out.println("clic sur pioche");
 					
 					panneauDeJeu.setCaseSelectionnee(false);
 					panneauDeJeu.setMainSelectionnee(-1);
@@ -73,7 +72,6 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				// si le joueur selectionne une carte dans sa main
 				else if ( estDansMain(piocheX, piocheY) 
 					   && mot.getTabPlayers()[mainNo(piocheY)-1].getMain().getTuileAt(tuileNo(piocheX)) != null ){
-					System.out.println("clic sur une main de joueur");
 					
 					int numeroTuile = tuileNo(piocheX);
 					int numeroMain = mainNo(piocheY);
@@ -91,7 +89,6 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 				}
 				// si le joueur clique en dehors du plateau
 				else if ( estSurPlateau(caseX, caseY) ){
-					System.out.println("clic sur le plateau");
 					
 					panneauDeJeu.setPiocheSelectionnee(false);
 					// Pour voir si l'on a selectionne au prealable 
@@ -107,8 +104,6 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					}
 				}
 				else {
-					System.out.println("clic hors de toute zone particuliere");
-					
 					caseX = -1;
 					caseY = -1;
 					panneauDeJeu.setMainSelectionnee(-1);
