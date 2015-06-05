@@ -96,6 +96,7 @@ public class NewGamePanel extends PanelInterface {
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(title));
 		panel.setPreferredSize(setNewDimension(400,60));
+		panel.setBackground(Color.getColor("gris_tram", 4607576));
 		return panel;
 	}
 
@@ -103,6 +104,7 @@ public class NewGamePanel extends PanelInterface {
 		JRadioButton rbutton = new JRadioButton(text);
 		panel.add(rbutton);
 		group.add(rbutton);
+		this.setBackground(Color.getColor("gris_tram", 4607576));
 		if (text == selected){ rbutton.setSelected(true); };
 		rbutton.addActionListener(action);
 	}
