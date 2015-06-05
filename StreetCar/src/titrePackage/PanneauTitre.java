@@ -28,6 +28,7 @@ public class PanneauTitre extends JPanel{
 	int selectionner = -1;
 	public int actif = 0;
 	public int chargementPartie = -1;
+	FenetreTitre fenetre;
 	
 	ChargementTitre chargement = new ChargementTitre();
 	String[] saves = chargement.listerRepertoire();
@@ -46,6 +47,7 @@ public class PanneauTitre extends JPanel{
 	PanneauTitre(FenetreTitre fen)
 	{
 		super();
+		fenetre = fen;
 		EcouteTitre ecoute = new EcouteTitre(this, fen);
 		this.addMouseListener(ecoute);
 		this.addMouseMotionListener(ecoute);
@@ -121,9 +123,10 @@ public class PanneauTitre extends JPanel{
 				Moteur m = new Moteur(new Plateau());
 				
 				c.charger(m, saves[chargementPartie]);
-				
-				//Fenetre f = new Fenetre("Street Car"); 
-				//f.disposition_V2(m, f.getSize());
+
+				Fenetre f = new Fenetre("Street Car"); 
+				f.disposition_V2(m, f.getSize());
+				fenetre.fermeture();
 				/*
 				PanelListener pn = new PanelListener();
 				

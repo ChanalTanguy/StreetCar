@@ -33,6 +33,7 @@ public class Chargement {
 	{
 		try 
 		{
+			
 			if(!name.contains(".txt"))
 			{
 				name = name+".txt";
@@ -88,16 +89,42 @@ public class Chargement {
 				//System.out.println(lignePlateau);
 				
 				String[]tabPlat = lignePlateau.split("} ");
+				for(int k = 0; k<tabPlat.length;k++)
+				{
+					//System.out.println(tabPlat[k]+"}");
+				}
+				
 				for(int j=0; j<tabPlat.length;j++)
 				{
 					tabPlat[j]+="}";
 					if(!(tabPlat[j].equals("{null}")) && !(tabPlat[j].equals("{Nord:[]}"))) 
 					{
-						plat.setTuileAt(i, j, creerTuile(tabPlat[j]));
+						//System.out.println(tabPlat[j]);
+						//System.out.println(creerTuile(tabPlat[j]).toString());
+						plat.setTuileAt(i+1, j+1, creerTuile(tabPlat[j]));
 					}
 				}
 			}
+			
 			mot.setPlateau(plat);
+			//System.out.println(mot.getTabPlayers()[0].getMain());  
+			//Fonction de test d'affichage de plateau
+			
+			System.out.println(mot.getcurrentPlayer());
+			System.out.println(mot.getTabPlayers()[mot.getcurrentPlayer()].getMain().toString());
+			System.out.println(1-mot.getcurrentPlayer());
+			System.out.println(mot.getTabPlayers()[1-mot.getcurrentPlayer()].getMain().toString());
+			System.out.println(mot.getPioche().toString());
+			
+			for(int i = 1; i<13;i++)
+			{
+				for(int j=1; j<13; j++)
+				{
+					System.out.print(mot.getPlateau().getPlateau()[i][j]+ " ");
+				}
+				System.out.println("");
+			}
+		
 				
 			System.out.println("Fichier chargé");
 			f.close();
@@ -119,7 +146,6 @@ public class Chargement {
 		orientation = orient[0].substring(1);
 		t.setOrientation(orientation);
 		
-		
 		//Connections
 		connect = orient[1].split(","); //Ce split est là pour les multi-connections
 		
@@ -129,6 +155,8 @@ public class Chargement {
 			con = new Connection(connections[0], connections[1]);
 			t.getListeConnections().add(con);
 		}
+		
+		t.rechercheImage();
 		
 		return t;
 	}
