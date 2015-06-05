@@ -28,15 +28,17 @@ public class CreditsPanel extends PanelInterface {
 	
 	boolean openMenu = false;
 
-	public CreditsPanel(JDialog parent){
+	public CreditsPanel(JFrame main, JDialog parent){
 		parentDialog = parent;
+		mainWindow = main;
 		this.setCursor();
 		this.buildSettingsPanel();
 	}
 	
-	public CreditsPanel(JDialog parent, boolean b){
+	public CreditsPanel(JFrame main, JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		mainWindow = main;
 		this.setCursor();
 		this.buildSettingsPanel();
 	}
@@ -56,7 +58,7 @@ public class CreditsPanel extends PanelInterface {
 		zone1.add(image);
 		
 		if (openMenu){
-			addNewButton(zone2, "Retour", buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+			addNewButton(zone2, "Retour", buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
 		} else {
 			addNewButton(zone2, "Retour", buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, null), null);
 		}

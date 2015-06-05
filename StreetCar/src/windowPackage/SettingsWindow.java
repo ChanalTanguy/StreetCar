@@ -15,7 +15,7 @@ public class SettingsWindow extends WindowInterface {
 	
 	public void openWindow(){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		SettingsPanel menu = new SettingsPanel(win);
+		SettingsPanel menu = new SettingsPanel(mainWindow, win);
 		setNewSize(win,500,160);
 		win.add(menu);
 		win.setResizable(false);
@@ -27,7 +27,7 @@ public class SettingsWindow extends WindowInterface {
 	
 	public void openWindow(boolean b){
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
-		SettingsPanel menu = new SettingsPanel(win, b);
+		SettingsPanel menu = new SettingsPanel(mainWindow, win, b);
 		setNewSize(win,500,160);
 		win.add(menu);
 		win.setResizable(false);

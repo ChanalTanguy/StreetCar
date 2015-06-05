@@ -28,16 +28,18 @@ public class SettingsPanel extends PanelInterface {
 	
 	boolean selectDebug = false;
 
-	public SettingsPanel(JDialog parent){
+	public SettingsPanel(JFrame main, JDialog parent){
 		parentDialog = parent;
+		mainWindow = main;
 		this.setCursor();
 		this.buildSettingsPanel();
 		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
 	
-	public SettingsPanel(JDialog parent, boolean b){
+	public SettingsPanel(JFrame main, JDialog parent, boolean b){
 		parentDialog = parent;
 		openMenu = b;
+		mainWindow = main;
 		this.setCursor();
 		this.buildSettingsPanel();
 		this.setBackground(Color.getColor("gris_tram", 4607576));
@@ -53,7 +55,7 @@ public class SettingsPanel extends PanelInterface {
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		
 		if (openMenu){
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
 		} else {
 			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}

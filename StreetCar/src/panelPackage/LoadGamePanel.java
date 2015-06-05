@@ -49,7 +49,7 @@ public class LoadGamePanel extends PanelInterface {
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 
 		if (openMenu){
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
 		} else {
 			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}

@@ -175,15 +175,18 @@ public class PanelListener {
 
 		JDialog parent;
 		boolean openWindow;
+		JFrame mainWindow;
 
-		public CreditsButtonListener(JDialog parent, boolean b){
+		public CreditsButtonListener(JDialog parent, boolean b, JFrame main){
 			this.parent = parent;
 			this.openWindow = b;
+			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
 			CreditsWindow win = new CreditsWindow();
+			win.setMainWindow(mainWindow);
 			win.openWindow(openWindow);
 		}
 
@@ -196,15 +199,18 @@ public class PanelListener {
 
 		JDialog parent;
 		boolean openWindow;
+		JFrame mainWindow;
 
-		public SettingsButtonListener(JDialog parent, boolean b){
+		public SettingsButtonListener(JDialog parent, boolean b, JFrame main){
 			this.parent = parent;
 			this.openWindow = b;
+			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			parent.dispose();
 			SettingsWindow win = new SettingsWindow();
+			win.setMainWindow(mainWindow);
 			win.openWindow(openWindow);
 		}
 
@@ -258,7 +264,7 @@ public class PanelListener {
 
 		public void actionPerformed(ActionEvent e) {
 			parentDialog.dispose();
-			if (window != null) { window.openWindow(); }
+			if (window != null) { window.setMainWindow(mainWindow); window.openWindow(); }
 			if(mainWindow != null && mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.start();}
 		}
 
