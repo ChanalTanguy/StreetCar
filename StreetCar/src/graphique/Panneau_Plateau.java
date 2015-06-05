@@ -40,6 +40,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private Point[] coupsHistorique;
 	private Coup coupSimultaneEnAction;
 	private int numeroTuileCoupSimultane;
+	private Tuile tuilePourCoupSimultane;
 	private Plateau plateauAComparer;
 	/*
 	 * FIN Details Visuels
@@ -78,6 +79,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * ACCESSEURS
 	 */
+	public Moteur getMoteur (){
+		return mot;
+	}
+	public String getNotifications (){
+		return notifications;
+	}
+
 	public int getMainSelectionnee (){
 		return mainSelectionnee;
 	}
@@ -121,14 +129,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public int getDimensionPioche (){
 		return dimensionPioche;
 	}
-	public Moteur getMoteur (){
-		return mot;
-	}
-	public String getNotifications (){
-		return notifications;
-	}
 	public int getNumeroTuileCoupSimultane (){
 		return numeroTuileCoupSimultane;
+	}
+	public Tuile getTuilePourCoupSimultane (){
+		return tuilePourCoupSimultane;
 	}
 	public Coup getCoupSimultaneActif (){
 		return coupSimultaneEnAction;
@@ -178,6 +183,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public void setNumeroTuileCoupSimultane (int newNumeroTuile){
 		numeroTuileCoupSimultane = newNumeroTuile;
+	}
+	public void setTuilePourCoupSimultane (Tuile referenceTuileCoupSimultane){
+		tuilePourCoupSimultane = referenceTuileCoupSimultane.clone();
 	}
 	
 	/*
@@ -391,6 +399,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 			for (int colonne = 1; colonne < plateau.length()-1; colonne++){
 				Point positionDeComparaison = new Point(colonne, ligne);
 				if ( coupSimultaneEnAction != null && positionDeComparaison.equals(coupSimultaneEnAction.getCoordonnee()) ){
+//					dessinerTuile(crayon, )
 					crayon.drawImage(imageCoupSimultane, depart + colonne*tailleCase, depart + ligne*tailleCase, tailleCase-1, tailleCase-1, this);
 				}
 				else {
@@ -563,7 +572,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerTuileGrisee (Graphics2D crayon, int coordX, int coordY){
 //		crayon.setColor(Color.red);
 //		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
-		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5, depart + coordY*tailleCase - tailleCase/4 + 5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
+		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5 +20, depart + coordY*tailleCase - tailleCase/4 + 5 +20, tailleCase-4+tailleCase/2-5 -40 , tailleCase-4+tailleCase/2-5 -40, this);
 	}
 	
 	// Methodes "generales" de verification
