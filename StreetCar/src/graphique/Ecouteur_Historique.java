@@ -40,7 +40,6 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 			panneauHistorique.changeImageDefilementBas("histo_bas_a.png");
 			panneauHistorique.repaint();
 		}
-		else {}
 	}
 	public void mouseMoved(MouseEvent e) {
 		int coordX = e.getX();
