@@ -74,13 +74,15 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Facile", selected2, null);
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
-
-		addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), null);
+		addNewButton(zone3, buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), loadImage("lancer.png"));
+		//addNewButton(zone3, "Démarrer", buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), null);
 
 		if (openMenu){
-			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), loadImage("annuler.png"));
+			//addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow()), null);
 		} else {
-			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), loadImage("annuler.png"));
+			//addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}
 
 		this.add(zone1);
