@@ -14,7 +14,7 @@ public class Tuile {
 	private ArrayList<Connection> listeConnections;
 	private BufferedImage imageTuile;
 	private int typeTuile; // 0 : classique, 1 : terminus, 2 : Escale, 3 : Bord
-	private int escale;
+	private int escaleLiee;
 	
 	/*
 	 * 2 Constructeurs
@@ -24,14 +24,14 @@ public class Tuile {
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
-		escale = 0;
+		escaleLiee = 0;
 	}
 	public Tuile (boolean presenceArbres){
 		immuable = presenceArbres;
 		orientation = Constantes.Orientation.nord;
 		listeConnections = new ArrayList<Connection>();
 		typeTuile = 0;
-		escale = 0;
+		escaleLiee = 0;
 	}
 	
 	/*
@@ -145,7 +145,7 @@ public class Tuile {
 		return typeTuile;
 	}
 	public int getEscale() {
-		return escale;
+		return escaleLiee;
 	}
 	public void setImage (BufferedImage newImage){
 		imageTuile = newImage;
@@ -166,7 +166,7 @@ public class Tuile {
 		typeTuile = newTypeTuile;
 	}
 	public void setEscale(int numerEscale) {
-		escale = numerEscale;
+		escaleLiee = numerEscale;
 	}
 	
 	/*
@@ -278,7 +278,15 @@ public class Tuile {
 	 * @param
 	 * @return
 	 */
-
+	static BufferedImage deepCopy(BufferedImage bi) {
+		 ColorModel cm = bi.getColorModel();
+		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		 WritableRaster raster = bi.copyData(null);
+		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+		}
+	
+	
+	
 	public String toString (){
 		String resultat = "{";
 		resultat = resultat + orientation + ":";
@@ -300,7 +308,7 @@ public class Tuile {
 		newTuile.setImage(imageTuile);
 		newTuile.setOrientation(orientation);
 		newTuile.setType(typeTuile);
-		newTuile.setEscale(escale);
+		newTuile.setEscale(escaleLiee);
 		
 		return newTuile;
 	}
