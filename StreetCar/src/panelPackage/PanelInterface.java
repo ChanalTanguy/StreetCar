@@ -46,6 +46,7 @@ public class PanelInterface extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.setPreferredSize(setNewDimension(x,y));
+		panel.setBackground(Color.getColor("gris_tram", 4607576));
 		return panel;
 	}
 	

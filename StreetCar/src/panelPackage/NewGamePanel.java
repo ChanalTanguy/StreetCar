@@ -1,6 +1,7 @@
 package panelPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -42,6 +43,7 @@ public class NewGamePanel extends PanelInterface {
 		mainWindow = main;
 		this.setCursor();
 		this.buildNewGamePanel();
+		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
 
 	public NewGamePanel(JFrame main, JDialog parent, boolean b){
@@ -50,6 +52,7 @@ public class NewGamePanel extends PanelInterface {
 		mainWindow = main;
 		this.setCursor();
 		this.buildNewGamePanel();
+		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
 
 	private void buildNewGamePanel(){
@@ -83,6 +86,7 @@ public class NewGamePanel extends PanelInterface {
 		this.add(zone1);
 		this.add(zone2);
 		this.add(zone3);
+		
 
 	}
 
