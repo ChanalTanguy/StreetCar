@@ -1,6 +1,7 @@
 package panelPackage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ public class SettingsPanel extends PanelInterface {
 		parentDialog = parent;
 		this.setCursor();
 		this.buildSettingsPanel();
+		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
 	
 	public SettingsPanel(JDialog parent, boolean b){
@@ -38,6 +40,7 @@ public class SettingsPanel extends PanelInterface {
 		openMenu = b;
 		this.setCursor();
 		this.buildSettingsPanel();
+		this.setBackground(Color.getColor("gris_tram", 4607576));
 	}
 
 	private void buildSettingsPanel(){
@@ -62,6 +65,7 @@ public class SettingsPanel extends PanelInterface {
 	private JPanel newCheckBoxZone(int x, int y){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(setNewDimension(x,y));
+		panel.setBackground(Color.getColor("gris_tram", 4607576));
 		return panel;
 	}
 	
@@ -70,6 +74,8 @@ public class SettingsPanel extends PanelInterface {
 	    box.setMnemonic(KeyEvent.VK_C); 
 	    box.setSelected(selected);
 	    box.addItemListener(action);
+	    box.setBackground(Color.getColor("gris_tram", 4607576));
+	    box.setForeground(Color.white);
 		panel.add(box);
 	}
 
