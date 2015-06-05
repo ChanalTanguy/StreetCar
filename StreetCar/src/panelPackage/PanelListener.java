@@ -23,16 +23,18 @@ import mainPackage.Moteur;
 import objectPackage.Plateau;
 import windowPackage.ConfirmWindow;
 import windowPackage.CreditsWindow;
+import windowPackage.LoadGameWindow;
 import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 import windowPackage.NewGameWindow;
 import windowPackage.SettingsWindow;
 
 public class PanelListener {
+	
+	
+	// Ouvre la fenêtre de configuration d'une nouvelle partie
 
 	public class ConfigureNewGameButtonListener implements ActionListener {
-
-		// Ouvre la fenêtre de configuration d'une nouvelle partie
 
 		JDialog parent;
 		boolean openWindow;
@@ -52,10 +54,11 @@ public class PanelListener {
 		}
 
 	}
+	
+	
+	// Démarre une nouvelle partie
 
 	public class StartNewGameButtonListener implements ActionListener {
-
-		// Démarre une nouvelle partie
 
 		ButtonGroup selectedJ1;
 		ButtonGroup selectedJ2;
@@ -103,9 +106,10 @@ public class PanelListener {
 		
 	}
 
+	
+	// Ouvre la fenêtre demandant de confirmer la fermeture du jeu
+	
 	public class QuitButtonListener implements ActionListener {
-
-		// Ouvre la fenêtre demandant de confirmer la fermeture du jeu
 
 		public void actionPerformed(ActionEvent e) {
 			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
@@ -115,10 +119,59 @@ public class PanelListener {
 			conf.openConfirmWindow();
 		}
 	}
+	
+	
+	// Ouvre le menu de chargement d'une partie
+	
+	public class LoadGameButtonListener implements ActionListener {
 
+		JDialog parent;
+		boolean openWindow;
+		JFrame mainWindow;
+
+		public LoadGameButtonListener(JDialog parent, JFrame main, boolean b){
+			this.parent = parent;
+			this.openWindow = b;
+			this.mainWindow = main;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			parent.dispose();
+			LoadGameWindow win = new LoadGameWindow();
+			win.setMainWindow(mainWindow);
+			win.openWindow(openWindow);
+		}
+
+	}
+	
+	// Charge une partie
+	
+	public class LoadGameListener implements ActionListener {
+
+		Moteur loadedEngine;
+		JDialog parent;
+		JFrame mainWindow;
+
+		public LoadGameListener(Moteur engine, JDialog parent, JFrame main){
+			this.loadedEngine = engine;
+			this.parent = parent;
+			this.mainWindow = main;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if(parent != null){parent.dispose();}
+			if(mainWindow != null){mainWindow.dispose();}
+			if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
+			Fenetre f = new Fenetre("Street Car");
+			f.disposition_V2(loadedEngine, f.getSize());
+		}
+		
+	}
+
+	
+	// Ouvre la fenêtre de configuration d'une nouvelle partie
+	
 	public class CreditsButtonListener implements ActionListener {
-
-		// Ouvre la fenêtre de configuration d'une nouvelle partie
 
 		JDialog parent;
 		boolean openWindow;
@@ -135,10 +188,11 @@ public class PanelListener {
 		}
 
 	}
+	
+	
+	// Ouvre la fenêtre de configuration des options
 
 	public class SettingsButtonListener implements ActionListener {
-
-		// Ouvre la fenêtre de configuration des options
 
 		JDialog parent;
 		boolean openWindow;
@@ -156,19 +210,21 @@ public class PanelListener {
 
 	}
 
+	
+	// Quitte le jeu
+	
 	public class Quit implements ActionListener {
-
-		// Quitte le jeu
 
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
 
 	}
+	
+	
+	// Agit selon si le mode debug est activé ou non
 
 	public class DebugCheckBoxListener implements ItemListener {
-
-		// Agit selon si le mode debug est activé ou non
 
 		public void itemStateChanged(ItemEvent e) {
 			int change = e.getStateChange();
@@ -180,9 +236,10 @@ public class PanelListener {
 		}
 	}
 
+	
+	// Ferme la	fenêtre courante
+	
 	public class ReturnButtonListener implements ActionListener {
-
-		// Ferme la	fenêtre courante
 
 		JDialog parentDialog;
 		MenuWindow window;
