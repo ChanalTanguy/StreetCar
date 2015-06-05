@@ -23,7 +23,7 @@ public class IADifficile implements InterfaceIA {
 	private CoupEtRotation coupEnAttente;
 
 	private final static boolean trace = true;
-	private final static int nbTourAvantIAPlusDevellope = 100;
+	private final static int nbTourAvantIAPlusDevellope = 0;
 
 	public IADifficile(Moteur moteur, JoueurIA joueurIA) {
 		this.moteur = moteur;
@@ -75,44 +75,86 @@ public class IADifficile implements InterfaceIA {
 		// *** Faire ça avec tout les coups
 		// **** Prendre le coup le mieux évaluer.
 
+		// PARTIE 0 : INITIALISATION : VERIFIER SI DEUX TUILE SONT IDENTIQUE DANS LA MAIN
+		// POUR REDUIRE LE COUT.
+
+		boolean[] unique = {true, true, true, true, true};
+		boolean[][] uniqueRotation = {	{true, true, true, true},
+				{true, true, true, true},
+				{true, true, true, true},
+				{true, true, true, true},
+				{true, true, true, true}};
+		Tuile tCourant, tInnomable;
+
+		for (int i = 0; i < 5; i++) {
+			if (main.getTuileAt(i) != null) {
+				tCourant = main.getTuileAt(i).clone();
+				tInnomable = tCourant.clone();
+				tInnomable.rotation();
+				for (int r = 0; r < 4; r++) {
+					for (int j = i+1; j < 5; j++) {
+
+						if (tCourant.equals(main.getTuileAt(j)))
+							unique[j] = false;
+
+					}
+
+					if ((r != 0 && tCourant.equals(main.getTuileAt(i))) || ((r >1) && tCourant.equals(tInnomable)))
+						uniqueRotation[i][r] = false;
+
+					tCourant.rotation();
+				}
+			}
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			System.out.print("TUILE N°"+(i+1)+" | UNIQUE : "+unique[i]+" | ROTATION : "); 
+			for (int r = 0; r < 4; r++){
+				System.out.print(uniqueRotation[i][r]+" "); 
+			}
+			System.out.println(); 
+		}
+
 		// PARTIE 1 : SIMULER TOUT LES COUP ET GARDER LE MEILLEUR DE TOUS
 		// EN PARALLELE, SIMULER TOUT LES DUO DE COUP ADJACENT ET ENREGISTRER LE MEILLEUR DE TOUS
 		for (int x = 1; x < Constantes.Dimensions.dimensionPlateau-1; x++) { 	 	// Pour chaque...
 			for (int y = 1; y < Constantes.Dimensions.dimensionPlateau-1; y++) { 	// position...
 				for (int numTuile = 0; numTuile < 5; numTuile++) { 					// Pour chaque Tuile non null dans la main...
-					if (main.getTuileAt(numTuile) != null){	
+					if (main.getTuileAt(numTuile) != null && unique[numTuile]){	
 						for (int nbRotation = 0; nbRotation < 4; nbRotation++) { 	// Et pour chaque orientation...
-							coupSoloActuel = new CoupEtRotation(new Coup(Constantes.Coup.placement, numTuile, new Point(x,y)), nbRotation);
-							if (plateau.coupValide(main.getTuileAt(coupSoloActuel.getCoup().getTuile()), coupSoloActuel.getCoup())) {
-								jouerCoupProvisoire(plateau, x, y, numTuile, main);
+							if (uniqueRotation[numTuile][nbRotation]) {
+								coupSoloActuel = new CoupEtRotation(new Coup(Constantes.Coup.placement, numTuile, new Point(x,y)), nbRotation);
+								if (plateau.coupValide(main.getTuileAt(coupSoloActuel.getCoup().getTuile()), coupSoloActuel.getCoup())) {
+									jouerCoupProvisoire(plateau, x, y, numTuile, main);
 
-								coutActuel = evaluationPlateau(plateau);
-								if (coutSolo > coutActuel) {
-									coupsSoloRetenu.clear();
-									coupsSoloRetenu.add(coupSoloActuel);
-									coutSolo = coutActuel;
-								}
-								else if (coutSolo == coutActuel) {
-									coupsSoloRetenu.add(coupSoloActuel);
-								}
+									coutActuel = evaluationPlateau(plateau);
+									if (coutSolo > coutActuel) {
+										coupsSoloRetenu.clear();
+										coupsSoloRetenu.add(coupSoloActuel);
+										coutSolo = coutActuel;
+									}
+									else if (coutSolo == coutActuel) {
+										coupsSoloRetenu.add(coupSoloActuel);
+									}
 
-								if (moteur.getNumTour() > nbTourAvantIAPlusDevellope) {
-									coupDuoActuel = secondCoupAdjacent(plateau, coupSoloActuel, nbRotation);
-									if (coupDuoActuel.getCoup() != null) {
+									if (moteur.getNumTour() > nbTourAvantIAPlusDevellope) {
+										coupDuoActuel = secondCoupAdjacent(plateau, coupSoloActuel, nbRotation);
+										if (coupDuoActuel.getCoup() != null) {
 
-										if (coutDuo >= coupDuoActuel.getCout()) {
-											if (coutDuo > coupDuoActuel.getCout()) {
-												coupsDuoRetenu.clear();
-												coutDuo = coupDuoActuel.getCout();
+											if (coutDuo >= coupDuoActuel.getCout()) {
+												if (coutDuo > coupDuoActuel.getCout()) {
+													coupsDuoRetenu.clear();
+													coutDuo = coupDuoActuel.getCout();
+												}
+												CoupEtRotation[] crs = new CoupEtRotation[2];
+												crs[0] = coupSoloActuel;
+												crs[1] = coupDuoActuel;
+												coupsDuoRetenu.add(crs);
 											}
-											CoupEtRotation[] crs = new CoupEtRotation[2];
-											crs[0] = coupSoloActuel;
-											crs[1] = coupDuoActuel;
-											coupsDuoRetenu.add(crs);
 										}
 									}
+									jouerCoupProvisoire(plateau, x, y, numTuile, main);
 								}
-								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 							}
 							joueur.tournerTuileMain(numTuile);
 						}
@@ -136,25 +178,26 @@ public class IADifficile implements InterfaceIA {
 				for (int numTuile = 0; numTuile < 5; numTuile++) { 					// Pour chaque Tuile non null dans la main...
 					if (main.getTuileAt(numTuile) != null){
 						for (int nbRotation = 0; nbRotation < 4; nbRotation++) { 	// Et pour chaque orientation...
+							if (uniqueRotation[numTuile][nbRotation]) {
+								coupDuoActuel = new CoupEtRotation(new Coup(Constantes.Coup.placement, numTuile, new Point(x,y)), nbRotation);
 
-							coupDuoActuel = new CoupEtRotation(new Coup(Constantes.Coup.placement, numTuile, new Point(x,y)), nbRotation);
+								if (plateau.coupValide(main.getTuileAt(coupDuoActuel.getCoup().getTuile()), coupDuoActuel.getCoup())) {
 
-							if (plateau.coupValide(main.getTuileAt(coupDuoActuel.getCoup().getTuile()), coupDuoActuel.getCoup())) {
+									jouerCoupProvisoire(plateau, x, y, numTuile, main);
+									coupDuoActuel.setCout(evaluationPlateau(plateau));
 
-								jouerCoupProvisoire(plateau, x, y, numTuile, main);
-								coupDuoActuel.setCout(evaluationPlateau(plateau));
-
-								if (duoValideEtMeilleur(coupDuoActuel, coupSoloChoisi, coutDuo)) {
-									if (coutDuo > coupDuoActuel.getCout()) {
-										coupsDuoRetenu.clear();
-										coutDuo = coupDuoActuel.getCout();
+									if (duoValideEtMeilleur(coupDuoActuel, coupSoloChoisi, coutDuo)) {
+										if (coutDuo > coupDuoActuel.getCout()) {
+											coupsDuoRetenu.clear();
+											coutDuo = coupDuoActuel.getCout();
+										}
+										CoupEtRotation[] crs = new CoupEtRotation[2];
+										crs[0] = coupSoloChoisi;
+										crs[1] = coupDuoActuel;
+										coupsDuoRetenu.add(crs);
 									}
-									CoupEtRotation[] crs = new CoupEtRotation[2];
-									crs[0] = coupSoloChoisi;
-									crs[1] = coupDuoActuel;
-									coupsDuoRetenu.add(crs);
+									jouerCoupProvisoire(plateau, x, y, numTuile, main);
 								}
-								jouerCoupProvisoire(plateau, x, y, numTuile, main);
 							}
 							joueur.tournerTuileMain(numTuile);
 						}
@@ -193,6 +236,7 @@ public class IADifficile implements InterfaceIA {
 
 	private CoupEtRotation secondCoupAdjacent(Plateau plateau, CoupEtRotation c, int evaluationInitiale) {
 		int coutActuel = evaluationInitiale;
+		//long t = System.currentTimeMillis();
 		CoupEtRotation coupGarde = new CoupEtRotation(null,0); coupGarde.setCout(Integer.MAX_VALUE/2);
 		CoupEtRotation coupCourant;
 		MainJoueur main = joueur.getMain();
@@ -225,6 +269,7 @@ public class IADifficile implements InterfaceIA {
 				}
 			}
 		}
+		//System.out.println("Temps d'execution coup duo (ms) : "+(System.currentTimeMillis()-t));
 		return coupGarde;
 	}
 

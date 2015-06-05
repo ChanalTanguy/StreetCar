@@ -323,24 +323,40 @@ public class Tuile {
 	 * @return true : les 2 listes sont identiques
 	 */
 	private boolean listesIdentiques (ArrayList<Connection> autreListe){
+		
+		boolean listeIdentique = true;
 		boolean estContenu = false;
 		
-		if ( listeConnections.isEmpty() && autreListe.isEmpty() ){
-			estContenu = true;
-		}
-		else {
-			ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
-			while ( iterateurConnections.hasNext() ){
-				ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
-				Connection connection1 = iterateurConnections.next();
-				while ( iterateurAutresConnections.hasNext() ){
-					Connection connection2 = iterateurAutresConnections.next();
-					estContenu = estContenu && connection1.equals(connection2);
-				}
+		// La vérification dans les deux sens est necessaire, car une connexion qui est dans la liste 2
+		// Mais pas dans la liste 1 ne sera pas prise en compte sinon
+		
+		// Vérifiez que chaque de la liste 1 est présente dans l'autre liste
+		ListIterator<Connection> iterateurConnections = listeConnections.listIterator();
+		while ( iterateurConnections.hasNext() && listeIdentique){
+			estContenu = false;
+			ListIterator<Connection> iterateurAutresConnections = autreListe.listIterator();
+			Connection connection1 = iterateurConnections.next();
+			while ( iterateurAutresConnections.hasNext() && !estContenu){
+				Connection connection2 = iterateurAutresConnections.next();
+				estContenu = connection1.equals(connection2);
 			}
+			listeIdentique = estContenu;
 		}
 		
-		return estContenu;
+		// Vérifiez que chaque connexion de la liste 2 est présente dans l'autre liste
+		iterateurConnections = autreListe.listIterator();
+		while ( iterateurConnections.hasNext() && listeIdentique){
+			estContenu = false;
+			ListIterator<Connection> iterateurAutresConnections = listeConnections.listIterator();
+			Connection connection1 = iterateurConnections.next();
+			while ( iterateurAutresConnections.hasNext() && !estContenu){
+				Connection connection2 = iterateurAutresConnections.next();
+				estContenu = connection1.equals(connection2);
+			}
+			listeIdentique = estContenu;
+		}
+		
+		return listeIdentique;
 	}
 	
 	/**
