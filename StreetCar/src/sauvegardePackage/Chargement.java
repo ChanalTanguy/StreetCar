@@ -109,7 +109,7 @@ public class Chargement {
 			mot.setPlateau(plat);
 			//System.out.println(mot.getTabPlayers()[0].getMain());  
 			//Fonction de test d'affichage de plateau
-			
+			/*
 			System.out.println(mot.getcurrentPlayer());
 			System.out.println(mot.getTabPlayers()[mot.getcurrentPlayer()].getMain().toString());
 			System.out.println(1-mot.getcurrentPlayer());
@@ -123,7 +123,7 @@ public class Chargement {
 					System.out.print(mot.getPlateau().getPlateau()[i][j]+ " ");
 				}
 				System.out.println("");
-			}
+			}*/
 		
 				
 			System.out.println("Fichier chargé");

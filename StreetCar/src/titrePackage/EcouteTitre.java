@@ -77,7 +77,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 
 	private void retour(int x, int y) {
 		// TODO Auto-generated method stub
-		System.out.println("X " + x + " Y " + y);
+		//System.out.println("X " + x + " Y " + y);
 		if(x>980 && x<980+300 && y>850 && y<850+45) pan.actif = 0;
 		
 	}
