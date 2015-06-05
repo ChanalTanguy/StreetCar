@@ -101,7 +101,7 @@ public abstract class Joueur {
 				Escale e = (Escale) tAdjacente;
 				if (e.getStop() == null) {
 					e.setStop(new Point(x,y));
-					t.setEscale(e.getNumeroEscale());
+					t.setEscaleLiee(e.getNumeroEscale());
 				}
 			}
 

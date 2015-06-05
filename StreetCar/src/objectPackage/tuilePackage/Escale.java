@@ -40,7 +40,7 @@ public class Escale extends Tuile{
 		e.setListeConnections((ArrayList<Connection>) t.getListeConnections().clone());
 		e.setPresenceArbres(t.getPresenceArbres());
 		e.setOrientation(t.getOrientation());
-		e.setEscale(0);
+		e.setEscaleLiee(0);
 		e.setImage(null);
 		e.setType(2);
 		e.numeroEscale = numeroEscale;

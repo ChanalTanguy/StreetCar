@@ -431,10 +431,10 @@ public class IADifficile implements InterfaceIA {
 				}
 
 				// La tuile qu'on regarde est lié à une escale : 
-				if ((escaleAdjacente != 0 || (t != null && t.getEscale() != 0)) && !plusDEscale) {
+				if ((escaleAdjacente != 0 || (t != null && t.getEscaleLiee() != 0)) && !plusDEscale) {
 					int e;
-					if (t != null && t.getEscale() != 0) {
-						e = t.getEscale();
+					if (t != null && t.getEscaleLiee() != 0) {
+						e = t.getEscaleLiee();
 					} else {
 						e = escaleAdjacente;
 					}

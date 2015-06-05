@@ -38,7 +38,7 @@ public class Plateau {
 		initialisationTuile();
 	}
 
-	public void initialisationTuile() {
+	private void initialisationTuile() {
 		// Mettre toutes les tuiles de bord vides à la vertical
 		Tuile t;
 		for (int i = 0; i<14;i++) {
@@ -115,14 +115,27 @@ public class Plateau {
 
 	}
 
+	/*
+	 * Accesseurs
+	 */
 	public Tuile[][] getPlateau (){
 		return plateau;
 	}
+	
+	public void setTuileAt(int x, int y, Tuile t) {
+		plateau[x][y] = t;
+	}
 
+	/*
+	 * FIN Accesseurs
+	 */
+	
+	/*
+	 * Methodes Public de Plateau
+	 */
 	public int length (){
 		return plateau.length;
 	}
-
 	public boolean coupValide (Tuile nouvTuile, Coup coup){
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
@@ -154,8 +167,7 @@ public class Plateau {
 		} else 
 			return false;
 	}
-
-	public String coupSimultaneValide(Tuile nouvTuile, Coup coup) {
+	public String coupSimultaneValide (Tuile nouvTuile, Coup coup) {
 		if(coup.getType().equals(Constantes.Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
 			// Et que les 4 cases adjacente ne font pas conflit
@@ -193,16 +205,10 @@ public class Plateau {
 		} else 
 			return null;
 	}
-
-	public Tuile getTuileAt(int x, int y) {
+	public Tuile getTuileAt (int x, int y){
 		return plateau[x][y];
 	}
-
-	public void setTuileAt(int x, int y, Tuile t) {
-		plateau[x][y] = t;
-	}
-
-	public Point getTerminalPosition(int numberLigne, int numberTerminal) {
+	public Point getTerminalPosition (int numberLigne, int numberTerminal){
 		Point p;
 		switch (numberLigne) {
 		case 1 : 
@@ -246,17 +252,36 @@ public class Plateau {
 		}
 		return p;
 	}
-
-	public Point getEscalelPosition(int numberEscale) {
-
+	public Point getEscalelPosition (int numberEscale){
 		try {
 			return new Point(PositionEscale[numberEscale-1][0],PositionEscale[numberEscale-1][1]);
 		} catch (Exception e) {
 			return null;
 		}
+	}	
+	public int aCoterDUneEscaleNonAssignee (Point p){
+		int x = p.x, y = p.y;
+		if (x != 0 					&& plateau[x-1][y] != null && plateau[x-1][y].getTypeTuile() == 2 && ((Escale)(plateau[x-1][y])).getStop() == null)
+			return ((Escale)(plateau[x-1][y])).getNumeroEscale();
+		if (x != plateau.length-1	&& plateau[x+1][y] != null && plateau[x+1][y].getTypeTuile() == 2 && ((Escale)(plateau[x+1][y])).getStop() == null)
+			return ((Escale)(plateau[x+1][y])).getNumeroEscale();
+		if (y != 0 					&& plateau[x][y-1] != null && plateau[x][y-1].getTypeTuile() == 2 && ((Escale)(plateau[x][y-1])).getStop() == null)
+			return ((Escale)(plateau[x][y-1])).getNumeroEscale();
+		if (y != plateau.length-1	&& plateau[x][y+1] != null && plateau[x][y+1].getTypeTuile() == 2 && ((Escale)(plateau[x][y+1])).getStop() == null)
+			return ((Escale)(plateau[x][y+1])).getNumeroEscale();
+			
+		return 0;
+	}
+	public boolean ObjectifComplet (Objectifs objectifs){
+		int[] escales = new int[3];
+		for (int i = 0; i< 3; i++){
+			escales[i] = objectifs.getEscalesCibles()[i];
+		}
+		return atteindreObjectifDepuisPosition(getTerminalPosition(objectifs.getLigne(),1),Constantes.Orientation.ouest,getTerminalPosition(objectifs.getLigne(),2), escales);
+
 	}
 
-	public Plateau clone() {
+	public Plateau clone () {
 		Plateau p = new Plateau();
 		for (int i = 0; i < Constantes.Dimensions.dimensionPlateau; i++) {
 			for (int j = 0; j < Constantes.Dimensions.dimensionPlateau; j++) {
@@ -267,32 +292,15 @@ public class Plateau {
 		}
 		return p;
 	}
+	public boolean equals (){
+		boolean plateauIdentique = false;
+		
+		return plateauIdentique;
+	}
 	
-	public int aCoterDUneEscaleNonAssignee(Point p) {
-		int x = p.x;
-		int y = p.y;
-		if (x != 0 											&& plateau[x-1][y] != null && plateau[x-1][y].getTypeTuile() == 2 && ((Escale)(plateau[x-1][y])).getStop() == null)
-			return ((Escale)(plateau[x-1][y])).getNumeroEscale();
-		if (x != Constantes.Dimensions.dimensionPlateau-1 	&& plateau[x+1][y] != null && plateau[x+1][y].getTypeTuile() == 2 && ((Escale)(plateau[x+1][y])).getStop() == null)
-			return ((Escale)(plateau[x+1][y])).getNumeroEscale();
-		if (y != 0 											&& plateau[x][y-1] != null && plateau[x][y-1].getTypeTuile() == 2 && ((Escale)(plateau[x][y-1])).getStop() == null)
-			return ((Escale)(plateau[x][y-1])).getNumeroEscale();
-		if (y != Constantes.Dimensions.dimensionPlateau-1 	&& plateau[x][y+1] != null && plateau[x][y+1].getTypeTuile() == 2 && ((Escale)(plateau[x][y+1])).getStop() == null)
-			return ((Escale)(plateau[x][y+1])).getNumeroEscale();
-			
-		return 0;
-	}
-
-	public boolean ObjectifComplet(Objectifs objectifs) {
-
-		int[] escales = new int[3];
-		for (int i = 0; i< 3; i++)
-			escales[i] = objectifs.getEscalesCibles()[i];
-
-		return atteindreObjectifDepuisPosition(getTerminalPosition(objectifs.getLigne(),1),Constantes.Orientation.ouest,getTerminalPosition(objectifs.getLigne(),2), escales);
-
-	}
-
+	/*
+	 * Methodes Private de Plateau
+	 */
 	private boolean atteindreObjectifDepuisPosition(Point depart, String direction, Point arrive, int[] escale) {
 
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
@@ -358,12 +366,12 @@ public class Plateau {
 						}
 					}
 					
-					if (t.getEscale() != 0 && !plusDEscale) {
+					if (t.getEscaleLiee() != 0 && !plusDEscale) {
 						for (int i = 0; i < 3; i++) {
-							if (escale[i] == t.getEscale()) {
+							if (escale[i] == t.getEscaleLiee()) {
 								escale[i] = -1;
 								found = atteindreObjectifDepuisPosition(pCourant, tuileCheminCourant.getDirection(), arrive, escale);
-								escale[i] = t.getEscale();
+								escale[i] = t.getEscaleLiee();
 							}
 						}
 					}
