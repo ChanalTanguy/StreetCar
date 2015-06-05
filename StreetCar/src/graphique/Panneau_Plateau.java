@@ -561,8 +561,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	private void dessinerTuileGrisee (Graphics2D crayon, int coordX, int coordY){
-		crayon.setColor(Color.red);
-		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
+//		crayon.setColor(Color.red);
+//		crayon.drawRect(depart + coordX*tailleCase + 2, depart + coordY*tailleCase + 2, tailleCase-4, tailleCase-4);
+		crayon.drawImage(surbrillanceRouge, depart+coordX*tailleCase - tailleCase/4 + 5, depart + coordY*tailleCase - tailleCase/4 + 5, tailleCase-4+tailleCase/2-5, tailleCase-4+tailleCase/2-5, this);
 	}
 	
 	// Methodes "generales" de verification
