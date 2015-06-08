@@ -65,12 +65,12 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					panneauDeJeu.setVisObjJ2(false);
 				}
 				
-				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer() == 1){
+				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer() == 0){
 					panneauDeJeu.setVisObjJ1(true);
 					panneauDeJeu.repaint();
 				}
 				
-				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer() == 2){
+				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer() == 1){
 					panneauDeJeu.setVisObjJ2(true);
 					panneauDeJeu.repaint();
 				}
@@ -139,12 +139,12 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					int piocheX = x - panneauDeJeu.getDepart();
 					int piocheY = y;
 		
-		if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+		if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==0){
 			panneauDeJeu.setVisObjJ1(false);
 			panneauDeJeu.repaint();
 		}
 		
-		else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+		else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==1){
 			panneauDeJeu.setVisObjJ2(false);
 			panneauDeJeu.repaint();
 		}

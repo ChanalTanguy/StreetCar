@@ -14,6 +14,9 @@ public abstract class Joueur {
 	protected Objectifs objectif;
 	protected int phase = 1;
 	protected int typeJoueur;
+	protected Point positionCouranteTram;
+	protected String orientationCouranteTram;
+	protected Escale[] escalesAtteintes;
 	protected boolean voyagePossible = false;
 	protected boolean voyageActive = false;
 	
@@ -22,7 +25,6 @@ public abstract class Joueur {
 		main = referenceMain;
 		typeJoueur = newTypeJoueur;
 		objectif = new Objectifs(ligne);
-		initBidonObjectifs();
 	}
 	public Joueur (MainJoueur referenceMain, int newTypeJoueur){
 		main = referenceMain;
@@ -68,6 +70,10 @@ public abstract class Joueur {
 	public void setLigne (int newLigne){
 		objectif.setLigne(newLigne);
 	}
+	public void setType(int type){
+		typeJoueur = type;
+	}
+	
 	public void setMain(MainJoueur referenceMain)
 	{
 		main = referenceMain;
@@ -161,8 +167,5 @@ public abstract class Joueur {
 	/*
 	 * Methodes Private de Joueur
 	 */
-	private void initBidonObjectifs (){
-		objectif.ajouterEscales(1);
-		objectif.ajouterEscales(12);
-	}
+
 }

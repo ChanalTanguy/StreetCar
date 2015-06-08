@@ -177,28 +177,53 @@ public class PanelListener {
 		}
 
 	}
+	
+	
+	// Propose la suavegarde d'une partie
+	
+	public class SaveGameButtonListener implements ActionListener {
+
+		Moteur savedEngine;
+		JDialog parent;
+		JFrame mainWindow;
+
+		public SaveGameButtonListener(Moteur engine, JDialog parent, JFrame main){
+			this.savedEngine = engine;
+			this.parent = parent;
+			this.mainWindow = main;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			ConfirmWindow conf = new ConfirmWindow("Sauvegarder la partie courante ?", null, null);
+			PanelListener listener = new PanelListener();
+			conf.setListeners(listener.new SaveGameListener(savedEngine, conf, null), listener.new ReturnButtonListener(conf, null));
+
+			conf.openConfirmWindow();
+		}
+
+	}
 
 
 	// Charge une partie
 
 	public class SaveGameListener implements ActionListener {
 
-		Moteur loadedEngine;
+		Moteur savedEngine;
 		JDialog parent;
 		JFrame mainWindow;
 
 		public SaveGameListener(Moteur engine, JDialog parent, JFrame main){
-			this.loadedEngine = engine;
+			this.savedEngine = engine;
 			this.parent = parent;
 			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			//if(parent != null){parent.dispose();}
+			if(parent != null){parent.dispose();}
 			//if(mainWindow != null){mainWindow.dispose();}
 			//if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
 
-			Sauvegarder save = new Sauvegarder(loadedEngine);
+			Sauvegarder save = new Sauvegarder(savedEngine);
 		}
 
 	}

@@ -44,7 +44,8 @@ public class LoadGamePanel extends PanelInterface {
 	private void buildSettingsPanel(){
 
 		JPanel zone1 = newZone(5);
-		JPanel zone2 = newZone(1);
+		JPanel zone2 = newZone(5);
+		JPanel zone3 = newZone(1);
 		
 		ChargementTitre title = new ChargementTitre();
 		
@@ -56,23 +57,31 @@ public class LoadGamePanel extends PanelInterface {
 		addNewButton(zone1, setSaveName(table,3), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,3), parentDialog, mainWindow), null);
 		addNewButton(zone1, setSaveName(table,4), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,4), parentDialog, mainWindow), null);
 
+		addNewButton(zone2, setSaveName(table,5), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,5), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,6), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,6), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,7), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,7), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,8), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,8), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,9), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,9), parentDialog, mainWindow), null);
+
 		//addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 
 		if (openMenu){
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
+			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
 		} else {
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
 		}
 
 		this.add(zone1);
 		this.add(zone2);
+		this.add(zone3);
 	}
 	
 	
 	private String setSaveName(String[] table, int i){
-		if (table.length < i+1) {
+		if (table.length <= i) {
 		    return "Vide";
 		} else {
+			System.out.println(i+" : "+table[i]);
 			return table[i];
 		}
 	}
