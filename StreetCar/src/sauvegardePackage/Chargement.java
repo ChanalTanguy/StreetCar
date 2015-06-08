@@ -166,8 +166,11 @@ public class Chargement {
 					System.out.print(mot.getPlateau().getPlateau()[i][j]+ " ");
 				}
 				System.out.println("");
-			}*/
-				
+			}
+			System.out.println(mot.getTabPlayers()[joueur].getType());
+			System.out.println(mot.getTabPlayers()[1-joueur].getType());
+			*/
+			
 			System.out.println("Fichier chargé");
 			f.close();
 		}

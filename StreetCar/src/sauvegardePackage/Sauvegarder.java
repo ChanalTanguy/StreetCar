@@ -16,6 +16,8 @@ public class Sauvegarder {
 	int numTour;
 	int typeJoueur;
 	Pioche pio;
+	String[] date;
+	String dateFinale = null;
 	Tuile[][] plat;
 	MainJoueur mainJactif, mainJinact;
 	String name, objectif1, objectif2;
@@ -25,7 +27,15 @@ public class Sauvegarder {
 	{
 		mot = moteur;
 		dateCourante = new Date();
-		name = "save/Sauvegarde_du_" + dateCourante + ".txt";
+		date = dateCourante.toString().split(" ");
+		dateFinale = date[0]+"_";
+		for(int i = 1; i<date.length; i++)
+		{
+			dateFinale += date[i];
+			dateFinale += "_";
+		}
+		
+		name = "save/Sauvegarde_du_" + dateFinale + ".txt";
 		save(this);
 	}
 	
