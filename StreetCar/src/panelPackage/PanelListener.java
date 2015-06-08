@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import joueurPackage.Joueur;
 import joueurPackage.JoueurHumain;
 import joueurPackage.JoueurIA;
+import joueurPackage.Objectifs;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import sauvegardePackage.Chargement;
@@ -71,8 +72,10 @@ public class PanelListener {
 
 		public void actionPerformed(ActionEvent e) {
 			Moteur m = new Moteur(new Plateau());
-			Joueur joueur1 = createPlayer(selectedJ1, m, 1);
-			Joueur joueur2 = createPlayer(selectedJ2, m, 1);
+			Objectifs obj1 = m.getTabPlayers()[0].getObjectifs();
+			Objectifs obj2 = m.getTabPlayers()[1].getObjectifs();
+			Joueur joueur1 = createPlayer(selectedJ1, m, obj1);
+			Joueur joueur2 = createPlayer(selectedJ2, m, obj2);
 			m.setPlayers(joueur1, joueur2);
 			parent.dispose();
 			if(mainWindow != null){mainWindow.dispose();}
@@ -91,13 +94,13 @@ public class PanelListener {
 			return null;
 		}
 
-		private Joueur createPlayer(ButtonGroup group, Moteur m, int terminus){
+		private Joueur createPlayer(ButtonGroup group, Moteur m, Objectifs obj){
 			String text = getSelectedButtonText(group);
 			switch (text){
-			case "Humain" : { return new JoueurHumain(m, terminus); } 
-			case "Facile" : { return new JoueurIA(m, terminus); } 
-			case "Moyen" : { return new JoueurIA(m, terminus); } 
-			case "Difficile" : { return new JoueurIA(m, terminus); } 
+			case "Humain" : { return new JoueurHumain(m, obj); } 
+			case "Facile" : { return new JoueurIA(m, obj); } 
+			case "Moyen" : { return new JoueurIA(m, obj); } 
+			case "Difficile" : { return new JoueurIA(m, obj); } 
 			default : return null;
 			}
 		}
