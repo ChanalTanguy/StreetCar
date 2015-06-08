@@ -89,7 +89,7 @@ public class Configuration {
 		chaine_resultat += piocheDuTour.toString();
 		chaine_resultat += plateauDuTour.toString();
 		for (int numCoupPrecedent = 0; numCoupPrecedent < coupsPrecedents.length; numCoupPrecedent++){
-			chaine_resultat += coupsPrecedents[numCoupPrecedent].toString();
+			if(coupsPrecedents[numCoupPrecedent] != null) chaine_resultat += coupsPrecedents[numCoupPrecedent].toString();
 		}
 		return chaine_resultat;
 	}

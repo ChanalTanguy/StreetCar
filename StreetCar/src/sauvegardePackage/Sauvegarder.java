@@ -45,7 +45,6 @@ public class Sauvegarder {
 		pio = mot.getPioche();
 		plat = mot.getPlateau().getPlateau();
 		numTour = mot.getNumTour();
-		//TODO Prendre en compte l'historique ?
 		//TODO Prendre en compte les objectifs de chacun joueur.objectif
 		
 		try 
@@ -92,6 +91,10 @@ public class Sauvegarder {
 				}
 				f.write(System.getProperty("line.separator"));
 			}
+			
+			//Historique
+			//f.write(mot.getHistorique().toString());
+			
 			
 			System.out.println("Fichier enregistré");
 			f.close();
