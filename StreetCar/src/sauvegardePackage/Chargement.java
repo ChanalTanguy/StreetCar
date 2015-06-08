@@ -24,6 +24,7 @@ public class Chargement {
 	int numTour;
 	int nbPioche;
 	int ligne;
+	int typeJoueur;
 	int[] objectifs = new int[3];
 	String[] objectif1;
 	String[] objectif2;
@@ -56,6 +57,10 @@ public class Chargement {
 			joueur = Character.getNumericValue((br.readLine().charAt(0)));
 			mot.setcurrentPlayer(joueur);
 			
+			//Type du joueur actif
+			typeJoueur = Character.getNumericValue((br.readLine().charAt(0)));
+			mot.getTabPlayers()[joueur].setType(typeJoueur);
+			
 			//Ligne joueur actif
 			ligne = Character.getNumericValue((br.readLine().charAt(0)));
 			mot.getTabPlayers()[joueur].setLigne(ligne);
@@ -80,6 +85,10 @@ public class Chargement {
 
 			//Joueur inactif
 			joueurInactif = Character.getNumericValue((br.readLine().charAt(0)));
+			
+			//Type joueur inactif
+			typeJoueur = Character.getNumericValue((br.readLine().charAt(0)));
+			mot.getTabPlayers()[1-joueur].setType(typeJoueur);
 			
 			//Ligne joueur inactif
 			ligne = Character.getNumericValue((br.readLine().charAt(0)));
@@ -107,12 +116,15 @@ public class Chargement {
 			nbPioche = Integer.parseInt(br.readLine());
 			pioche = br.readLine();
 			
+			
 			String[]tabPioche = pioche.split("} ");
 			for(int i = 0; i<tabPioche.length; i++)
 			{
 				pio.add(creerTuile(tabPioche[i]+"}"));
 				
 			}
+			
+			mot.setPioche(pio);;
 
 			//Plateau
 			for(int i = 0; i<12; i++)
@@ -156,7 +168,6 @@ public class Chargement {
 				}
 				System.out.println("");
 			}*/
-		
 				
 			System.out.println("Fichier chargé");
 			f.close();
