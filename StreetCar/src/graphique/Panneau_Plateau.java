@@ -71,6 +71,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private int decalageMain;
 	private int positionXPioche;
 	private int positionYPioche;
+	private int positionXObjJ1;
+	private int positionYObjJ1;
+	private int positionXObjJ2;
+	private int positionYObjJ2;
 	private int dimensionPioche;
 	public boolean piocher = false;
 	/*
@@ -105,6 +109,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public int getMainDuHaut (){
 		return mainDuHaut;
 	}
+	public boolean getVisObjJ1 (){
+		return objectifsVisibleJ1;
+	}
+	public boolean getVisObjJ2 (){
+		return objectifsVisibleJ2;
+	}
 	public int getMaintDuBas (){
 		return mainDuBas;
 	}
@@ -113,6 +123,18 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	public int getDecalageMain (){
 		return decalageMain;
+	}
+	public int getPositionXObjJ1 (){
+		return positionXObjJ1;
+	}
+	public int getPositionYObjJ1 (){
+		return positionYObjJ1;
+	}
+	public int getPositionXObjJ2 (){
+		return positionXObjJ2;
+	}
+	public int getPositionYObjJ2 (){
+		return positionYObjJ2;
 	}
 	public int getPositionXPioche (){
 		return positionXPioche;
@@ -136,6 +158,16 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setMainSelectionnee (int numeroMain) {
 		mainSelectionnee = numeroMain;
 	}
+	
+	public void setVisObjJ1 (boolean newbool) {
+		objectifsVisibleJ1 = newbool;
+	}
+	
+	public void setVisObjJ2 (boolean newbool) {
+		objectifsVisibleJ2 = newbool;
+	}
+	
+	
 	public void setTuileSelectionnee (int numeroTuile) {
 		tuileMainSelectionnee = numeroTuile;
 	}
@@ -223,6 +255,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		mainDuHaut = depart - 10 - tailleCaseMain;
 		mainDuBas = depart + mot.getPlateau().length() * tailleCase + 10;
+		
+		positionXObjJ1 = depart+((tailleCase*145)/10);
+		positionYObjJ1 = (depart-tailleCase);
+		
+		positionXObjJ2 = depart+((tailleCase*145)/10);
+		positionYObjJ2 = depart+(tailleCase*13);
 		
 		positionXPioche = 6*largeur/7;
 		positionYPioche = hauteur/2-tailleCase;
@@ -367,11 +405,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 	{
 		if(objectifsVisibleJ1)
 		{
-			crayon.drawImage(carteObjectif1, depart+(tailleCase*15), (depart-tailleCase*2), (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(carteObjectif1, positionXObjJ1, positionYObjJ1, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		} 
 		else
 		{
-			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), (depart-tailleCase*2), (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(carteObjectifDos, positionXObjJ1, positionYObjJ1, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
 	
@@ -380,11 +418,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 	{
 		if(objectifsVisibleJ2)
 		{
-			crayon.drawImage(carteObjectif2, depart+(tailleCase*15), depart+(tailleCase*13), (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(carteObjectif2, positionXObjJ2, positionYObjJ2, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		} 
 		else
 		{
-			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+(tailleCase*13), (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(carteObjectifDos, positionXObjJ2, positionYObjJ2, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
 	

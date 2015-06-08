@@ -43,9 +43,11 @@ public class Moteur {
 	 */
 	public Moteur(Plateau referencePlateau) {
 		Objectifs[] obj = new Objectifs[2];
-		obj = tirerObjectif();
-		//System.out.println("Objectif joueur 1 : " + obj[0].toString());
-		//System.out.println("Objectif joueur 2 : " + obj[1].toString());
+//		obj = tirerObjectif();
+		initBidon(obj);
+		
+		System.out.println("Objectif joueur 1 : " + obj[0].toString());
+		System.out.println("Objectif joueur 2 : " + obj[1].toString());
 		
 		
 		tabPlayers = new Joueur[2];
@@ -211,6 +213,8 @@ public class Moteur {
 				
 				panneau_Jeu.setPiocheSelectionnee(true);
 				panneau_Jeu.repaint();
+				
+				
 				
 				System.out.println("tour " + numeroDeTour + " valide");
 				System.out.println("joueur courant de ce tour : " + currentPlayer);
@@ -683,14 +687,17 @@ public class Moteur {
 			case 'I':
 				val = 9;
 				break;
-			case 'K':
+			case 'J':
 				val = 10;
 				break;
-			case 'L':
+			case 'K':
 				val = 11;
 				break;
-			case 'M':
+			case 'L':
 				val = 12;
+				break;
+			case 'M':
+				val = 13;
 				break;
 			default :
 				val = 0;
@@ -699,5 +706,17 @@ public class Moteur {
 		return val;
 	}
 
+	private void initBidon (Objectifs[] tabObjectifs){
+		for (int indexObjectif = 0; indexObjectif < tabObjectifs.length; indexObjectif++){
+			tabObjectifs[indexObjectif] = new Objectifs();
+		}
+		tabObjectifs[0].setLigne(4);
+		tabObjectifs[0].ajouterEscales(valeurEscale('G'));
+		tabObjectifs[0].ajouterEscales(valeurEscale('A'));
+		
+		tabObjectifs[1].setLigne(6);
+		tabObjectifs[1].ajouterEscales(valeurEscale('D'));
+		tabObjectifs[1].ajouterEscales(valeurEscale('H'));
+	}
 	
 }

@@ -61,6 +61,18 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					panneauDeJeu.setMainSelectionnee(-1);
 					joueur.coupPiocher();
 					selectionnerPioche();
+					panneauDeJeu.setVisObjJ2(false);
+					panneauDeJeu.setVisObjJ2(false);
+				}
+				
+				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+					panneauDeJeu.setVisObjJ1(true);
+					panneauDeJeu.repaint();
+				}
+				
+				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+					panneauDeJeu.setVisObjJ2(true);
+					panneauDeJeu.repaint();
 				}
 
 				//TODO faire la rotation de la case
@@ -118,7 +130,25 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	
 	public void mouseMoved(MouseEvent e) {}
 	
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		// Coordonnees
+					int x = e.getX();
+					int y = e.getY();
+					
+					// on supprime le decalage de dessin par rapport a la bordure gauche.
+					int piocheX = x - panneauDeJeu.getDepart();
+					int piocheY = y;
+		
+		if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+			panneauDeJeu.setVisObjJ1(false);
+			panneauDeJeu.repaint();
+		}
+		
+		else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+			panneauDeJeu.setVisObjJ2(false);
+			panneauDeJeu.repaint();
+		}
+	}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
@@ -137,6 +167,35 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		}
 		return clicValide;
 	}
+	
+	private boolean estSurObjectifJ1(int Xget, int Yget){
+		boolean clicValideSurObj1 = false;
+		int borneGauche = panneauDeJeu.getPositionXObjJ1()-90;
+		int borneDroite = panneauDeJeu.getPositionXObjJ1() -90 + (panneauDeJeu.getTailleCase()*30)/10;
+		int borneHaute = panneauDeJeu.getPositionYObjJ1();
+		int borneBasse = panneauDeJeu.getPositionYObjJ1() + (panneauDeJeu.getTailleCase()*25)/10;
+		
+		if ( Xget >= borneGauche && Xget <= borneDroite
+				&&	 Yget >= borneHaute && Yget <= borneBasse ){
+					clicValideSurObj1 = true;
+				}
+				return clicValideSurObj1;
+	}
+	
+	private boolean estSurObjectifJ2(int Xget, int Yget){
+		boolean clicValideSurObj1 = false;
+		int borneGauche = panneauDeJeu.getPositionXObjJ2() - 90;
+		int borneDroite = panneauDeJeu.getPositionXObjJ2() -90 + (panneauDeJeu.getTailleCase()*30)/10;
+		int borneHaute = panneauDeJeu.getPositionYObjJ2();
+		int borneBasse = panneauDeJeu.getPositionYObjJ2() + (panneauDeJeu.getTailleCase()*25)/10;
+		
+		if ( Xget >= borneGauche && Xget <= borneDroite
+				&&	 Yget >= borneHaute && Yget <= borneBasse ){
+					clicValideSurObj1 = true;
+				}
+				return clicValideSurObj1;
+	}
+	
 	private boolean estSurPioche(int piocheX, int piocheY) {
 		boolean clicValideSurPioche = false;
 		int borneGauche = panneauDeJeu.getPositionXPioche() +10;
