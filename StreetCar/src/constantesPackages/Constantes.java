@@ -95,6 +95,23 @@ public class Constantes {
 		
 		/**
 		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
+		 * @param nomImage
+		 * @return une BufferedImage image si un fichier de nom "nomImage" existe dans l'arborescence de fichier. Leve une exception sinon.
+		 */
+		public static BufferedImage initCarte (String nomImage){
+			BufferedImage imageResultat = null;
+			String chemin = "images/cartes/";
+			try {
+				chemin = chemin + nomImage;
+				imageResultat = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucune image de ce nom trouvee");
+			}
+			return imageResultat;
+		}
+		
+		/**
+		 * retourne une BufferedImage recuperee grace a son nom donne en parametre de la methode
 		 * @param nomBouton
 		 * @return une BufferedImage bouton si un fichier de nom "nomBouton" existe dans l'arborescence de fichier. Leve une exception sinon
 		 */

@@ -1,0 +1,12 @@
+1  Bulles
+2  Hopital Michallon
+3  Campus
+4  Parc Paul Mistral
+5  Les 3 brasseurs
+6  Vallier Jaures
+7  Gare
+8  Foire des Rameux
+9  Place Victor Hugo
+11 Place de Verdun
+12 Stade des Alpes
+13 CAserne de Bonne
