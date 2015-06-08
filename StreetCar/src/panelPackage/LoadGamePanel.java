@@ -12,6 +12,7 @@ import mainPackage.Moteur;
 import objectPackage.Plateau;
 import panelPackage.PanelListener.DebugCheckBoxListener;
 import panelPackage.PanelListener.ReturnButtonListener;
+import titrePackage.ChargementTitre;
 import windowPackage.MenuWindow;
 
 public class LoadGamePanel extends PanelInterface {
@@ -43,6 +44,10 @@ public class LoadGamePanel extends PanelInterface {
 
 		JPanel zone1 = newButtonZone(400,50);
 		JPanel zone2 = newButtonZone(400,50);
+		
+		ChargementTitre title = new ChargementTitre();
+		
+		String[] table = title.listerRepertoire();
 
 		addNewButton(zone1, "LEBOUTON", buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(new Moteur(new Plateau()), parentDialog, mainWindow), null);
 

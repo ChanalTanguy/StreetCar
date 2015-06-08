@@ -20,7 +20,7 @@ public class Sauvegarder {
 	String name, objectif1, objectif2;
 	Date dateCourante;
 	
-	Sauvegarder(Moteur moteur)
+	public Sauvegarder(Moteur moteur)
 	{
 		mot = moteur;
 		dateCourante = new Date();

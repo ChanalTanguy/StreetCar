@@ -1,5 +1,7 @@
 package panelPackage;
 
+import graphique.Fenetre;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -21,6 +23,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
 public class MenuPanel extends PanelInterface {
@@ -49,8 +52,8 @@ public class MenuPanel extends PanelInterface {
 		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null, this.mainWindow), loadImage("reprendre_menu.png"));
 		
 		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, this.mainWindow, true), loadImage("nouvellePartie_menu.png"));
-		addNewButton(zone2, buttonSize, null, null, loadImage("sauvegarderPartie_menu.png"));
-		addNewButton(zone2, buttonSize, null, null /*listener.new LoadGameButtonListener(parentDialog, this.mainWindow, true)*/, loadImage("chargerPartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new SaveGameListener(((Fenetre)this.mainWindow).moteurParent, parentDialog, this.mainWindow), loadImage("sauvegarderPartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new LoadGameButtonListener(parentDialog, this.mainWindow, true), loadImage("chargerPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("defis_menu.png"));
 		addNewButton(zone2, buttonSize, null, listener.new SettingsButtonListener(parentDialog, true, this.mainWindow), loadImage("options_menu.png"));
 		addNewButton(zone2, buttonSize, null, listener.new CreditsButtonListener(parentDialog, true, this.mainWindow), loadImage("credits_menu.png"));
