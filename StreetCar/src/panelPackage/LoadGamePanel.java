@@ -81,7 +81,6 @@ public class LoadGamePanel extends PanelInterface {
 		if (table.length <= i) {
 		    return "Vide";
 		} else {
-			System.out.println(i+" : "+table[i]);
 			return table[i];
 		}
 	}
