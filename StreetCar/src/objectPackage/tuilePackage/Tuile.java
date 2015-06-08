@@ -9,6 +9,7 @@ import java.util.ListIterator;
 import constantesPackages.Constantes;
 
 public class Tuile {
+	int i = 0;
 	private boolean immuable;
 	private String orientation;
 	private ArrayList<Connection> listeConnections;
@@ -311,7 +312,7 @@ public class Tuile {
 			this.rotation();
 		}
 		Tuile tuileDeComparaison;
-		if ( this.equals( (tuileDeComparaison = Tuile.newLigneDroite()) ) ){
+		if ( this.listesIdentiques( (tuileDeComparaison = newLigneDroite()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -319,7 +320,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = Tuile.newVirage()) ) ){
+		else if( this.listesIdentiques( (tuileDeComparaison = newVirage()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -327,7 +328,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = Tuile.newBifurcationDroite()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newBifurcationDroite()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -335,7 +336,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newBifurcationGauche()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newBifurcationGauche()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -343,7 +344,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newSeparation()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newSeparation()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -351,7 +352,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newDoubleVirage()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newDoubleVirage()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -359,7 +360,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newDoubleBifurcation()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newDoubleBifurcation()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -367,7 +368,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newCroisement()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newCroisement()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -375,7 +376,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newBifurcationsSeparesGauche()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newBifurcationsSeparesGauche()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -383,7 +384,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newBifurcationsSeparesDroite()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newBifurcationsSeparesDroite()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -391,7 +392,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newQuadrupleVirages()) ) ){
+		else if ( this.listesIdentiques( (tuileDeComparaison = newQuadrupleVirages()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());
@@ -399,7 +400,7 @@ public class Tuile {
 			this.setType(tuileDeComparaison.getTypeTuile());
 			this.setImage(tuileDeComparaison.deepCopy());
 		}
-		else if ( this.equals( (tuileDeComparaison = newBifurcationsEmbrassees()) ) ){
+		else if( this.listesIdentiques( (tuileDeComparaison = newBifurcationsEmbrassees()).getListeConnections())){
 			this.setPresenceArbres(tuileDeComparaison.getPresenceArbres());
 			this.setOrientation(tuileDeComparaison.getOrientation());
 			this.setListeConnections(tuileDeComparaison.getListeConnections());

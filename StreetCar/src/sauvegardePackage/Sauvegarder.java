@@ -24,7 +24,7 @@ public class Sauvegarder {
 	{
 		mot = moteur;
 		dateCourante = new Date();
-		name = "save/Sauvegarde du " + dateCourante + ".txt";
+		name = "save/Sauvegarde_du_" + dateCourante + ".txt";
 		save(this);
 	}
 	
@@ -45,7 +45,7 @@ public class Sauvegarder {
 		pio = mot.getPioche();
 		plat = mot.getPlateau().getPlateau();
 		numTour = mot.getNumTour();
-		//TODO Prendre en compte les objectifs de chacun joueur.objectif
+		//TODO Prendre en compte historique
 		
 		try 
 		{

@@ -99,21 +99,22 @@ public class Chargement {
 			for(int i = 0; i<nbCartes; i++)
 			{
 				tuileS = br.readLine();
-				tuile = creerTuile(tuileS);
 				main.setTuileAt(i, creerTuile(tuileS));
 				mot.setMainPlayers(main.clone(), 1-joueur);
 			}
 
+			//Pioche
 			nbPioche = Integer.parseInt(br.readLine());
-			
 			pioche = br.readLine();
 			
 			String[]tabPioche = pioche.split("} ");
 			for(int i = 0; i<tabPioche.length; i++)
 			{
 				pio.add(creerTuile(tabPioche[i]+"}"));
+				
 			}
-			
+
+			//Plateau
 			for(int i = 0; i<12; i++)
 			{
 				lignePlateau = br.readLine();
