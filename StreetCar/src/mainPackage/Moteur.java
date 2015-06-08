@@ -434,7 +434,8 @@ public class Moteur {
 		
 		System.out.println(" ===== FIN Chargement Tour V2 ===== \n");
 	}
-/*	
+
+	/*	
 	public void annulerTour (){
 		System.out.println("\n ===== Annulation du tour ===== ");
 		System.out.println("numeroDeTour : " + numeroDeTour);
@@ -498,6 +499,7 @@ public class Moteur {
 		System.out.println(" ===== FIN Chargement d'un Tour ===== \n");
 	}
 */	
+	
 	public void montrerCoupsJoues (int numeroTourAMontrer){
 		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
 		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
