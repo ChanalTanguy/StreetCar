@@ -10,11 +10,11 @@ public class MainSauvegarde {
 	{
 		Moteur m = new Moteur(new Plateau());
 		
-		Sauvegarder s = new Sauvegarder(m, "save/testObjectifs");  
+		//Sauvegarder s = new Sauvegarder(m, "save/test");  
 		
-		//Chargement c = new Chargement();
-		//c.charger(m, "save/testObjectifs.txt");
+		Chargement c = new Chargement();
+		c.charger(m, "save/test.txt");
 		
-		//Sauvegarder copyC = new Sauvegarder(m, "save/testObjectifsCopy");
+		Sauvegarder copyC = new Sauvegarder(m, "save/testCopy");
 	}
 }
