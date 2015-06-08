@@ -19,6 +19,12 @@ public class JoueurIA extends Joueur {
 		t = new Timer(450, ecouteurBoucle);
 	}
 	
+	public JoueurIA(Moteur m, Objectifs obj) {
+		super(new MainJoueur(), obj, typeIA);
+		ecouteurBoucle = new EcouteurBoucle(m, new IAFacile(m, this));
+		t = new Timer(450, ecouteurBoucle);
+	}
+	
 	public void attendCoup() {
 		ecouteurBoucle.enable();
 		if (!t.isRunning())
