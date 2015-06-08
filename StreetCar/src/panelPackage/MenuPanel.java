@@ -52,7 +52,7 @@ public class MenuPanel extends PanelInterface {
 		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null, this.mainWindow), loadImage("reprendre_menu.png"));
 		
 		addNewButton(zone2, buttonSize, null, listener.new ConfigureNewGameButtonListener(parentDialog, this.mainWindow, true), loadImage("nouvellePartie_menu.png"));
-		addNewButton(zone2, buttonSize, null, listener.new SaveGameListener(((Fenetre)this.mainWindow).moteurParent, parentDialog, this.mainWindow), loadImage("sauvegarderPartie_menu.png"));
+		addNewButton(zone2, buttonSize, null, listener.new SaveGameButtonListener(((Fenetre)this.mainWindow).moteurParent, parentDialog, this.mainWindow), loadImage("sauvegarderPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, listener.new LoadGameButtonListener(parentDialog, this.mainWindow, true), loadImage("chargerPartie_menu.png"));
 		addNewButton(zone2, buttonSize, null, null, loadImage("defis_menu.png"));
 		addNewButton(zone2, buttonSize, null, listener.new SettingsButtonListener(parentDialog, true, this.mainWindow), loadImage("options_menu.png"));
