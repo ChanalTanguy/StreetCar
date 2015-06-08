@@ -486,12 +486,12 @@ public class IADifficile implements InterfaceIA {
 
 		} while(!found && !file.isEmpty());
 
-		TuileChemin lastOne = tuileCheminCourant;
+		/*TuileChemin lastOne = tuileCheminCourant;
 		while(lastOne != null) {
 			System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
 			lastOne = lastOne.getPrevious();
 		}
-		System.out.println("---------");
+		System.out.println("---------");*/
 		//System.out.println(System.nanoTime()-time);
 
 		return coutFinal;
