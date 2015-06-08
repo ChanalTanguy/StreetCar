@@ -4,6 +4,7 @@ import graphique.Panneau_Plateau;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -43,6 +44,7 @@ public class PanneauTitre extends JPanel{
 	BufferedImage quitter ;
 	BufferedImage titre ;
 	BufferedImage fleche ;
+	BufferedImage retour ;
 	
 	PanneauTitre(FenetreTitre fen)
 	{
@@ -65,6 +67,7 @@ public class PanneauTitre extends JPanel{
 		titre = Constantes.Images.initBackground("titre.png");
 		fleche = Constantes.Images.initBackground("fleche.png");
 		backgroundCredits = Constantes.Images.initBackground("tramCred.png");
+		retour = Constantes.Images.initBackground("retour.png");
 	}
 
 	public void paintComponent (Graphics g){
@@ -96,20 +99,24 @@ public class PanneauTitre extends JPanel{
 	}
 
 	public void defis(Graphics2D crayon) {
-		// TODO Auto-generated method stub
+		crayon.setColor(Color.white);
+		crayon.drawString("Cette section n'a pas encore été faite.", getWidth()/3, getHeight()/4-50);
+		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
 	}
 
 	public void options(Graphics2D crayon) {
-		// TODO Auto-generated method stub
+		crayon.setColor(Color.white);
+		crayon.drawString("Cette section n'a pas encore été faite.", getWidth()/3, getHeight()/4-50);
+		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
 		
 	}
 	
 	private void chargerPartie(Graphics2D crayon) {
 		crayon.setColor(Color.white);
-		
+		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
 		if(saves != null)
 		{
-
+			crayon.setFont(new Font(Font.SANS_SERIF,0, getHeight()/50));
 			crayon.drawString("Choisissez une sauvegarde", getWidth()/3, getHeight()/4-50);
 			
 			for(int i = 0; i<saves.length && i<10; i++)
@@ -119,23 +126,15 @@ public class PanneauTitre extends JPanel{
 			
 			if(chargementPartie != -1)
 			{
-				Chargement c = new Chargement();
-				Moteur m = new Moteur(new Plateau());
-				
-				c.charger(m, saves[chargementPartie]);
-
-				Fenetre f = new Fenetre("Street Car"); 
-				f.disposition_V2(m, f.getSize());
-				fenetre.fermeture();
-				/*
-				PanelListener pn = new PanelListener();
-				
-				pn.new LoadGameListener(m, null, fenetre);
-				*/
-				
 				crayon.drawRect(getWidth()/3,getHeight()/4+chargementPartie*50-25 , 200, 25);
-			}
-			
+				
+				Chargement c = new Chargement();
+				Moteur m = new Moteur(new Plateau());			
+				c.charger(m, saves[chargementPartie]);
+				fenetre.fermeture();
+				Fenetre f = new Fenetre("Street Car"); 
+				f.disposition_V2(m, f.getSize());}
+				
 		}
 		
 		else crayon.drawString("Pas de sauvegarde", getWidth()/3, getHeight()/4);
@@ -146,9 +145,8 @@ public class PanneauTitre extends JPanel{
 	public void credits(Graphics2D crayon) {
 		//TODO inclure le bouton de retour
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
-		//crayon.setColor(Color.white);
-		//crayon.drawRect(getWidth()-300, getHeight()-175, 175, 55);
-	
+		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
+		//crayon.drawRect(getWidth()-200, getHeight()-100, 300, 45);
 	}
 	
 }
