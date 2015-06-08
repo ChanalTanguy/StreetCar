@@ -32,8 +32,8 @@ import windowPackage.NewGameWindow;
 import windowPackage.SettingsWindow;
 
 public class PanelListener {
-	
-	
+
+
 	// Ouvre la fenêtre de configuration d'une nouvelle partie
 
 	public class ConfigureNewGameButtonListener implements ActionListener {
@@ -56,8 +56,8 @@ public class PanelListener {
 		}
 
 	}
-	
-	
+
+
 	// Démarre une nouvelle partie
 
 	public class StartNewGameButtonListener implements ActionListener {
@@ -84,7 +84,7 @@ public class PanelListener {
 			Fenetre f = new Fenetre("Street Car");
 			f.disposition_V2(m, f.getSize());
 		}
-		
+
 		private String getSelectedButtonText(ButtonGroup group) {
 			for (Enumeration<AbstractButton> buttons = group.getElements(); buttons.hasMoreElements();) {
 				AbstractButton button = buttons.nextElement();
@@ -94,7 +94,7 @@ public class PanelListener {
 			}
 			return null;
 		}
-		
+
 		private Joueur createPlayer(ButtonGroup group, Moteur m, int terminus){
 			String text = getSelectedButtonText(group);
 			switch (text){
@@ -105,12 +105,12 @@ public class PanelListener {
 			default : return null;
 			}
 		}
-		
+
 	}
 
-	
+
 	// Ouvre la fenêtre demandant de confirmer la fermeture du jeu
-	
+
 	public class QuitButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -121,10 +121,10 @@ public class PanelListener {
 			conf.openConfirmWindow();
 		}
 	}
-	
-	
+
+
 	// Ouvre le menu de chargement d'une partie
-	
+
 	public class LoadGameButtonListener implements ActionListener {
 
 		JDialog parent;
@@ -145,64 +145,67 @@ public class PanelListener {
 		}
 
 	}
-	
+
 	// Charge une partie
-	
+
 	public class LoadGameListener implements ActionListener {
+
+		String saveName;
+		JDialog parent;
+		JFrame mainWindow;
+
+		public LoadGameListener(String name, JDialog parent, JFrame main){
+			this.saveName = name;
+			this.parent = parent;
+			this.mainWindow = main;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if(saveName != "Vide"){
+				Chargement load = new Chargement();
+				Moteur newEngine = new Moteur(new Plateau());
+				load.charger(newEngine, saveName);
+
+				Fenetre f = new Fenetre("Street Car");
+				f.disposition_V2(newEngine, f.getSize());
+				
+				if(parent != null){parent.dispose();}
+				if(mainWindow != null){mainWindow.dispose();}
+				if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
+
+			}
+		}
+
+	}
+
+
+	// Charge une partie
+
+	public class SaveGameListener implements ActionListener {
 
 		Moteur loadedEngine;
 		JDialog parent;
 		JFrame mainWindow;
 
-		public LoadGameListener(Moteur engine, JDialog parent, JFrame main){
+		public SaveGameListener(Moteur engine, JDialog parent, JFrame main){
 			this.loadedEngine = engine;
 			this.parent = parent;
 			this.mainWindow = main;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if(parent != null){parent.dispose();}
-			if(mainWindow != null){mainWindow.dispose();}
-			if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
-			
-			Chargement load = new Chargement();
-			Moteur newEngine = new Moteur(new Plateau());
-			load.charger(newEngine, "NOMDUBOUTON");
-			
-			Fenetre f = new Fenetre("Street Car");
-			f.disposition_V2(newEngine, f.getSize());
+			//if(parent != null){parent.dispose();}
+			//if(mainWindow != null){mainWindow.dispose();}
+			//if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
+
+			Sauvegarder save = new Sauvegarder(loadedEngine);
 		}
-		
+
 	}
 
-	
-	// Charge une partie
-	
-		public class SaveGameListener implements ActionListener {
 
-			Moteur loadedEngine;
-			JDialog parent;
-			JFrame mainWindow;
-
-			public SaveGameListener(Moteur engine, JDialog parent, JFrame main){
-				this.loadedEngine = engine;
-				this.parent = parent;
-				this.mainWindow = main;
-			}
-
-			public void actionPerformed(ActionEvent e) {
-				//if(parent != null){parent.dispose();}
-				//if(mainWindow != null){mainWindow.dispose();}
-				//if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
-				
-				Sauvegarder save = new Sauvegarder(loadedEngine);
-			}
-			
-		}
-		
-	
 	// Ouvre la fenêtre de configuration d'une nouvelle partie
-	
+
 	public class CreditsButtonListener implements ActionListener {
 
 		JDialog parent;
@@ -223,8 +226,8 @@ public class PanelListener {
 		}
 
 	}
-	
-	
+
+
 	// Ouvre la fenêtre de configuration des options
 
 	public class SettingsButtonListener implements ActionListener {
@@ -248,9 +251,9 @@ public class PanelListener {
 
 	}
 
-	
+
 	// Quitte le jeu
-	
+
 	public class Quit implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -258,8 +261,8 @@ public class PanelListener {
 		}
 
 	}
-	
-	
+
+
 	// Agit selon si le mode debug est activé ou non
 
 	public class DebugCheckBoxListener implements ItemListener {
@@ -274,9 +277,9 @@ public class PanelListener {
 		}
 	}
 
-	
+
 	// Ferme la	fenêtre courante
-	
+
 	public class ReturnButtonListener implements ActionListener {
 
 		JDialog parentDialog;
@@ -287,7 +290,7 @@ public class PanelListener {
 			parentDialog = parent;
 			this.window = window;
 		}
-		
+
 		public ReturnButtonListener(JDialog parent, MenuWindow window, JFrame mainWindow){
 			parentDialog = parent;
 			this.window = window;
