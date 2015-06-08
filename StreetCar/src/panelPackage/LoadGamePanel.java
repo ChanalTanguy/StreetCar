@@ -78,10 +78,10 @@ public class LoadGamePanel extends PanelInterface {
 	
 	
 	private String setSaveName(String[] table, int i){
-		System.out.println(table.length);
-		if (table.length <= i+1) {
+		if (table.length <= i) {
 		    return "Vide";
 		} else {
+			System.out.println(i+" : "+table[i]);
 			return table[i];
 		}
 	}

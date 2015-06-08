@@ -18,7 +18,7 @@ public class ChargementTitre {
 	
 	public String[] listerRepertoire(){
 
-		String[] listeTxt = null;
+		String[] listeTxt;
 		File[] listeFiles;
 			
 		listeTxt = f.list();
