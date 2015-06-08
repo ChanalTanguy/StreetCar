@@ -21,6 +21,8 @@ import joueurPackage.JoueurHumain;
 import joueurPackage.JoueurIA;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
+import sauvegardePackage.Chargement;
+import sauvegardePackage.Sauvegarder;
 import windowPackage.ConfirmWindow;
 import windowPackage.CreditsWindow;
 import windowPackage.LoadGameWindow;
@@ -162,12 +164,42 @@ public class PanelListener {
 			if(parent != null){parent.dispose();}
 			if(mainWindow != null){mainWindow.dispose();}
 			if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
+			
+			Chargement load = new Chargement();
+			Moteur newEngine = new Moteur(new Plateau());
+			load.charger(newEngine, "NOMDUBOUTON");
+			
 			Fenetre f = new Fenetre("Street Car");
-			f.disposition_V2(loadedEngine, f.getSize());
+			f.disposition_V2(newEngine, f.getSize());
 		}
 		
 	}
 
+	
+	// Charge une partie
+	
+		public class SaveGameListener implements ActionListener {
+
+			Moteur loadedEngine;
+			JDialog parent;
+			JFrame mainWindow;
+
+			public SaveGameListener(Moteur engine, JDialog parent, JFrame main){
+				this.loadedEngine = engine;
+				this.parent = parent;
+				this.mainWindow = main;
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				//if(parent != null){parent.dispose();}
+				//if(mainWindow != null){mainWindow.dispose();}
+				//if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
+				
+				Sauvegarder save = new Sauvegarder(loadedEngine);
+			}
+			
+		}
+		
 	
 	// Ouvre la fenêtre de configuration d'une nouvelle partie
 	

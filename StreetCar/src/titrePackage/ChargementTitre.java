@@ -7,7 +7,7 @@ public class ChargementTitre {
 
 	String reper = "save";
 	File f;
-	ChargementTitre()
+	public ChargementTitre()
 	{
 		f = new File(reper);
 	}
