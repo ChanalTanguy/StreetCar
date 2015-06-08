@@ -51,7 +51,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs d'Images
 	 */
 	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
-	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2;
+	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	/*
@@ -654,42 +654,54 @@ public class Panneau_Plateau extends Pan_Abstract{
 		{
 			case 1: 
 					carteObjectif1 = Constantes.Images.initCarte("carte1.png");
+					tramJ1 = Constantes.Images.initCarte("tram1.png");
 					break;
 			case 2: 
 					carteObjectif1 = Constantes.Images.initCarte("carte2.png");
+					tramJ1 = Constantes.Images.initCarte("tram2.png");
 					break;
 			case 3: 
 					carteObjectif1 = Constantes.Images.initCarte("carte3.png");
+					tramJ1 = Constantes.Images.initCarte("tram3.png");
 					break;
 			case 4: 
 					carteObjectif1 = Constantes.Images.initCarte("carte4.png");
+					tramJ1 = Constantes.Images.initCarte("tram4.png");
 					break;
 			case 5: 
 					carteObjectif1 = Constantes.Images.initCarte("carte5.png");
+					tramJ1 = Constantes.Images.initCarte("tram5.png");
 					break;
 			case 6: 
 					carteObjectif1 = Constantes.Images.initCarte("carte6.png");
+					tramJ1 = Constantes.Images.initCarte("tram6.png");
 					break;
 		}
 		switch(mot.getTabPlayers()[1].getObjectifs().getLigne())
 		{
 			case 1: 
 					carteObjectif2 = Constantes.Images.initCarte("carte1.png");
+					tramJ2 = Constantes.Images.initCarte("tram1.png");
 					break;
 			case 2: 
 					carteObjectif2 = Constantes.Images.initCarte("carte2.png");
+					tramJ2 = Constantes.Images.initCarte("tram2.png");
 					break;
 			case 3: 
 					carteObjectif2 = Constantes.Images.initCarte("carte3.png");
+					tramJ2 = Constantes.Images.initCarte("tram3.png");
 					break;
 			case 4: 
 					carteObjectif2 = Constantes.Images.initCarte("carte4.png");
+					tramJ2 = Constantes.Images.initCarte("tram4.png");
 					break;
 			case 5: 
 					carteObjectif2 = Constantes.Images.initCarte("carte5.png");
+					tramJ2 = Constantes.Images.initCarte("tram5.png");
 					break;
 			case 6: 
 					carteObjectif2 = Constantes.Images.initCarte("carte6.png");
+					tramJ2 = Constantes.Images.initCarte("tram6.png");
 					break;
 		}
 		//initialisation des escales selon les escales tiré
