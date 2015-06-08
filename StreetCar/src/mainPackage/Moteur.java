@@ -35,7 +35,6 @@ public class Moteur {
 	private Historique historiqueDeTours;
 	
 	private Coup[] coupsPrecedents;
-	private Coup[] coupsFutursAnticipes;
 	
 	/*
 	 * Constructeur
@@ -66,7 +65,6 @@ public class Moteur {
 		
 		historiqueDeTours = new Historique();
 		coupsPrecedents = new Coup[Coup.nbMaxPlacements];
-		coupsFutursAnticipes = new Coup[Coup.nbMaxPlacements];
 		
 		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, coupsPrecedents);
 		historiqueDeTours.add(configurationInitiale);
