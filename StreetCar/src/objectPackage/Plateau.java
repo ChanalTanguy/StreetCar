@@ -297,6 +297,24 @@ public class Plateau {
 		
 		return plateauIdentique;
 	}
+	public String toString (){
+		String chaine_resultat = "";
+		
+		for (int indexLigne = 1; indexLigne < plateau.length-1; indexLigne++){
+			for (int indexColonne = 1; indexColonne < plateau.length-1; indexColonne++){
+				if ( plateau[indexLigne][indexColonne] != null ){
+					chaine_resultat += plateau[indexLigne][indexColonne].toString();
+				}
+				else {
+					chaine_resultat += "{null}";
+				}
+				chaine_resultat += " ";
+			}
+			chaine_resultat += "\n";
+		}
+		
+		return chaine_resultat;
+	}
 	
 	/*
 	 * Methodes Private de Plateau
