@@ -48,7 +48,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, piocheMain, rotate;
+	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	/*
@@ -405,6 +405,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 					break;
 			}
 			dessinerRotation(crayon, tuileAt.getImage(), angle, depart + coordX*tailleCase + 1, depart + coordY*tailleCase + 1, tailleCase-1);
+			if (tuileAt.getEscaleLiee()!=0)
+			{
+				crayon.drawImage(stop,  depart + (tailleCase*coordX), depart + (tailleCase*coordY), tailleCase/3, tailleCase/3, this);
+			}
 		}
 	}
 	private void dessinerTuileMain (Graphics2D crayon, Tuile tuileAt, int numeroTuile, int coordY){
@@ -427,7 +431,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 				break;
 		}
 		dessinerRotation(crayon, tuileAt.getImage(), angle, decalageMain + numeroTuile * (tailleCaseMain + petitEcartMain), coordY, tailleCaseMain);
-		
 	}
 	private void dessinerRotation (Graphics2D crayon, BufferedImage image, int angle, int coordX, int coordY, int dimension){
 		double rotationRequired = Math.toRadians(angle);
@@ -583,6 +586,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		surbrillanceJaune = Constantes.Images.initBackground("surbrillanceJaune.png");
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
 		opaciteFutur = Constantes.Images.initBackground("opaciteFutur.png");
+		stop = Constantes.Images.initTuile("stop.png");
+		
 	}
 
 }
