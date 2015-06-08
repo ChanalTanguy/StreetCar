@@ -215,9 +215,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mot = referenceMoteur;
 		notifications = "tests d'ecriture";
 		initialiserImages();
-		coupsJoues = new Coup[Constantes.Coup.nbMaxPlacements];
-		coupsPrecedents = new Coup[Constantes.Coup.nbMaxPlacements];
-		coupsHistorique = new Coup[Constantes.Coup.nbMaxPlacements];
+		coupsJoues = new Coup[Coup.nbMaxPlacements];
+		coupsPrecedents = new Coup[Coup.nbMaxPlacements];
+		coupsHistorique = new Coup[Coup.nbMaxPlacements];
 		
 		Ecouteur_Plateau ecouteur = new Ecouteur_Plateau(this, referenceMoteur);
 		addMouseListener(ecouteur);
@@ -400,7 +400,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
 	
-	//dessiner les objectifs, cachés ou non, du joueur1
+	//dessiner les objectifs, cachï¿½s ou non, du joueur1
 	private void dessinerObjectifJ1()
 	{
 		if(objectifsVisibleJ1)
@@ -413,7 +413,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	
-	//dessine les objectifs, cachés ou non, du joueur2
+	//dessine les objectifs, cachï¿½s ou non, du joueur2
 	private void dessinerObjectifJ2()
 	{
 		if(objectifsVisibleJ2)
