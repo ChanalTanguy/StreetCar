@@ -26,7 +26,6 @@ public class Coup {
 		this.typeCoup = type;
 		this.numeroTuileMain = tuile;
 		this.coordonneePlateau = coordonnee;
-//		this.mainUtilisee = new MainJoueur();
 	}
 	
 	public String getType() {
@@ -86,7 +85,7 @@ public class Coup {
 	 * @return
 	 */
 	static public Coup newAvanceeTram (int x, int y){
-		return new Coup(avanceeTrame, -1, new Point(x, y));
+		return new Coup(avanceeTrame, 0, new Point(x, y));
 	}
 	
 	/**
@@ -95,7 +94,7 @@ public class Coup {
 	 * @return
 	 */
 	static public Coup newPioche() {
-		return new Coup(pioche,-1,null);
+		return new Coup(pioche,0,null);
 	}
 	
 	/**
