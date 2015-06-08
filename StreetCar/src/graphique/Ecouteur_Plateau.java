@@ -65,12 +65,12 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					panneauDeJeu.setVisObjJ2(false);
 				}
 				
-				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer() == 1){
 					panneauDeJeu.setVisObjJ1(true);
 					panneauDeJeu.repaint();
 				}
 				
-				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer() == 2){
 					panneauDeJeu.setVisObjJ2(true);
 					panneauDeJeu.repaint();
 				}
@@ -176,10 +176,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		int borneBasse = panneauDeJeu.getPositionYObjJ1() + (panneauDeJeu.getTailleCase()*25)/10;
 		
 		if ( Xget >= borneGauche && Xget <= borneDroite
-				&&	 Yget >= borneHaute && Yget <= borneBasse ){
-					clicValideSurObj1 = true;
-				}
-				return clicValideSurObj1;
+		&&	 Yget >= borneHaute && Yget <= borneBasse ){
+			clicValideSurObj1 = true;
+		}
+		return clicValideSurObj1;
 	}
 	
 	private boolean estSurObjectifJ2(int Xget, int Yget){
@@ -190,10 +190,10 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		int borneBasse = panneauDeJeu.getPositionYObjJ2() + (panneauDeJeu.getTailleCase()*25)/10;
 		
 		if ( Xget >= borneGauche && Xget <= borneDroite
-				&&	 Yget >= borneHaute && Yget <= borneBasse ){
-					clicValideSurObj1 = true;
-				}
-				return clicValideSurObj1;
+		&&	 Yget >= borneHaute && Yget <= borneBasse ){
+			clicValideSurObj1 = true;
+		}
+		return clicValideSurObj1;
 	}
 	
 	private boolean estSurPioche(int piocheX, int piocheY) {
