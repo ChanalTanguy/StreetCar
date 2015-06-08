@@ -168,9 +168,6 @@ public class Moteur {
 	 * @param coupChoisi
 	 */
 	public void jouerCoup (Coup coupChoisi) {
-		coupChoisi.setMain(tabPlayers[currentPlayer].getMain());
-		
-//		System.out.println("coupChoisi")
 		
 		String msg = "";
 		String r;
@@ -230,42 +227,10 @@ public class Moteur {
 				// s'il existe deja au moins un tour dans le "futur", on compare les coups actuels joues et ceux qui auraient ete joues
 				if ( numeroDeTour < historiqueDeTours.size() ){
 					System.out.println(" ===== Tour charge au prealable ===== ");
-					System.out.println("numeroDeTour : " + numeroDeTour);
-					Configuration configFuturAnticipe = historiqueDeTours.get(numeroDeTour);
-					
-					recuperationCoups_FutursAnticipes(configFuturAnticipe.getCoupsPrecedents());
-					
-					for (int index = 0; index < coupsFutursAnticipes.length; index++){
-						System.out.print("coupsFutursAnticipes[" + index + "] : ");
-						try{
-							System.out.println(coupsFutursAnticipes[index].toString());
-						} catch (Exception e){
-							System.out.println("null");
-						}
-					}
-					
-					for (int index = 0; index < coupsPrecedents.length; index++){
-						System.out.print("coupsPrecedents[" + index + "] : ");
-						try{
-							System.out.println(coupsPrecedents[index].toString());
-						} catch (Exception e){
-							System.out.println("null");
-						}
-					}
-					
-					if ( coupsJoues_AnticipesIdentiques(coupsPrecedents, coupsFutursAnticipes) ){
-						System.out.println("les memes coups seront joues");
-					}
-					else {
-						System.out.println("des coups differents seront joues");
-						effacerHistorique(numeroDeTour);
-						historiqueDeTours.ajouter(config_a_Ajouter);
-					}
+
+					effacerHistorique(numeroDeTour);
 				}
-				else {
-					historiqueDeTours.ajouter(config_a_Ajouter);
-					System.out.println("tour joue normalement");
-				}
+				historiqueDeTours.ajouter(config_a_Ajouter);
 				panneau_Historique.setNumeroTourCourant(numeroDeTour);
 				numeroDeTour++;
 				
