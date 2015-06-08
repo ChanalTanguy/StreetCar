@@ -23,18 +23,21 @@ public class JoueurIA extends Joueur {
 	public static JoueurIA JoueurIAFacile(Moteur m, Objectifs obj) {
 		JoueurIA j = new JoueurIA(m,obj);
 		j.ecouteurBoucle = new EcouteurBoucle(m, new IAFacile(m, j));
+		j.t = new Timer(450, j.ecouteurBoucle);
 		return j;
 	}
 	
 	public static JoueurIA JoueurIAMoyen(Moteur m, Objectifs obj) {
 		JoueurIA j = new JoueurIA(m,obj);
 		j.ecouteurBoucle = new EcouteurBoucle(m, new IAFacile(m, j));
+		j.t = new Timer(450, j.ecouteurBoucle);
 		return j;
 	}
 	
 	public static JoueurIA JoueurIADifficile(Moteur m, Objectifs obj) {
 		JoueurIA j = new JoueurIA(m,obj);
 		j.ecouteurBoucle = new EcouteurBoucle(m, new IADifficile(m, j));
+		j.t = new Timer(450, j.ecouteurBoucle);
 		return j;
 	}
 	
@@ -51,6 +54,8 @@ public class JoueurIA extends Joueur {
 	public Joueur clone() {
 		JoueurIA joueur_renvoi = new JoueurIA(ecouteurBoucle.moteur, objectif.clone());
 		
+		joueur_renvoi.ecouteurBoucle = ecouteurBoucle;
+		joueur_renvoi.t = t;
 		joueur_renvoi.main = this.main.clone();
 		joueur_renvoi.phase = this.phase;
 		
