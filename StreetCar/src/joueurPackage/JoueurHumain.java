@@ -1,5 +1,7 @@
 	package joueurPackage;
 
+import java.awt.Point;
+
 import mainPackage.Moteur;
 
 public class JoueurHumain extends Joueur {
@@ -52,7 +54,6 @@ public class JoueurHumain extends Joueur {
 	 *  et une tuile a été préalablement selectionnée
 	 */
 	public void coupPlacerTuile(int carte, int x, int y) {
-
 		if (enabled && carte >= 0 && carte <= 4) {
 			moteur.jouerCoup(Coup.newPlacement(carte, x, y));
 		}
@@ -64,6 +65,13 @@ public class JoueurHumain extends Joueur {
 	public void coupTourner(int tuile) {
 		if (enabled)
 			tournerTuileMain(tuile);
+	}
+	
+	
+	public void coupAvancerTram (int x, int y){
+		if ( voyagePossible || voyageActive ){
+			moteur.jouerCoup(Coup.newAvanceeTram(x, y));
+		}
 	}
 	
 	public Joueur clone() {

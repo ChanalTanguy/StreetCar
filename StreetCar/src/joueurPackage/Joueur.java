@@ -163,7 +163,7 @@ public abstract class Joueur {
 			while (!main.isFull() && !pioche.isEmpty())
 				main.ajouterCarte(pioche.remove(0));
 	}
-
+	
 	/*
 	 * Methodes Private de Joueur
 	 */
