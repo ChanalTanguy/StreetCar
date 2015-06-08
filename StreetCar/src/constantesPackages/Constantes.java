@@ -50,14 +50,6 @@ public class Constantes {
 		public static final String ouest = "Ouest";
 	}
 	
-	public static class Coup {
-		public static final int nbMaxPlacements = 2;
-		public static final String pioche = "Pioche";
-		public static final String vol = "Vol";
-		public static final String placement = "Placement";
-		public static final String avanceeTrame = "AvanceeTram";
-	}
-	
 	public static class Images {
 		
 		/**

@@ -53,8 +53,8 @@ public class Moteur {
 		tabPlayers = new Joueur[2];
 		tabPlayers[0] = new JoueurHumain(this,obj[0]);
 		
-//		tabPlayers[1] = new JoueurHumain(this,obj[1]);
-		tabPlayers[1] = new JoueurIA(this, obj[1]);
+		tabPlayers[1] = new JoueurHumain(this,obj[1]);
+//		tabPlayers[1] = new JoueurIA(this, obj[1]);
 		
 		currentPlayer = 0;
 		numeroDeTour = 0;
@@ -66,8 +66,8 @@ public class Moteur {
 		pioche.shuffle();
 		
 		historiqueDeTours = new Historique();
-		coupsPrecedents = new Coup[Constantes.Coup.nbMaxPlacements];
-		coupsFutursAnticipes = new Coup[Constantes.Coup.nbMaxPlacements];
+		coupsPrecedents = new Coup[Coup.nbMaxPlacements];
+		coupsFutursAnticipes = new Coup[Coup.nbMaxPlacements];
 		
 		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, coupsPrecedents);
 		historiqueDeTours.add(configurationInitiale);
@@ -186,7 +186,7 @@ public class Moteur {
 				panneau_Jeu.setCoupSimultaneEnAction(null);
 				panneau_Jeu.effacerCoupsJoues();
 			}
-			if (coupChoisi.getType().equals(Constantes.Coup.placement)) {
+			if (coupChoisi.getType().equals(Coup.placement)) {
 				tabPlayers[currentPlayer].jouerTuileSurPlateau(coupChoisi.getTuile(), coupChoisi.getCoordonnee().x, coupChoisi.getCoordonnee().y, plateauDeJeu);
 				nbActions--;
 				
@@ -195,11 +195,11 @@ public class Moteur {
 				
 				coupSimultane = null;
 				
-			} else if (coupChoisi.getType().equals(Constantes.Coup.vol)) {
+			} else if (coupChoisi.getType().equals(Coup.vol)) {
 				tabPlayers[currentPlayer].volerTuile(coupChoisi.getTuile(), tabPlayers[(currentPlayer+1)%2]);
 				nbActions--;
 				coupSimultane = null;
-			} else if (coupChoisi.getType().equals(Constantes.Coup.pioche)) {
+			} else if (coupChoisi.getType().equals(Coup.pioche)) {
 				if (!pioche.isEmpty())
 					tabPlayers[currentPlayer].piocher(pioche);
 				nbActions = 0;
@@ -214,7 +214,13 @@ public class Moteur {
 				panneau_Jeu.setPiocheSelectionnee(true);
 				panneau_Jeu.repaint();
 				
-				
+				if ( plateauDeJeu.ObjectifComplet(tabPlayers[currentPlayer].getObjectifs()) ){
+					System.out.println("objectif rempli");
+					tabPlayers[currentPlayer].setVoyagePossible(true);
+				}
+				else {
+					System.out.println("objectif incomplet");
+				}
 				
 				System.out.println("tour " + numeroDeTour + " valide");
 				System.out.println("joueur courant de ce tour : " + currentPlayer);
@@ -347,11 +353,11 @@ public class Moteur {
 			}
 			if (nbActions < 3)
 				msg = Constantes.Message.finDeTour(currentPlayer);
-			else if (coupChoisi.getType().equals(Constantes.Coup.placement))
+			else if (coupChoisi.getType().equals(Coup.placement))
 				msg = Constantes.Message.poseImpossible;
-			else if (coupChoisi.getType().equals(Constantes.Coup.vol))
+			else if (coupChoisi.getType().equals(Coup.vol))
 				msg = Constantes.Message.volImpossible;
-			else if (coupChoisi.getType().equals(Constantes.Coup.pioche))
+			else if (coupChoisi.getType().equals(Coup.pioche))
 				msg = Constantes.Message.piocheImpossible;
 			else {
 				msg = Constantes.Message.tramImpossible; // N'EST PAS SENSE ARRIVER !
@@ -514,7 +520,7 @@ public class Moteur {
 	 */
 	private boolean coupValide (Coup c) {
 		if (nbActions > 2) {
-			if (c.getType().equals(Constantes.Coup.placement)) {
+			if (c.getType().equals(Coup.placement)) {
 					// Vérifie si le joueur prend une tuile existante et vérifie si le placement est valide
 				return (tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()) != null) && 
 						(plateauDeJeu.coupValide(tabPlayers[currentPlayer].getMain().getTuileAt(c.getTuile()),c));
@@ -522,13 +528,13 @@ public class Moteur {
 				return false;
 		}
 		else {
-			if (c.getType().equals(Constantes.Coup.vol)) {
+			if (c.getType().equals(Coup.vol)) {
 				// true si l'autre joueur est en phase 2, que la carte volé est différente de null
 				// et que la main du joueur n'est pas pleine (2 remplacements ont été fait)
 				// false sinon
 				return ((!tabPlayers[(currentPlayer+1)%2].getMain().isFull()) && (tabPlayers[(currentPlayer+1)%2].getPhase() == 2)
 					&&	 tabPlayers[(currentPlayer+1)%2].getMain().getTuileAt(c.getTuile()) != null);
-			} else if (c.getType().equals(Constantes.Coup.pioche)) {
+			} else if (c.getType().equals(Coup.pioche)) {
 				return true; // Rien d'autre à vérifier (Quand la main est pleine, piocher mettra fin au tour)
 			} else
 				return false;
