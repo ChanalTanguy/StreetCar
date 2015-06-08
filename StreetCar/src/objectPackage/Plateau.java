@@ -252,7 +252,7 @@ public class Plateau {
 		}
 		return p;
 	}
-	public Point getEscalelPosition (int numberEscale){
+	public Point getEscalePosition (int numberEscale){
 		try {
 			return new Point(PositionEscale[numberEscale-1][0],PositionEscale[numberEscale-1][1]);
 		} catch (Exception e) {
@@ -261,14 +261,18 @@ public class Plateau {
 	}	
 	public int aCoterDUneEscaleNonAssignee (Point p){
 		int x = p.x, y = p.y;
-		if (x != 0 					&& plateau[x-1][y] != null && plateau[x-1][y].getTypeTuile() == 2 && ((Escale)(plateau[x-1][y])).getStop() == null)
+		if (x != 0 					&& plateau[x-1][y] != null && plateau[x-1][y].getTypeTuile() == 2 && ((Escale)(plateau[x-1][y])).getStop() == null){
 			return ((Escale)(plateau[x-1][y])).getNumeroEscale();
-		if (x != plateau.length-1	&& plateau[x+1][y] != null && plateau[x+1][y].getTypeTuile() == 2 && ((Escale)(plateau[x+1][y])).getStop() == null)
+		}
+		if (x != plateau.length-1	&& plateau[x+1][y] != null && plateau[x+1][y].getTypeTuile() == 2 && ((Escale)(plateau[x+1][y])).getStop() == null){
 			return ((Escale)(plateau[x+1][y])).getNumeroEscale();
-		if (y != 0 					&& plateau[x][y-1] != null && plateau[x][y-1].getTypeTuile() == 2 && ((Escale)(plateau[x][y-1])).getStop() == null)
+		}
+		if (y != 0 					&& plateau[x][y-1] != null && plateau[x][y-1].getTypeTuile() == 2 && ((Escale)(plateau[x][y-1])).getStop() == null){
 			return ((Escale)(plateau[x][y-1])).getNumeroEscale();
-		if (y != plateau.length-1	&& plateau[x][y+1] != null && plateau[x][y+1].getTypeTuile() == 2 && ((Escale)(plateau[x][y+1])).getStop() == null)
+		}
+		if (y != plateau.length-1	&& plateau[x][y+1] != null && plateau[x][y+1].getTypeTuile() == 2 && ((Escale)(plateau[x][y+1])).getStop() == null){
 			return ((Escale)(plateau[x][y+1])).getNumeroEscale();
+		}
 			
 		return 0;
 	}
