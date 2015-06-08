@@ -6,12 +6,18 @@ import historiqPackage.Configuration;
 import historiqPackage.Historique;
 
 import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Random;
 
 import joueurPackage.Coup;
 import joueurPackage.Joueur;
 import joueurPackage.JoueurHumain;
 import joueurPackage.JoueurIA;
 import joueurPackage.MainJoueur;
+import joueurPackage.Objectifs;
 import objectPackage.Pioche;
 import objectPackage.Plateau;
 import constantesPackages.Constantes;
@@ -36,12 +42,18 @@ public class Moteur {
 	 * Constructeur
 	 */
 	public Moteur(Plateau referencePlateau) {
+		Objectifs[] obj = new Objectifs[2];
+		obj = tirerObjectif();
+		//System.out.println("Objectif joueur 1 : " + obj[0].toString());
+		//System.out.println("Objectif joueur 2 : " + obj[1].toString());
+		
+		
 		tabPlayers = new Joueur[2];
-		tabPlayers[0] = new JoueurHumain(this,1);
+		tabPlayers[0] = new JoueurHumain(this,obj[0]);
 		tabPlayers[0].setLigne(1);
 		
 //		tabPlayers[1] = new JoueurHumain(this,4);
-		tabPlayers[1] = new JoueurIA(this, 4);
+		tabPlayers[1] = new JoueurIA(this, obj[1]);
 		
 		tabPlayers[1].setLigne(4);
 		
@@ -63,10 +75,12 @@ public class Moteur {
 		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
 
 	}
+	
 	/*
 	 * FIN Constructeur
 	 */
 	
+
 	/*
 	 * Constructeur 2
 	 */
@@ -346,6 +360,117 @@ public class Moteur {
 		
 		tabPlayers[currentPlayer].attendCoup();
 
+	}
+	private Objectifs[] tirerObjectif() {
+		Random r = new Random();
+		int num ;
+		char[] val = new char[2];
+		String current;
+		Objectifs[] obj = new Objectifs[2];
+		
+		obj[0] = new Objectifs();
+		obj[1] = new Objectifs();
+		
+		//Tirage ligne joueur 1
+		obj[0].setLigne((r.nextInt(6))+1);
+		
+		//Tirage ligne joueur 2
+		num = (r.nextInt(6))+1;
+		while(num == obj[0].getLigne())	num = (r.nextInt(6)+1);
+		obj[1].setLigne(num);
+		
+		//Lecture des objectifs
+		try 
+		{
+			FileReader f = new FileReader(new File("ressources/cartes.txt"));
+			BufferedReader br = new BufferedReader(f);
+			current = br.readLine();
+			while(Character.getNumericValue((current.charAt(0))) != 6)
+			{
+				if(Character.getNumericValue((current.charAt(0))) == obj[0].getLigne())
+				{
+					num = (r.nextInt(6)+1);
+					for(int i = 1; i<num; i++)
+					{
+						br.readLine();
+					}
+					current = br.readLine();
+					val[0] = current.charAt(0);
+					val[1] = current.charAt(1);
+
+					obj[0].ajouterEscales(valeurEscale(val[0]));
+					obj[0].ajouterEscales(valeurEscale(val[1]));		
+	
+				}
+				
+				if(Character.getNumericValue((current.charAt(0))) == obj[1].getLigne())
+				{
+					num = (r.nextInt(6)+1);
+					for(int i = 1; i<num; i++)
+					{
+						br.readLine();
+					}
+					current = br.readLine();
+					val[0] = current.charAt(0);
+					val[1] = current.charAt(1);
+					
+					obj[1].ajouterEscales(valeurEscale(val[0]));
+					obj[1].ajouterEscales(valeurEscale(val[1]));
+				}
+				current = br.readLine();
+			}
+		} 	
+		catch (Exception e) { e.printStackTrace(); }
+		
+		return obj;
+	}
+	
+	private int valeurEscale(char c) {
+		int val;
+		
+		switch(c)
+		{
+			case 'A':
+				val = 1;
+				break;
+			case 'B':
+				val = 2;
+				break;
+			case 'C':
+				val = 3;
+				break;
+			case 'D':
+				val = 4;
+				break;
+			case 'E':
+				val = 5;
+				break;
+			case 'F':
+				val = 6;
+				break;
+			case 'G':
+				val = 7;
+				break;
+			case 'H':
+				val = 8;
+				break;
+			case 'I':
+				val = 9;
+				break;
+			case 'K':
+				val = 10;
+				break;
+			case 'L':
+				val = 11;
+				break;
+			case 'M':
+				val = 12;
+				break;
+			default :
+				val = 0;
+				break;
+		}
+		return val;
 	}
 
 	// Methodes de Kévin
