@@ -316,10 +316,11 @@ public class Plateau {
 		return chaine_resultat;
 	}
 	
+	
 	/*
 	 * Methodes Private de Plateau
 	 */
-	private boolean atteindreObjectifDepuisPosition(Point depart, String direction, Point arrive, int[] escale) {
+	public boolean atteindreObjectifDepuisPosition(Point depart, String direction, Point arrive, int[] escale) {
 
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
 		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
