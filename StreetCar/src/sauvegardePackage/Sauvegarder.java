@@ -34,7 +34,7 @@ public class Sauvegarder {
 			dateFinale += "_";
 			dateFinale += date[i];		
 		}
-		
+		dateFinale.replace(":", "H");
 		name = "save/Sauvegarde_du_" + dateFinale + ".txt";
 		save(this);
 	}
