@@ -24,7 +24,7 @@ public class Sauvegarder {
 	{
 		mot = moteur;
 		dateCourante = new Date();
-		name = "Sauvegarde du " + dateCourante + ".txt";
+		name = "save/Sauvegarde du " + dateCourante + ".txt";
 		save(this);
 	}
 	
@@ -60,7 +60,7 @@ public class Sauvegarder {
 			f.write(System.getProperty("line.separator"));
 			
 			//Objectif joueur actif
-			f.write("" +objectif1); //A MODIFIER DANS CHARGEMENT
+			f.write("" +objectif1); 
 			f.write(System.getProperty("line.separator"));
 			
 			//Main joueur actif
@@ -71,7 +71,7 @@ public class Sauvegarder {
 			f.write(System.getProperty("line.separator"));
 			
 			//Objectif joueur inactif
-			f.write("" +objectif2); //A MODIFIER DANS CHARGEMENT
+			f.write("" +objectif2); 
 			f.write(System.getProperty("line.separator"));
 			
 			//Main joueur inactif
