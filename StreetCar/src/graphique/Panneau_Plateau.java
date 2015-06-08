@@ -50,7 +50,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
+	private BufferedImage fond,cadreNotif, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
 	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
@@ -293,6 +293,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 			}
 		}
 		
+		//dessin du cadre de notification
+		dessinerCadreNotification();
+		
 		// La notification pour Joueur
 		ecrireNotifications(crayon);
 		
@@ -517,6 +520,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		crayon.drawImage(op.filter(image,  null), coordX, coordY, dimension, dimension, this);
 	}
+	private void dessinerCadreNotification()
+	{
+		crayon.drawImage(cadreNotif, depart+(tailleCase*15), depart+(tailleCase*2), tailleCase*5, tailleCase*4, this);
+	}
+	//a remplacer pas un texte de notification avec une image
 	private void ecrireNotifications (Graphics2D crayon){
 		crayon.setColor(Color.white);
 		crayon.drawString(notifications, 6*largeur/7-20, hauteur/4);
@@ -879,6 +887,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
 		opaciteFutur = Constantes.Images.initBackground("opaciteFutur.png");
 		stop = Constantes.Images.initTuile("stop.png");
+		cadreNotif = Constantes.Images.initBackground("cadreNotif.png");
 		
 	}
 
