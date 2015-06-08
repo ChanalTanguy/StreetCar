@@ -137,7 +137,7 @@ public class Plateau {
 		return plateau.length;
 	}
 	public boolean coupValide (Tuile nouvTuile, Coup coup){
-		if(coup.getType().equals(Constantes.Coup.placement)) {
+		if(coup.getType().equals(Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
 			// Et que les 4 cases adjacente ne font pas conflit
 			boolean valide = false;
@@ -168,7 +168,7 @@ public class Plateau {
 			return false;
 	}
 	public String coupSimultaneValide (Tuile nouvTuile, Coup coup) {
-		if(coup.getType().equals(Constantes.Coup.placement)) {
+		if(coup.getType().equals(Coup.placement)) {
 			// Vérifier que la case est sois vide, sois possède une sous version de la tuile qu'on veut poser
 			// Et que les 4 cases adjacente ne font pas conflit
 
