@@ -14,6 +14,7 @@ public class Sauvegarder {
 	Moteur mot;
 	int joueur;
 	int numTour;
+	int typeJoueur;
 	Pioche pio;
 	Tuile[][] plat;
 	MainJoueur mainJactif, mainJinact;
@@ -59,6 +60,11 @@ public class Sauvegarder {
 			f.write(new String(""+joueur));
 			f.write(System.getProperty("line.separator"));
 			
+			//Type joueur actif
+			typeJoueur = mot.getTabPlayers()[joueur].getType();
+			f.write(new String("")+typeJoueur);
+			f.write(System.getProperty("line.separator"));
+			
 			//Objectif joueur actif
 			f.write("" +objectif1); 
 			f.write(System.getProperty("line.separator"));
@@ -68,6 +74,11 @@ public class Sauvegarder {
 			
 			//Joueur inactif
 			f.write(new String(""+(1-joueur)));	
+			f.write(System.getProperty("line.separator"));
+			
+			//Type joueur inactif
+			typeJoueur = mot.getTabPlayers()[1-joueur].getType();
+			f.write(new String("")+typeJoueur);
 			f.write(System.getProperty("line.separator"));
 			
 			//Objectif joueur inactif

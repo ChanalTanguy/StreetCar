@@ -70,6 +70,10 @@ public abstract class Joueur {
 	public void setLigne (int newLigne){
 		objectif.setLigne(newLigne);
 	}
+	public void setType(int type){
+		typeJoueur = type;
+	}
+	
 	public void setMain(MainJoueur referenceMain)
 	{
 		main = referenceMain;
