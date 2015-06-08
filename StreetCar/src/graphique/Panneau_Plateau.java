@@ -51,6 +51,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attributs d'Images
 	 */
 	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
+	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	/*
@@ -404,6 +405,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if(objectifsVisibleJ1)
 		{
 			crayon.drawImage(carteObjectif1, positionXObjJ1, positionYObjJ1, (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(escale1J1, positionXObjJ1+(tailleCase*30)/10-(3*tailleCase)+tailleCase/4+1, positionYObjJ1+tailleCase-5, tailleCase, tailleCase,this);
+			crayon.drawImage(escale2J1, positionXObjJ1+(tailleCase*30)/10-tailleCase-tailleCase/4-1, positionYObjJ1+tailleCase-5, tailleCase, tailleCase,this);
 		} 
 		else
 		{
@@ -417,6 +420,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 		if(objectifsVisibleJ2)
 		{
 			crayon.drawImage(carteObjectif2, positionXObjJ2, positionYObjJ2, (tailleCase*30)/10, (tailleCase*25)/10, this);
+			crayon.drawImage(escale1J2, positionXObjJ1+(tailleCase*30)/10-(3*tailleCase)+tailleCase/4+1, positionYObjJ2+tailleCase-5, tailleCase, tailleCase,this);
+			crayon.drawImage(escale2J2, positionXObjJ1+(tailleCase*30)/10-tailleCase-tailleCase/4-1, positionYObjJ2+tailleCase-5, tailleCase, tailleCase,this);
 		} 
 		else
 		{
@@ -644,6 +649,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Methode Private d'iniialisation d'image
 	 */
 	protected void initialiserImages (){
+		//initialisation des cartes de lignes selon la lignes tiré
 		switch(mot.getTabPlayers()[0].getObjectifs().getLigne())
 		{
 			case 1: 
@@ -684,6 +690,166 @@ public class Panneau_Plateau extends Pan_Abstract{
 					break;
 			case 6: 
 					carteObjectif2 = Constantes.Images.initCarte("carte6.png");
+					break;
+		}
+		//initialisation des escales selon les escales tiré
+		switch(mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[0])
+		{
+			case 1:
+					escale1J1 = Constantes.Images.initCarte("A.jpg");
+					break;
+			case 2:
+					escale1J1 = Constantes.Images.initCarte("B.jpg");
+					break;
+			case 3:
+					escale1J1 = Constantes.Images.initCarte("C.jpg");
+					break;
+			case 4:
+					escale1J1 = Constantes.Images.initCarte("D.jpg");
+					break;
+			case 5:
+					escale1J1 = Constantes.Images.initCarte("E.jpg");
+					break;
+			case 6:
+					escale1J1 = Constantes.Images.initCarte("F.jpg");
+					break;
+			case 7:
+					escale1J1 = Constantes.Images.initCarte("G.jpg");
+					break;
+			case 8:
+					escale1J1 = Constantes.Images.initCarte("H.jpg");
+					break;
+			case 9:
+					escale1J1 = Constantes.Images.initCarte("I.jpg");
+					break;
+			case 10:
+					escale1J1 = Constantes.Images.initCarte("J.jpg");
+					break;
+			case 11:
+					escale1J1 = Constantes.Images.initCarte("K.jpg");
+					break;
+			case 12:
+					escale1J1 = Constantes.Images.initCarte("L.jpg");
+					break;
+		}
+		
+		switch(mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[1])
+		{
+			case 1:
+					escale2J1 = Constantes.Images.initCarte("A.jpg");
+					break;
+			case 2:
+					escale2J1 = Constantes.Images.initCarte("B.jpg");
+					break;
+			case 3:
+					escale2J1 = Constantes.Images.initCarte("C.jpg");
+					break;
+			case 4:
+					escale2J1 = Constantes.Images.initCarte("D.jpg");
+					break;
+			case 5:
+					escale2J1 = Constantes.Images.initCarte("E.jpg");
+					break;
+			case 6:
+					escale2J1 = Constantes.Images.initCarte("F.jpg");
+					break;
+			case 7:
+					escale2J1 = Constantes.Images.initCarte("G.jpg");
+					break;
+			case 8:
+					escale2J1 = Constantes.Images.initCarte("H.jpg");
+					break;
+			case 9:
+					escale2J1 = Constantes.Images.initCarte("I.jpg");
+					break;
+			case 10:
+					escale2J1 = Constantes.Images.initCarte("J.jpg");
+					break;
+			case 11:
+					escale2J1 = Constantes.Images.initCarte("K.jpg");
+					break;
+			case 12:
+					escale2J1 = Constantes.Images.initCarte("L.jpg");
+					break;
+		}
+		
+		switch(mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[0])
+		{
+			case 1:
+					escale1J2 = Constantes.Images.initCarte("A.jpg");
+					break;
+			case 2:
+					escale1J2 = Constantes.Images.initCarte("B.jpg");
+					break;
+			case 3:
+					escale1J2 = Constantes.Images.initCarte("C.jpg");
+					break;
+			case 4:
+					escale1J2 = Constantes.Images.initCarte("D.jpg");
+					break;
+			case 5:
+					escale1J2 = Constantes.Images.initCarte("E.jpg");
+					break;
+			case 6:
+					escale1J2 = Constantes.Images.initCarte("F.jpg");
+					break;
+			case 7:
+					escale1J2 = Constantes.Images.initCarte("G.jpg");
+					break;
+			case 8:
+					escale1J2 = Constantes.Images.initCarte("H.jpg");
+					break;
+			case 9:
+					escale1J2 = Constantes.Images.initCarte("I.jpg");
+					break;
+			case 10:
+					escale1J2 = Constantes.Images.initCarte("J.jpg");
+					break;
+			case 11:
+					escale1J2 = Constantes.Images.initCarte("K.jpg");
+					break;
+			case 12:
+					escale1J2 = Constantes.Images.initCarte("L.jpg");
+					break;
+		}
+		
+		switch(mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[1])
+		{
+			case 1:
+					escale2J2 = Constantes.Images.initCarte("A.jpg");
+					break;
+			case 2:
+					escale2J2 = Constantes.Images.initCarte("B.jpg");
+					break;
+			case 3:
+					escale2J2 = Constantes.Images.initCarte("C.jpg");
+					break;
+			case 4:
+					escale2J2 = Constantes.Images.initCarte("D.jpg");
+					break;
+			case 5:
+					escale2J2 = Constantes.Images.initCarte("E.jpg");
+					break;
+			case 6:
+					escale2J2 = Constantes.Images.initCarte("F.jpg");
+					break;
+			case 7:
+					escale2J2 = Constantes.Images.initCarte("G.jpg");
+					break;
+			case 8:
+					escale2J2 = Constantes.Images.initCarte("H.jpg");
+					break;
+			case 9:
+					escale2J2 = Constantes.Images.initCarte("I.jpg");
+					break;
+			case 10:
+					escale2J2 = Constantes.Images.initCarte("J.jpg");
+					break;
+			case 11:
+					escale2J2 = Constantes.Images.initCarte("K.jpg");
+					break;
+			case 12:
+					escale2J2 = Constantes.Images.initCarte("L.jpg");
 					break;
 		}
 		carteObjectifDos = Constantes.Images.initCarte("carteDos.png");
