@@ -214,6 +214,8 @@ public class Moteur {
 				panneau_Jeu.setPiocheSelectionnee(true);
 				panneau_Jeu.repaint();
 				
+				
+				
 				System.out.println("tour " + numeroDeTour + " valide");
 				System.out.println("joueur courant de ce tour : " + currentPlayer);
 				
@@ -710,7 +712,7 @@ public class Moteur {
 		}
 		tabObjectifs[0].setLigne(4);
 		tabObjectifs[0].ajouterEscales(valeurEscale('G'));
-		tabObjectifs[0].ajouterEscales(valeurEscale('J'));
+		tabObjectifs[0].ajouterEscales(valeurEscale('A'));
 		
 		tabObjectifs[1].setLigne(6);
 		tabObjectifs[1].ajouterEscales(valeurEscale('D'));
