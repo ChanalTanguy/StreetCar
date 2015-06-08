@@ -51,7 +51,7 @@ public class ChargementTitre {
 		{
 			x = listeTxt[i];
 			f = listeFiles[i];
-			for(j = i; j>0 && listeTxt[j-1].compareTo(x)>0;j--)
+			for(j = i; j>0 && listeTxt[j-1].compareTo(x)<0;j--)
 			{
 				listeTxt[j] = listeTxt[j-1];
 				listeFiles[j] = listeFiles[j-1];

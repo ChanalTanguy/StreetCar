@@ -116,7 +116,6 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		}	
 	}
 
-	
 	private void effectuerAction(int selectionner) {
 		
 		switch(selectionner)

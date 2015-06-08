@@ -39,8 +39,7 @@ public class Chargement {
 	public void charger(Moteur mot, String name)
 	{
 		try 
-		{
-			
+		{		
 			if(!name.contains(".txt"))
 			{
 				name = name+".txt";
