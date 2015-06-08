@@ -27,6 +27,12 @@ public abstract class Joueur {
 		objectif = new Objectifs();
 	}
 	
+	public Joueur (MainJoueur referenceMain, Objectifs obj, int newTypeJoueur)
+	{
+		main = referenceMain;
+		typeJoueur = newTypeJoueur;
+		objectif = obj;
+	}
 	/*
 	 * Methodes Abstract de Joueur
 	 */

@@ -17,6 +17,12 @@ public class JoueurHumain extends Joueur {
 		// TODO : Ajouter la main en paramètre
 	}
 	
+	public JoueurHumain(Moteur m, Objectifs obj) {
+		super(new MainJoueur(), obj, typeHumain);
+		enabled = false;
+		this.moteur = m;
+	}
+	
 	public void attendCoup() {
 		enabled = true;
 	}
