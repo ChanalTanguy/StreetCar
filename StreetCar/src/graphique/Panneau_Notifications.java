@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 public class Panneau_Notifications extends Pan_Abstract{
 	JTextArea message;
 	
+	
 	public Panneau_Notifications (Color newCouleur){
 		super(newCouleur);
 		message = new JTextArea ("Notifications");

@@ -139,30 +139,58 @@ public class Constantes {
 	}
 
 	public static class Message {
-		public static String auTourDe (int numeroJoueur){
-			String notif = "C'est au tour du joueur ";
-			notif = notif + (numeroJoueur+1);
+		public static BufferedImage auTourDe (int numeroJoueur){
+			//old
+			//String notif = "C'est au tour du joueur ";
+			//notif = notif + (numeroJoueur+1);
+			BufferedImage notif;
+			if (numeroJoueur==0)
+			{
+				notif = Images.initNotification("tourJ1.png");
+			}
+			else
+			{
+				notif = Images.initNotification("tourJ2.png");
+			}
 			return notif;
 		}
 		
-		public static String partieTerminee (int numeroGagnant){
-			String notif = "La partie est remportée par :\n";
-			notif = notif + "\tle joueur " + numeroGagnant;
+		public static BufferedImage partieTerminee (int numeroGagnant){
+			BufferedImage notif;
+			if (numeroGagnant==1)
+			{
+				notif = Images.initNotification("victoireJ1.png");
+			}
+			else
+			{
+				notif = Images.initNotification("victoireJ2.png");
+			}
+			//String notif = "La partie est remportée par :\n";
+			//notif = notif + "\tle joueur " + numeroGagnant;
 			return notif;
 		}
 		
-		public static String finDeTour (int numeroJoueur){
-			String notif = "Joueur " + (numeroJoueur+1);
-			notif = notif + " piochez pour valide votre tour\n";
-			notif = notif + "(Vous pouvez éventuellement en voler à l'adversaire \n";
-			notif = notif + "s'il a terminé sa ligne";
+		public static BufferedImage finDeTour (int numeroJoueur){
+			//String notif = "Joueur " + (numeroJoueur+1);
+			//notif = notif + " piochez pour valide votre tour\n";
+			//notif = notif + "(Vous pouvez éventuellement en voler à l'adversaire \n";
+			//notif = notif + "s'il a terminé sa ligne";
+			BufferedImage notif;
+			if (numeroJoueur==0)
+			{
+				notif = Images.initNotification("piocheJ1.png");
+			}
+			else
+			{
+				notif = Images.initNotification("piocheJ2.png");
+			}
 			return notif;
 		}
 		
-		public static final String poseImpossible = "Vous ne pouvez pas poser \nvotre tuile ici";
-		public static final String piocheImpossible = "Vous ne pouvez piocher \nqu'à la fin de votre tour";
-		public static final String volImpossible = "Vous ne pouvez pas voler \nce joueur : \nCe joueur n'a pas fini sa ligne";
-		public static final String tramImpossible = "Votre tramway ne peut pas aller ici";
+		public static final BufferedImage poseImpossible = Images.initNotification("poseImpossible.png");
+		public static final BufferedImage piocheImpossible = Images.initNotification("piocheImpossible.png");
+		public static final BufferedImage volImpossible = Images.initNotification("volImpossible.png");
+		public static final BufferedImage tramImpossible = Images.initNotification("tramImpossible.png");
 		
 	}
 

@@ -6,6 +6,7 @@ import historiqPackage.Configuration;
 import historiqPackage.Historique;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -166,7 +167,7 @@ public class Moteur {
 	 */
 	public void jouerCoup (Coup coupChoisi) {
 		
-		String msg = "";
+		BufferedImage msg = null;
 		String r;
 		if (coupValide(coupChoisi)) {
 			if ( coupSimultane != null ){
@@ -253,7 +254,7 @@ public class Moteur {
 		{
 			if (coupSimultane == null) {
 				coupSimultane = coupChoisi;
-				msg = "Coup simultanée possible";
+				msg = Constantes.Images.initNotification("coupSimultane.png");
 				
 				panneau_Jeu.ajouterCoup(coupSimultane);
 				panneau_Jeu.setTuilePourCoupSimultane(tabPlayers[currentPlayer].getMain().getTuileAt(coupSimultane.getTuile()));

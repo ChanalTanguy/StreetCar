@@ -20,7 +20,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Attribut Principal
 	 */
 	private Moteur mot;
-	private String notifications;
+	private BufferedImage notifications;
+	//private String notifications;
 	/*
 	 * FIN Attributs Principaux
 	 */
@@ -52,7 +53,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	private BufferedImage fond,cadreNotif, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
 	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
-	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
+	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	/*
 	 * FIN Images
@@ -149,7 +150,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public Moteur getMoteur (){
 		return mot;
 	}
-	public String getNotifications (){
+	//public String getNotifications (){
+	//	return notifications;
+	//}
+	public BufferedImage getNotifications (){
 		return notifications;
 	}
 	public Coup getCoupSimultaneActif (){
@@ -184,7 +188,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setCoordYSelection (int newCoordY){
 		coordYSelection = newCoordY;
 	}
-	public void setNotifications (String newNotif){
+	//public void setNotifications (String newNotif){
+	//	notifications = newNotif;
+	//}
+	public void setNotifications (BufferedImage newNotif){
 		notifications = newNotif;
 	}
 	public void setCoupsPrecedents (Coup[] referenceCoupsPrecedents){
@@ -214,7 +221,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public Panneau_Plateau (Color newCouleur, Moteur referenceMoteur){
 		super(newCouleur);
 		mot = referenceMoteur;
-		notifications = "tests d'ecriture";
+		//notifications = "tests d'ecriture";
 		initialiserImages();
 		coupsJoues = new Coup[Coup.nbMaxPlacements];
 		coupsPrecedents = new Coup[Coup.nbMaxPlacements];
@@ -297,7 +304,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerCadreNotification();
 		
 		// La notification pour Joueur
-		ecrireNotifications(crayon);
+		ecrireNotifications();
 		
 		//objectifs des joueurs
 		dessinerObjectifJ1();
@@ -525,9 +532,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 		crayon.drawImage(cadreNotif, depart+(tailleCase*15), depart+(tailleCase*2), tailleCase*5, tailleCase*4, this);
 	}
 	//a remplacer pas un texte de notification avec une image
-	private void ecrireNotifications (Graphics2D crayon){
+	private void ecrireNotifications (){
 		crayon.setColor(Color.white);
-		crayon.drawString(notifications, 6*largeur/7-20, hauteur/4);
+		crayon.drawImage(notifications, depart+(tailleCase*15)+12, depart+(tailleCase*2)+5, (tailleCase*5)-24, (tailleCase*4)-10, this);
 	}
 	
 	
@@ -607,10 +614,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		int coordXMain = decalageMain + coupSimultaneEnAction.getTuile() * (tailleCaseMain + petitEcartMain);
 		switch (mot.getcurrentPlayer()){
 		case 0:
-			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillanceVioletteExt, coordXMain-tailleCase/2, mainDuBas-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		case 1:
-			crayon.drawImage(surbrillanceViolet, coordXMain-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
+			crayon.drawImage(surbrillanceVioletteExt, coordXMain-tailleCase/2, mainDuHaut-tailleCase/2, tailleCaseMain+tailleCase-1, tailleCaseMain+tailleCase-1, this);
 			break;
 		}
 	}
@@ -882,6 +889,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		surbrillanceVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
 		surbrillanceCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
 		surbrillanceViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
+		surbrillanceVioletteExt = Constantes.Images.initBackground("surbrillanceVioletExt.png");
 		surbrillanceRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
 		surbrillanceJaune = Constantes.Images.initBackground("surbrillanceJaune.png");
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
