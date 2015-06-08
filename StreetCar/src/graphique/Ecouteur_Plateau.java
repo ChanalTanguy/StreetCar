@@ -61,15 +61,17 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					panneauDeJeu.setMainSelectionnee(-1);
 					joueur.coupPiocher();
 					selectionnerPioche();
+					panneauDeJeu.setVisObjJ2(false);
+					panneauDeJeu.setVisObjJ2(false);
 				}
 				
-				else if ( estSurObjectifJ1(piocheX, piocheY)){
-					panneauDeJeu.setVisObjJ1(!panneauDeJeu.getVisObjJ1());
+				else if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+					panneauDeJeu.setVisObjJ1(true);
 					panneauDeJeu.repaint();
 				}
 				
-				else if ( estSurObjectifJ2(piocheX, piocheY)){
-					panneauDeJeu.setVisObjJ2(!panneauDeJeu.getVisObjJ2());
+				else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+					panneauDeJeu.setVisObjJ2(true);
 					panneauDeJeu.repaint();
 				}
 
@@ -128,7 +130,25 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 	
 	public void mouseMoved(MouseEvent e) {}
 	
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		// Coordonnees
+					int x = e.getX();
+					int y = e.getY();
+					
+					// on supprime le decalage de dessin par rapport a la bordure gauche.
+					int piocheX = x - panneauDeJeu.getDepart();
+					int piocheY = y;
+		
+		if ( estSurObjectifJ1(piocheX, piocheY) && mot.getcurrentPlayer()==1){
+			panneauDeJeu.setVisObjJ1(false);
+			panneauDeJeu.repaint();
+		}
+		
+		else if ( estSurObjectifJ2(piocheX, piocheY) && mot.getcurrentPlayer()==0){
+			panneauDeJeu.setVisObjJ2(false);
+			panneauDeJeu.repaint();
+		}
+	}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}

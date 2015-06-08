@@ -1,7 +1,7 @@
 1
 0
 1
-1 5 -1 
+1 6 -1 
 5
 {Nord:[(Nord;Sud)]}
 {Nord:[(Nord;Sud)]}
@@ -9,8 +9,8 @@
 {Nord:[(Est;Nord)]}
 {Nord:[(Est;Nord)]}
 1
-4
-1 12 -1 
+2
+6 8 -1 
 5
 {Nord:[(Nord;Sud)]}
 {Nord:[(Nord;Sud)]}
