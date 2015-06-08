@@ -305,24 +305,23 @@ public class IADifficile implements InterfaceIA {
 			return -i;
 		return i;
 	}
-
 	private int max(int i, int j) {
 		if (i < j)
 			return j;
 		return i;
 	}
 
-	private int coutChemin(int ligne, int[] escales, Plateau p) {
+	private int coutChemin(int ligne, int[] escales, Plateau referencePlateau) {
 		int[] escalesBis = new int[3];
 		for (int i = 0; i< 3; i++)
 			escalesBis[i] = escales[i];
 
 		escalesBis[0] = -1;
-		int x = rechercheChemin(p.getTerminalPosition(ligne,1),Constantes.Orientation.ouest,p.getEscalelPosition(escales[0]), ligne, escalesBis, p, 0);
+		int x = rechercheChemin(referencePlateau.getTerminalPosition(ligne,1), Constantes.Orientation.ouest, referencePlateau.getEscalePosition(escales[0]), ligne, escalesBis, referencePlateau, 0);
 		escalesBis[0] = escales[0];
 
 		escalesBis[1] = -1;
-		int y = rechercheChemin(p.getTerminalPosition(ligne,1),Constantes.Orientation.ouest,p.getEscalelPosition(escales[1]), ligne, escalesBis, p, 0);
+		int y = rechercheChemin(referencePlateau.getTerminalPosition(ligne,1), Constantes.Orientation.ouest, referencePlateau.getEscalePosition(escales[1]), ligne, escalesBis, referencePlateau, 0);
 		escalesBis[1] = escales[1];
 
 		return max(x,y);
@@ -332,6 +331,7 @@ public class IADifficile implements InterfaceIA {
 
 		// Initialisation
 		long time = System.nanoTime();
+		
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
 		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
 		Point po = depart;
@@ -367,7 +367,7 @@ public class IADifficile implements InterfaceIA {
 				if (t == null) {
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
-						file.add(new TuileChemin(po,Constantes.Orientation.ouest,tuileCheminCourant.getPriority()+coutTuileNull,calculHeuristique(po, arrivee), tuileCheminCourant));
+						file.add(new TuileChemin(po, Constantes.Orientation.ouest, tuileCheminCourant.getPriority()+coutTuileNull, calculHeuristique(po, arrivee), tuileCheminCourant));
 					}
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.ouest)){
 						po.x = pCourant.x-1; po.y = pCourant.y;
@@ -470,7 +470,7 @@ public class IADifficile implements InterfaceIA {
 							int e = escales[i];
 							//System.out.println(e +" "+ escales[i] + " " + escaleCourante + " " + escaleAdjacente);
 							escales[i] = -1;
-							coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), plateau.getEscalelPosition(e), ligne, escales, plateau, tuileCheminCourant.getPriority());
+							coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), plateau.getEscalePosition(e), ligne, escales, plateau, tuileCheminCourant.getPriority());
 							found = true;
 							escales[i] = e;
 						}
@@ -486,12 +486,12 @@ public class IADifficile implements InterfaceIA {
 
 		} while(!found && !file.isEmpty());
 
-		/*TuileChemin lastOne = tuileCheminCourant;
+		TuileChemin lastOne = tuileCheminCourant;
 		while(lastOne != null) {
 			System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
 			lastOne = lastOne.getPrevious();
 		}
-		System.out.println("---------");*/
+		System.out.println("---------");
 		//System.out.println(System.nanoTime()-time);
 
 		return coutFinal;
