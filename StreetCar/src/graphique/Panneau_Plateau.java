@@ -257,7 +257,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		mainDuBas = depart + mot.getPlateau().length() * tailleCase + 10;
 		
 		positionXObjJ1 = depart+((tailleCase*145)/10);
-		positionYObjJ1 = (depart-tailleCase*2);
+		positionYObjJ1 = (depart-tailleCase);
 		
 		positionXObjJ2 = depart+((tailleCase*145)/10);
 		positionYObjJ2 = depart+(tailleCase*13);
