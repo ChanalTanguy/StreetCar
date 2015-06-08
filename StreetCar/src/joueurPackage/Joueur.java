@@ -10,10 +10,13 @@ import objectPackage.tuilePackage.Tuile;
 
 public abstract class Joueur {
 	
-	MainJoueur main;
-	Objectifs objectif;
-	int phase = 1;
-	int typeJoueur;
+	protected MainJoueur main;
+	protected Objectifs objectif;
+	protected int phase = 1;
+	protected int typeJoueur;
+	protected boolean voyagePossible = false;
+	protected boolean voyageActive = false;
+	
 	
 	public Joueur (MainJoueur referenceMain, int ligne, int newTypeJoueur) {
 		main = referenceMain;
@@ -55,21 +58,30 @@ public abstract class Joueur {
 	public Objectifs getObjectifs (){
 		return objectif;
 	}
+	public boolean getVoyagePossible (){
+		return voyagePossible;
+	}
+	public boolean getVoyageActive (){
+		return voyageActive;
+	}
 	
 	public void setLigne (int newLigne){
 		objectif.setLigne(newLigne);
 	}
-	
 	public void setMain(MainJoueur referenceMain)
 	{
 		main = referenceMain;
 	}
-	
 	public void setObjectifs(Objectifs referenceObjectif)
 	{
 		objectif = referenceObjectif;
 	}
-	
+	public void setVoyagePossible (boolean newPossibilite){
+		voyagePossible = newPossibilite;
+	}
+	public void setVoyageActive (boolean newActivite){
+		voyageActive = newActivite;
+	}
 	
 	/*
 	 * FIN Accesseurs
