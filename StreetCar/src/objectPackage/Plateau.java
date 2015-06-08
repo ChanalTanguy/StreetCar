@@ -20,17 +20,17 @@ public class Plateau {
 	private Tuile[][] plateau;
 
 	private static final int[][] PositionEscale = {  { 1, 5},
-		{ 2, 9},
 		{ 4, 2},
-		{ 4, 7},
-		{ 5,12},
-		{ 6, 4},
-		{ 7, 9},
 		{ 8, 1},
-		{ 9, 6},
-		{ 9,11},
 		{11, 4},
-		{12, 8}
+		{12, 8},
+		{ 9,11},
+		{ 5,12},
+		{ 2, 9},
+		{ 4, 7},
+		{ 6, 4},
+		{ 9, 6},
+		{ 7, 9}
 	};
 
 	public Plateau (){
