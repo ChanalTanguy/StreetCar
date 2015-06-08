@@ -8,7 +8,7 @@ public class MainJoueur {
 	
 	public MainJoueur (){
 		cartesJoueur = new Tuile[Constantes.Plateau.nbCartesJoueur];
-		instanciation(cartesJoueur);
+		instanciation();
 	}
 	
 	public String toString(){
@@ -22,12 +22,12 @@ public class MainJoueur {
 	}
 	
 	
-	private void instanciation (Tuile[] tab){
-		tab[0] = Tuile.newLigneDroite(); // La main est créée de cette manière.
-		tab[1] = Tuile.newLigneDroite(); // Pour pouvoir la modifier facilement.
-		tab[2] = Tuile.newLigneDroite();
-		tab[3] = Tuile.newVirage();
-		tab[4] = Tuile.newVirage();
+	public void instanciation (){
+		cartesJoueur[0] = Tuile.newLigneDroite(); // La main est créée de cette manière.
+		cartesJoueur[1] = Tuile.newLigneDroite(); // Pour pouvoir la modifier facilement.
+		cartesJoueur[2] = Tuile.newLigneDroite();
+		cartesJoueur[3] = Tuile.newVirage();
+		cartesJoueur[4] = Tuile.newVirage();
 	}
 	private int nombreDeTuilesJouables (){
 		int compteur = 0;

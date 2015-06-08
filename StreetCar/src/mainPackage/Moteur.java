@@ -53,8 +53,8 @@ public class Moteur {
 		tabPlayers = new Joueur[2];
 		tabPlayers[0] = new JoueurHumain(this,obj[0]);
 		
-		tabPlayers[1] = new JoueurHumain(this,obj[1]);
-//		tabPlayers[1] = new JoueurIA(this, obj[1]);
+//		tabPlayers[1] = new JoueurHumain(this,obj[1]);
+		tabPlayers[1] = new JoueurIA(this, obj[1]);
 		
 		currentPlayer = 0;
 		numeroDeTour = 0;
@@ -84,16 +84,8 @@ public class Moteur {
 	 * Constructeur 2
 	 */
 	public void setPlayers(Joueur j1, Joueur j2) {
-		tabPlayers[0] = j1;
-		tabPlayers[0].setLigne(1);
-		tabPlayers[1] = j2;
-		tabPlayers[1].setLigne(4);
-		currentPlayer = 0;
-		
-		historiqueDeTours.clear();
-		Configuration configurationInitiale = new Configuration (tabPlayers, currentPlayer, plateauDeJeu, pioche, numeroDeTour++, historiqueDeTours, coupsPrecedents);
-		historiqueDeTours.add(configurationInitiale);
-		historiqueDeTours.get(0).setHistorique(historiqueDeTours);
+		tabPlayers[0] = j1.clone();
+		tabPlayers[1] = j2.clone();
 	}
 	/*
 	 * FIN Constructeur 2
@@ -178,6 +170,8 @@ public class Moteur {
 	public void jouerCoup (Coup coupChoisi) {
 		coupChoisi.setMain(tabPlayers[currentPlayer].getMain());
 		
+//		System.out.println("coupChoisi")
+		
 		String msg = "";
 		String r;
 		if (coupValide(coupChoisi)) {
@@ -236,6 +230,7 @@ public class Moteur {
 				// s'il existe deja au moins un tour dans le "futur", on compare les coups actuels joues et ceux qui auraient ete joues
 				if ( numeroDeTour < historiqueDeTours.size() ){
 					System.out.println(" ===== Tour charge au prealable ===== ");
+					System.out.println("numeroDeTour : " + numeroDeTour);
 					Configuration configFuturAnticipe = historiqueDeTours.get(numeroDeTour);
 					
 					recuperationCoups_FutursAnticipes(configFuturAnticipe.getCoupsPrecedents());
@@ -499,7 +494,6 @@ public class Moteur {
 		System.out.println(" ===== FIN Chargement d'un Tour ===== \n");
 	}
 */	
-	
 	public void montrerCoupsJoues (int numeroTourAMontrer){
 		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
 		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
@@ -595,9 +589,21 @@ public class Moteur {
 	}
 	
 	private void recuperationCoups_FutursAnticipes (Coup[] tabCoupsAnticipes){
+		System.out.println("\n ===== Recup Futur Anticipe ===== ");
+		
+		for (int index = 0; index < tabCoupsAnticipes.length; index++){
+			try {
+				System.out.println(tabCoupsAnticipes[index].toString());
+			} catch (Exception e){
+				System.out.println("null");
+			}
+		}
+		
 		for (int indexCoup = 0; indexCoup < tabCoupsAnticipes.length; indexCoup++){
 			coupsFutursAnticipes[indexCoup] = tabCoupsAnticipes[indexCoup].clone();
 		}
+		
+		System.out.println("\n ===== FIN Recup Futur Anticipe ===== ");
 	}
 	
 	private Objectifs[] tirerObjectif() {

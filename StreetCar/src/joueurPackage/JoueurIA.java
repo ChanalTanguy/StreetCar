@@ -44,7 +44,6 @@ public class JoueurIA extends Joueur {
 		return j;
 	}
 	
-	
 	public void attendCoup() {
 		ecouteurBoucle.enable();
 		if (!t.isRunning())

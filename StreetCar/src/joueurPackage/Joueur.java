@@ -23,7 +23,6 @@ public abstract class Joueur {
 	
 	public Joueur (MainJoueur referenceMain, int ligne, int newTypeJoueur) {
 		main = referenceMain;
-		main.instanciation();
 		typeJoueur = newTypeJoueur;
 		objectif = new Objectifs(ligne);
 	}
