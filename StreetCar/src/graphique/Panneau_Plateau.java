@@ -28,6 +28,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs pour Details Visuels
 	 */
+	private boolean objectifsVisibleJ1 = false;
+	private boolean objectifsVisibleJ2 = false;
 	private int mainSelectionnee = -1;
 	private boolean casePlateauSelectionnee = false;
 	private int tuileMainSelectionnee = -1;
@@ -48,7 +50,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop;
+	private BufferedImage fond, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
 	private BufferedImage surbrillance, surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	/*
@@ -255,6 +257,10 @@ public class Panneau_Plateau extends Pan_Abstract{
 		// La notification pour Joueur
 		ecrireNotifications(crayon);
 		
+		//objectifs des joueurs
+		dessinerObjectifJ1();
+		dessinerObjectifJ2();
+		
 		// La pioche
 		dessinerPioche(crayon);
 		
@@ -349,10 +355,39 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawLine( depart + numeroLigne*tailleCase, depart + tailleCase, depart + numeroLigne*tailleCase, depart + (mot.getPlateau().length()-1)*tailleCase );
 		}
 	}
+	
+	
 	private void dessinerPioche (Graphics2D crayon) {
 		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
+	
+	//dessiner les objectifs, cachés ou non, du joueur1
+	private void dessinerObjectifJ1()
+	{
+		if(objectifsVisibleJ1)
+		{
+			crayon.drawImage(carteObjectif1, depart+(tailleCase*15), depart+tailleCase, (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+		} 
+		else
+		{
+			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+tailleCase, (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+		}
+	}
+	
+	//dessine les objectifs, cachés ou non, du joueur2
+	private void dessinerObjectifJ2()
+	{
+		if(objectifsVisibleJ2)
+		{
+			crayon.drawImage(carteObjectif2, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+		} 
+		else
+		{
+			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+		}
+	}
+	
 	private void dessinerMain1 (Graphics2D crayon, MainJoueur main) {
 		for (int numeroTuile = 0; numeroTuile < main.length(); numeroTuile++){
 			Tuile tui = main.getTuileAt(numeroTuile);
@@ -573,6 +608,49 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Methode Private d'iniialisation d'image
 	 */
 	protected void initialiserImages (){
+		switch(mot.getTabPlayers()[0].getObjectifs().getLigne())
+		{
+			case 1: 
+					carteObjectif1 = Constantes.Images.initCarte("carte1.png");
+					break;
+			case 2: 
+					carteObjectif1 = Constantes.Images.initCarte("carte2.png");
+					break;
+			case 3: 
+					carteObjectif1 = Constantes.Images.initCarte("carte3.png");
+					break;
+			case 4: 
+					carteObjectif1 = Constantes.Images.initCarte("carte4.png");
+					break;
+			case 5: 
+					carteObjectif1 = Constantes.Images.initCarte("carte5.png");
+					break;
+			case 6: 
+					carteObjectif1 = Constantes.Images.initCarte("carte6.png");
+					break;
+		}
+		switch(mot.getTabPlayers()[1].getObjectifs().getLigne())
+		{
+			case 1: 
+					carteObjectif2 = Constantes.Images.initCarte("carte1.png");
+					break;
+			case 2: 
+					carteObjectif2 = Constantes.Images.initCarte("carte2.png");
+					break;
+			case 3: 
+					carteObjectif2 = Constantes.Images.initCarte("carte3.png");
+					break;
+			case 4: 
+					carteObjectif2 = Constantes.Images.initCarte("carte4.png");
+					break;
+			case 5: 
+					carteObjectif2 = Constantes.Images.initCarte("carte5.png");
+					break;
+			case 6: 
+					carteObjectif2 = Constantes.Images.initCarte("carte6.png");
+					break;
+		}
+		carteObjectifDos = Constantes.Images.initCarte("carteDos.png");
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
