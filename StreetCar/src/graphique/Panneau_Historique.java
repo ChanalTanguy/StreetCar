@@ -10,10 +10,10 @@ import constantesPackages.Constantes;
 
 public class Panneau_Historique extends Pan_Abstract{
 	private BufferedImage defilementHaut, defilementBas, historiqueCentral, ongletHistorique;
+	private BufferedImage surbrillanceSelectionnee, surbrillanceCourante;
 	
 	// Variable permettant de separer le Panneau en 3 parties pour les 3 images;
 	private int diviseurDeDimension;
-	private int encadrerZone;
 	
 	/*
 	 * Attributs d'Entiers de positionnement
@@ -37,7 +37,9 @@ public class Panneau_Historique extends Pan_Abstract{
 	 */
 	
 	private int nbOngletsActifs;
-	private boolean retourConfirme;
+	private int numeroTourCourant;
+	private int numeroTourSelectionne;
+	private boolean autorisationInteraction;
 	
 	/*
 	 * FIN Attributs
@@ -45,15 +47,23 @@ public class Panneau_Historique extends Pan_Abstract{
 	
 	private Moteur moteur;
 	
+	/*
+	 * Constructeur
+	 */
 	public Panneau_Historique (Color newCouleur, Moteur referenceMoteur){
 		super(newCouleur);
 		moteur = referenceMoteur;
-		encadrerZone = 0;
 		initialiserImages();
 		Ecouteur_Historique ecouteur = new Ecouteur_Historique(this, moteur);
+		numeroTourCourant = 0;
+		numeroTourSelectionne = -1;
+		autorisationInteraction = true;
 		addMouseListener(ecouteur);
 		addMouseMotionListener(ecouteur);
 	}
+	/*
+	 * FIN Constructeur
+	 */
 	
 	/*
 	 * ACCESSEURS
@@ -61,11 +71,8 @@ public class Panneau_Historique extends Pan_Abstract{
 	public int getDiviseur (){
 		return diviseurDeDimension;
 	}
-	public int getZoneEncadree (){
-		return encadrerZone;
-	}
-	public boolean getRetourConfirme (){
-		return retourConfirme;
+	public int getNumeroTourCourant (){
+		return numeroTourCourant;
 	}
 	
 	public int getBorneGauche_Bouton (){
@@ -119,9 +126,19 @@ public class Panneau_Historique extends Pan_Abstract{
 		return hauteurImage;
 	}
 	
-	public void setEncadrer (int newZone){
-		encadrerZone = newZone;
-		repaint();
+	public boolean getAutorisation (){
+		return autorisationInteraction;
+	}
+	
+	public void setNumeroTourCourant (int newTourCourant){
+		numeroTourCourant = newTourCourant;
+		System.out.println("numeroTourCourant : " + numeroTourCourant);
+	}
+	public void setNumeroTourSelectionne (int newTourSelectionne){
+		numeroTourSelectionne = newTourSelectionne;
+	}
+	public void setAutorisation (boolean newAutorisation){
+		autorisationInteraction = newAutorisation;
 	}
 	/*
 	 * FIN ACCESSEURS
@@ -169,11 +186,6 @@ public class Panneau_Historique extends Pan_Abstract{
 		hauteurImage = hauteur/diviseurDeDimension;
 		crayon.drawImage(defilementHaut, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 		
-		if ( encadrerZone == 1){
-			crayon.setColor(Color.white);
-			crayon.drawRect(coordX - elargissementX, coordY+1, largeurImage + 2*elargissementX, hauteurImage-2);
-		}
-		
 		borneGauche_Bouton = coordX - elargissementX;
 		borneDroite_Bouton = borneGauche_Bouton + largeurImage + 2*elargissementX;
 		borneHaute_BoutonSuperieur = coordY;
@@ -200,11 +212,6 @@ public class Panneau_Historique extends Pan_Abstract{
 		hauteurImage = hauteur/diviseurDeDimension;
 		crayon.drawImage(defilementBas, coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage, this);
 		
-		if ( encadrerZone == 2){
-			crayon.setColor(Color.white);
-			crayon.drawRect(coordX - elargissementX, coordY, largeurImage + 2*elargissementX, hauteurImage-2);
-		}
-		
 		borneHaute_BoutonInferieur = coordY;
 		borneBasse_BoutonInferieur = borneHaute_BoutonInferieur + hauteurImage;
 	}
@@ -212,10 +219,14 @@ public class Panneau_Historique extends Pan_Abstract{
 	private void dessinerOnglets (Graphics2D crayon, int nombreMaxTour){
 		int coordYOnglet = borneHaute_Onglet;
 		for (int numTour = 0; numTour < nombreMaxTour; numTour++){
-			
-//			crayon.setColor(Color.white);
-//			crayon.fillRect(borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet);
 			crayon.drawImage(ongletHistorique, borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet, this);
+			
+			if ( numTour == numeroTourCourant - moteur.getHistorique().getNbConfigsPrecedentes() ){
+				crayon.drawImage(surbrillanceCourante, borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet, this);
+			}
+			if ( numTour == numeroTourSelectionne ){
+				crayon.drawImage(surbrillanceSelectionnee, borneGauche_Onglet, coordYOnglet, dimensionOnglet, dimensionOnglet, this);
+			}
 			
 			int posXString = borneGauche_Onglet + 2*dimensionOnglet/5+1;
 			int posYString = coordYOnglet + 3*dimensionOnglet/5;
@@ -228,8 +239,6 @@ public class Panneau_Historique extends Pan_Abstract{
 			crayon.drawString(chaineTour , posXString, posYString);
 			
 			coordYOnglet += dimensionOnglet + ecart;
-			
-			
 		}
 	}
 	
@@ -238,6 +247,7 @@ public class Panneau_Historique extends Pan_Abstract{
 		historiqueCentral = Constantes.Images.initBackground("histo_centre.png");
 		ongletHistorique = Constantes.Images.initBackground("histo_case.png");
 		defilementBas = Constantes.Images.initBackground("histo_bas.png");
-		
+		surbrillanceSelectionnee = Constantes.Images.initBackground("surbrillanceJaune.png");
+		surbrillanceCourante = Constantes.Images.initBackground("surbrillanceVerte.png");
 	}
 }

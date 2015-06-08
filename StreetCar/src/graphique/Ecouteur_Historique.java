@@ -3,7 +3,6 @@ package graphique;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.Point2D;
 
 import mainPackage.Moteur;
 
@@ -24,11 +23,9 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		int tourSelectionne;
 		
 		if ( (tourSelectionne = estSurOnglets(coordX, coordY)) != aucunTour){
-			
-//			panneauHistorique.demandeConfirmation();
-//			if ( panneauHistorique.getRetourConfirme() ){
-				moteur.chargerTour(tourSelectionne);
-//			}
+			if ( panneauHistorique.getAutorisation() ){
+				moteur.chargerTour_v2(tourSelectionne);
+			}
 		}
 		else if ( estSurDefilementHaut(coordX, coordY) ){
 			moteur.getHistorique().defilementVersHaut();
@@ -45,6 +42,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		int coordX = e.getX();
 		int coordY = e.getY();
 		int tourSurligne;
+		panneauHistorique.setNumeroTourSelectionne(-1);
 		if ( estSurDefilementHaut(coordX, coordY) ){
 			panneauHistorique.changeImageDefilementHaut("histo_haut_s.png");
 		}
@@ -52,6 +50,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 			panneauHistorique.changeImageDefilementBas("histo_bas_s.png");
 		}
 		else if ( (tourSurligne = estSurOnglets(coordX, coordY)) != aucunTour ){
+			panneauHistorique.setNumeroTourSelectionne(tourSurligne);
 			moteur.montrerCoupsJoues(tourSurligne);
 		}
 		else {
@@ -59,6 +58,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 			panneauHistorique.changeImageDefilementBas("histo_bas.png");
 			moteur.effacerCoupsJoues();
 		}
+		
 		panneauHistorique.repaint();
 	}
 	public void mouseReleased(MouseEvent e) {
@@ -69,6 +69,7 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 	public void mouseExited(MouseEvent e) {
 		panneauHistorique.changeImageDefilementHaut("histo_haut.png");
 		panneauHistorique.changeImageDefilementBas("histo_bas.png");
+		panneauHistorique.setNumeroTourSelectionne(-1);
 		moteur.effacerCoupsJoues();
 		panneauHistorique.repaint();
 	}

@@ -14,22 +14,54 @@ public class Coup {
 	private Point coordonneePlateau; // Coordonnée si on a besoin d'une coordonnée sur le tableau
 								 // null si on a pas besoin de tuile.
 	
+	private MainJoueur mainUtilisee;
+	
 	public Coup(String type, int tuile, Point coordonnee) {
 		this.typeCoup = type;
 		this.numeroTuileMain = tuile;
 		this.coordonneePlateau = coordonnee;
+		this.mainUtilisee = new MainJoueur();
 	}
 	
 	public String getType() {
 		return typeCoup;
 	}
-
 	public int getTuile() {
 		return numeroTuileMain;
 	}
-	
 	public Point getCoordonnee() {
 		return (Point) coordonneePlateau.clone();
+	}
+	
+	public void setMain (MainJoueur referenceMainJoueur){
+		mainUtilisee = referenceMainJoueur;
+	}
+	
+	public Coup clone (){
+		String renvoi_typeCoup = this.typeCoup;
+		int renvoi_numeroTuile = this.numeroTuileMain;
+		Point renvoi_coordonnees = (Point) this.coordonneePlateau.clone();
+		
+		return new Coup(renvoi_typeCoup, renvoi_numeroTuile, renvoi_coordonnees);
+	}
+	public boolean equals (Coup otherCoup){
+//		System.out.println("\n ===== Equals de Coup ===== ");
+
+		boolean coupIdentique = false;
+		coupIdentique = this.typeCoup.equals(otherCoup.typeCoup);
+		coupIdentique = coupIdentique && ( this.mainUtilisee.getTuileAt(numeroTuileMain).equals(otherCoup.mainUtilisee.getTuileAt(otherCoup.numeroTuileMain)) );
+		coupIdentique = coupIdentique && this.coordonneePlateau.equals(otherCoup.coordonneePlateau);
+
+//		System.out.println(" ===== Equals de Coup ===== \n");
+
+		return coupIdentique;
+	}
+	public String toString (){
+		String chaine_resultat = "";
+		
+		chaine_resultat += typeCoup + " " + numeroTuileMain + " " + "[" + coordonneePlateau.x + ";" + coordonneePlateau.y + "]";
+		
+		return chaine_resultat;
 	}
 	
 	/**

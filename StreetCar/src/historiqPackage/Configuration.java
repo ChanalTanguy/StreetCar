@@ -1,30 +1,38 @@
 package historiqPackage;
 
-import java.awt.Point;
-
+import joueurPackage.Coup;
 import joueurPackage.Joueur;
 import objectPackage.Pioche;
 import objectPackage.Plateau;
 
 public class Configuration {
 	private Joueur[] tabJoueurs;
-	private int joueurCourantDuTour;
+	private int joueurCourantDuTourSuivant;
 	private Plateau plateauDuTour;
 	private Pioche piocheDuTour;
-	private int numeroDuTour;
+	private int numeroDuTourCourant;
 	private Historique historiqueDuTour;
-	private Point[] coupsPrecedents;
+	private Coup[] coupsPrecedents;
 	
 	/*
 	 * CONSTRUCTEUR
 	 */
-	public Configuration (Joueur[] referenceTabJoueurs, int currentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour, Historique referenceHistorique, Point[] referenceCoupsPrecedents){
+	public Configuration (Joueur[] referenceTabJoueurs, int newCurrentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour, Coup[] referenceCoupsPrecedents){
 		tabJoueurs = new Joueur[referenceTabJoueurs.length];
 		instanciationJoueurs(referenceTabJoueurs);
-		joueurCourantDuTour = currentPlayer;
+		joueurCourantDuTourSuivant = newCurrentPlayer;
 		plateauDuTour = plateauDeJeu.clone();
 		piocheDuTour = pioche.clone();
-		numeroDuTour = numeroDeTour;
+		numeroDuTourCourant = numeroDeTour;
+		copie(referenceCoupsPrecedents);
+	}
+	public Configuration (Joueur[] referenceTabJoueurs, int newCurrentPlayer, Plateau plateauDeJeu, Pioche pioche, int numeroDeTour, Historique referenceHistorique, Coup[] referenceCoupsPrecedents){
+		tabJoueurs = new Joueur[referenceTabJoueurs.length];
+		instanciationJoueurs(referenceTabJoueurs);
+		joueurCourantDuTourSuivant = newCurrentPlayer;
+		plateauDuTour = plateauDeJeu.clone();
+		piocheDuTour = pioche.clone();
+		numeroDuTourCourant = numeroDeTour;
 		historiqueDuTour = referenceHistorique.clone();
 		copie(referenceCoupsPrecedents);
 	}
@@ -39,7 +47,7 @@ public class Configuration {
 		return tabJoueurs[numeroJoueur];
 	}
 	public int getJoueurCourant (){
-		return joueurCourantDuTour;
+		return joueurCourantDuTourSuivant;
 	}
 	public Plateau getPlateauDuTour (){
 		return plateauDuTour;
@@ -48,12 +56,12 @@ public class Configuration {
 		return piocheDuTour;
 	}
 	public int getNumeroTour (){
-		return numeroDuTour;
+		return numeroDuTourCourant;
 	}
 	public Historique getHistorique (){
 		return historiqueDuTour;
 	}
-	public Point[] getCoupsPrecedents (){
+	public Coup[] getCoupsPrecedents (){
 		return coupsPrecedents;
 	}
 	
@@ -73,8 +81,8 @@ public class Configuration {
 	}
 	public String toString (){
 		String chaine_resultat = "";
-		chaine_resultat += joueurCourantDuTour + "\n";
-		chaine_resultat += numeroDuTour + "\n";
+		chaine_resultat += joueurCourantDuTourSuivant + "\n";
+		chaine_resultat += numeroDuTourCourant + "\n";
 		for (int numJoueur = 0; numJoueur < tabJoueurs.length; numJoueur++){
 			chaine_resultat += tabJoueurs[numJoueur].getMain().toString() + "\n";
 		}
@@ -85,11 +93,11 @@ public class Configuration {
 		}
 		return chaine_resultat;
 	}
-	public void copie (Point[] tabCoups){
-		coupsPrecedents = new Point[tabCoups.length];
+	public void copie (Coup[] tabCoups){
+		coupsPrecedents = new Coup[tabCoups.length];
 		int numeroCoup = 0;
 		while (numeroCoup < coupsPrecedents.length && tabCoups[numeroCoup] != null){
-			coupsPrecedents[numeroCoup] = (Point) tabCoups[numeroCoup].clone();
+			coupsPrecedents[numeroCoup] = tabCoups[numeroCoup].clone();
 			numeroCoup++;
 		}
 	}
