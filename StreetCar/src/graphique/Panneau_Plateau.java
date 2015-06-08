@@ -393,8 +393,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawLine( depart + numeroLigne*tailleCase, depart + tailleCase, depart + numeroLigne*tailleCase, depart + (mot.getPlateau().length()-1)*tailleCase );
 		}
 	}
-	
-	
 	private void dessinerPioche (Graphics2D crayon) {
 		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
