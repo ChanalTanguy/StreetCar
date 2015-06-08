@@ -125,6 +125,9 @@ public class Moteur {
 	public Historique getHistorique (){
 		return historiqueDeTours;
 	}
+	public Panneau_Historique getPanneau_Historique (){
+		return panneau_Historique;
+	}
 	
 	public void setPanneau_Jeu (Panneau_Plateau referencePanJeu){
 		panneau_Jeu = referencePanJeu;
