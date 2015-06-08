@@ -53,6 +53,8 @@ public class PanelInterface extends JPanel {
 	protected void addNewButton(JPanel panel, String text, Dimension size, String position, ActionListener action, ImageIcon img){
 		JButton button = new JButton(text, img);
 		button.setPreferredSize(size);
+		button.setBackground(Color.getColor("gris_tram", 4607576));
+		button.setForeground(Color.white);
 		button.addActionListener(action);
 		panel.add(button, position);
 	}
@@ -61,6 +63,8 @@ public class PanelInterface extends JPanel {
 		ImageIcon sizedImg = resizeImage(img, size);
 		JButton button = new JButton("", sizedImg);
 		button.setPreferredSize(size);
+		button.setBackground(Color.getColor("gris_tram", 4607576));
+		button.setForeground(Color.white);
 		button.addActionListener(action);
 		panel.add(button, position);
 	}
