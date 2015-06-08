@@ -98,9 +98,9 @@ public class PanelListener {
 			String text = getSelectedButtonText(group);
 			switch (text){
 			case "Humain" : { return new JoueurHumain(m, obj); } 
-			case "Facile" : { return new JoueurIA(m, obj); } 
-			case "Moyen" : { return new JoueurIA(m, obj); } 
-			case "Difficile" : { return new JoueurIA(m, obj); } 
+			case "Facile" : { return JoueurIA.JoueurIAFacile(m, obj); } 
+			case "Moyen" : { return JoueurIA.JoueurIAMoyen(m, obj); } 
+			case "Difficile" : { return JoueurIA.JoueurIADifficile(m, obj); } 
 			default : return null;
 			}
 		}
