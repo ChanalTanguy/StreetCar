@@ -27,14 +27,20 @@ public class Sauvegarder {
 	{
 		mot = moteur;
 		dateCourante = new Date();
-		date = dateCourante.toString().split(" ");
+		date = dateCourante.toString().split(":");
 		dateFinale = date[0];
 		for(int i = 1; i<date.length; i++)
 		{
 			dateFinale += "_";
 			dateFinale += date[i];		
 		}
-		dateFinale.replace(":", "H");
+		date = dateFinale.toString().split(" ");
+		dateFinale = date[0];
+		for(int i = 1; i<date.length; i++)
+		{
+			dateFinale += "_";
+			dateFinale += date[i];		
+		}
 		name = "save/Sauvegarde_du_" + dateFinale + ".txt";
 		save(this);
 	}
