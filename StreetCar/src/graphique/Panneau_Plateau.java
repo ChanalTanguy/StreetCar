@@ -367,11 +367,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 	{
 		if(objectifsVisibleJ1)
 		{
-			crayon.drawImage(carteObjectif1, depart+(tailleCase*15), depart+tailleCase, (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+			crayon.drawImage(carteObjectif1, depart+(tailleCase*15), depart+tailleCase, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		} 
 		else
 		{
-			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+tailleCase, (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+tailleCase, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
 	
@@ -380,11 +380,11 @@ public class Panneau_Plateau extends Pan_Abstract{
 	{
 		if(objectifsVisibleJ2)
 		{
-			crayon.drawImage(carteObjectif2, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+			crayon.drawImage(carteObjectif2, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCase*30)/10, (tailleCase*25)/10, this);
 		} 
 		else
 		{
-			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCaseMain*30)/10, (tailleCaseMain*25)/10, this);
+			crayon.drawImage(carteObjectifDos, depart+(tailleCase*15), depart+(tailleCase*9), (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
 	
