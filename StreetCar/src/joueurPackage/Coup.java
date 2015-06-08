@@ -2,8 +2,6 @@ package joueurPackage;
 
 import java.awt.Point;
 
-import objectPackage.tuilePackage.Tuile;
-
 public class Coup {
 
 	public static final int nbMaxPlacements = 2;

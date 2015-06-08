@@ -13,7 +13,6 @@ public abstract class Pan_Abstract extends JComponent{
 	
 	public Pan_Abstract (Color newCouleur){
 		couleur = newCouleur;
-		addMouseListener(new GestionSouris(this));
 	}
 	
 	protected int getLargeur (){

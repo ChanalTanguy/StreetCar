@@ -1,7 +1,5 @@
 	package joueurPackage;
 
-import java.awt.Point;
-
 import mainPackage.Moteur;
 
 public class JoueurHumain extends Joueur {
@@ -13,10 +11,8 @@ public class JoueurHumain extends Joueur {
 	
 	public JoueurHumain(Moteur m, int ligne) {
 		super(new MainJoueur(), ligne, typeHumain);
-		//ecouteurPlateau = new EcouteTerrain(this);
 		enabled = false;
 		this.moteur = m;
-		// TODO : Ajouter la main en paramètre
 	}
 	
 	public JoueurHumain(Moteur m, Objectifs obj) {

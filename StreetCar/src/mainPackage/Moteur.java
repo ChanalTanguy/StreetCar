@@ -8,7 +8,6 @@ import historiqPackage.Historique;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Random;
 
@@ -516,26 +515,6 @@ public class Moteur {
 		}
 	}
 	
-	private boolean coupsJoues_AnticipesIdentiques (Coup[] tabCoupsJoues, Coup[] tabCoupsAnticipes){
-//		System.out.println("\n ===== Coups Joues/Anticipes ===== ");
-		
-		boolean coupsIdentiques = true;
-		
-		int indexProchainCoup = 0;
-		while ( indexProchainCoup < tabCoupsJoues.length && coupsIdentiques ){
-			int indexCoupEnregistre = 0;
-			boolean coupCommun = false;
-			while ( indexCoupEnregistre < tabCoupsAnticipes.length && !coupCommun ){
-				coupCommun = coupCommun || tabCoupsJoues[indexProchainCoup].equals(tabCoupsAnticipes[indexCoupEnregistre]);
-				indexCoupEnregistre++;
-			}
-			coupsIdentiques = coupsIdentiques && coupCommun;
-			indexProchainCoup++;
-		}
-
-//		System.out.println(" ===== FIN Coups Joues/Anticipes ===== \n");
-		return coupsIdentiques;
-	}
 	private void effacerHistorique (int numeroTourDepartSuppression){
 		System.out.println("\n ===== Effacer Historique =====");
 		System.out.println("\ttour de depart : " + numeroTourDepartSuppression);
@@ -551,24 +530,6 @@ public class Moteur {
 		
 		System.out.println("\tapres taille de l'historique : " + historiqueDeTours.size());
 		System.out.println(" ===== FIN Effacer Historique ===== \n");
-	}
-	
-	private void recuperationCoups_FutursAnticipes (Coup[] tabCoupsAnticipes){
-		System.out.println("\n ===== Recup Futur Anticipe ===== ");
-		
-		for (int index = 0; index < tabCoupsAnticipes.length; index++){
-			try {
-				System.out.println(tabCoupsAnticipes[index].toString());
-			} catch (Exception e){
-				System.out.println("null");
-			}
-		}
-		
-		for (int indexCoup = 0; indexCoup < tabCoupsAnticipes.length; indexCoup++){
-			coupsFutursAnticipes[indexCoup] = tabCoupsAnticipes[indexCoup].clone();
-		}
-		
-		System.out.println("\n ===== FIN Recup Futur Anticipe ===== ");
 	}
 	
 	private Objectifs[] tirerObjectif() {
