@@ -43,16 +43,13 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 				charger(x,y);
 				retour(x,y);
 				break;
-			case 3: //Defis
-	
+			case 3: //Defis	
 				retour(x,y);
 				break;
-			case 4: //Options
-				
+			case 4: //Options			
 				retour(x,y);
 				break;
-			case 5: //Crédits
-				
+			case 5: //Crédits			
 				retour(x,y);
 				break;
 		}
@@ -61,13 +58,11 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 	}
 	
 	private void charger(int x, int y) {
-		// TODO Auto-generated method stub
 		int borneX = pan.getWidth()/3;
 		int borneY =  pan.getHeight()/4 ;
 		
 		for(int i = 0; i<10; i++)
 		{
-			// getWidth()/3, getHeight()/4+i*50);
 			if(x>borneX && x<borneX+100 && y>borneY+i*50 && y<borneY+(i+1)*50)
 			{
 				pan.chargementPartie = i;
@@ -76,10 +71,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 	}
 
 	private void retour(int x, int y) {
-		// TODO Auto-generated method stub
-		//System.out.println("X " + x + " Y " + y);
-		if(x>980 && x<980+300 && y>850 && y<850+45) pan.actif = 0;
-		
+		if(x>fen.getWidth()-200 && x<fen.getWidth()-200+300 && y>fen.getHeight()-100-25 && y<fen.getHeight()-100+45) pan.actif = 0;		
 	}
 
 	private void quitterAction(int x, int y) {
@@ -105,7 +97,6 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 	private void quitter(int x, int y) {
 		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*50 && y<((10+4)*50+45))
 		{
-			//if(pan.selectionner == 10) effectuerAction(pan.selectionner);
 			pan.selectionner = 10;
 			pan.selection = true;
 		}	
@@ -118,7 +109,6 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		{
 			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*50 && y<((i+4)*50+45)) 
 			{
-				//if(i == pan.selectionner) effectuerAction(pan.selectionner);
 				pan.selectionner = i;
 				pan.selection = true;
 				b = false;
@@ -131,13 +121,10 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		
 		switch(selectionner)
 		{
-			case 1 : //Nouvelle partie
-				
+			case 1 : //Nouvelle partie		
 				NewGameWindow g = new NewGameWindow();
 				g.setMainWindow(fen);
-				g.openWindow(); //voir si on choppe le bonton annuler
-				//fen.fermeture();
-
+				g.openWindow();
 				break;
 			case 2 : //Charger partie
 				pan.actif = 2;
