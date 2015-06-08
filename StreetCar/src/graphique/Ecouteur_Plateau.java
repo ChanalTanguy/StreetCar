@@ -62,6 +62,16 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 					joueur.coupPiocher();
 					selectionnerPioche();
 				}
+				
+				else if ( estSurObjectifJ1(piocheX, piocheY)){
+					panneauDeJeu.setVisObjJ1(!panneauDeJeu.getVisObjJ1());
+					panneauDeJeu.repaint();
+				}
+				
+				else if ( estSurObjectifJ2(piocheX, piocheY)){
+					panneauDeJeu.setVisObjJ2(!panneauDeJeu.getVisObjJ2());
+					panneauDeJeu.repaint();
+				}
 
 				//TODO faire la rotation de la case
 				else if ( estSurRotation(piocheX, piocheY) && joueur.getMain().getTuileAt(tuileNo(piocheX)) != null){
@@ -137,6 +147,35 @@ public class Ecouteur_Plateau implements MouseListener, MouseMotionListener{
 		}
 		return clicValide;
 	}
+	
+	private boolean estSurObjectifJ1(int Xget, int Yget){
+		boolean clicValideSurObj1 = false;
+		int borneGauche = panneauDeJeu.getPositionXObjJ1()-90;
+		int borneDroite = panneauDeJeu.getPositionXObjJ1() -90 + (panneauDeJeu.getTailleCase()*30)/10;
+		int borneHaute = panneauDeJeu.getPositionYObjJ1();
+		int borneBasse = panneauDeJeu.getPositionYObjJ1() + (panneauDeJeu.getTailleCase()*25)/10;
+		
+		if ( Xget >= borneGauche && Xget <= borneDroite
+				&&	 Yget >= borneHaute && Yget <= borneBasse ){
+					clicValideSurObj1 = true;
+				}
+				return clicValideSurObj1;
+	}
+	
+	private boolean estSurObjectifJ2(int Xget, int Yget){
+		boolean clicValideSurObj1 = false;
+		int borneGauche = panneauDeJeu.getPositionXObjJ2() - 90;
+		int borneDroite = panneauDeJeu.getPositionXObjJ2() -90 + (panneauDeJeu.getTailleCase()*30)/10;
+		int borneHaute = panneauDeJeu.getPositionYObjJ2();
+		int borneBasse = panneauDeJeu.getPositionYObjJ2() + (panneauDeJeu.getTailleCase()*25)/10;
+		
+		if ( Xget >= borneGauche && Xget <= borneDroite
+				&&	 Yget >= borneHaute && Yget <= borneBasse ){
+					clicValideSurObj1 = true;
+				}
+				return clicValideSurObj1;
+	}
+	
 	private boolean estSurPioche(int piocheX, int piocheY) {
 		boolean clicValideSurPioche = false;
 		int borneGauche = panneauDeJeu.getPositionXPioche() +10;
