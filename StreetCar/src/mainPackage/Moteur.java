@@ -43,17 +43,12 @@ public class Moteur {
 	 */
 	public Moteur(Plateau referencePlateau) {
 		Objectifs[] obj = new Objectifs[2];
-//		obj = tirerObjectif();
-		initBidon(obj);
-		
-		//System.out.println("Objectif joueur 1 : " + obj[0].toString());
-		//System.out.println("Objectif joueur 2 : " + obj[1].toString());
-		
+		obj = tirerObjectif();
+//		initBidon(obj);
 		
 		tabPlayers = new Joueur[2];
 		tabPlayers[0] = new JoueurHumain(this,obj[0]);
 		
-//		tabPlayers[1] = new JoueurHumain(this,obj[1]);
 		tabPlayers[1] = new JoueurIA(this, obj[1]);
 		
 		currentPlayer = 0;
@@ -167,7 +162,6 @@ public class Moteur {
 	 * @param coupChoisi
 	 */
 	public void jouerCoup (Coup coupChoisi) {
-		
 		BufferedImage msg = null;
 		String r;
 		if (coupValide(coupChoisi)) {
@@ -207,6 +201,7 @@ public class Moteur {
 					System.out.println("objectif rempli pour le joueur " + (currentPlayer+1));
 					tabPlayers[currentPlayer].setVoyagePossible(true);
 					System.out.println(" ===== FIN Partie Terminee ===== ");
+					return;
 				}
 				
 				// Mise a Jour de l'historique de tours
