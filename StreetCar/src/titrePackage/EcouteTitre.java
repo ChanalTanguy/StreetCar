@@ -69,7 +69,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 	}
 
 	private void quitterAction(int x, int y) {
-		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*fen.getHeight()/20  && y<((10+4)*fen.getHeight()/20 +45))
+		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>14*fen.getHeight()/20  && y<(14*fen.getHeight()/20 +45))
 		{
 			if(pan.selectionner == 10) effectuerAction(pan.selectionner);
 		}	
@@ -89,7 +89,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 	}
 
 	private void quitter(int x, int y) {
-		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(10+4)*50 && y<((10+4)*50+45))
+		if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>14*fen.getHeight()/20 && y<(14*fen.getHeight()/20+45))
 		{
 			pan.selectionner = 10;
 			pan.selection = true;
