@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import joueurPackage.Coup;
+import joueurPackage.Joueur;
 import joueurPackage.JoueurIA;
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
@@ -22,6 +23,10 @@ public class IAMoyenne implements InterfaceIA {
 		this.moteur = moteur;
 		joueur = joueurIA;
 		r = new Random();
+	}
+	
+	public void setJoueur(JoueurIA j) {
+		joueur = j;
 	}
 	
 	@Override

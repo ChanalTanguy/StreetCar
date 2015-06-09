@@ -20,6 +20,10 @@ public class IAFacile implements InterfaceIA {
 		joueur = joueurIA;
 	}
 	
+	public void setJoueur(JoueurIA j) {
+		joueur = j;
+	}
+	
 	@Override
 	public Coup getCoup() {
 		if(moteur.getNbActions()<3)

@@ -32,6 +32,10 @@ public class IADifficile implements InterfaceIA {
 		r = new Random();
 		coupEnAttente = null;
 	}
+	
+	public void setJoueur(JoueurIA j) {
+		joueur = j;
+	}
 
 	public void setCoupEnAttente(Coup c) {
 		if (coupEnAttente != null)
@@ -187,10 +191,12 @@ public class IADifficile implements InterfaceIA {
 									jouerCoupProvisoire(plateau, x, y, numTuile, main);
 									coupDuoActuel.setCout(evaluationPlateau(plateau));
 
+
 									if (duoValideEtMeilleur(coupDuoActuel, coupSoloChoisi, coutDuo)) {
 										if (coutDuo > coupDuoActuel.getCout()) {
 											coupsDuoRetenu.clear();
 											coutDuo = coupDuoActuel.getCout();
+											//System.out.println(coupDuoActuel);
 										}
 										CoupEtRotation[] crs = new CoupEtRotation[2];
 										crs[0] = coupSoloChoisi;
@@ -290,7 +296,7 @@ public class IADifficile implements InterfaceIA {
 		}
 		return (4*c1)-(c2);
 	}
-	
+
 	private final static int coutTuileFixe = 0;
 	private final static int coutTuileNull = 3;
 	private final static int coutTuilePossible = 15;
@@ -335,7 +341,7 @@ public class IADifficile implements InterfaceIA {
 
 		// Initialisation
 		long time = System.nanoTime();
-		
+		boolean trace = false;
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
 		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
 		Point po = depart;
@@ -349,12 +355,13 @@ public class IADifficile implements InterfaceIA {
 		Point prochainObjectif = null;
 
 		// Verifier si l'objectif actuel est une Escale
+		// Si oui on récupère son numéro, et on récupère l'objectif suivant
 		Tuile tuileArrivee = plateau.getTuileAt(arrivee.x, arrivee.y);
 		int escaleCourante = 0; 
 		if (tuileArrivee instanceof Escale) {
 			Escale e = (Escale) tuileArrivee;
 			escaleCourante = e.getNumeroEscale();
-			
+
 			int i = 0;
 			while (i < 3 && !found) {
 				if (escales[i] > 0) {
@@ -370,17 +377,19 @@ public class IADifficile implements InterfaceIA {
 
 		// Debut du A*
 		do {
-			// Récupérer la tuile suivante
+			// Récupérer la tuile suivante,
 			tuileCheminCourant = file.remove();
 			Point pCourant = tuileCheminCourant.getPosition();
 			Tuile t = plateau.getPlateau()[pCourant.x][pCourant.y];
 
+			// On traite la tuile si la tuile + rotation n'a pas déja été vu.
 			if (!seens.contain(tuileCheminCourant)) {
 				seens.add(tuileCheminCourant);
 
 				escaleAdjacente = plateau.aCoterDUneEscaleNonAssignee(pCourant);
 
 				// Cas de la tuile null
+				// On va dans toute les direction sauf celle d'où on vient avec un cout de coutTuileNull
 				if (t == null) {
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
@@ -401,6 +410,7 @@ public class IADifficile implements InterfaceIA {
 				}
 
 				// Cas de la tuile d'escale de début;
+				// On va dans les deux direction possible de la tuile (Code inutile possible)
 				else if (t.getTypeTuile() == 1 && pCourant.equals(depart)) {
 					if (t.connectionsExistantes(Constantes.Orientation.est)) {
 						po.x = pCourant.x+1; po.y = pCourant.y;
@@ -421,6 +431,7 @@ public class IADifficile implements InterfaceIA {
 				}
 
 				// Cas des tuiles avec présence d'arbre.
+				// On va dans toutes les directions ou on peut aller depuis la direction d'ou on vient avec un cout de coutTuileFixe
 				else if (t.getPresenceArbres()) {
 					for (String s : t.getDirectionConnectedTo(tuileCheminCourant.getDirection())) {
 						switch (s) {
@@ -444,7 +455,9 @@ public class IADifficile implements InterfaceIA {
 					}
 				}
 
-				// Cas de base
+				// Cas de base (Une tuile remplaçable)
+				// On va dans toutes les directions ou on peut aller depuis la direction d'ou on vient avec un cout de coutTuileFixe
+				// + Toute les autres direction d'ou on ne vient pas avec un cout de coutTuilePossible
 				else {
 					ArrayList<String> listeDirectionPossible = t.getDirectionConnectedTo(tuileCheminCourant.getDirection());
 					if (!tuileCheminCourant.getDirection().equals(Constantes.Orientation.est)) {
@@ -477,9 +490,13 @@ public class IADifficile implements InterfaceIA {
 					}
 				}
 
+				// On atteint l'objectif :
+				// Si l'objectif est le terminus, on arrête l'algo et on renvoi le cout
 				if (escaleCourante == 0 && pCourant.equals(arrivee) ) {
 					coutFinal = tuileCheminCourant.getPriority();
 					found = true;
+					// Si c'est une escale, on change d'objectif en prenant le prochain objectif.
+					// Pour cela on utilise récursivement l'algorithme
 				} else if (escaleCourante != 0 && (escaleAdjacente == escaleCourante || (t != null && t.getEscaleLiee() == escaleCourante))) {
 					int i = 0;
 					while (i < 3 && !found) {
@@ -493,6 +510,7 @@ public class IADifficile implements InterfaceIA {
 						}
 						i++;
 					}
+					// Si il n'y a plus d'escale, le prochain objectif est le terminus de la ligne
 					if (!found) {
 						coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), plateau.getTerminalPosition(ligne,2), ligne, escales, plateau, tuileCheminCourant.getPriority());
 						found = true;
@@ -503,12 +521,15 @@ public class IADifficile implements InterfaceIA {
 
 		} while(!found && !file.isEmpty());
 
-		/*TuileChemin lastOne = tuileCheminCourant;
-		while(lastOne != null) {
-			System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
-			lastOne = lastOne.getPrevious();
+
+		if (trace == true) {
+			TuileChemin lastOne = tuileCheminCourant;
+			while(lastOne != null) {
+				System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
+				lastOne = lastOne.getPrevious();
+			}
+			System.out.println("---------");
 		}
-		System.out.println("---------");*/
 		//System.out.println(System.nanoTime()-time);
 
 		return coutFinal;

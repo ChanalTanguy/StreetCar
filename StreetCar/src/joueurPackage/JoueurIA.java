@@ -56,6 +56,7 @@ public class JoueurIA extends Joueur {
 		JoueurIA joueur_renvoi = new JoueurIA(ecouteurBoucle.moteur, objectif.clone());
 		
 		joueur_renvoi.ecouteurBoucle = ecouteurBoucle;
+		joueur_renvoi.ecouteurBoucle.getIA().setJoueur(joueur_renvoi);
 		joueur_renvoi.t = t;
 		joueur_renvoi.main = this.main.clone();
 		joueur_renvoi.phase = this.phase;

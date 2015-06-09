@@ -28,6 +28,10 @@ public class EcouteurBoucle implements ActionListener {
 		enabled = false;
 	}
 	
+	public InterfaceIA getIA() {
+		return ia;
+	}
+	
 	public void actionPerformed(ActionEvent arg0) {
 		if (enabled) {
 			try {
