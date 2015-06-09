@@ -86,7 +86,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		
 		for(int i = 1; i<6 && b; i++)
 		{
-			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*50 && y<((i+4)*50+45)) 
+			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*fen.getHeight()/20 && y<((i+4)*fen.getHeight()/20+45)) 
 			{
 				if(i == pan.selectionner) effectuerAction(pan.selectionner);
 			}
@@ -107,7 +107,7 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 		
 		for(int i = 1; i<6 && b; i++)
 		{
-			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*50 && y<((i+4)*50+45)) 
+			if(x>pan.getWidth()/3 && x<pan.getWidth()/3+300 && y>(i+4)*fen.getHeight()/20 && y<((i+4)*fen.getHeight()/20+45)) 
 			{
 				pan.selectionner = i;
 				pan.selection = true;

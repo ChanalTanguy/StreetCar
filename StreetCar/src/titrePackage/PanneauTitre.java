@@ -83,18 +83,20 @@ public class PanneauTitre extends JPanel{
 	}
 
 	private void ecranTitre(Graphics2D crayon) {
-		crayon.drawImage(titre, getWidth()/5, 50, 900, 90, this);
-		crayon.drawImage(nouvellePartie, getWidth()/3, (1+4)*50, 300, 45, this);
-		crayon.drawImage(chargerPartie, getWidth()/3, (2+4)*50, 300, 45, this);
-		crayon.drawImage(defis, getWidth()/3, (3+4)*50, 300, 45, this);
-		crayon.drawImage(options, getWidth()/3, (4+4)*50, 300, 45, this);
-		crayon.drawImage(credits, getWidth()/3, (5+4)*50, 300, 45, this);
-		crayon.drawImage(quitter, getWidth()/3, (10+4)*50, 300, 45, this);
+		int i = getHeight()/20;
+		
+		crayon.drawImage(titre, getWidth()/5, i, 900, 90, this);
+		crayon.drawImage(nouvellePartie, getWidth()/3, 5*i, 300, 45, this);
+		crayon.drawImage(chargerPartie, getWidth()/3, 6*i, 300, 45, this);
+		crayon.drawImage(defis, getWidth()/3, 7*i, 300, 45, this);
+		crayon.drawImage(options, getWidth()/3, 8*i, 300, 45, this);
+		crayon.drawImage(credits, getWidth()/3, 9*i, 300, 45, this);
+		crayon.drawImage(quitter, getWidth()/3, 14*i, 300, 45, this);
 			
 		if(selection)
 		{
 			crayon.setColor(Color.white);
-			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*51, 84, 50, this);
+			crayon.drawImage(fleche, getWidth()/4, (selectionner+4)*i, 84, 50, this);
 		}
 	}
 
@@ -143,10 +145,8 @@ public class PanneauTitre extends JPanel{
 
 	//Pas encore complet
 	public void credits(Graphics2D crayon) {
-		//TODO inclure le bouton de retour
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
 		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
-		//crayon.drawRect(getWidth()-200, getHeight()-100, 300, 45);
 	}
 	
 }
