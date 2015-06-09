@@ -46,8 +46,8 @@ public class Moteur {
 //		obj = tirerObjectif();
 		initBidon(obj);
 		
-		System.out.println("Objectif joueur 1 : " + obj[0].toString());
-		System.out.println("Objectif joueur 2 : " + obj[1].toString());
+		//System.out.println("Objectif joueur 1 : " + obj[0].toString());
+		//System.out.println("Objectif joueur 2 : " + obj[1].toString());
 		
 		
 		tabPlayers = new Joueur[2];
