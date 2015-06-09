@@ -58,7 +58,6 @@ public class IADifficile implements InterfaceIA {
 			return c;
 		}
 
-		long t = System.currentTimeMillis();
 
 		Plateau plateau = (Plateau) moteur.getPlateau().clone();
 
@@ -111,16 +110,6 @@ public class IADifficile implements InterfaceIA {
 			}
 		}
 
-		if (trace == true) {
-			for (int i = 0; i < 5; i++) {
-				System.out.print("TUILE N°"+(i+1)+" | UNIQUE : "+unique[i]+" | ROTATION : "); 
-				for (int r = 0; r < 4; r++){
-					System.out.print(uniqueRotation[i][r]+" "); 
-				}
-				System.out.println(); 
-			}
-		}
-
 		// PARTIE 1 : SIMULER TOUT LES COUP ET GARDER LE MEILLEUR DE TOUS
 		// EN PARALLELE, SIMULER TOUT LES DUO DE COUP ADJACENT ET ENREGISTRER LE MEILLEUR DE TOUS
 		for (int x = 1; x < Constantes.Dimensions.dimensionPlateau-1; x++) { 	 	// Pour chaque...
@@ -170,8 +159,6 @@ public class IADifficile implements InterfaceIA {
 
 		CoupEtRotation coupSoloChoisi = coupsSoloRetenu.get(r.nextInt(coupsSoloRetenu.size()));
 
-		if (trace == true)
-			System.out.println("Temps d'execution première partie (ms) : "+(System.currentTimeMillis()-t));
 
 		// PARTIE 2 : SIMULER LE PREMIER COUP, ET TROUVER LE MEILLEUR DEUXIEME COUP ASSOCIE AU PREMIER.
 		// PUIS COMPARER AVEC LE MEILLEUR DUO DE COUP ADJACENT DE LA PREMIERE PHASE
@@ -196,7 +183,6 @@ public class IADifficile implements InterfaceIA {
 										if (coutDuo > coupDuoActuel.getCout()) {
 											coupsDuoRetenu.clear();
 											coutDuo = coupDuoActuel.getCout();
-											//System.out.println(coupDuoActuel);
 										}
 										CoupEtRotation[] crs = new CoupEtRotation[2];
 										crs[0] = coupSoloChoisi;
@@ -218,14 +204,6 @@ public class IADifficile implements InterfaceIA {
 		CoupEtRotation[] coupChoisi = coupsDuoRetenu.get(r.nextInt(coupsDuoRetenu.size()));
 
 		coupEnAttente = coupChoisi[1];
-
-		if (trace == true) {
-			System.out.println("Temps d'execution total (ms) : "+(System.currentTimeMillis()-t));
-			System.out.println("Résultat : ");
-			System.out.println("Coup 1 : "+coupChoisi[0].getCoup().getTuile()+" "+coupChoisi[0].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[0].getNbRotation()+"; cout : "+coupChoisi[0].getCout());
-			System.out.println("Coup 2 : "+coupChoisi[1].getCoup().getTuile()+" "+coupChoisi[1].getCoup().getCoordonnee()+"; nbRot : "+coupChoisi[1].getNbRotation()+"; cout : "+coupChoisi[1].getCout());
-			System.out.println();
-		}
 
 		for (int i = 0; i < coupChoisi[0].getNbRotation(); i++)
 			joueur.tournerTuileMain(coupChoisi[0].getCoup().getTuile());
@@ -286,11 +264,9 @@ public class IADifficile implements InterfaceIA {
 	}
 
 	private int evaluationPlateau(Plateau p) {
-		long t = System.nanoTime()/1000;
 		int c1 = coutChemin(joueur.getObjectifs().getLigne(),joueur.getObjectifs().getEscalesCibles(),p);
 		int c2 = coutChemin(moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getObjectifs().getLigne(),moteur.getTabPlayers()[(moteur.getcurrentPlayer()+1)%2].getObjectifs().getEscalesCibles(),p);
 
-		//System.out.println("Temps d'execution 2 recherche (µs) : "+(System.nanoTime()/1000-t));
 		if (c1 == 0) {
 			return Integer.MIN_VALUE/4;
 		}
@@ -340,7 +316,6 @@ public class IADifficile implements InterfaceIA {
 	private static int rechercheChemin(Point depart, String directionDepart, Point arrivee, int ligne, int[] escales, Plateau plateau, int coutInitial) {
 
 		// Initialisation
-		long time = System.nanoTime();
 		boolean trace = false;
 		PriorityQueue<TuileChemin> file = new PriorityQueue<TuileChemin>
 		(Constantes.Dimensions.dimensionPlateau*Constantes.Dimensions.dimensionPlateau, new ComparateurChemin());
@@ -502,7 +477,6 @@ public class IADifficile implements InterfaceIA {
 					while (i < 3 && !found) {
 						if (escales[i] > 0) {
 							int e = escales[i];
-							//System.out.println(e +" "+ escales[i] + " " + escaleCourante + " " + escaleAdjacente);
 							escales[i] = -1;
 							coutFinal = rechercheChemin(pCourant, tuileCheminCourant.getDirection(), plateau.getEscalePosition(e), ligne, escales, plateau, tuileCheminCourant.getPriority());
 							found = true;
@@ -520,17 +494,6 @@ public class IADifficile implements InterfaceIA {
 			}
 
 		} while(!found && !file.isEmpty());
-
-
-		if (trace == true) {
-			TuileChemin lastOne = tuileCheminCourant;
-			while(lastOne != null) {
-				System.out.println(lastOne.getPosition()+" "+lastOne.getDirection()+" | cout :"+lastOne.getPriority());
-				lastOne = lastOne.getPrevious();
-			}
-			System.out.println("---------");
-		}
-		//System.out.println(System.nanoTime()-time);
 
 		return coutFinal;
 	}
