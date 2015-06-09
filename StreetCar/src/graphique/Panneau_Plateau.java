@@ -240,7 +240,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Methode paintComponent de Panneau_Plateau
 	 */
 	public void paintComponent (Graphics g){
-//		System.out.println("\n ===== Paint Panneau_Plateau ===== ");
 		crayon = (Graphics2D) g;
 		
 		largeur = getSize().width;
@@ -331,8 +330,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 		
 		dessinerCoupsHistorique(crayon);
-
-//		System.out.println("\n ===== FIN Paint Panneau_Plateau ===== ");
 	}
 	
 	
