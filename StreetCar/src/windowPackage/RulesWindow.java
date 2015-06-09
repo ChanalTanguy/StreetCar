@@ -5,6 +5,7 @@ import java.awt.Dialog;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+import constantesPackages.Constantes;
 import panelPackage.CreditsPanel;
 import panelPackage.RulesPanel;
 import panelPackage.SettingsPanel;
@@ -15,9 +16,10 @@ public class RulesWindow extends WindowInterface {
 	}
 	
 	public void openWindow(){
+		
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		RulesPanel menu = new RulesPanel(mainWindow, win);
-		setNewSize(win,750,630);
+		setNewSize(win,1024,900);
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);
