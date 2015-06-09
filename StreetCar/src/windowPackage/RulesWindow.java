@@ -19,7 +19,7 @@ public class RulesWindow extends WindowInterface {
 		
 		JDialog win = new JDialog(new JFrame(), "Allan please add title", true);
 		RulesPanel menu = new RulesPanel(mainWindow, win);
-		setNewSize(win,1024,900);
+		setNewSize(win,1024,940);
 		win.add(menu);
 		win.setResizable(false);
 		win.setLocationRelativeTo(null);
