@@ -22,7 +22,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	private Moteur mot;
 	private BufferedImage notifications;
-	//private String notifications;
 	/*
 	 * FIN Attributs Principaux
 	 */
@@ -57,6 +56,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	private BufferedImage victoire;
+	private BufferedImage joueur1, joueur2;
 	/*
 	 * FIN Images
 	 */
@@ -637,24 +637,21 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerTuileMasquageAbsence (Graphics2D crayon, int coordX, int coordY){
 		crayon.drawImage(opacitePasse, depart + coordX*tailleCase +1, depart + coordY*tailleCase +1, tailleCase-1, tailleCase-1, this);
 	}
-	
-	private void dessinerGagnant(Graphics2D crayon)
-	{
+	private void dessinerGagnant (Graphics2D crayon){
 		if(mot.getPlateau().ObjectifComplet(mot.getTabPlayers()[mot.getcurrentPlayer()].getObjectifs()))
 		{
 			if (mot.getcurrentPlayer()==0)
 			{
-				victoire = Constantes.Images.initBackground("j1win.png");
+				victoire = Constantes.Images.initImageJoueur("j1win.png");
 				crayon.drawImage(victoire, 0, (hauteur/2)-150, largeur, 300, this);
 			}
 			else
 			{
-				victoire = Constantes.Images.initBackground("j2win.png");
+				victoire = Constantes.Images.initImageJoueur("j2win.png");
 				crayon.drawImage(victoire, 0, (hauteur/2)-150, largeur, 300, this);
 			}
 		}
 	}
-	
 	private void dessinerTuileMasquageAnticipation (Graphics2D crayon, int coordX, int coordY){
 		crayon.drawImage(opaciteFutur, depart + coordX*tailleCase +1, depart + coordY*tailleCase +1, tailleCase-1, tailleCase-1, this);
 	}
@@ -669,10 +666,8 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 * Methode Private d'iniialisation d'image
 	 */
 	protected void initialiserImages (){
-		//initialisation des cartes de lignes selon la lignes tiré
 		String numeroLigne, numeroTram, numeroEscale1, numeroEscale2;
 		
-		System.out.println("joueur 1");
 		numeroLigne = "carte" + mot.getTabPlayers()[0].getObjectifs().getLigne() + ".png";
 		numeroTram = "tram" + mot.getTabPlayers()[0].getObjectifs().getLigne() + ".png";
 		numeroEscale1 = "" + (char) (mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[0] + 'A'-1) + ".jpg";
@@ -692,25 +687,30 @@ public class Panneau_Plateau extends Pan_Abstract{
 		tramJ2 = Constantes.Images.initCarte(numeroTram);
 		escale1J2 = Constantes.Images.initCarte(numeroEscale1);
 		escale2J2 = Constantes.Images.initCarte(numeroEscale2);
-
 		carteObjectifDos = Constantes.Images.initCarte("carteDos.png");
+		
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
-		rotate = Constantes.Images.initBouton("tourner.png");
-		surbrillance = Constantes.Images.initBackground("surbrillance.png");
-		surbrillanceVerte = Constantes.Images.initBackground("surbrillanceVerte.png");
-		surbrillanceCyan = Constantes.Images.initBackground("surbrillanceCyan.png");
-		surbrillanceViolet = Constantes.Images.initBackground("surbrillanceViolet.png");
-		surbrillanceVioletteExt = Constantes.Images.initBackground("surbrillanceVioletExt.png");
-		surbrillanceRouge = Constantes.Images.initBackground("surbrillanceRouge.png");
-		surbrillanceJaune = Constantes.Images.initBackground("surbrillanceJaune.png");
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
 		opaciteFutur = Constantes.Images.initBackground("opaciteFutur.png");
-		stop = Constantes.Images.initTuile("stop.png");
 		cadreNotif = Constantes.Images.initBackground("cadreNotif.png");
 		
+		rotate = Constantes.Images.initBouton("tourner.png");
+		
+		stop = Constantes.Images.initTuile("stop.png");
+		
+		surbrillance = Constantes.Images.initSurbrillance("surbrillance.png");
+		surbrillanceVerte = Constantes.Images.initSurbrillance("surbrillanceVerte.png");
+		surbrillanceCyan = Constantes.Images.initSurbrillance("surbrillanceCyan.png");
+		surbrillanceViolet = Constantes.Images.initSurbrillance("surbrillanceViolet.png");
+		surbrillanceVioletteExt = Constantes.Images.initSurbrillance("surbrillanceVioletExt.png");
+		surbrillanceRouge = Constantes.Images.initSurbrillance("surbrillanceRouge.png");
+		surbrillanceJaune = Constantes.Images.initSurbrillance("surbrillanceJaune.png");
+		
+		joueur1 = Constantes.Images.initImageJoueur("joueur1.png");
+		joueur2 = Constantes.Images.initImageJoueur("joueur2.png");
 	}
 
 }
