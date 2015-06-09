@@ -450,7 +450,7 @@ public class Moteur {
 			FileReader f = new FileReader(new File("ressources/cartes.txt"));
 			BufferedReader br = new BufferedReader(f);
 			current = br.readLine();
-			while(Character.getNumericValue((current.charAt(0))) != 6)
+			while(Character.getNumericValue((current.charAt(0))) != 7)
 			{
 				if(Character.getNumericValue((current.charAt(0))) == obj[0].getLigne())
 				{

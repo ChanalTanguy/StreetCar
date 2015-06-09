@@ -269,6 +269,9 @@ public class IADifficile implements InterfaceIA {
 		Point prochainObjectif = null;
 		// Verifier si l'objectif actuel est une Escale
 		// Si oui on récupère son numéro, et on récupère l'objectif suivant
+		if (arrivee == null) {
+			return coutFinal;
+		}
 		Tuile tuileArrivee = plateau.getTuileAt(arrivee.x, arrivee.y);
 		int escaleCourante = 0;
 		if (tuileArrivee instanceof Escale) {
