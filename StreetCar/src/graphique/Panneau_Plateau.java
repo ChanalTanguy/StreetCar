@@ -401,6 +401,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerPioche (Graphics2D crayon) {
 		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		crayon.drawString("Il reste " + (mot.getPioche().size()) + " tuiles",positionXPioche+10, positionYPioche+10);
 	}
 	
 	// dessiner les objectifs, caches ou non, du joueur1
