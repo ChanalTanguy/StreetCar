@@ -2,6 +2,8 @@ package titrePackage;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import windowPackage.LoadGameWindow;
 import windowPackage.NewGameWindow;
 
 public class EcouteTitre implements MouseListener, MouseMotionListener {
@@ -120,7 +122,9 @@ public class EcouteTitre implements MouseListener, MouseMotionListener {
 				g.openWindow();
 				break;
 			case 2 : //Charger partie
-				pan.actif = 2;
+				LoadGameWindow load = new LoadGameWindow();
+				load.setMainWindow(fen);
+				load.openWindow();
 				break;
 			case 3 : //Défis
 				pan.actif = 3;
