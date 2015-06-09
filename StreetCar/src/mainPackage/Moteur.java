@@ -82,8 +82,8 @@ public class Moteur {
 	 * Constructeur 2
 	 */
 	public void setPlayers(Joueur j1, Joueur j2) {
-		tabPlayers[0] = j1.clone();
-		tabPlayers[1] = j2.clone();
+		tabPlayers[0] = j1;
+		tabPlayers[1] = j2;
 	}
 	/*
 	 * FIN Constructeur 2
