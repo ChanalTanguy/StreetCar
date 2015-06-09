@@ -35,6 +35,7 @@ public class Moteur {
 	private int numeroDeTour;
 	private Historique historiqueDeTours;
 	
+	
 	private Coup[] coupsPrecedents;
 	
 	/*
