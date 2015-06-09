@@ -71,7 +71,7 @@ public class PanneauTitre extends JPanel{
 		crayon.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		
 		if(actif == 0) ecranTitre(crayon);
-		if(actif == 2) chargerPartie(crayon);
+		//if(actif == 2) chargerPartie(crayon);
 		if(actif == 3) defis(crayon);
 		if(actif == 4) options(crayon);
 		if(actif == 5) credits(crayon);
@@ -110,9 +110,7 @@ public class PanneauTitre extends JPanel{
 	
 	private void chargerPartie(Graphics2D crayon) {
 		
-		LoadGameWindow load = new LoadGameWindow();
-		load.setMainWindow(fenetre);
-		load.openWindow();
+
 		/*
 		crayon.setColor(Color.white);
 		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
