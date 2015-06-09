@@ -207,9 +207,6 @@ public class Moteur {
 					tabPlayers[currentPlayer].setVoyagePossible(true);
 					System.out.println(" ===== FIN Partie Terminee ===== ");
 				}
-				else {
-					System.out.println("objectif incomplet");
-				}
 				
 				// Mise a Jour de l'historique de tours
 				// creation de la configuration a ajouter
@@ -322,10 +319,6 @@ public class Moteur {
 	
 	// Methodes de Kévin
 	public void annulerTour_V2 (){
-		System.out.println("\n ===== Annulation du tour V2 ===== ");
-		
-		System.out.println("numero du tour actuel : " + numeroDeTour);
-		System.out.println("joueur courant : " + currentPlayer);
 		Configuration configARetablir;
 		if ( numeroDeTour > 0 ){
 			configARetablir = historiqueDeTours.get(numeroDeTour - 1);
@@ -341,20 +334,12 @@ public class Moteur {
 		nbActions = 4;
 		panneau_Jeu.repaint();
 		tabPlayers[currentPlayer].attendCoup();
-		
-		System.out.println(" ===== FIN Annulation du tour V2 ===== \n");
 	}
 	public void chargerTour_v2 (int numeroTourACharger){
-		System.out.println("\n ===== Chargement Tour V2 ===== ");
 		int numeroReelTour = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
-		System.out.println("tour " + numeroReelTour + " a charger");
 		
 		Configuration configACharger = historiqueDeTours.get(numeroReelTour);
 		viderCoupsPrecedents();
-		System.out.println("config.numTour : " + configACharger.getNumeroTour());
-		System.out.println("config.joueurCourant : " + configACharger.getJoueurCourant());
-		System.out.println("config.nbconfig : " + configACharger.getHistorique().size());
-		System.out.println("historique.size actuel : " + historiqueDeTours.size());
 		
 		viderCoupsPrecedents();
 		panneau_Jeu.effacerCoupsJoues();
@@ -377,76 +362,7 @@ public class Moteur {
 		
 		// Attente du tour du joueur courant de la configuration chargee
 		tabPlayers[currentPlayer].attendCoup();
-		
-		
-		
-		System.out.println(" ===== FIN Chargement Tour V2 ===== \n");
 	}
-
-	/*	
-	public void annulerTour (){
-		System.out.println("\n ===== Annulation du tour ===== ");
-		System.out.println("numeroDeTour : " + numeroDeTour);
-//		if ( numeroDeTour > 0 ){
-			Configuration dernierTour = historiqueDeTours.get(numeroDeTour-1);
-			
-			System.out.println("numero du tour recupere : " + dernierTour.getNumeroTour());
-			
-			for (int numeroPlayer = 0; numeroPlayer < tabPlayers.length; numeroPlayer++){
-				tabPlayers[numeroPlayer] = dernierTour.getJoueurAt(numeroPlayer).clone();
-			}
-			plateauDeJeu = dernierTour.getPlateauDuTour().clone();
-			nbActions = 4;
-			panneau_Jeu.repaint();
-			tabPlayers[currentPlayer].attendCoup();
-//		}
-		System.out.println(" ===== FIN Annulation du tour ===== \n");
-	}
-*/
-/*
-	public void chargerTour (int numeroTourACharger){
-		System.out.println("\n ===== Chargement d'un Tour ===== ");
-		
-		int indexTour = numeroTourACharger + historiqueDeTours.getNbConfigsPrecedentes();
-		System.out.println("numTourActif : " + indexTour);
-		
-		if ( indexTour < historiqueDeTours.size()-1 ){
-			System.out.println("chargement d'un tour anterieur");
-		}
-		else {
-			System.out.println("chargement du dernier tour joue");
-		}
-			
-		Configuration configACharger = historiqueDeTours.get(indexTour);
-		
-		plateauDeJeu = configACharger.getPlateauDuTour().clone();
-		pioche = configACharger.getPiocheDuTour().clone();
-		
-		tabPlayers = new Joueur[configACharger.getNombreJoueurs()];
-		for (int numeroJoueur = 0; numeroJoueur < tabPlayers.length; numeroJoueur++){
-			tabPlayers[numeroJoueur] = configACharger.getJoueurAt(numeroJoueur).clone();
-		}
-		
-		currentPlayer = configACharger.getJoueurCourant();
-		
-		numeroDeTour = configACharger.getNumeroTour();
-		
-		System.out.println("joueur courant charge : " + currentPlayer);
-		
-		panneau_Jeu.setCoupsPrecedents(configACharger.getCoupsPrecedents());
-		viderCoupsPrecedents();
-		panneau_Jeu.setNotifications(Constantes.Message.auTourDe(currentPlayer));
-		
-		// Mise a jour graphique du Panneau_Plateau et du Panneau_Historique
-		panneau_Jeu.repaint();
-		panneau_Historique.repaint();
-		
-		// Attente du tour du joueur courant de la configuration chargee
-		tabPlayers[currentPlayer].attendCoup();
-
-		System.out.println(" ===== FIN Chargement d'un Tour ===== \n");
-	}
-*/	
 	
 	public void montrerCoupsJoues (int numeroTourAMontrer){
 		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
@@ -506,20 +422,12 @@ public class Moteur {
 	}
 	
 	private void effacerHistorique (int numeroTourDepartSuppression){
-		System.out.println("\n ===== Effacer Historique =====");
-		System.out.println("\ttour de depart : " + numeroTourDepartSuppression);
-		System.out.println("\tavant taille de l'historique : " + historiqueDeTours.size());
-		
 		int compteur = historiqueDeTours.size() - numeroTourDepartSuppression;
 		while ( compteur > 0 ){
 			historiqueDeTours.retirer(historiqueDeTours.get(numeroTourDepartSuppression));
 			compteur--;
 		}
-		
 		panneau_Historique.repaint();
-		
-		System.out.println("\tapres taille de l'historique : " + historiqueDeTours.size());
-		System.out.println(" ===== FIN Effacer Historique ===== \n");
 	}
 	
 	private Objectifs[] tirerObjectif() {
