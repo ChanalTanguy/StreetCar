@@ -26,7 +26,7 @@ public class SettingsPanel extends PanelInterface {
 	
 	boolean openMenu = false;
 	
-	boolean selectDebug = false;
+	boolean selectDebug = true;
 
 	public SettingsPanel(JFrame main, JDialog parent){
 		parentDialog = parent;
@@ -50,7 +50,7 @@ public class SettingsPanel extends PanelInterface {
 		JPanel zone1 = newCheckBoxZone(400,50);
 		JPanel zone2 = newButtonZone(400,50);
 		
-		addNewCheckBox(zone1, "Activer le mode debug", listener.new DebugCheckBoxListener(), selectDebug);
+		addNewCheckBox(zone1, "Activer l'historique", listener.new DebugCheckBoxListener(), selectDebug);
 		
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		

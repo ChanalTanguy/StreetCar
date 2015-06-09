@@ -58,9 +58,9 @@ public class CreditsPanel extends PanelInterface {
 		zone1.add(image);
 		
 		if (openMenu){
-			addNewButton(zone2, "Retour", buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
+			addNewButton(zone2, buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("retour_menu.png"));
 		} else {
-			addNewButton(zone2, "Retour", buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, null), null);
+			addNewButton(zone2, buttonSize, BorderLayout.CENTER, listener.new ReturnButtonListener(parentDialog, null), loadImage("retour_menu.png"));
 		}
 				
 		this.add(zone1);
