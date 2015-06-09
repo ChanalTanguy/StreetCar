@@ -89,7 +89,7 @@ public class Historique extends ArrayList<Configuration>{
 	public String toString (){
 		String chaine_resultat = "";
 		for (int numeroConfig = 0; numeroConfig < this.size(); numeroConfig++){
-			chaine_resultat += this.get(0).toString() + "\n";
+			chaine_resultat += this.get(0).toString();
 		}
 		return chaine_resultat;
 	}
