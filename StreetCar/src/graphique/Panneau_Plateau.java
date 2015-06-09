@@ -53,7 +53,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	private BufferedImage fond, cadreNotif, plateau, pioche, piocheVide, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
 	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
-	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
+	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte,surbrillanceVerteExt, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	private BufferedImage victoire;
 	private BufferedImage joueur1, joueur2;
@@ -401,6 +401,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerPioche (Graphics2D crayon) {
 		if(mot.getNbActions()<=2) crayon.drawImage(piocheMain, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
+		crayon.drawString("Il reste " + (mot.getPioche().size()) + " tuiles",positionXPioche+10, positionYPioche+10);
 	}
 	
 	// dessiner les objectifs, caches ou non, du joueur1
@@ -527,14 +528,14 @@ public class Panneau_Plateau extends Pan_Abstract{
 		int coordY = mainDuBas+10;
 		crayon.drawImage(joueur1, tailleCase, coordY, tailleCaseMain, tailleCaseMain-10, this);
 		if ( mot.getcurrentPlayer() == 0 ){
-			crayon.drawImage(surbrillanceVerte, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
+			crayon.drawImage(surbrillanceVerteExt, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
 		}
 	}
 	private void dessinerIconeJoueur2 (Graphics2D crayon){
 		int coordY = mainDuHaut;
 		crayon.drawImage(joueur2, tailleCase, coordY, tailleCaseMain, tailleCaseMain-10, this);
 		if ( mot.getcurrentPlayer() == 1 ){
-			crayon.drawImage(surbrillanceVerte, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
+			crayon.drawImage(surbrillanceVerteExt, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
 		}
 	}
 	
@@ -720,6 +721,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		surbrillanceCyan = Constantes.Images.initSurbrillance("surbrillanceCyan.png");
 		surbrillanceViolet = Constantes.Images.initSurbrillance("surbrillanceViolet.png");
 		surbrillanceVioletteExt = Constantes.Images.initSurbrillance("surbrillanceVioletExt.png");
+		surbrillanceVerteExt = Constantes.Images.initSurbrillance("surbrillanceVerteExt.png");
 		surbrillanceRouge = Constantes.Images.initSurbrillance("surbrillanceRouge.png");
 		surbrillanceJaune = Constantes.Images.initSurbrillance("surbrillanceJaune.png");
 		
