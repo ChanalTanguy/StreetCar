@@ -63,7 +63,7 @@ public class Pioche extends ArrayList<Tuile>{
 	 * Melange les tuiles de la pioche appelante
 	 */
 	public void shuffle (){
-		Random generateur = new Random(0);
+		Random generateur = new Random();
 		Pioche tampon = new Pioche();
 		
 		while (!this.isEmpty()){
