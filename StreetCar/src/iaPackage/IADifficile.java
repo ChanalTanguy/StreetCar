@@ -273,7 +273,7 @@ public class IADifficile implements InterfaceIA {
 		return coupGarde;
 	}
 
-	private void jouerCoupProvisoire(Plateau p, int x, int y, int tuileDansMain, MainJoueur main) {
+	static void jouerCoupProvisoire(Plateau p, int x, int y, int tuileDansMain, MainJoueur main) {
 		Tuile t = p.getTuileAt(x, y);
 		p.setTuileAt(x, y, main.getTuileAt(tuileDansMain));
 		main.setTuileAt(tuileDansMain, t);
@@ -290,31 +290,32 @@ public class IADifficile implements InterfaceIA {
 		}
 		return (4*c1)-(c2);
 	}
+	
 	private final static int coutTuileFixe = 0;
 	private final static int coutTuileNull = 3;
 	private final static int coutTuilePossible = 15;
 	private final static int coutHeuristique = 3;
 	private final static int coutHeuristiqueSecond = 1;
 
-	private int calculHeuristique(Point p1, Point p2, Point p3) {
+	private static int calculHeuristique(Point p1, Point p2, Point p3) {
 		if (p3 == null)
 			return coutHeuristique*(absolu(p1.x-p2.x)+absolu(p1.y-p2.y));
 		else 
 			return coutHeuristique*(absolu(p1.x-p2.x)+absolu(p1.y-p2.y)) + coutHeuristiqueSecond*(absolu(p1.x-p3.x)+absolu(p1.y-p3.y));
 	}
 
-	private int absolu(int i) {
+	private static int absolu(int i) {
 		if (i < 0)
 			return -i;
 		return i;
 	}
-	private int max(int i, int j) {
+	private static int max(int i, int j) {
 		if (i < j)
 			return j;
 		return i;
 	}
 
-	private int coutChemin(int ligne, int[] escales, Plateau referencePlateau) {
+	static int coutChemin(int ligne, int[] escales, Plateau referencePlateau) {
 		int[] escalesBis = new int[3];
 		for (int i = 0; i< 3; i++)
 			escalesBis[i] = escales[i];
@@ -330,7 +331,7 @@ public class IADifficile implements InterfaceIA {
 		return max(x,y);
 	}
 
-	private int rechercheChemin(Point depart, String directionDepart, Point arrivee, int ligne, int[] escales, Plateau plateau, int coutInitial) {
+	private static int rechercheChemin(Point depart, String directionDepart, Point arrivee, int ligne, int[] escales, Plateau plateau, int coutInitial) {
 
 		// Initialisation
 		long time = System.nanoTime();
