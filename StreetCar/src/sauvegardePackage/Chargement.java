@@ -172,6 +172,7 @@ public class Chargement {
 			*/
 			
 			System.out.println("Fichier chargé");
+			br.close();
 			f.close();
 		}
 		catch (IOException e) {e.printStackTrace();}
