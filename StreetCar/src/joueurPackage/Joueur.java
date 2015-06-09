@@ -16,7 +16,7 @@ public abstract class Joueur {
 	protected int typeJoueur;
 	protected Point positionCouranteTram;
 	protected String orientationCouranteTram;
-	protected Escale[] escalesAtteintes;
+	protected int[] escalesAtteintes;
 	protected boolean voyagePossible = false;
 	protected boolean voyageActive = false;
 	
