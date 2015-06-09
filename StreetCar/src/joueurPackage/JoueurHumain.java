@@ -9,12 +9,6 @@ public class JoueurHumain extends Joueur {
 
 	private static int typeHumain = 0;
 	
-	public JoueurHumain(Moteur m, int ligne) {
-		super(new MainJoueur(), ligne, typeHumain);
-		enabled = false;
-		this.moteur = m;
-	}
-	
 	public JoueurHumain(Moteur m, Objectifs obj) {
 		super(new MainJoueur(), obj, typeHumain);
 		enabled = false;
@@ -71,7 +65,7 @@ public class JoueurHumain extends Joueur {
 	}
 	
 	public Joueur clone() {
-		JoueurHumain joueur_renvoi = new JoueurHumain(moteur, objectif.getLigne());
+		JoueurHumain joueur_renvoi = new JoueurHumain(moteur, objectif);
 		
 		joueur_renvoi.main = this.main.clone();
 		joueur_renvoi.phase = this.phase;
