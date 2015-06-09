@@ -137,7 +137,7 @@ public class Chargement {
 
 					if(!(tabPlat[j].equals("{null}")) && !(tabPlat[j].equals("{Nord:[]}"))) 
 					{
-						System.out.println(tabPlat[j].toString());
+						//System.out.println(tabPlat[j] + " lié à " + creerTuile(tabPlat[j]).getEscaleLiee());
 						plat.setTuileAt(i+1, j+1, creerTuile(tabPlat[j]));
 					}
 				}
@@ -154,6 +154,7 @@ public class Chargement {
 
 	//Permet de créer une tuile à partie d'une chaine de caractère de la forme {Orientation:[(Connection;Connection), (...;...)]}
 	private Tuile creerTuile(String tuileS2) {
+		int linked = 0;
 		Tuile t = new Tuile();
 		String[] orient;
 		String orientation;
@@ -162,11 +163,12 @@ public class Chargement {
 		Connection con;
 		
 		//Escale liée
-		if(tuileS2.charAt(0)>= 1 && tuileS2.charAt(0)<= 12)
+		if(Character.getNumericValue(tuileS2.charAt(0))>= 1 && Character.getNumericValue(tuileS2.charAt(0))<= 12)
 		{
-			//t.setEscaleLiee(tuileS2.charAt(0));
-			tuileS2.substring(1, tuileS2.length());
+			linked = Character.getNumericValue(tuileS2.charAt(0));
+			tuileS2 = tuileS2.substring(1, tuileS2.length());
 		}
+		
 		
 		//Orientation générale
 		orient = tuileS2.split(":");
@@ -184,7 +186,8 @@ public class Chargement {
 		}
 		
 		t.rechercheImage();
-		
+		t.setEscaleLiee(linked);
+	
 		return t;
 	}
 

@@ -122,7 +122,7 @@ public class Sauvegarder {
 						}
 						else
 						{
-							f.write(plat[i][j].toString() +  " ");
+							f.write(plat[i][j].getEscaleLiee()+plat[i][j].toString() +  " ");
 						}
 					}
 				}
