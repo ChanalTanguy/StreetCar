@@ -489,6 +489,8 @@ public class Moteur {
 				}
 				current = br.readLine();
 			}
+			
+			br.close();
 		} 	
 		catch (Exception e) { e.printStackTrace(); }
 		
