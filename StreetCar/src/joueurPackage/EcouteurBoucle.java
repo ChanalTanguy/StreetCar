@@ -32,6 +32,10 @@ public class EcouteurBoucle implements ActionListener {
 		return ia;
 	}
 	
+	public Moteur getMoteur() {
+		return moteur;
+	}
+	
 	public void actionPerformed(ActionEvent arg0) {
 		if (enabled) {
 			try {

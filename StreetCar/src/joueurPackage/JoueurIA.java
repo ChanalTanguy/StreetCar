@@ -53,16 +53,17 @@ public class JoueurIA extends Joueur {
 	}
 	
 	public Joueur clone() {
-		JoueurIA joueur_renvoi = new JoueurIA(ecouteurBoucle.moteur, objectif.clone());
+		JoueurIA joueur_renvoi;
+		switch(this.typeJoueur) {
+		case 1 : joueur_renvoi = JoueurIAFacile(this.ecouteurBoucle.getMoteur(), this.objectif); break;
+		case 2 : joueur_renvoi = JoueurIAMoyen(this.ecouteurBoucle.getMoteur(), this.objectif); break;
+		case 3 : joueur_renvoi = JoueurIADifficile(this.ecouteurBoucle.getMoteur(), this.objectif); break;
+		default :joueur_renvoi = JoueurIAFacile(this.ecouteurBoucle.getMoteur(), this.objectif); break;
+		}
 		
-		joueur_renvoi.ecouteurBoucle = ecouteurBoucle;
-		joueur_renvoi.ecouteurBoucle.getIA().setJoueur(joueur_renvoi);
-		joueur_renvoi.t = t;
 		joueur_renvoi.main = this.main.clone();
 		joueur_renvoi.phase = this.phase;
 		
-		
 		return joueur_renvoi;
 	}
-
 }
