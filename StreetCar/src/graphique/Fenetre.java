@@ -32,10 +32,10 @@ public class Fenetre extends JFrame{
 		this.setCursor(monCurseur);
 		
 		if (largeur > hauteur){
-			largeur = 7*hauteur/6;
+			largeur = 80*hauteur/57;
 		}
 		else {
-			hauteur = 7*largeur/6;
+			hauteur = 57*largeur/80;
 		}
 		
 		try {		
