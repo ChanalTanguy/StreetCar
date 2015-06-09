@@ -246,7 +246,8 @@ public class Panneau_Historique extends Pan_Abstract{
 		historiqueCentral = Constantes.Images.initBackground("histo_centre.png");
 		ongletHistorique = Constantes.Images.initBackground("histo_case.png");
 		defilementBas = Constantes.Images.initBackground("histo_bas.png");
-		surbrillanceSelectionnee = Constantes.Images.initBackground("surbrillanceJaune.png");
-		surbrillanceCourante = Constantes.Images.initBackground("surbrillanceVerte.png");
+		
+		surbrillanceSelectionnee = Constantes.Images.initSurbrillance("surbrillanceJaune.png");
+		surbrillanceCourante = Constantes.Images.initSurbrillance("surbrillanceVerte.png");
 	}
 }
