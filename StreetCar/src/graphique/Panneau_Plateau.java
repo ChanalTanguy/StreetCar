@@ -150,9 +150,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public Moteur getMoteur (){
 		return mot;
 	}
-	//public String getNotifications (){
-	//	return notifications;
-	//}
 	public BufferedImage getNotifications (){
 		return notifications;
 	}
@@ -163,16 +160,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setMainSelectionnee (int numeroMain) {
 		mainSelectionnee = numeroMain;
 	}
-	
 	public void setVisObjJ1 (boolean newbool) {
 		objectifsVisibleJ1 = newbool;
 	}
-	
 	public void setVisObjJ2 (boolean newbool) {
 		objectifsVisibleJ2 = newbool;
 	}
-	
-	
 	public void setTuileSelectionnee (int numeroTuile) {
 		tuileMainSelectionnee = numeroTuile;
 	}
@@ -188,9 +181,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	public void setCoordYSelection (int newCoordY){
 		coordYSelection = newCoordY;
 	}
-	//public void setNotifications (String newNotif){
-	//	notifications = newNotif;
-	//}
 	public void setNotifications (BufferedImage newNotif){
 		notifications = newNotif;
 	}
@@ -234,7 +224,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * FIN Constructeur
 	 */
-	
 	
 	/*
 	 * Methode paintComponent de Panneau_Plateau
@@ -332,7 +321,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerCoupsHistorique(crayon);
 	}
 	
-	
 	/*
 	 * Methodes Public de Panneau_Plateau 
 	 */
@@ -406,7 +394,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		else crayon.drawImage(pioche, positionXPioche, positionYPioche, dimensionPioche, dimensionPioche, this);
 	}
 	
-	//dessiner les objectifs, cach�s ou non, du joueur1
+	// dessiner les objectifs, caches ou non, du joueur1
 	private void dessinerObjectifJ1()
 	{
 		if(objectifsVisibleJ1)
@@ -421,7 +409,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 	}
 	
-	//dessine les objectifs, cach�s ou non, du joueur2
+	// dessiner les objectifs, caches ou non, du joueur2
 	private void dessinerObjectifJ2()
 	{
 		if(objectifsVisibleJ2)
@@ -524,16 +512,13 @@ public class Panneau_Plateau extends Pan_Abstract{
 		
 		crayon.drawImage(op.filter(image,  null), coordX, coordY, dimension, dimension, this);
 	}
-	private void dessinerCadreNotification()
-	{
+	private void dessinerCadreNotification (){
 		crayon.drawImage(cadreNotif, depart+(tailleCase*15), depart+(tailleCase*2), tailleCase*5, tailleCase*4, this);
 	}
-	//a remplacer pas un texte de notification avec une image
 	private void ecrireNotifications (){
 		crayon.setColor(Color.white);
 		crayon.drawImage(notifications, depart+(tailleCase*15)+12, depart+(tailleCase*2)+5, (tailleCase*5)-24, (tailleCase*4)-10, this);
 	}
-	
 	
 	// Methodes de dessin de details visuels
 	private void dessinerMainSelectionnee (Graphics2D crayon) {
@@ -662,220 +647,29 @@ public class Panneau_Plateau extends Pan_Abstract{
 	 */
 	protected void initialiserImages (){
 		//initialisation des cartes de lignes selon la lignes tiré
-		switch(mot.getTabPlayers()[0].getObjectifs().getLigne())
-		{
-			case 1: 
-					carteObjectif1 = Constantes.Images.initCarte("carte1.png");
-					tramJ1 = Constantes.Images.initCarte("tram1.png");
-					break;
-			case 2: 
-					carteObjectif1 = Constantes.Images.initCarte("carte2.png");
-					tramJ1 = Constantes.Images.initCarte("tram2.png");
-					break;
-			case 3: 
-					carteObjectif1 = Constantes.Images.initCarte("carte3.png");
-					tramJ1 = Constantes.Images.initCarte("tram3.png");
-					break;
-			case 4: 
-					carteObjectif1 = Constantes.Images.initCarte("carte4.png");
-					tramJ1 = Constantes.Images.initCarte("tram4.png");
-					break;
-			case 5: 
-					carteObjectif1 = Constantes.Images.initCarte("carte5.png");
-					tramJ1 = Constantes.Images.initCarte("tram5.png");
-					break;
-			case 6: 
-					carteObjectif1 = Constantes.Images.initCarte("carte6.png");
-					tramJ1 = Constantes.Images.initCarte("tram6.png");
-					break;
-		}
-		switch(mot.getTabPlayers()[1].getObjectifs().getLigne())
-		{
-			case 1: 
-					carteObjectif2 = Constantes.Images.initCarte("carte1.png");
-					tramJ2 = Constantes.Images.initCarte("tram1.png");
-					break;
-			case 2: 
-					carteObjectif2 = Constantes.Images.initCarte("carte2.png");
-					tramJ2 = Constantes.Images.initCarte("tram2.png");
-					break;
-			case 3: 
-					carteObjectif2 = Constantes.Images.initCarte("carte3.png");
-					tramJ2 = Constantes.Images.initCarte("tram3.png");
-					break;
-			case 4: 
-					carteObjectif2 = Constantes.Images.initCarte("carte4.png");
-					tramJ2 = Constantes.Images.initCarte("tram4.png");
-					break;
-			case 5: 
-					carteObjectif2 = Constantes.Images.initCarte("carte5.png");
-					tramJ2 = Constantes.Images.initCarte("tram5.png");
-					break;
-			case 6: 
-					carteObjectif2 = Constantes.Images.initCarte("carte6.png");
-					tramJ2 = Constantes.Images.initCarte("tram6.png");
-					break;
-		}
-		//initialisation des escales selon les escales tiré
-		switch(mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[0])
-		{
-			case 1:
-					escale1J1 = Constantes.Images.initCarte("A.jpg");
-					break;
-			case 2:
-					escale1J1 = Constantes.Images.initCarte("B.jpg");
-					break;
-			case 3:
-					escale1J1 = Constantes.Images.initCarte("C.jpg");
-					break;
-			case 4:
-					escale1J1 = Constantes.Images.initCarte("D.jpg");
-					break;
-			case 5:
-					escale1J1 = Constantes.Images.initCarte("E.jpg");
-					break;
-			case 6:
-					escale1J1 = Constantes.Images.initCarte("F.jpg");
-					break;
-			case 7:
-					escale1J1 = Constantes.Images.initCarte("G.jpg");
-					break;
-			case 8:
-					escale1J1 = Constantes.Images.initCarte("H.jpg");
-					break;
-			case 9:
-					escale1J1 = Constantes.Images.initCarte("I.jpg");
-					break;
-			case 10:
-					escale1J1 = Constantes.Images.initCarte("J.jpg");
-					break;
-			case 11:
-					escale1J1 = Constantes.Images.initCarte("K.jpg");
-					break;
-			case 12:
-					escale1J1 = Constantes.Images.initCarte("L.jpg");
-					break;
-		}
+		String numeroLigne, numeroTram, numeroEscale1, numeroEscale2;
 		
-		switch(mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[1])
-		{
-			case 1:
-					escale2J1 = Constantes.Images.initCarte("A.jpg");
-					break;
-			case 2:
-					escale2J1 = Constantes.Images.initCarte("B.jpg");
-					break;
-			case 3:
-					escale2J1 = Constantes.Images.initCarte("C.jpg");
-					break;
-			case 4:
-					escale2J1 = Constantes.Images.initCarte("D.jpg");
-					break;
-			case 5:
-					escale2J1 = Constantes.Images.initCarte("E.jpg");
-					break;
-			case 6:
-					escale2J1 = Constantes.Images.initCarte("F.jpg");
-					break;
-			case 7:
-					escale2J1 = Constantes.Images.initCarte("G.jpg");
-					break;
-			case 8:
-					escale2J1 = Constantes.Images.initCarte("H.jpg");
-					break;
-			case 9:
-					escale2J1 = Constantes.Images.initCarte("I.jpg");
-					break;
-			case 10:
-					escale2J1 = Constantes.Images.initCarte("J.jpg");
-					break;
-			case 11:
-					escale2J1 = Constantes.Images.initCarte("K.jpg");
-					break;
-			case 12:
-					escale2J1 = Constantes.Images.initCarte("L.jpg");
-					break;
-		}
+		System.out.println("joueur 1");
+		numeroLigne = "carte" + mot.getTabPlayers()[0].getObjectifs().getLigne() + ".png";
+		numeroTram = "tram" + mot.getTabPlayers()[0].getObjectifs().getLigne() + ".png";
+		numeroEscale1 = "" + (char) (mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[0] + 'A'-1) + ".jpg";
+		numeroEscale2 = "" + (char) (mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[1] + 'A'-1) + ".jpg";
 		
-		switch(mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[0])
-		{
-			case 1:
-					escale1J2 = Constantes.Images.initCarte("A.jpg");
-					break;
-			case 2:
-					escale1J2 = Constantes.Images.initCarte("B.jpg");
-					break;
-			case 3:
-					escale1J2 = Constantes.Images.initCarte("C.jpg");
-					break;
-			case 4:
-					escale1J2 = Constantes.Images.initCarte("D.jpg");
-					break;
-			case 5:
-					escale1J2 = Constantes.Images.initCarte("E.jpg");
-					break;
-			case 6:
-					escale1J2 = Constantes.Images.initCarte("F.jpg");
-					break;
-			case 7:
-					escale1J2 = Constantes.Images.initCarte("G.jpg");
-					break;
-			case 8:
-					escale1J2 = Constantes.Images.initCarte("H.jpg");
-					break;
-			case 9:
-					escale1J2 = Constantes.Images.initCarte("I.jpg");
-					break;
-			case 10:
-					escale1J2 = Constantes.Images.initCarte("J.jpg");
-					break;
-			case 11:
-					escale1J2 = Constantes.Images.initCarte("K.jpg");
-					break;
-			case 12:
-					escale1J2 = Constantes.Images.initCarte("L.jpg");
-					break;
-		}
+		carteObjectif1 = Constantes.Images.initCarte(numeroLigne);
+		tramJ1 = Constantes.Images.initCarte(numeroTram);
+		escale1J1 = Constantes.Images.initCarte(numeroEscale1);
+		escale2J1 = Constantes.Images.initCarte(numeroEscale2);
 		
-		switch(mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[1])
-		{
-			case 1:
-					escale2J2 = Constantes.Images.initCarte("A.jpg");
-					break;
-			case 2:
-					escale2J2 = Constantes.Images.initCarte("B.jpg");
-					break;
-			case 3:
-					escale2J2 = Constantes.Images.initCarte("C.jpg");
-					break;
-			case 4:
-					escale2J2 = Constantes.Images.initCarte("D.jpg");
-					break;
-			case 5:
-					escale2J2 = Constantes.Images.initCarte("E.jpg");
-					break;
-			case 6:
-					escale2J2 = Constantes.Images.initCarte("F.jpg");
-					break;
-			case 7:
-					escale2J2 = Constantes.Images.initCarte("G.jpg");
-					break;
-			case 8:
-					escale2J2 = Constantes.Images.initCarte("H.jpg");
-					break;
-			case 9:
-					escale2J2 = Constantes.Images.initCarte("I.jpg");
-					break;
-			case 10:
-					escale2J2 = Constantes.Images.initCarte("J.jpg");
-					break;
-			case 11:
-					escale2J2 = Constantes.Images.initCarte("K.jpg");
-					break;
-			case 12:
-					escale2J2 = Constantes.Images.initCarte("L.jpg");
-					break;
-		}
+		numeroLigne = "carte" + mot.getTabPlayers()[1].getObjectifs().getLigne() + ".png";
+		numeroTram = "tram" + mot.getTabPlayers()[1].getObjectifs().getLigne() + ".png";
+		numeroEscale1 = "" + (char) (mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[0] + 'A'-1) + ".jpg";
+		numeroEscale2 = "" + (char) (mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[1] + 'A'-1) + ".jpg";
+		
+		carteObjectif2 = Constantes.Images.initCarte(numeroLigne);
+		tramJ2 = Constantes.Images.initCarte(numeroTram);
+		escale1J2 = Constantes.Images.initCarte(numeroEscale1);
+		escale2J2 = Constantes.Images.initCarte(numeroEscale2);
+
 		carteObjectifDos = Constantes.Images.initCarte("carteDos.png");
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
