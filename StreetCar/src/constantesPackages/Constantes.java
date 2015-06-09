@@ -82,6 +82,7 @@ public class Constantes {
 				background = ImageIO.read(new File(chemin));
 			} catch (IOException e){
 				System.out.println("aucun background de ce nom trouve");
+				System.out.println("chemin : " + chemin);
 			}
 			return background;
 		}
@@ -135,6 +136,32 @@ public class Constantes {
 				System.out.println("aucun bouton de ce nom trouve");
 			}
 			return bouton;
+		}
+	
+		public static BufferedImage initSurbrillance (String nomSurbrillance){
+			BufferedImage surbrillance = null;
+			String chemin = "images/surbrillance/";
+			try {
+				chemin = chemin + nomSurbrillance;
+				surbrillance = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucune surbrillance de ce nom trouvee");
+			}
+			
+			return surbrillance;
+		}
+		
+		public static BufferedImage initImageJoueur (String nomJoueur){
+			BufferedImage imageJoueur = null;
+			String chemin = "images/joueurs/";
+			try {
+				chemin = chemin + nomJoueur;
+				imageJoueur = ImageIO.read(new File(chemin));
+			} catch (IOException e){
+				System.out.println("aucune image de ce nom trouvee");
+			}
+			
+			return imageJoueur;
 		}
 	}
 
