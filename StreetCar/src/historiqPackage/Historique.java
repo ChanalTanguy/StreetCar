@@ -50,23 +50,6 @@ public class Historique extends ArrayList<Configuration>{
 		return this.get(this.size()-1);
 	}
 	
-// Les 4 "methodes" Incr et Decr sont possiblement inutiles
-// Plutot utiliser les 2 methodes "defilement"
-	public void incrPrecedentes (){
-			nombreConfigsPrecedentes++;
-	}
-	public void incrSuivantes (){
-		nombreConfigsSuivantes++;
-	}
-	public void decrPrecedentes (){
-		if (nombreConfigsPrecedentes > 0){
-			nombreConfigsPrecedentes--;
-		}
-	}
-	public void decrSuivantes (){
-		nombreConfigsSuivantes--;
-	}
-	
 	public void defilementVersHaut (){
 		if ( nombreConfigsPrecedentes > 0){
 			nombreConfigsPrecedentes--;
@@ -92,8 +75,12 @@ public class Historique extends ArrayList<Configuration>{
 	public boolean retirer (Configuration config){
 		boolean retraitValide = remove(config);
 		if (retraitValide){
-			if ( this.size() > nombreMaxOnglets ){
+//			if ( this.size() > nombreMaxOnglets ){
+			if ( nombreConfigsSuivantes > 0 ){
 				nombreConfigsSuivantes--;
+			}
+			if ( nombreConfigsPrecedentes > 0 ){
+				nombreConfigsPrecedentes--;
 			}
 		}
 		return retraitValide;
