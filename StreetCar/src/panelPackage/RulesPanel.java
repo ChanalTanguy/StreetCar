@@ -24,9 +24,10 @@ import windowPackage.MenuWindow;
 public class RulesPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(250,60);
-	Dimension imageSize = setNewDimension(750,475);
+	Dimension imageSize = setNewDimension(1024,740);
 
-	public RulesPanel(JFrame main, JDialog parent){
+	public RulesPanel(JFrame main, JDialog parent){	
+		
 		parentDialog = parent;
 		mainWindow = main;
 		this.setCursor();
