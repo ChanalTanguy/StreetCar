@@ -3,11 +3,11 @@ package sauvegardePackage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
 
-import constantesPackages.Constantes;
+import joueurPackage.Joueur;
+import joueurPackage.JoueurHumain;
+import joueurPackage.JoueurIA;
 import joueurPackage.MainJoueur;
 import joueurPackage.Objectifs;
 import mainPackage.Moteur;
@@ -25,6 +25,8 @@ public class Chargement {
 	int nbPioche;
 	int ligne;
 	int typeJoueur;
+	Boolean j1 = false;
+	Boolean j2 = false;
 	int[] objectifs = new int[3];
 	String[] objectif1;
 	String[] objectif2;
@@ -34,6 +36,8 @@ public class Chargement {
 	MainJoueur main = new MainJoueur();
 	Pioche pio = new Pioche();
 	Plateau plat = new Plateau();
+	JoueurHumain joueurH1, joueurH2;
+	Joueur joueurIA1, joueurIA2;
 	Tuile tuile;
 	
 	public void charger(Moteur mot, String name) //TODO faire en sorte de lire les escales
@@ -59,17 +63,15 @@ public class Chargement {
 			//Type du joueur actif
 			typeJoueur = Character.getNumericValue((br.readLine().charAt(0)));
 			mot.getTabPlayers()[joueur].setType(typeJoueur);
-			
+		
 			//Ligne joueur actif
 			ligne = Character.getNumericValue((br.readLine().charAt(0)));
-			mot.getTabPlayers()[joueur].setLigne(ligne);
 			
 			//Objectifs joueur actif
 			objectif1 = br.readLine().split(" ");
 			objectifs[0] = Integer.parseInt(objectif1[0]);
 			objectifs[1] = Integer.parseInt(objectif1[1]);
-			objectifs[2] = Integer.parseInt(objectif1[2]);
-			mot.getTabPlayers()[joueur].setObjectifs(new Objectifs(ligne, objectifs));
+			objectifs[2] = Integer.parseInt(objectif1[2]);	
 			
 			//Nb cartes dans main joueur actif
 			nbCartes = Character.getNumericValue((br.readLine().charAt(0)));
@@ -79,26 +81,46 @@ public class Chargement {
 			{
 				tuileS = br.readLine();			
 				main.setTuileAt(i, creerTuile(tuileS));
-				mot.setMainPlayers(main.clone(), joueur);		
 			}
+			
+			if(typeJoueur == 0) //joueur humain
+			{
+				joueurH1 = new JoueurHumain(mot, new Objectifs(ligne, objectifs));
+				joueurH1.setMain(main.clone());
+			}
+			else
+			{
+				switch(typeJoueur)
+				{
+				case 1 :
+					joueurIA1 = JoueurIA.JoueurIAFacile(mot, new Objectifs(ligne, objectifs));
+					break;
+				case 2 :
+					joueurIA1 = JoueurIA.JoueurIAMoyen(mot, new Objectifs(ligne, objectifs));
+					break;
+				case 3 :
+					joueurIA1 = JoueurIA.JoueurIADifficile(mot, new Objectifs(ligne, objectifs));
+					break;
+				}
 
+				joueurIA1.setMain(main.clone());
+				j1 = true;
+			}
+			
 			//Joueur inactif
 			joueurInactif = Character.getNumericValue((br.readLine().charAt(0)));
 			
 			//Type joueur inactif
 			typeJoueur = Character.getNumericValue((br.readLine().charAt(0)));
-			mot.getTabPlayers()[1-joueur].setType(typeJoueur);
 			
 			//Ligne joueur inactif
 			ligne = Character.getNumericValue((br.readLine().charAt(0)));
-			mot.getTabPlayers()[joueurInactif].setLigne(ligne);
 			
 			//Objectifs joueur inactif
 			objectif2 = br.readLine().split(" ");
 			objectifs[0] = Integer.parseInt(objectif2[0]);
 			objectifs[1] = Integer.parseInt(objectif2[1]);
 			objectifs[2] = Integer.parseInt(objectif2[2]);
-			mot.getTabPlayers()[joueurInactif].setObjectifs(new Objectifs(ligne, objectifs));
 			
 			//Nb cartes dans main joueur inactif
 			nbCartes =  Character.getNumericValue((br.readLine().charAt(0)));
@@ -108,7 +130,53 @@ public class Chargement {
 			{
 				tuileS = br.readLine();
 				main.setTuileAt(i, creerTuile(tuileS));
-				mot.setMainPlayers(main.clone(), 1-joueur);
+			}
+			
+			if(typeJoueur == 0) //joueur humain
+			{
+				joueurH2 = new JoueurHumain(mot, new Objectifs(ligne, objectifs));
+				joueurH2.setMain(main.clone());
+			}
+			else
+			{
+				switch(typeJoueur)
+				{
+				case 1 :
+					joueurIA2 = JoueurIA.JoueurIAFacile(mot, new Objectifs(ligne, objectifs));
+					break;
+				case 2 :
+					joueurIA2 = JoueurIA.JoueurIAMoyen(mot, new Objectifs(ligne, objectifs));
+					break;
+				case 3 :
+					joueurIA2 = JoueurIA.JoueurIADifficile(mot, new Objectifs(ligne, objectifs));
+					break;
+
+				}
+				joueurIA2.setMain(main.clone());
+				j2 = true;
+			}
+			
+			if(!j1)
+			{
+				if(!j2)
+				{
+					mot.setPlayers(joueurH1, joueurH2);
+				}
+				else
+				{
+					mot.setPlayers(joueurH1, joueurIA2);
+				}
+			}
+			else
+			{
+				if(!j2)
+				{
+					mot.setPlayers(joueurIA1, joueurH2);
+				}
+				else
+				{
+					mot.setPlayers(joueurIA1, joueurIA2);
+				}
 			}
 
 			//Pioche
@@ -137,13 +205,13 @@ public class Chargement {
 
 					if(!(tabPlat[j].equals("{null}")) && !(tabPlat[j].equals("{Nord:[]}"))) 
 					{
-						//System.out.println(tabPlat[j] + " lié à " + creerTuile(tabPlat[j]).getEscaleLiee());
 						plat.setTuileAt(i+1, j+1, creerTuile(tabPlat[j]));
 					}
 				}
 			}
 			
 			mot.setPlateau(plat);
+			//Historique
 			
 			System.out.println("Fichier chargé");
 			br.close();
@@ -155,6 +223,7 @@ public class Chargement {
 	//Permet de créer une tuile à partie d'une chaine de caractère de la forme {Orientation:[(Connection;Connection), (...;...)]}
 	private Tuile creerTuile(String tuileS2) {
 		int linked = 0;
+		int val;
 		Tuile t = new Tuile();
 		String[] orient;
 		String orientation;
@@ -163,9 +232,18 @@ public class Chargement {
 		Connection con;
 		
 		//Escale liée
-		if(Character.getNumericValue(tuileS2.charAt(0))>= 1 && Character.getNumericValue(tuileS2.charAt(0))<= 12)
+		val = Character.getNumericValue(tuileS2.charAt(1));
+		if(val >= 0 && val <=2) //Cela veut dire que l'on a un nombre à deux chiffres
 		{
-			linked = Character.getNumericValue(tuileS2.charAt(0));
+			val += Character.getNumericValue(tuileS2.charAt(0))*10;
+			linked = val;
+			tuileS2 = tuileS2.substring(2, tuileS2.length());
+		}
+		
+		val = Character.getNumericValue(tuileS2.charAt(0));
+		if(val >= 1 && val <=9)
+		{
+			linked = val;
 			tuileS2 = tuileS2.substring(1, tuileS2.length());
 		}
 		

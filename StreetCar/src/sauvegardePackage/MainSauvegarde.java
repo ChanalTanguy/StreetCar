@@ -1,7 +1,6 @@
 package sauvegardePackage;
 
 import objectPackage.Plateau;
-import joueurPackage.Joueur;
 import mainPackage.Moteur;
 
 public class MainSauvegarde {
@@ -10,11 +9,11 @@ public class MainSauvegarde {
 	{
 		Moteur m = new Moteur(new Plateau());
 		
-		//Sauvegarder s = new Sauvegarder(m, "save/test");  
+		//new Sauvegarder(m, "save/test");  
 		
 		Chargement c = new Chargement();
-		c.charger(m, "save/test.txt");
+		c.charger(m, "save/testCopy.txt");
 		
-		new Sauvegarder(m, "save/testCopy");
+		new Sauvegarder(m, "save/test");
 	}
 }

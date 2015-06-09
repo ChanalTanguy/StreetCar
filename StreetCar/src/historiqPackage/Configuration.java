@@ -84,7 +84,7 @@ public class Configuration {
 		chaine_resultat += joueurCourantDuTourSuivant + "\n";
 		chaine_resultat += numeroDuTourCourant + "\n";
 		for (int numJoueur = 0; numJoueur < tabJoueurs.length; numJoueur++){
-			chaine_resultat += tabJoueurs[numJoueur].getMain().toString() + "\n";
+			chaine_resultat += tabJoueurs[numJoueur].getMain().toString();
 		}
 		chaine_resultat += piocheDuTour.toString();
 		chaine_resultat += plateauDuTour.toString();

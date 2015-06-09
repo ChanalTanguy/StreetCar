@@ -51,7 +51,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond,cadreNotif, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
+	private BufferedImage fond, cadreNotif, plateau, pioche, piocheVide, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
 	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
 	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
@@ -304,8 +304,12 @@ public class Panneau_Plateau extends Pan_Abstract{
 		dessinerPioche(crayon);
 		
 		// Les 2 mains
+		dessinerIconeJoueur1(crayon);
 		dessinerMain1(crayon, mot.getTabPlayers()[0].getMain());
+		dessinerIconeJoueur2(crayon);
 		dessinerMain2(crayon, mot.getTabPlayers()[1].getMain());
+		
+		
 		
 		// Surbrillance de la tuile selectionnee dans une main s'il y en a une
 		if ( mainSelectionnee != -1 ){
@@ -400,8 +404,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	}
 	
 	// dessiner les objectifs, caches ou non, du joueur1
-	private void dessinerObjectifJ1()
-	{
+	private void dessinerObjectifJ1 (){
 		if(objectifsVisibleJ1)
 		{
 			crayon.drawImage(carteObjectif1, positionXObjJ1, positionYObjJ1, (tailleCase*30)/10, (tailleCase*25)/10, this);
@@ -413,10 +416,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawImage(carteObjectifDos, positionXObjJ1, positionYObjJ1, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
-	
-	// dessiner les objectifs, caches ou non, du joueur2
-	private void dessinerObjectifJ2()
-	{
+	private void dessinerObjectifJ2 (){
 		if(objectifsVisibleJ2)
 		{
 			crayon.drawImage(carteObjectif2, positionXObjJ2, positionYObjJ2, (tailleCase*30)/10, (tailleCase*25)/10, this);
@@ -428,7 +428,6 @@ public class Panneau_Plateau extends Pan_Abstract{
 			crayon.drawImage(carteObjectifDos, positionXObjJ2, positionYObjJ2, (tailleCase*30)/10, (tailleCase*25)/10, this);
 		}
 	}
-	
 	private void dessinerMain1 (Graphics2D crayon, MainJoueur main) {
 		for (int numeroTuile = 0; numeroTuile < main.length(); numeroTuile++){
 			Tuile tui = main.getTuileAt(numeroTuile);
@@ -523,6 +522,20 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void ecrireNotifications (){
 		crayon.setColor(Color.white);
 		crayon.drawImage(notifications, depart+(tailleCase*15)+12, depart+(tailleCase*2)+5, (tailleCase*5)-24, (tailleCase*4)-10, this);
+	}
+	private void dessinerIconeJoueur1 (Graphics2D crayon){
+		int coordY = mainDuBas+10;
+		crayon.drawImage(joueur1, tailleCase, coordY, tailleCaseMain, tailleCaseMain-10, this);
+		if ( mot.getcurrentPlayer() == 0 ){
+			crayon.drawImage(surbrillanceVerte, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
+		}
+	}
+	private void dessinerIconeJoueur2 (Graphics2D crayon){
+		int coordY = mainDuHaut;
+		crayon.drawImage(joueur2, tailleCase, coordY, tailleCaseMain, tailleCaseMain-10, this);
+		if ( mot.getcurrentPlayer() == 1 ){
+			crayon.drawImage(surbrillanceVerte, tailleCase-20, coordY-10, tailleCaseMain+40, tailleCaseMain+10, this);
+		}
 	}
 	
 	// Methodes de dessin de details visuels
@@ -692,6 +705,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
+		piocheVide = Constantes.Images.initBackground("piocheVide.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
 		opaciteFutur = Constantes.Images.initBackground("opaciteFutur.png");
