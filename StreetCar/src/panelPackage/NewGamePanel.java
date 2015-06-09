@@ -58,8 +58,8 @@ public class NewGamePanel extends PanelInterface {
 
 	private void buildNewGamePanel(){
 
-		JPanel zone1 = newRadioButtonZone("Niveau du joueur");
-		JPanel zone2 = newRadioButtonZone("Niveau de l'adversaire");
+		JPanel zone1 = newRadioButtonZone("Niveau du Joueur 1");
+		JPanel zone2 = newRadioButtonZone("Niveau du Joueur 2");
 		JPanel zone3 = newButtonZone(400,60);
 
 		ButtonGroup group1 = new ButtonGroup();
