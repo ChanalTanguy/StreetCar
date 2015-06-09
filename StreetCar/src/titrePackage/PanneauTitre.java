@@ -1,24 +1,13 @@
 package titrePackage;
 import graphique.Fenetre;
-import graphique.Panneau_Plateau;
-
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.Box.Filler;
-
-import objectPackage.Plateau;
-import panelPackage.PanelListener;
 import mainPackage.Moteur;
+import objectPackage.Plateau;
 import sauvegardePackage.Chargement;
 import constantesPackages.Constantes;
 
@@ -143,7 +132,6 @@ public class PanneauTitre extends JPanel{
 	
 	}
 
-	//Pas encore complet
 	public void credits(Graphics2D crayon) {
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);
 		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);

@@ -1,14 +1,8 @@
 package titrePackage;
-
-import graphique.Fenetre;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-import objectPackage.Plateau;
 import windowPackage.NewGameWindow;
-import mainPackage.Moteur;
 
 public class EcouteTitre implements MouseListener, MouseMotionListener {
 

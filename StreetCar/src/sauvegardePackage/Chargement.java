@@ -36,7 +36,7 @@ public class Chargement {
 	Plateau plat = new Plateau();
 	Tuile tuile;
 	
-	public void charger(Moteur mot, String name)
+	public void charger(Moteur mot, String name) //TODO faire en sorte de lire les escales
 	{
 		try 
 		{		
@@ -129,47 +129,21 @@ public class Chargement {
 			for(int i = 0; i<12; i++)
 			{
 				lignePlateau = br.readLine();
-				//System.out.println(lignePlateau);
-				
 				String[]tabPlat = lignePlateau.split("} ");
-				for(int k = 0; k<tabPlat.length;k++)
-				{
-					//System.out.println(tabPlat[k]+"}");
-				}
 				
 				for(int j=0; j<tabPlat.length;j++)
 				{
 					tabPlat[j]+="}";
+
 					if(!(tabPlat[j].equals("{null}")) && !(tabPlat[j].equals("{Nord:[]}"))) 
 					{
-						//System.out.println(tabPlat[j]);
-						//System.out.println(creerTuile(tabPlat[j]).toString());
+						System.out.println(tabPlat[j].toString());
 						plat.setTuileAt(i+1, j+1, creerTuile(tabPlat[j]));
 					}
 				}
 			}
 			
 			mot.setPlateau(plat);
-			//System.out.println(mot.getTabPlayers()[0].getMain());  
-			//Fonction de test d'affichage de plateau
-			/*
-			System.out.println(mot.getcurrentPlayer());
-			System.out.println(mot.getTabPlayers()[mot.getcurrentPlayer()].getMain().toString());
-			System.out.println(1-mot.getcurrentPlayer());
-			System.out.println(mot.getTabPlayers()[1-mot.getcurrentPlayer()].getMain().toString());
-			System.out.println(mot.getPioche().toString());
-			
-			for(int i = 1; i<13;i++)
-			{
-				for(int j=1; j<13; j++)
-				{
-					System.out.print(mot.getPlateau().getPlateau()[i][j]+ " ");
-				}
-				System.out.println("");
-			}
-			System.out.println(mot.getTabPlayers()[joueur].getType());
-			System.out.println(mot.getTabPlayers()[1-joueur].getType());
-			*/
 			
 			System.out.println("Fichier chargé");
 			br.close();
@@ -186,6 +160,13 @@ public class Chargement {
 		String[] connect;
 		String[] connections;
 		Connection con;
+		
+		//Escale liée
+		if(tuileS2.charAt(0)>= 1 && tuileS2.charAt(0)<= 12)
+		{
+			//t.setEscaleLiee(tuileS2.charAt(0));
+			tuileS2.substring(1, tuileS2.length());
+		}
 		
 		//Orientation générale
 		orient = tuileS2.split(":");

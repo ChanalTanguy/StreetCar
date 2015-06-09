@@ -15,6 +15,6 @@ public class MainSauvegarde {
 		Chargement c = new Chargement();
 		c.charger(m, "save/test.txt");
 		
-		Sauvegarder copyC = new Sauvegarder(m, "save/testCopy");
+		//new Sauvegarder(m, "save/testCopy");
 	}
 }

@@ -4,12 +4,8 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.Transparency;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
@@ -34,7 +30,6 @@ public class FenetreTitre extends JFrame {
 		this.setCursor(monCurseur);
 		
 		this.getContentPane().add(new JScrollPane(pan), BorderLayout.CENTER);
-		//add(pan);
 		addKeyListener(new EcouteClavierTitre(pan, this));
 		
 		setSize(largeur, hauteur); 

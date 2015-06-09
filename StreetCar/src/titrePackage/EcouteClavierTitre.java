@@ -1,12 +1,7 @@
 package titrePackage;
-import graphique.Fenetre;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import objectPackage.Plateau;
 import windowPackage.NewGameWindow;
-import mainPackage.Moteur;
 
 
 public class EcouteClavierTitre implements KeyListener {
@@ -53,12 +48,6 @@ public class EcouteClavierTitre implements KeyListener {
 				
 				NewGameWindow g = new NewGameWindow();
 				g.openWindow();
-				/*
-				fen.fermeture();
-				Moteur m = new Moteur(new Plateau());
-				Fenetre f = new Fenetre("Street Car");
-				f.disposition_V2(m, f.getSize());
-				*/
 				break;
 			case 2 : //Charger partie
 				pan.actif = 2;

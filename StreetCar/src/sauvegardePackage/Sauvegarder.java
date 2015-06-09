@@ -52,7 +52,7 @@ public class Sauvegarder {
 		save(this);
 	}
 	
-	private void save(Sauvegarder s)
+	private void save(Sauvegarder s) //TODO faire les escales
 	{
 		joueur = mot.getcurrentPlayer();
 		objectif1 = mot.getTabPlayers()[joueur].getObjectifs().toString();
@@ -114,7 +114,17 @@ public class Sauvegarder {
 				for(int j=1; j<13; j++)
 				{
 					if(plat[i][j] == null) f.write("{null} ");
-					else f.write(plat[i][j].toString() + " ");
+					else 
+					{
+						if(plat[i][j].getEscaleLiee() == 0) //Si une tuile n'est pas liée
+						{
+							f.write(plat[i][j].toString() + " ");
+						}
+						else
+						{
+							f.write(plat[i][j].toString() +  " ");
+						}
+					}
 				}
 				f.write(System.getProperty("line.separator"));
 			}
