@@ -82,8 +82,8 @@ public class Moteur {
 	 * Constructeur 2
 	 */
 	public void setPlayers(Joueur j1, Joueur j2) {
-		tabPlayers[0] = j1.clone();
-		tabPlayers[1] = j2.clone();
+		tabPlayers[0] = j1;
+		tabPlayers[1] = j2;
 	}
 	/*
 	 * FIN Constructeur 2
@@ -198,21 +198,18 @@ public class Moteur {
 			}
 			
 			if (nbActions == 0) {
-				System.out.println("\n ===== Clic Pioche ===== ");
-				
 				panneau_Jeu.setPiocheSelectionnee(true);
 				panneau_Jeu.repaint();
 				
 				if ( plateauDeJeu.ObjectifComplet(tabPlayers[currentPlayer].getObjectifs()) ){
-					System.out.println("objectif rempli");
+					System.out.println("\n ===== Partie Terminee ===== ");
+					System.out.println("objectif rempli pour le joueur " + (currentPlayer+1));
 					tabPlayers[currentPlayer].setVoyagePossible(true);
+					System.out.println(" ===== FIN Partie Terminee ===== ");
 				}
 				else {
 					System.out.println("objectif incomplet");
 				}
-				
-				System.out.println("tour " + numeroDeTour + " valide");
-				System.out.println("joueur courant de ce tour : " + currentPlayer);
 				
 				// Mise a Jour de l'historique de tours
 				// creation de la configuration a ajouter
@@ -224,17 +221,11 @@ public class Moteur {
 				
 				// s'il existe deja au moins un tour dans le "futur", on compare les coups actuels joues et ceux qui auraient ete joues
 				if ( numeroDeTour < historiqueDeTours.size() ){
-					System.out.println(" ===== Tour charge au prealable ===== ");
-
 					effacerHistorique(numeroDeTour);
 				}
 				historiqueDeTours.ajouter(config_a_Ajouter);
 				panneau_Historique.setNumeroTourCourant(numeroDeTour);
 				numeroDeTour++;
-				
-				System.out.println("prochain tour : " + numeroDeTour);
-				System.out.println("joueur courant de ce tour : " + currentPlayer);
-				System.out.println("prochaine historique.size du tour : " + historiqueDeTours.size());
 				
 				panneau_Jeu.afficherCoupsPrecedents();
 				panneau_Jeu.effacerCoupsJoues();
@@ -243,7 +234,6 @@ public class Moteur {
 				panneau_Jeu.setPiocheSelectionnee(false);
 				
 				panneau_Historique.repaint();
-				System.out.println(" ===== FIN Clic Pioche ===== \n");
 			}
 			if (nbActions > 2)
 				msg = Constantes.Message.auTourDe(currentPlayer);
@@ -457,6 +447,7 @@ public class Moteur {
 		System.out.println(" ===== FIN Chargement d'un Tour ===== \n");
 	}
 */	
+	
 	public void montrerCoupsJoues (int numeroTourAMontrer){
 		int numTourActif = numeroTourAMontrer + historiqueDeTours.getNbConfigsPrecedentes();
 		Configuration configARecuperer = historiqueDeTours.get(numTourActif);
