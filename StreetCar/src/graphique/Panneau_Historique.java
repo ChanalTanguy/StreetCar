@@ -132,7 +132,6 @@ public class Panneau_Historique extends Pan_Abstract{
 	
 	public void setNumeroTourCourant (int newTourCourant){
 		numeroTourCourant = newTourCourant;
-		System.out.println("numeroTourCourant : " + numeroTourCourant);
 	}
 	public void setNumeroTourSelectionne (int newTourSelectionne){
 		numeroTourSelectionne = newTourSelectionne;

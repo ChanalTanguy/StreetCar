@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -39,6 +40,16 @@ public class PanelInterface extends JPanel {
 		panel.setLayout(new BorderLayout());
 		panel.setBackground(Color.getColor("gris_tram", 4607576));
 		panel.setPreferredSize(setNewDimension(x,y));
+		return panel;
+	}
+	
+	protected JPanel newZone(int size, int width, int height){
+		JPanel panel = new JPanel();
+		FlowLayout layout = new FlowLayout();
+		layout.setVgap(0);
+		panel.setBackground(Color.getColor("gris_tram", 4607576)); 
+		panel.setLayout(layout);
+		panel.setPreferredSize(setNewDimension(width ,(height*size)+20));
 		return panel;
 	}
 	

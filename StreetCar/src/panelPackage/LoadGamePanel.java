@@ -18,7 +18,8 @@ import windowPackage.MenuWindow;
 
 public class LoadGamePanel extends PanelInterface {
 
-	Dimension buttonSize = setNewDimension(400,40);
+	Dimension saveButtonSize = setNewDimension(400,40);
+	Dimension buttonSize = setNewDimension(175,60);
 
 	boolean openMenu = false;
 
@@ -43,32 +44,32 @@ public class LoadGamePanel extends PanelInterface {
 
 	private void buildSettingsPanel(){
 
-		JPanel zone1 = newZone(5);
-		JPanel zone2 = newZone(5);
-		JPanel zone3 = newZone(1);
+		JPanel zone1 = newZone(5, 400, 40);
+		JPanel zone2 = newZone(5, 400, 40);
+		JPanel zone3 = newButtonZone(175,60);
 		
 		ChargementTitre title = new ChargementTitre();
 		
 		String[] table = title.listerRepertoire();
 
-		addNewButton(zone1, setSaveName(table,0), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,0), parentDialog, mainWindow), null);
-		addNewButton(zone1, setSaveName(table,1), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,1), parentDialog, mainWindow), null);
-		addNewButton(zone1, setSaveName(table,2), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,2), parentDialog, mainWindow), null);
-		addNewButton(zone1, setSaveName(table,3), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,3), parentDialog, mainWindow), null);
-		addNewButton(zone1, setSaveName(table,4), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,4), parentDialog, mainWindow), null);
+		addNewButton(zone1, setSaveName(table,0), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,0), parentDialog, mainWindow), null);
+		addNewButton(zone1, setSaveName(table,1), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,1), parentDialog, mainWindow), null);
+		addNewButton(zone1, setSaveName(table,2), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,2), parentDialog, mainWindow), null);
+		addNewButton(zone1, setSaveName(table,3), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,3), parentDialog, mainWindow), null);
+		addNewButton(zone1, setSaveName(table,4), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,4), parentDialog, mainWindow), null);
 
-		addNewButton(zone2, setSaveName(table,5), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,5), parentDialog, mainWindow), null);
-		addNewButton(zone2, setSaveName(table,6), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,6), parentDialog, mainWindow), null);
-		addNewButton(zone2, setSaveName(table,7), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,7), parentDialog, mainWindow), null);
-		addNewButton(zone2, setSaveName(table,8), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,8), parentDialog, mainWindow), null);
-		addNewButton(zone2, setSaveName(table,9), buttonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,9), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,5), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,5), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,6), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,6), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,7), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,7), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,8), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,8), parentDialog, mainWindow), null);
+		addNewButton(zone2, setSaveName(table,9), saveButtonSize, BorderLayout.CENTER, listener.new LoadGameListener(setSaveName(table,9), parentDialog, mainWindow), null);
 
 		//addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 
 		if (openMenu){
-			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("annuler.png"));
 		} else {
-			addNewButton(zone3, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), loadImage("annuler.png"));
 		}
 
 		this.add(zone1);
@@ -83,17 +84,6 @@ public class LoadGamePanel extends PanelInterface {
 		} else {
 			return table[i];
 		}
-	}
-	
-	private JPanel newZone(int size){
-		JPanel panel = new JPanel();
-		FlowLayout layout = new FlowLayout();
-		layout.setVgap(0);
-		panel.setBackground(Color.getColor("gris_tram", 4607576)); 
-		panel.setLayout(layout);
-		panel.setPreferredSize(setNewDimension(400,(40*size)+20));
-		return panel;
-
 	}
 
 }

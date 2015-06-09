@@ -45,9 +45,9 @@ public class MenuPanel extends PanelInterface {
 
 	private void buildMenuPanel(){
 
-		JPanel zone1 = newZone(1);
-		JPanel zone2 = newZone(6);
-		JPanel zone3 = newZone(1);
+		JPanel zone1 = newZone(1, 400, 75);
+		JPanel zone2 = newZone(6, 400, 75);
+		JPanel zone3 = newZone(1, 400, 75);
 		
 		addNewButton(zone1, buttonSize, null, listener.new ReturnButtonListener(parentDialog, null, this.mainWindow), loadImage("reprendre_menu.png"));
 		
@@ -66,17 +66,6 @@ public class MenuPanel extends PanelInterface {
 		
 		this.setBackground(Color.getColor("gris_tram", 4607576));
 		
-	}
-
-	private JPanel newZone(int size){
-		JPanel panel = new JPanel();
-		FlowLayout layout = new FlowLayout();
-		layout.setVgap(0);
-		panel.setBackground(Color.getColor("gris_tram", 4607576)); 
-		panel.setLayout(layout);
-		panel.setPreferredSize(setNewDimension(400,75*size+20));
-		return panel;
-
 	}
 	
 }
