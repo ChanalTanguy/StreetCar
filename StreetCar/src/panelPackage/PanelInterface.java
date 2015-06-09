@@ -98,7 +98,7 @@ public class PanelInterface extends JPanel {
 	
 	protected ImageIcon resizeImage(ImageIcon img, Dimension size){
 		Image src = img.getImage() ;
-		Image sizedSrc = src.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);  
+		Image sizedSrc = src.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);  
 		ImageIcon sizedImg = new ImageIcon(sizedSrc);
 		return sizedImg;
 	}
