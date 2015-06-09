@@ -131,15 +131,10 @@ public class Sauvegarder {
 			
 			//Historique
 			//f.write(mot.getHistorique().toString());
-			
-			
+				
 			System.out.println("Fichier enregistré");
 			f.close();
 		}
-		catch (IOException e) {e.printStackTrace();}
-	
-		
+		catch (IOException e) {e.printStackTrace();}	
 	}
-	
-	
 }
