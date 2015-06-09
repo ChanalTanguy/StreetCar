@@ -115,7 +115,7 @@ public class PanelListener {
 		public void actionPerformed(ActionEvent e) {
 			ConfirmWindow conf = new ConfirmWindow("Êtes-vous sûr de vouloir quitter ?", null, null);
 			PanelListener listener = new PanelListener();
-			conf.setListeners(listener.new Quit(), listener.new ReturnButtonListener(conf, null));
+			conf.setListeners(listener.new Quit(), listener.new CancelButtonListener(conf, null));
 
 			conf.openConfirmWindow();
 		}
@@ -195,7 +195,7 @@ public class PanelListener {
 		public void actionPerformed(ActionEvent e) {
 			ConfirmWindow conf = new ConfirmWindow("Sauvegarder la partie courante ?", null, null);
 			PanelListener listener = new PanelListener();
-			conf.setListeners(listener.new SaveGameListener(savedEngine, conf, null), listener.new ReturnButtonListener(conf, null));
+			conf.setListeners(listener.new SaveGameListener(savedEngine, conf, null), listener.new CancelButtonListener(conf, null));
 
 			conf.openConfirmWindow();
 		}
@@ -304,18 +304,18 @@ public class PanelListener {
 
 	// Ferme la	fenêtre courante
 
-	public class ReturnButtonListener implements ActionListener {
+	public class CancelButtonListener implements ActionListener {
 
 		JDialog parentDialog;
 		MenuWindow window;
 		JFrame mainWindow;
 
-		public ReturnButtonListener(JDialog parent, MenuWindow window){
+		public CancelButtonListener(JDialog parent, MenuWindow window){
 			parentDialog = parent;
 			this.window = window;
 		}
 
-		public ReturnButtonListener(JDialog parent, MenuWindow window, JFrame mainWindow){
+		public CancelButtonListener(JDialog parent, MenuWindow window, JFrame mainWindow){
 			parentDialog = parent;
 			this.window = window;
 			this.mainWindow = mainWindow;

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import panelPackage.PanelListener.DebugCheckBoxListener;
-import panelPackage.PanelListener.ReturnButtonListener;
+import panelPackage.PanelListener.CancelButtonListener;
 import titrePackage.ChargementTitre;
 import windowPackage.MenuWindow;
 
@@ -67,9 +67,9 @@ public class LoadGamePanel extends PanelInterface {
 		//addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 
 		if (openMenu){
-			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("annuler.png"));
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("background","annuler.png"));
 		} else {
-			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), loadImage("annuler.png"));
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, null), loadImage("background","annuler.png"));
 		}
 
 		this.add(zone1);

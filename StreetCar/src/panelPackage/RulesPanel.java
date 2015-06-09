@@ -21,23 +21,13 @@ import constantesPackages.Constantes;
 import panelPackage.PanelListener.CancelButtonListener;
 import windowPackage.MenuWindow;
 
-public class CreditsPanel extends PanelInterface {
+public class RulesPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(250,60);
 	Dimension imageSize = setNewDimension(750,475);
-	
-	boolean openMenu = false;
 
-	public CreditsPanel(JFrame main, JDialog parent){
+	public RulesPanel(JFrame main, JDialog parent){
 		parentDialog = parent;
-		mainWindow = main;
-		this.setCursor();
-		this.buildSettingsPanel();
-	}
-	
-	public CreditsPanel(JFrame main, JDialog parent, boolean b){
-		parentDialog = parent;
-		openMenu = b;
 		mainWindow = main;
 		this.setCursor();
 		this.buildSettingsPanel();
@@ -54,14 +44,10 @@ public class CreditsPanel extends PanelInterface {
 		
 		JPanel zone2 = newButtonZone(buttonSize.width, buttonSize.height);
 		
-		JLabel image = new JLabel(resizeImage(loadImage("background","tramCred.png"), imageSize));
+		JLabel image = new JLabel(resizeImage(loadImage("tutoriel","tuto1.png"), imageSize));
 		zone1.add(image);
-		
-		if (openMenu){
-			addNewButton(zone2, buttonSize, BorderLayout.CENTER, listener.new CancelButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("background","retour_menu.png"));
-		} else {
-			addNewButton(zone2, buttonSize, BorderLayout.CENTER, listener.new CancelButtonListener(parentDialog, null), loadImage("background","retour_menu.png"));
-		}
+
+		addNewButton(zone2, buttonSize, BorderLayout.CENTER, listener.new CancelButtonListener(parentDialog, null, this.mainWindow), loadImage("background","retour_menu.png"));
 				
 		this.add(zone1);
 		this.add(zone2);

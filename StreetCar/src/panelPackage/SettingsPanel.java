@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import constantesPackages.Constantes;
-import panelPackage.PanelListener.ReturnButtonListener;
+import panelPackage.PanelListener.CancelButtonListener;
 import windowPackage.MenuWindow;
 
 public class SettingsPanel extends PanelInterface {
@@ -55,9 +55,9 @@ public class SettingsPanel extends PanelInterface {
 		addNewButton(zone2, "Confirmer", buttonSize, BorderLayout.WEST, null, null);
 		
 		if (openMenu){
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, new MenuWindow(), mainWindow), null);
 		} else {
-			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), null);
+			addNewButton(zone2, "Annuler", buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, null), null);
 		}
 				
 		this.add(zone1);

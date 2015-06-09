@@ -21,7 +21,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import panelPackage.PanelListener.ReturnButtonListener;
+import panelPackage.PanelListener.CancelButtonListener;
 import constantesPackages.Constantes;
 
 public class PanelInterface extends JPanel {
@@ -86,10 +86,10 @@ public class PanelInterface extends JPanel {
 		return new Dimension((int)newWidth, (int)newHeight);
 	}
 	
-	protected ImageIcon loadImage(String name){
+	protected ImageIcon loadImage(String folder, String name){
 		ImageIcon img = null;
 		try {
-			img = new ImageIcon(ImageIO.read(new File("images/background/"+name)));
+			img = new ImageIcon(ImageIO.read(new File("images/"+folder+"/"+name)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

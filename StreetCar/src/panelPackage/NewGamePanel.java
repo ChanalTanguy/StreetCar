@@ -26,7 +26,7 @@ import joueurPackage.Joueur;
 import joueurPackage.JoueurHumain;
 import joueurPackage.JoueurIA;
 import constantesPackages.Constantes;
-import panelPackage.PanelListener.ReturnButtonListener;
+import panelPackage.PanelListener.CancelButtonListener;
 import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 
@@ -75,12 +75,12 @@ public class NewGamePanel extends PanelInterface {
 		addNewRadioButton(zone2, group2, "Facile", selected2, null);
 		addNewRadioButton(zone2, group2, "Moyen", selected2, null);
 		addNewRadioButton(zone2, group2, "Difficile", selected2, null);
-		addNewButton(zone3, buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), loadImage("lancer.png"));
+		addNewButton(zone3, buttonSize, BorderLayout.WEST, listener.new StartNewGameButtonListener(group1, group2, parentDialog, mainWindow), loadImage("background","lancer.png"));
 
 		if (openMenu){
-			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("annuler.png"));
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, new MenuWindow(), mainWindow), loadImage("background","annuler.png"));
 		} else {
-			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new ReturnButtonListener(parentDialog, null), loadImage("annuler.png"));
+			addNewButton(zone3, buttonSize, BorderLayout.EAST, listener.new CancelButtonListener(parentDialog, null), loadImage("background","annuler.png"));
 		}
 
 		this.add(zone1);

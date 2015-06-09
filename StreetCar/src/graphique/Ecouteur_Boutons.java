@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import constantesPackages.Constantes;
 import windowPackage.MenuWindow;
+import windowPackage.RulesWindow;
 
 public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 	Panneau_Boutons panneauDeBoutons;
@@ -48,6 +49,10 @@ public class Ecouteur_Boutons implements MouseListener, MouseMotionListener{
 		}
 		else if ( estSurAssistance(x, y, rayon) ){
 			panneauDeBoutons.changeImageAssistance("bouton_aide_a.png");
+			RulesWindow menu = new RulesWindow();
+			((Fenetre)mainWindow).moteurParent.stop();
+			menu.setMainWindow(mainWindow);
+			menu.openWindow();
 		}
 		else if ( estSurMenu(x, y, rayon) ){
 			panneauDeBoutons.changeImageMenu("bouton_menu_a.png");

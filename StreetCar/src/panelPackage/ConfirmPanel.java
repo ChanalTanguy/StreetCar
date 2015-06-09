@@ -45,8 +45,8 @@ public class ConfirmPanel extends PanelInterface {
 		label.setForeground(Color.white);
 		
 		zone1.add(label);
-		addNewButton(zone2, buttonSize, BorderLayout.WEST, actionYES, loadImage("oui.png"));
-		addNewButton(zone2, buttonSize, BorderLayout.EAST, actionNO, loadImage("non.png"));
+		addNewButton(zone2, buttonSize, BorderLayout.WEST, actionYES, loadImage("background","oui.png"));
+		addNewButton(zone2, buttonSize, BorderLayout.EAST, actionNO, loadImage("background","non.png"));
 		
 		confirm.add(zone1, BorderLayout.NORTH);
 		confirm.add(zone2, BorderLayout.SOUTH);
