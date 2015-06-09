@@ -1,6 +1,7 @@
 package graphique;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -55,6 +56,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
 	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
+	private BufferedImage victoire;
 	/*
 	 * FIN Images
 	 */
@@ -319,6 +321,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 		}
 		
 		dessinerCoupsHistorique(crayon);
+		
+		// Dessin du gagnant s'il y a
+		dessinerGagnant(crayon);
 	}
 	
 	/*
@@ -632,6 +637,24 @@ public class Panneau_Plateau extends Pan_Abstract{
 	private void dessinerTuileMasquageAbsence (Graphics2D crayon, int coordX, int coordY){
 		crayon.drawImage(opacitePasse, depart + coordX*tailleCase +1, depart + coordY*tailleCase +1, tailleCase-1, tailleCase-1, this);
 	}
+	
+	private void dessinerGagnant(Graphics2D crayon)
+	{
+		if(mot.getPlateau().ObjectifComplet(mot.getTabPlayers()[mot.getcurrentPlayer()].getObjectifs()))
+		{
+			if (mot.getcurrentPlayer()==0)
+			{
+				victoire = Constantes.Images.initBackground("j1win.png");
+				crayon.drawImage(victoire, 0, (hauteur/2)-150, largeur, 300, this);
+			}
+			else
+			{
+				victoire = Constantes.Images.initBackground("j2win.png");
+				crayon.drawImage(victoire, 0, (hauteur/2)-150, largeur, 300, this);
+			}
+		}
+	}
+	
 	private void dessinerTuileMasquageAnticipation (Graphics2D crayon, int coordX, int coordY){
 		crayon.drawImage(opaciteFutur, depart + coordX*tailleCase +1, depart + coordY*tailleCase +1, tailleCase-1, tailleCase-1, this);
 	}
