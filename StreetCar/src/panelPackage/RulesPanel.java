@@ -51,8 +51,8 @@ public class RulesPanel extends PanelInterface {
 		image = new JLabel(resizeImage(loadImage("tutoriel","tuto"+numImg+".png"), imageSize));
 		zone1.add(image);
 		
-		addNewButton(zone2, "Précédent", buttonSize, BorderLayout.WEST, new PreviousButtonListener(), null);
-		addNewButton(zone2, "Suivant", buttonSize, BorderLayout.EAST, new NextButtonListener(), null);
+		addNewButton(zone2, buttonSize, BorderLayout.WEST, new PreviousButtonListener(), loadImage("background","precedent_menu.png"));
+		addNewButton(zone2, buttonSize, BorderLayout.EAST, new NextButtonListener(), loadImage("background","suivant_menu.png"));
 		addNewButton(zone3, buttonSize, BorderLayout.CENTER, listener.new CancelButtonListener(parentDialog, null, this.mainWindow), loadImage("background","retour_menu.png"));
 				
 		this.add(zone1);
