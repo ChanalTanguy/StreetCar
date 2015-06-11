@@ -76,9 +76,9 @@ public class Historique extends ArrayList<Configuration>{
 		boolean retraitValide = remove(config);
 		if (retraitValide){
 //			if ( this.size() > nombreMaxOnglets ){
-			if ( nombreConfigsSuivantes > 0 ){
-				nombreConfigsSuivantes--;
-			}
+//			if ( nombreConfigsSuivantes > 0 ){
+//				nombreConfigsSuivantes--;
+//			}
 			if ( nombreConfigsPrecedentes > 0 ){
 				nombreConfigsPrecedentes--;
 			}
