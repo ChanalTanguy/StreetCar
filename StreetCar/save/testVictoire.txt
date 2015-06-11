@@ -1,14 +1,14 @@
-21
+6
 0
 0
 3
 3 6 -1 
 5
 {Est:[(Sud;Est), (Nord;Sud), (Nord;Est)]}
-{Est:[(Est;Ouest), (Sud;Est)]}
+{Nord:[(Nord;Sud)]}
 {Nord:[(Ouest;Sud), (Est;Nord), (Nord;Sud)]}
-{Nord:[(Nord;Sud), (Ouest;Nord)]}
 {Nord:[(Est;Nord)]}
+{Nord:[(Nord;Sud)]}
 1
 0
 5
@@ -16,20 +16,20 @@
 5
 {Nord:[(Ouest;Est), (Nord;Sud)]}
 {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]}
-{Ouest:[(Sud;Est), (Nord;Ouest), (Ouest;Est)]}
-{Nord:[(Ouest;Sud), (Est;Nord)]}
-{Nord:[(Nord;Sud)]}
-78
-{Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Ouest;Est), (Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Est), (Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Est), (Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} 
+{Nord:[(Ouest;Nord), (Est;Nord)]}
+{Sud:[(Ouest;Sud)]}
+{Nord:[(Ouest;Est), (Nord;Sud)]}
+71
+{Nord:[(Est;Nord)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Est), (Nord;Sud)]} {Nord:[(Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Est), (Nord;Sud)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Est;Nord)]} {Nord:[(Ouest;Sud), (Est;Sud), (Nord;Sud)]} {Nord:[(Est;Nord), (Ouest;Est), (Ouest;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Est;Sud), (Ouest;Nord), (Ouest;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Est;Nord)]} 
 {null} {null} {null} {null} {Nord:[]} {null} {null} {null} {null} {null} {null} {null} 
-{null} {null} {null} {null} {null} {Est:[(Sud;Est)]} {Nord:[(Nord;Sud), (Est;Nord)]} 8{Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[]} {null} {null} {null} 
-{null} {null} {null} {null} {Est:[(Sud;Est)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {null} {Sud:[(Ouest;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {null} 
-{null} {Nord:[]} {null} {null} {Ouest:[(Sud;Est), (Nord;Est), (Ouest;Est)]} {null} {Nord:[]} {null} {null} {null} {Est:[(Est;Ouest)]} {null} 
+{null} {null} {Ouest:[(Ouest;Est), (Nord;Ouest)]} {null} {null} {Est:[(Sud;Est)]} {Nord:[(Nord;Sud), (Est;Nord)]} 8{Nord:[(Ouest;Nord), (Est;Nord)]} {Nord:[]} {null} {null} {null} 
+{null} {null} {Ouest:[(Sud;Est), (Nord;Ouest), (Ouest;Est)]} {null} {Est:[(Sud;Est)]} {Nord:[(Nord;Sud), (Ouest;Nord)]} {null} {Sud:[(Ouest;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud), (Est;Nord)]} {null} 
+{null} {Nord:[]} 2{Sud:[(Ouest;Sud)]} {Nord:[(Nord;Sud)]} {Ouest:[(Sud;Est), (Nord;Est), (Ouest;Est)]} {null} {Nord:[]} {null} {null} {null} {Est:[(Est;Ouest)]} {null} 
 {null} 2{Est:[(Sud;Est)]} {Est:[(Sud;Est), (Nord;Sud), (Nord;Est)]} 10{Nord:[(Nord;Sud)]} {Ouest:[(Nord;Ouest)]} {null} {null} {null} {null} {null} 7{Ouest:[(Ouest;Est), (Nord;Ouest)]} {Nord:[]} 
-{Nord:[(Nord;Sud)]} {Ouest:[(Nord;Ouest)]} {null} {Nord:[]} {null} {null} {null} {null} {null} {null} {Est:[(Est;Ouest)]} {null} 
-{null} {null} {null} {null} {null} {null} {null} {null} {Nord:[]} {null} {Sud:[(Ouest;Sud)]} {Sud:[(Est;Nord), (Ouest;Nord), (Sud;Nord)]} 
+{Nord:[(Nord;Sud)]} {Ouest:[(Nord;Ouest)]} 10{Est:[(Est;Ouest)]} {Nord:[]} {null} {null} {null} {null} {null} {null} {Est:[(Est;Ouest)]} {null} 
+{null} {null} {Ouest:[(Ouest;Est), (Sud;Ouest)]} {null} {null} {null} {null} {null} {Nord:[]} {null} {Sud:[(Ouest;Sud)]} {Sud:[(Est;Nord), (Ouest;Nord), (Sud;Nord)]} 
 {Nord:[]} 3{Est:[(Sud;Est)]} {Nord:[(Ouest;Nord), (Est;Nord)]} {null} {null} {null} {null} {null} {null} {null} {null} {Est:[(Est;Ouest)]} 
-{null} {Sud:[(Ouest;Sud)]} {Est:[(Est;Ouest), (Nord;Est)]} {null} {null} {Nord:[]} {null} {null} {null} {null} {Nord:[]} {Est:[(Est;Ouest)]} 
+{null} {Nord:[(Ouest;Sud), (Est;Nord)]} {Est:[(Est;Ouest), (Nord;Est)]} {null} {null} {Nord:[]} {null} {null} {null} {null} {Nord:[]} {Est:[(Est;Ouest)]} 
 {null} {null} {Sud:[(Ouest;Sud)]} 4{Sud:[(Sud;Nord)]} {Nord:[(Nord;Sud)]} 11{Nord:[(Nord;Sud)]} {Sud:[(Sud;Nord)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} {Nord:[(Nord;Sud)]} 6{Nord:[(Est;Nord)]} {null} 
 {null} {null} {null} {Nord:[]} {null} {null} {null} {null} {null} {null} {Est:[(Est;Ouest)]} {null} 
-{null} {null} {null} {null} {null} {null} {null} {Nord:[]} {null} {null} {Est:[(Est;Ouest)]} {null} 
+{null} {null} {null} {null} {null} {null} {null} {Nord:[]} {null} {Est:[(Est;Ouest), (Nord;Est)]} {Est:[(Est;Ouest)]} {null} 
