@@ -43,13 +43,13 @@ public class PanelInterface extends JPanel {
 		return panel;
 	}
 	
-	protected JPanel newZone(int size, int width, int height){
+	protected JPanel newZone(int size, int x, int y){
 		JPanel panel = new JPanel();
 		FlowLayout layout = new FlowLayout();
 		layout.setVgap(0);
 		panel.setBackground(Color.getColor("gris_tram", 4607576)); 
 		panel.setLayout(layout);
-		panel.setPreferredSize(setNewDimension(width ,(height*size)+20));
+		panel.setPreferredSize(setNewDimension(x ,(y*size)+20));
 		return panel;
 	}
 	
