@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 
+@SuppressWarnings("serial")
 public abstract class Pan_Abstract extends JComponent{
 	protected int largeur, hauteur;
 	protected Graphics2D crayon;

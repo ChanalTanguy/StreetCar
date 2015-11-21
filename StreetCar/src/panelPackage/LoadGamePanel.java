@@ -3,19 +3,15 @@ package panelPackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import mainPackage.Moteur;
-import objectPackage.Plateau;
-import panelPackage.PanelListener.DebugCheckBoxListener;
-import panelPackage.PanelListener.CancelButtonListener;
 import titrePackage.ChargementTitre;
 import windowPackage.MenuWindow;
 
+@SuppressWarnings("serial")
 public class LoadGamePanel extends PanelInterface {
 
 	Dimension saveButtonSize = setNewDimension(400,40);

@@ -34,6 +34,7 @@ public class Escale extends Tuile{
 		stop = p;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Escale clone() {
 		Escale e = new Escale();
 		Tuile t = super.clone();

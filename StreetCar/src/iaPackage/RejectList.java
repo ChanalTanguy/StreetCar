@@ -2,6 +2,7 @@ package iaPackage;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class RejectList extends ArrayList<TuileChemin> {
 	
 	public boolean contain(TuileChemin tuile) {

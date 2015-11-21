@@ -6,8 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import panelPackage.CreditsPanel;
-import panelPackage.SettingsPanel;
 
+@SuppressWarnings("serial")
 public class CreditsWindow extends WindowInterface {
 	
 	public CreditsWindow(){

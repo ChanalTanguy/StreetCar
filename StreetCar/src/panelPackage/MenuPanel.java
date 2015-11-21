@@ -1,31 +1,15 @@
 package panelPackage;
 
-import graphique.Fenetre;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import mainPackage.Moteur;
-import constantesPackages.Constantes;
+import graphique.Fenetre;
 
+@SuppressWarnings("serial")
 public class MenuPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(400,75);

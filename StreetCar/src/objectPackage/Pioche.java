@@ -6,6 +6,7 @@ import java.util.Random;
 
 import objectPackage.tuilePackage.Tuile;
 
+@SuppressWarnings("serial")
 public class Pioche extends ArrayList<Tuile>{
 	
 	/*

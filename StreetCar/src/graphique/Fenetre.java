@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class Fenetre extends JFrame{
 	
 	public Moteur moteurParent;

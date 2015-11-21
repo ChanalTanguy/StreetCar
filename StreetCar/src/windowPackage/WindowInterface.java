@@ -1,7 +1,5 @@
 package windowPackage;
 
-import graphique.Fenetre;
-
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
@@ -9,6 +7,7 @@ import javax.swing.JFrame;
 
 import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class WindowInterface extends JDialog {
 	
 	double width = Constantes.Resolution.width;

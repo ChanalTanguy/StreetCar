@@ -8,7 +8,6 @@ import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import objectPackage.tuilePackage.Tuile;
-import constantesPackages.Constantes;
 
 public class IAFacile implements InterfaceIA {
 

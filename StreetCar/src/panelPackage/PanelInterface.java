@@ -1,7 +1,5 @@
 package panelPackage;
 
-import graphique.Fenetre;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -21,9 +19,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import panelPackage.PanelListener.CancelButtonListener;
 import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class PanelInterface extends JPanel {
 	
 	JDialog parentDialog;

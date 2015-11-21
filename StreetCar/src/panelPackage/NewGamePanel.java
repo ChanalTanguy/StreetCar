@@ -2,34 +2,20 @@ package panelPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
-import mainPackage.Moteur;
-import joueurPackage.Joueur;
-import joueurPackage.JoueurHumain;
-import joueurPackage.JoueurIA;
-import constantesPackages.Constantes;
-import panelPackage.PanelListener.CancelButtonListener;
-import windowPackage.WindowInterface;
 import windowPackage.MenuWindow;
 
+@SuppressWarnings("serial")
 public class NewGamePanel extends PanelInterface {
 
 	String selected1 = "Humain";

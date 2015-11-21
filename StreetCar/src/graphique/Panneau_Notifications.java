@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class Panneau_Notifications extends Pan_Abstract{
 	JTextArea message;
 	

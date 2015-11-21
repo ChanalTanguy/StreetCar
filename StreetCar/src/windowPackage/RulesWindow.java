@@ -5,11 +5,9 @@ import java.awt.Dialog;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import constantesPackages.Constantes;
-import panelPackage.CreditsPanel;
 import panelPackage.RulesPanel;
-import panelPackage.SettingsPanel;
 
+@SuppressWarnings("serial")
 public class RulesWindow extends WindowInterface {
 	
 	public RulesWindow(){

@@ -541,18 +541,5 @@ public class Moteur {
 		}
 		return val;
 	}
-
-	private void initBidon (Objectifs[] tabObjectifs){
-		for (int indexObjectif = 0; indexObjectif < tabObjectifs.length; indexObjectif++){
-			tabObjectifs[indexObjectif] = new Objectifs();
-		}
-		tabObjectifs[0].setLigne(4);
-		tabObjectifs[0].ajouterEscales(valeurEscale('G'));
-		tabObjectifs[0].ajouterEscales(valeurEscale('A'));
-		
-		tabObjectifs[1].setLigne(6);
-		tabObjectifs[1].ajouterEscales(valeurEscale('D'));
-		tabObjectifs[1].ajouterEscales(valeurEscale('H'));
-	}
 	
 }

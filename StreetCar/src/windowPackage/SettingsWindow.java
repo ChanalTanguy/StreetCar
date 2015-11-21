@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import panelPackage.SettingsPanel;
 
+@SuppressWarnings("serial")
 public class SettingsWindow extends WindowInterface {
 	
 	public SettingsWindow(){

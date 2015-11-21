@@ -6,9 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import panelPackage.LoadGamePanel;
-import panelPackage.NewGamePanel;
-import panelPackage.SettingsPanel;
 
+@SuppressWarnings("serial")
 public class LoadGameWindow extends WindowInterface {
 	
 	public void openWindow(){

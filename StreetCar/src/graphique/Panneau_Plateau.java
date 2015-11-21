@@ -1,7 +1,6 @@
 package graphique;
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -9,13 +8,14 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+import constantesPackages.Constantes;
 import joueurPackage.Coup;
 import joueurPackage.MainJoueur;
 import mainPackage.Moteur;
 import objectPackage.Plateau;
 import objectPackage.tuilePackage.Tuile;
-import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attribut Principal
@@ -51,9 +51,9 @@ public class Panneau_Plateau extends Pan_Abstract{
 	/*
 	 * Attributs d'Images
 	 */
-	private BufferedImage fond, cadreNotif, plateau, pioche, piocheVide, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
-	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2, tramJ1, tramJ2;
-	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte,surbrillanceVerteExt, surbrillanceCyan, surbrillanceViolet, surbrillanceRouge, surbrillanceJaune;
+	private BufferedImage fond, cadreNotif, plateau, pioche, piocheMain, rotate, stop, carteObjectif1, carteObjectif2, carteObjectifDos;
+	private BufferedImage escale1J1, escale2J1, escale1J2, escale2J2;
+	private BufferedImage surbrillance, surbrillanceVioletteExt,surbrillanceVerte,surbrillanceVerteExt, surbrillanceCyan, surbrillanceViolet, surbrillanceJaune;
 	private BufferedImage opacitePasse, opaciteFutur;
 	private BufferedImage victoire;
 	private BufferedImage joueur1, joueur2;
@@ -688,7 +688,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		numeroEscale2 = "" + (char) (mot.getTabPlayers()[0].getObjectifs().getEscalesCibles()[1] + 'A'-1) + ".jpg";
 		
 		carteObjectif1 = Constantes.Images.initCarte(numeroLigne);
-		tramJ1 = Constantes.Images.initCarte(numeroTram);
+		Constantes.Images.initCarte(numeroTram);
 		escale1J1 = Constantes.Images.initCarte(numeroEscale1);
 		escale2J1 = Constantes.Images.initCarte(numeroEscale2);
 		
@@ -698,7 +698,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		numeroEscale2 = "" + (char) (mot.getTabPlayers()[1].getObjectifs().getEscalesCibles()[1] + 'A'-1) + ".jpg";
 		
 		carteObjectif2 = Constantes.Images.initCarte(numeroLigne);
-		tramJ2 = Constantes.Images.initCarte(numeroTram);
+		Constantes.Images.initCarte(numeroTram);
 		escale1J2 = Constantes.Images.initCarte(numeroEscale1);
 		escale2J2 = Constantes.Images.initCarte(numeroEscale2);
 		carteObjectifDos = Constantes.Images.initCarte("carteDos.png");
@@ -706,7 +706,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		fond = Constantes.Images.initBackground("tramOui.png");
 		plateau = Constantes.Images.initBackground("plateau.png");
 		pioche = Constantes.Images.initBackground("pioche.png");
-		piocheVide = Constantes.Images.initBackground("piocheVide.png");
+		Constantes.Images.initBackground("piocheVide.png");
 		piocheMain = Constantes.Images.initBackground("piocheMain.png");
 		opacitePasse = Constantes.Images.initBackground("opaciteGris.png");
 		opaciteFutur = Constantes.Images.initBackground("opaciteFutur.png");
@@ -722,7 +722,7 @@ public class Panneau_Plateau extends Pan_Abstract{
 		surbrillanceViolet = Constantes.Images.initSurbrillance("surbrillanceViolet.png");
 		surbrillanceVioletteExt = Constantes.Images.initSurbrillance("surbrillanceVioletExt.png");
 		surbrillanceVerteExt = Constantes.Images.initSurbrillance("surbrillanceVerteExt.png");
-		surbrillanceRouge = Constantes.Images.initSurbrillance("surbrillanceRouge.png");
+		Constantes.Images.initSurbrillance("surbrillanceRouge.png");
 		surbrillanceJaune = Constantes.Images.initSurbrillance("surbrillanceJaune.png");
 		
 		joueur1 = Constantes.Images.initImageJoueur("joueur1.png");

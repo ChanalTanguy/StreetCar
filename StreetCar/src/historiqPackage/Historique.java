@@ -2,6 +2,7 @@ package historiqPackage;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Historique extends ArrayList<Configuration>{
 	private int nombreConfigsPrecedentes, nombreConfigsSuivantes;
 	private int nombreMaxOnglets;

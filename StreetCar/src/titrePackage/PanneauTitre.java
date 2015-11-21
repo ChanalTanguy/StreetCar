@@ -1,23 +1,15 @@
 package titrePackage;
-import graphique.Fenetre;
-
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import mainPackage.Moteur;
-import objectPackage.Plateau;
-import panelPackage.LoadGamePanel;
-import sauvegardePackage.Chargement;
-import windowPackage.LoadGameWindow;
-import windowPackage.NewGameWindow;
 import constantesPackages.Constantes;
 
 
+@SuppressWarnings("serial")
 public class PanneauTitre extends JPanel{
 
 	Boolean selection = false;
@@ -108,10 +100,10 @@ public class PanneauTitre extends JPanel{
 		
 	}
 	
-	private void chargerPartie(Graphics2D crayon) {
+	/*private void chargerPartie(Graphics2D crayon) {
 		
 
-		/*
+		
 		crayon.setColor(Color.white);
 		crayon.drawImage(retour,getWidth()-200, getHeight()-100, 300, 45, this);
 		if(saves != null)
@@ -138,9 +130,9 @@ public class PanneauTitre extends JPanel{
 		}
 		
 		else crayon.drawString("Pas de sauvegarde", getWidth()/3, getHeight()/4);
-		*/
+		
 	
-	}
+	}*/
 
 	public void credits(Graphics2D crayon) {
 		crayon.drawImage(backgroundCredits, 0, 0, getWidth(), getHeight(), this);

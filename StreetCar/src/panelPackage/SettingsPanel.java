@@ -3,23 +3,17 @@ package panelPackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import constantesPackages.Constantes;
-import panelPackage.PanelListener.CancelButtonListener;
 import windowPackage.MenuWindow;
 
+@SuppressWarnings("serial")
 public class SettingsPanel extends PanelInterface {
 	
 	Dimension buttonSize = setNewDimension(175,40);

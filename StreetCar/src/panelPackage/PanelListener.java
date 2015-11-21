@@ -221,8 +221,7 @@ public class PanelListener {
 			if(parent != null){parent.dispose();}
 			//if(mainWindow != null){mainWindow.dispose();}
 			//if(mainWindow instanceof Fenetre){((Fenetre)mainWindow).moteurParent.stop();} //Modifier pour détruire l'instance ?
-
-			Sauvegarder save = new Sauvegarder(savedEngine);
+			new Sauvegarder(savedEngine);
 		}
 
 	}

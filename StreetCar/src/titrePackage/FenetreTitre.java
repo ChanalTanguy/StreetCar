@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import constantesPackages.Constantes;
 
 
+@SuppressWarnings("serial")
 public class FenetreTitre extends JFrame {
 	
 	PanneauTitre pan = new PanneauTitre(this);

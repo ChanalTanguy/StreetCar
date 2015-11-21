@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import panelPackage.NewGamePanel;
 
+@SuppressWarnings("serial")
 public class NewGameWindow extends WindowInterface {
 
 	public NewGameWindow(){

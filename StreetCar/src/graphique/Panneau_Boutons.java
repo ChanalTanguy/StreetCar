@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class Panneau_Boutons extends Pan_Abstract{
 	private BufferedImage undo, conseils, assistance, menu;
 	private Point centreUndo, centreConseils, centreAssistance, centreMenu;

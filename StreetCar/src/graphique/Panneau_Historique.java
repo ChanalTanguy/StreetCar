@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import mainPackage.Moteur;
 import constantesPackages.Constantes;
 
+@SuppressWarnings("serial")
 public class Panneau_Historique extends Pan_Abstract{
 	private BufferedImage defilementHaut, defilementBas, historiqueCentral, ongletHistorique;
 	private BufferedImage surbrillanceSelectionnee, surbrillanceCourante;
