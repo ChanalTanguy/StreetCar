@@ -3,10 +3,12 @@ package graphique;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import mainPackage.Moteur;
 
-public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
+public class Ecouteur_Historique implements MouseListener, MouseMotionListener, MouseWheelListener{
 	private Panneau_Historique panneauHistorique;
 	private Moteur moteur;
 	
@@ -118,6 +120,15 @@ public class Ecouteur_Historique implements MouseListener, MouseMotionListener{
 		}
 		
 		return numeroTour;
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if (e.getWheelRotation() > 0) 
+			moteur.getHistorique().defilementVersBas();
+		if (e.getWheelRotation() < 0) 
+			moteur.getHistorique().defilementVersHaut();
+		panneauHistorique.repaint();
 	}
 	
 }

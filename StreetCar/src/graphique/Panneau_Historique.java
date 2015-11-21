@@ -61,6 +61,7 @@ public class Panneau_Historique extends Pan_Abstract{
 		autorisationInteraction = true;
 		addMouseListener(ecouteur);
 		addMouseMotionListener(ecouteur);
+		addMouseWheelListener(ecouteur);
 	}
 	/*
 	 * FIN Constructeur
